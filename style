@@ -1,0 +1,25 @@
+    <style type="text/css">
+        /* pc_1 */
+        .container .title-box {
+            background: {$style.color};
+        }
+
+        .container .bottom-box .send {
+            border-color: {$style.color};
+            background: {$style.color};
+        }
+
+        .container .bottom-box .send:hover {
+            background: #fff;
+            color: {$style.color};
+        }
+
+        /* 消息 */
+        .right .bubble {
+            background: {$style.color};
+        }
+
+        .right .arrow {
+            border-left-color: {$style.color};
+        }
+    </style>
