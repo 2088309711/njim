@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>界面设置</title>
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" href="/component/pintuer/pintuer.css">
+<link rel="stylesheet" href="/static/css/set_style.css">
+</head>
+<body>
+
+	<div class="layout padding">
+
+		<blockquote class="border-main padding">
+			<strong style="margin: 0;">界面设置</strong>
+		</blockquote>
+
+		<div class="form-group hidden padding-top" id="alert">
+			<div class="alert alert-yellow">
+				<span onclick="hideAlert()" class="close rotate-hover"></span><strong>注意：</strong><span
+					id="alert-text"></span>
+			</div>
+		</div>
+
+
+		<div class="custom">
+			<form action="/index.php/staff/admin/setstyleaction" method="post"
+				onreset="setTimeout(updateIconColor, 100)"
+				onsubmit="return ckForm()">
+
+				<!-- 设置图标风格 -->
+				<div class="box-1">
+
+					<span class="title-2">图标风格</span>
+					<div class="style-box">
+
+						<label><img src="/static/images/staff-icon-1.jpg"> <input
+							@$iconStyle==1? 'checked':''@
+						type="radio"
+							name="iconStyle" value="1"> <span>风格1</span> </label> <label><img
+							src="/static/images/staff-icon-2.jpg"> <input
+							@$iconStyle==2? 'checked':''@
+						type="radio"
+							name="iconStyle" value="2"> <span>风格2</span> </label> <label>
+							<img src="/static/images/staff-icon-3.jpg"><input
+							@$iconStyle==3? 'checked':''@
+						type="radio"
+							name="iconStyle" value="3"> <span>风格3</span>
+						</label> <label> <img src="/static/images/staff-icon-4.jpg"><input
+							@$iconStyle==4? 'checked':''@
+						type="radio"
+							name="iconStyle" value="4"> <span>风格4</span>
+						</label> <label> <img src="/static/images/staff-icon-5.jpg"><input
+							@$iconStyle==5? 'checked':''@
+						type="radio"
+							name="iconStyle" value="5"> <span>风格5</span>
+						</label>
+					</div>
+				</div>
+
+				<!-- 设置主题色 -->
+				<div class="box-2">
+
+					<span class="title-2">主题色</span> <input id="main-color-input"
+						class="input-1 input" type="text" onblur="updateIconColor()"
+						value="@$mainColor@" name="mainColor">
+
+					<div id="main-color-show" style="background-color: #@$mainColor@"
+						class="color-icon"></div>
+
+				</div>
+
+
+				<div id="tips" class="alert alert-blue margin-top">
+					<span id="close-tips" class="close rotate-hover"></span><strong>提示：</strong>请选取或填写十六进制颜色值，建议使用深色，不要#，如：00cab7。
+				</div>
+
+
+				<div class="padding-top">
+					<input id="default-style" class="button margin-right" type="button"
+						value="默认"> <input class="button bg-sub margin-right"
+						type="reset" value="重置"> <input
+						class="button bg-main margin-right" type="submit" value="保存">
+				</div>
+
+			</form>
+
+		</div>
+
+	</div>
+
+	<div id="color-panel-bg" class="color-panel-bg">
+
+		<div class="color-panel">
+			<div class="panel">
+				<div class="panel-head">
+					<span id="close-color-panel" class="close rotate-hover float-right"></span>
+					颜色面板
+				</div>
+				<div class="panel-body">
+					<div id="color-box" class="color-box">
+
+						<div sel_color="8f63ff" style="background-color: #8f63ff;"
+							class="item"></div>
+						<div sel_color="63d8ff" style="background-color: #63d8ff;"
+							class="item"></div>
+
+						<div sel_color="fd63ff" style="background-color: #fd63ff;"
+							class="item"></div>
+
+						<div sel_color="909090" style="background-color: #909090;"
+							class="item"></div>
+						<div sel_color="935353" style="background-color: #935353;"
+							class="item"></div>
+						<div sel_color="ff4d4d" style="background-color: #ff4d4d;"
+							class="item"></div>
+						<div sel_color="d43434" style="background-color: #d43434;"
+							class="item"></div>
+						<div sel_color="ac1616" style="background-color: #ac1616;"
+							class="item"></div>
+						<div sel_color="db4a95" style="background-color: #db4a95;"
+							class="item"></div>
+						<div sel_color="b02d71" style="background-color: #b02d71;"
+							class="item"></div>
+						<div sel_color="404040" style="background-color: #404040;"
+							class="item"></div>
+						<div sel_color="613fd2" style="background-color: #613fd2;"
+							class="item"></div>
+						<div sel_color="a088ed" style="background-color: #a088ed;"
+							class="item"></div>
+						<div sel_color="4c63d6" style="background-color: #4c63d6;"
+							class="item"></div>
+						<div sel_color="2944cb" style="background-color: #2944cb;"
+							class="item"></div>
+						<div sel_color="0d31ea" style="background-color: #0d31ea;"
+							class="item"></div>
+						<div sel_color="4a5bae" style="background-color: #4a5bae;"
+							class="item"></div>
+						<div sel_color="9ba4d5" style="background-color: #9ba4d5;"
+							class="item"></div>
+						<div sel_color="122fc2" style="background-color: #122fc2;"
+							class="item"></div>
+						<div sel_color="1282c2" style="background-color: #1282c2;"
+							class="item"></div>
+						<div sel_color="4296c6" style="background-color: #4296c6;"
+							class="item"></div>
+						<div sel_color="20648a" style="background-color: #20648a;"
+							class="item"></div>
+						<div sel_color="096aa2" style="background-color: #096aa2;"
+							class="item"></div>
+						<div sel_color="09a292" style="background-color: #09a292;"
+							class="item"></div>
+						<div sel_color="09a267" style="background-color: #09a267;"
+							class="item"></div>
+						<div sel_color="43b78a" style="background-color: #43b78a;"
+							class="item"></div>
+						<div sel_color="3a965b" style="background-color: #3a965b;"
+							class="item"></div>
+						<div sel_color="56c27c" style="background-color: #56c27c;"
+							class="item"></div>
+						<div sel_color="19ce59" style="background-color: #19ce59;"
+							class="item"></div>
+						<div sel_color="45e37d" style="background-color: #45e37d;"
+							class="item"></div>
+						<div sel_color="70a482" style="background-color: #70a482;"
+							class="item"></div>
+						<div sel_color="60cc68" style="background-color: #60cc68;"
+							class="item"></div>
+
+						<div sel_color="1e9126" style="background-color: #1e9126;"
+							class="item"></div>
+						<div sel_color="097510" style="background-color: #097510;"
+							class="item"></div>
+						<div sel_color="14eb23" style="background-color: #14eb23;"
+							class="item"></div>
+						<div sel_color="27bc32" style="background-color: #27bc32;"
+							class="item"></div>
+						<div sel_color="3d6a40" style="background-color: #3d6a40;"
+							class="item"></div>
+						<div sel_color="589b43" style="background-color: #589b43;"
+							class="item"></div>
+						<div sel_color="87cd71" style="background-color: #87cd71;"
+							class="item"></div>
+						<div sel_color="accd71" style="background-color: #accd71;"
+							class="item"></div>
+						<div sel_color="82b42b" style="background-color: #82b42b;"
+							class="item"></div>
+						<div sel_color="addd5a" style="background-color: #addd5a;"
+							class="item"></div>
+						<div sel_color="d2dd5a" style="background-color: #d2dd5a;"
+							class="item"></div>
+						<div sel_color="858f14" style="background-color: #858f14;"
+							class="item"></div>
+						<div sel_color="676c35" style="background-color: #676c35;"
+							class="item"></div>
+						<div sel_color="626913" style="background-color: #626913;"
+							class="item"></div>
+						<div sel_color="694e13" style="background-color: #694e13;"
+							class="item"></div>
+						<div sel_color="a9770b" style="background-color: #a9770b;"
+							class="item"></div>
+						<div sel_color="ae8429" style="background-color: #ae8429;"
+							class="item"></div>
+						<div sel_color="d89a16" style="background-color: #d89a16;"
+							class="item"></div>
+						<div sel_color="afa287" style="background-color: #afa287;"
+							class="item"></div>
+						<div sel_color="a88335" style="background-color: #a88335;"
+							class="item"></div>
+						<div sel_color="976907" style="background-color: #976907;"
+							class="item"></div>
+						<div sel_color="4c4432" style="background-color: #4c4432;"
+							class="item"></div>
+						<div sel_color="ac7e55" style="background-color: #ac7e55;"
+							class="item"></div>
+						<div sel_color="a86122" style="background-color: #a86122;"
+							class="item"></div>
+						<div sel_color="c2630f" style="background-color: #c2630f;"
+							class="item"></div>
+						<div sel_color="cd8545" style="background-color: #cd8545;"
+							class="item"></div>
+						<div sel_color="95551b" style="background-color: #95551b;"
+							class="item"></div>
+						<div sel_color="c3a285" style="background-color: #c3a285;"
+							class="item"></div>
+						<div sel_color="c39b85" style="background-color: #c39b85;"
+							class="item"></div>
+						<div sel_color="8d4e2c" style="background-color: #8d4e2c;"
+							class="item"></div>
+						<div sel_color="c1561b" style="background-color: #c1561b;"
+							class="item"></div>
+						<div sel_color="d7743e" style="background-color: #d7743e;"
+							class="item"></div>
+
+						<div sel_color="8a3709" style="background-color: #8a3709;"
+							class="item"></div>
+						<div sel_color="b04307" style="background-color: #b04307;"
+							class="item"></div>
+						<div sel_color="cd642b" style="background-color: #cd642b;"
+							class="item"></div>
+						<div sel_color="b9896f" style="background-color: #b9896f;"
+							class="item"></div>
+						<div sel_color="b97f6f" style="background-color: #b97f6f;"
+							class="item"></div>
+						<div sel_color="584742" style="background-color: #584742;"
+							class="item"></div>
+						<div sel_color="d2755b" style="background-color: #d2755b;"
+							class="item"></div>
+						<div sel_color="dd461d" style="background-color: #dd461d;"
+							class="item"></div>
+						<div sel_color="c5bbb8" style="background-color: #c5bbb8;"
+							class="item"></div>
+						<div sel_color="d3695b" style="background-color: #d3695b;"
+							class="item"></div>
+						<div sel_color="85473f" style="background-color: #85473f;"
+							class="item"></div>
+						<div sel_color="be2916" style="background-color: #be2916;"
+							class="item"></div>
+						<div sel_color="ef2409" style="background-color: #ef2409;"
+							class="item"></div>
+
+						<div sel_color="c74b3b" style="background-color: #c74b3b;"
+							class="item"></div>
+						<div sel_color="f0280d" style="background-color: #f0280d;"
+							class="item"></div>
+						<div sel_color="f1c1ba" style="background-color: #f1c1ba;"
+							class="item"></div>
+
+						<div sel_color="691c63" style="background-color: #691c63;"
+							class="item"></div>
+						<div sel_color="1c4969" style="background-color: #1c4969;"
+							class="item"></div>
+						<div sel_color="2c88c8" style="background-color: #2c88c8;"
+							class="item"></div>
+						<div sel_color="138fe6" style="background-color: #138fe6;"
+							class="item"></div>
+						<div sel_color="86b8da" style="background-color: #86b8da;"
+							class="item"></div>
+						<div sel_color="3275a4" style="background-color: #3275a4;"
+							class="item"></div>
+						<div sel_color="32a485" style="background-color: #32a485;"
+							class="item"></div>
+						<div sel_color="0f8d6b" style="background-color: #0f8d6b;"
+							class="item"></div>
+						<div sel_color="84c0b0" style="background-color: #84c0b0;"
+							class="item"></div>
+						<div sel_color="69dbbc" style="background-color: #69dbbc;"
+							class="item"></div>
+
+					</div>
+				</div>
+				<div class="panel-foot text-center">
+					<button id="close-color-panel-button" class="button border-sub">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/static/js/jquery.js"></script>
+	<script src="/static/js/set_style.js"></script>
+
+</body>
+</html>

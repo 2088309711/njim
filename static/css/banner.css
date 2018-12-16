@@ -1,0 +1,73 @@
+.video video {
+	width:100%;
+	height:100%;
+	object-fit:cover;
+	object-position:center center;
+}
+.video {
+	position:absolute;
+	z-index:-9;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+}
+.video.low:after {
+	content:'';
+	background-color:rgba(0,0,0,.3);
+	position:absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+}
+#banner {
+	height:50%;
+}
+#banner {
+	width:100%;
+	height:100%;
+	z-index: -5;
+}
+#banner:after {
+	content:'';
+	position:absolute;
+	z-index:3;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+}
+#banner li {
+	width:0;
+	height:100%;
+	position:absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+	transition:width .6s ease;
+}
+#banner li img {
+	width:100%;
+	height:100%;
+	object-fit:cover;
+	object-position:center center;
+	display:block;
+	position:relative;
+	z-index:-1;
+}
+#banner li:nth-child(2) {
+	left:auto;
+}
+#banner li:nth-child(3) {
+	right:auto;
+}
+#banner li.on {
+	width:100%;
+	z-index:2;
+}

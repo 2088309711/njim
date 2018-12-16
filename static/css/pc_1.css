@@ -1,0 +1,157 @@
+.container {
+	background: #fff;
+	width: 350px;
+	height: 500px;
+	position: relative;
+	overflow: hidden;
+}
+
+.container .title-box {
+	height: 40px;
+	width: 100%;
+	position: relative;
+}
+
+.container .title-box .title {
+	position: absolute;
+	top: 12px;
+	left: 12px;
+	font-size: 15px;
+	color: #fff;
+	cursor: default;
+}
+
+.container .message-box {
+	height: 309px;
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border-bottom: 1px solid #eee;
+	background: #fafafa;
+}
+
+.container .tool-box {
+	height: 30px;
+	width: 100%;
+	position: relative;
+}
+
+.container .tool-box .emo-icon {
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	background: url(/static/images/icon-desktop.png) no-repeat -23px -1px;
+}
+
+.container .tool-box .pic-icon {
+	display: none;
+	position: absolute;
+	top: 8px;
+	left: 40px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	background: url(/static/images/icon-desktop.png) no-repeat -23px -23px;
+}
+
+.container .tool-box .evaluate-icon {
+	display: none;
+	position: absolute;
+	top: 8px;
+	left: 70px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	background: url(/static/images/icon-desktop.png) no-repeat -23px -45px;
+}
+
+.container .emo-panel {
+	height: 217px;
+	background: #fff;
+	position: absolute;
+	width: 344px;
+	bottom: 153px;
+	left: 2px;
+	border: 1px solid #ccc;
+	display: none;
+}
+
+.container .emo-panel .title {
+	height: 35px;
+	text-align: center;
+	line-height: 35px;
+	background: #f1f1f1;
+	font-size: 14px;
+	color: #888;
+}
+
+.container .emo-panel .title .close-icon {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 20px;
+	height: 20px;
+	cursor: pointer;
+	background: url(/static/images/icon-desktop.png) no-repeat -2px -133px;
+}
+
+.container .emo-panel .emo-box {
+	height: 182px;
+	overflow: auto;
+}
+
+.container .emo-panel .emo-box img {
+	margin: 7px 0 0 7px;
+}
+
+.container .input-box {
+	height: 80px;
+	width: 100%;
+}
+
+.container .input-box .edit {
+	overflow-x: hidden;
+	overflow-y: auto;
+	word-wrap: break-word;
+	border: 0;
+	height: 80px;
+	width: 338px;
+	outline: 0;
+	line-height: 25px;
+	padding: 0 6px;
+	resize: none;
+}
+
+.container .bottom-box {
+	height: 40px;
+	width: 100%;
+	position: relative;
+}
+
+.container .bottom-box .info {
+	position: absolute;
+	bottom: 8px;
+	left: 12px;
+	font-size: 14px;
+	color: #bbb;
+	cursor: default;
+}
+
+.container .bottom-box .send {
+	position: absolute;
+	bottom: 5px;
+	right: 6px;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 5px 30px;
+	border: none;
+	color: #fff;
+	outline: none;
+	cursor: pointer;
+	transition: all .6s;
+	border-style: solid;
+	border-width: 1px;
+}
