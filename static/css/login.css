@@ -1,0 +1,122 @@
+.container {
+	width: 400px;
+	height: 380px;
+	background: rgba(0, 0, 0, .5);
+	box-shadow: 0 0 50px rgba(255, 255, 255, .2);
+	top: 50%;
+	left: 50%;
+	position: fixed;
+	margin: -190px 0 0 -200px;
+	border-radius: 4px;
+}
+
+.container .box-2 {
+	position: relative;
+	height: 90px;
+	text-align: center;
+	font-weight: 100;
+}
+
+.container .box-2 .title-1 {
+	color: #ccc;
+	line-height: 60px;
+	font-size: 36px;
+	margin-top: 30px;
+}
+
+.container .box-2 .title-2 {
+	color: #aaa;
+	line-height: 20px;
+	font-size: 18px;
+}
+
+.container .box-1 {
+	position: relative;
+	height: 50px;
+}
+
+.container .box-1 .title-2 {
+	position: absolute;
+	top: 14px;
+	text-align: right;
+	color: #aaa;
+	font-size: 14px;
+	width: 70px;
+}
+
+.container .box-1 .input-1, .container .box-1 .input-2 {
+	position: absolute;
+	top: 10px;
+	left: 90px;
+	padding: 6px;
+	width: 207px;
+	color: #fff;
+	font-size: 14px;
+	background: rgba(0, 0, 0, 0);
+	border: 1px solid #555;
+	outline: none;
+}
+
+.container .box-1 .input-2 {
+	width: 108px;
+}
+
+.container .box-1 .input-1:focus, .container .box-1 .input-2:focus {
+	border-color: #fff;
+}
+
+.container .box-1 .img-1 {
+	position: absolute;
+	top: 10px;
+	right: 90px;
+	height: 30px;
+}
+
+.container .box-1 .submit {
+	position: absolute;
+	top: 10px;
+	left: 90px;
+	width: 220px;
+	height: 40px;
+	border: 1px solid #555;
+	background: none;
+	color: #aaa;
+	font-size: 14px;
+	transition: all 1s;
+	cursor: pointer;
+	outline: none;
+}
+
+.container .box-1 .submit:hover {
+	border-color: #fff;
+	background: #fff;
+	color: #000;
+}
+
+.container .box-1 .login-text {
+	color: #aaa;
+	font-size: 14px;
+	position: absolute;
+	top: 51px;
+	right: 90px;
+}
+
+.container .box-1 .login-text a {
+	color: #aaa;
+	transition: all 1s;
+}
+
+.container .box-1 .login-text a:hover {
+	color: #fff;
+}
+
+.container .err-msg {
+	color: #ff0;
+	font-size: 16px;
+	text-align: center;
+	line-height: 30px;
+	height: 30px;
+	overflow: hidden;
+	padding: 0 10px;
+	margin-top: 23px;
+}

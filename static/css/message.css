@@ -1,0 +1,61 @@
+/* 通用 */
+.clear {
+    clear: both;
+}
+
+.left, .right, .system {
+    position: relative;
+    margin: 15px 0;
+}
+
+.left .arrow, .right .arrow {
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    position: absolute;
+    top: 8px;
+}
+
+.left .bubble, .right .bubble {
+    border-radius: 4px;
+    margin: 0 15px;
+    padding: 6px 10px;
+    white-space: normal;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+/* 左边 */
+.left .arrow {
+    border-right: 8px solid #e6e6e6;
+    left: 7px;
+}
+
+.left .bubble {
+    float: left;
+    background: #e6e6e6;
+}
+
+/* 右边 */
+.right .arrow {
+    border-left-width: 8px;
+    border-left-style: solid;
+    right: 7px;
+    border-left-color: #00cab7;
+}
+
+.right .bubble {
+    float: right;
+    color: #fff;
+    background: #00cab7;
+}
+
+/* 系统 */
+.system {
+    text-align: center;
+}
+
+.system .bubble {
+    padding: 3px 10px;
+    border-radius: 4px;
+    background: #e6e6e6;
+}
