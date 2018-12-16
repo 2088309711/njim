@@ -232,10 +232,11 @@ var clientList = new Vue({
 
                         // 判断插入的消息是否为正在显示的访客
                         if (display.id === this.list[i].id) {
-                            // 是显示访客，将滚动条拉到底部
-                            display.$nextTick(function () {
-                                displayScrollBottom();
-                            });
+
+                            //和显示区同步消息
+                            display.sync_msg();
+
+
                         }
                     }
                     break;// 找到相应访客部署完成跳出
@@ -296,9 +297,7 @@ var clientList = new Vue({
             }
         }
     }
-
 });
-
 
 // 显示区滚动条拉倒底部
 function displayScrollBottom() {
@@ -327,6 +326,16 @@ var display = new Vue({
         display_time: function () {
             this.outMsgCount++;
             return this.outMsgCount % 3 == 0;
+        }, sync_msg: function () {//同步消息
+            for (var i = 0; i < clientList.list.length; i++) {
+                if (clientList.list[i].id === this.id) {
+                    this.messages = clientList.list[i].messages;
+                    // 将滚动条拉到底部
+                    display.$nextTick(function () {
+                        displayScrollBottom();
+                    });
+                }
+            }
         }
     }
 });

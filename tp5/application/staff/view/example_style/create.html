@@ -12,7 +12,7 @@
 
 <blockquote class="layui-elem-quote layui-text" style="margin-top: 10px;">创建样式</blockquote>
 
-<form class="layui-form" action="/index.php/staff/Example_Style/createExampleStyle" method="post">
+<form class="layui-form" lay-filter="formTest" action="/index.php/staff/Example_Style/createExampleStyle" method="post">
     {:token()}
     <div class="layui-form-item">
         <div class="layui-inline">
@@ -92,7 +92,18 @@
 <script src="/static/js/example_style.js" charset="utf-8"></script>
 <script>
     layui.use(['form', 'colorpicker'], function () {
-        var $ = layui.$, colorpicker = layui.colorpicker;
+        var $ = layui.$;
+        var colorpicker = layui.colorpicker;
+        var form = layui.form;
+
+
+        form.val("formTest", {
+            'name': '自动填写的样式',
+            'color': '#1c97f5',
+            'icon_code': code_object.icon[0],
+            'invitation_code': code_object.invitation[0],
+            'description': '以上所有字段均为系统自动填写的内容，请根据实际需求修改。'
+        });
 
         //表单赋值
         colorpicker.render({
