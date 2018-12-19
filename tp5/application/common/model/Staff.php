@@ -59,6 +59,7 @@ class Staff extends Model
             $saveArr['password'] = $su->pwdConfusion($data['password']);//f28fed86680bea284cf0cfe0640ec4
         }
 
+
         return !!$this->save($saveArr, ['id' => $data['id'], 'account' => $data['user_name']]);
     }
 
