@@ -280,7 +280,7 @@
                     <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 设置实例
                         <small>Set example</small>
                     </div>
-                    <p class="page-header-description">皮肤，邀请功能，绑定客服等相关参数设置。</p>
+                    <p class="page-header-description">皮肤，邀请功能，参与客服等相关参数设置。</p>
                 </div>
                 <div class="am-u-lg-3 tpl-index-settings-button">
                     <button type="button" class="page-header-button"><span class="am-icon-paint-brush"></span> 设置
@@ -310,29 +310,31 @@
                                     </ul>
                                     <div class="am-tabs-bd">
                                         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
-                                            <div class="am-form-group">
-                                                <label for="user-name" class="am-u-sm-3 am-form-label">实例名称</label>
-                                                <div class="am-u-sm-9">
-                                                    <input type="text" class="tpl-form-input" id="example-name"
-                                                           placeholder="请输入标题文字">
-                                                    <small>请填写标题文字10-20字左右。</small>
-                                                </div>
-                                            </div>
+
 
                                             <div class="am-form-group">
-                                                <label for="user-intro" class="am-u-sm-3 am-form-label">启用实例</label>
+                                                <label class="am-u-sm-3 am-form-label">启用实例</label>
                                                 <div class="am-u-sm-9">
                                                     <div class="tpl-switch">
-                                                        <input type="checkbox"
+                                                        <input type="checkbox" id="open-example"
                                                                class="ios-switch bigswitch tpl-switch-btn"
                                                                checked="">
                                                         <div class="tpl-switch-btn-view">
-                                                            <div>
-                                                            </div>
+                                                            <div></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+
+                                            <div class="am-form-group">
+                                                <label for="example-name" class="am-u-sm-3 am-form-label">实例名称</label>
+                                                <div class="am-u-sm-9">
+                                                    <input type="text" class="tpl-form-input" id="example-name"
+                                                           placeholder="请输入实例名称">
+                                                </div>
+                                            </div>
+
 
                                             <div class="am-form-group">
                                                 <label for="user-intro" class="am-u-sm-3 am-form-label">描述</label>
@@ -354,14 +356,19 @@
                                                 <div class="am-tabs-bd">
                                                     <div class="am-tab-panel am-fade am-in am-active" id="tab21">
 
+                                                        <blockquote>
+                                                            <p>以下是PC端皮肤参数</p>
+                                                        </blockquote>
+
+
                                                         <div class="am-form-group">
-                                                            <label for="user-name"
+                                                            <label for="color"
                                                                    class="am-u-sm-3 am-form-label">主题色</label>
                                                             <div class="am-u-sm-9">
                                                                 <input type="text" class="tpl-form-input"
-                                                                       id="example-name"
-                                                                       placeholder="请输入标题文字">
-                                                                <small>请填写标题文字10-20字左右。</small>
+                                                                       id="color"
+                                                                       placeholder="请输入十六进制颜色值">
+                                                                <small>请填写十六进制颜色值，如：#1c97f5</small>
                                                             </div>
                                                         </div>
 
@@ -370,7 +377,7 @@
                                                                    class="am-u-sm-3 am-form-label">挂件代码</label>
                                                             <div class="am-u-sm-9">
                                                                 <textarea class="" rows="10"
-                                                                          placeholder="请输入描述内容"></textarea>
+                                                                          placeholder="请输入HTML内容"></textarea>
                                                             </div>
                                                         </div>
 
@@ -379,14 +386,45 @@
                                                                    class="am-u-sm-3 am-form-label">邀请框代码</label>
                                                             <div class="am-u-sm-9">
                                                                 <textarea class="" rows="10"
-                                                                          placeholder="请输入描述内容"></textarea>
+                                                                          placeholder="请输入HTML内容"></textarea>
                                                             </div>
                                                         </div>
 
 
                                                     </div>
                                                     <div class="am-tab-panel am-fade" id="tab22">
-                                                        2
+
+                                                        <blockquote>
+                                                            <p>以下是移动端皮肤参数</p>
+                                                        </blockquote>
+                                                        <div class="am-form-group">
+                                                            <label for="color"
+                                                                   class="am-u-sm-3 am-form-label">主题色</label>
+                                                            <div class="am-u-sm-9">
+                                                                <input type="text" class="tpl-form-input"
+                                                                       id="color"
+                                                                       placeholder="请输入十六进制颜色值">
+                                                                <small>请填写十六进制颜色值，如：#1c97f5</small>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="am-form-group">
+                                                            <label for="user-intro"
+                                                                   class="am-u-sm-3 am-form-label">挂件代码</label>
+                                                            <div class="am-u-sm-9">
+                                                                <textarea class="" rows="10"
+                                                                          placeholder="请输入HTML内容"></textarea>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="am-form-group">
+                                                            <label for="user-intro"
+                                                                   class="am-u-sm-3 am-form-label">邀请框代码</label>
+                                                            <div class="am-u-sm-9">
+                                                                <textarea class="" rows="10"
+                                                                          placeholder="请输入HTML内容"></textarea>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -404,9 +442,14 @@
                                                 <div class="am-tabs-bd">
                                                     <div class="am-tab-panel am-fade am-in am-active" id="tab31">
 
+
+                                                        <blockquote>
+                                                            <p>以下是PC端邀请功能参数</p>
+                                                        </blockquote>
+
                                                         <div class="am-form-group">
                                                             <label for="user-intro"
-                                                                   class="am-u-sm-3 am-form-label">启用PC邀请</label>
+                                                                   class="am-u-sm-3 am-form-label">启用邀请</label>
                                                             <div class="am-u-sm-9">
                                                                 <div class="tpl-switch">
                                                                     <input type="checkbox"
@@ -425,25 +468,25 @@
                                                                    class="am-u-sm-3 am-form-label">星期范围</label>
                                                             <div class="am-u-sm-9">
                                                                 <label class="am-checkbox-inline">
-                                                                    <input type="checkbox" value="7"> 周日
+                                                                    <input type="checkbox" value="7">周日
                                                                 </label>
                                                                 <label class="am-checkbox-inline">
-                                                                    <input type="checkbox" value="1"> 周一
+                                                                    <input type="checkbox" value="1">周一
                                                                 </label>
                                                                 <label class="am-checkbox-inline">
-                                                                    <input type="checkbox" value="2"> 周二
+                                                                    <input type="checkbox" value="2">周二
                                                                 </label>
                                                                 <label class="am-checkbox-inline">
-                                                                    <input type="checkbox" value="3"> 周三
+                                                                    <input type="checkbox" value="3">周三
                                                                 </label>
                                                                 <label class="am-checkbox-inline">
-                                                                    <input type="checkbox" value="4"> 周四
+                                                                    <input type="checkbox" value="4">周四
                                                                 </label>
                                                                 <label class="am-checkbox-inline">
-                                                                    <input type="checkbox" value="5"> 周五
+                                                                    <input type="checkbox" value="5">周五
                                                                 </label>
                                                                 <label class="am-checkbox-inline">
-                                                                    <input type="checkbox" value="6"> 周六
+                                                                    <input type="checkbox" value="6">周六
                                                                 </label>
 
                                                             </div>
@@ -466,7 +509,7 @@
                                                             <div class="am-u-sm-9">
                                                                 <input type="text" class="tpl-form-input"
                                                                        id="" placeholder="请输入正整数">
-                                                                <small>邀请达到设定次数后不再邀请，如果不限制请输入：0</small>
+                                                                <small>邀请次数达到设定值后不再邀请，如果不限制请输入：0</small>
                                                             </div>
                                                         </div>
 
@@ -476,7 +519,7 @@
                                                             <div class="am-u-sm-9">
                                                                 <input type="text" class="tpl-form-input"
                                                                        id="" placeholder="请输入正整数">
-                                                                <small>页面被访问时，延迟多少秒发起第一次邀请？</small>
+                                                                <small>延迟多少秒发起第一次邀请？</small>
                                                             </div>
                                                         </div>
 
@@ -500,7 +543,102 @@
 
                                                     </div>
                                                     <div class="am-tab-panel am-fade" id="tab32">
-                                                        2
+                                                        <blockquote>
+                                                            <p>以下是移动端邀请功能参数</p>
+                                                        </blockquote>
+                                                        <div class="am-form-group">
+                                                            <label for="user-intro"
+                                                                   class="am-u-sm-3 am-form-label">启用邀请</label>
+                                                            <div class="am-u-sm-9">
+                                                                <div class="tpl-switch">
+                                                                    <input type="checkbox"
+                                                                           class="ios-switch bigswitch tpl-switch-btn"
+                                                                           checked="">
+                                                                    <div class="tpl-switch-btn-view">
+                                                                        <div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="am-form-group">
+                                                            <label for="user-name"
+                                                                   class="am-u-sm-3 am-form-label">星期范围</label>
+                                                            <div class="am-u-sm-9">
+                                                                <label class="am-checkbox-inline">
+                                                                    <input type="checkbox" value="7">周日
+                                                                </label>
+                                                                <label class="am-checkbox-inline">
+                                                                    <input type="checkbox" value="1">周一
+                                                                </label>
+                                                                <label class="am-checkbox-inline">
+                                                                    <input type="checkbox" value="2">周二
+                                                                </label>
+                                                                <label class="am-checkbox-inline">
+                                                                    <input type="checkbox" value="3">周三
+                                                                </label>
+                                                                <label class="am-checkbox-inline">
+                                                                    <input type="checkbox" value="4">周四
+                                                                </label>
+                                                                <label class="am-checkbox-inline">
+                                                                    <input type="checkbox" value="5">周五
+                                                                </label>
+                                                                <label class="am-checkbox-inline">
+                                                                    <input type="checkbox" value="6">周六
+                                                                </label>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="am-form-group">
+                                                            <label for="user-name"
+                                                                   class="am-u-sm-3 am-form-label">时间范围</label>
+                                                            <div class="am-u-sm-9">
+                                                                <input type="text" class="tpl-form-input"
+                                                                       id="" placeholder="请输入时间范围">
+                                                                <small>在某个时间段内发起邀请，格式：00:00:00-23:23:59</small>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="am-form-group">
+                                                            <label for="user-name"
+                                                                   class="am-u-sm-3 am-form-label">邀请次数</label>
+                                                            <div class="am-u-sm-9">
+                                                                <input type="text" class="tpl-form-input"
+                                                                       id="" placeholder="请输入正整数">
+                                                                <small>邀请次数达到设定值后不再邀请，如果不限制请输入：0</small>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="am-form-group">
+                                                            <label for="user-name" class="am-u-sm-3 am-form-label">首次邀请延迟</label>
+                                                            <div class="am-u-sm-9">
+                                                                <input type="text" class="tpl-form-input"
+                                                                       id="" placeholder="请输入正整数">
+                                                                <small>延迟多少秒发起第一次邀请？</small>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="am-form-group">
+                                                            <label for="user-name" class="am-u-sm-3 am-form-label">后续邀请延迟</label>
+                                                            <div class="am-u-sm-9">
+                                                                <input type="text" class="tpl-form-input"
+                                                                       id="" placeholder="请输入正整数">
+                                                                <small>首次邀请除外，之后的邀请需要延迟多少秒？</small>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="am-form-group">
+                                                            <label for="user-name" class="am-u-sm-3 am-form-label">自动关闭延迟</label>
+                                                            <div class="am-u-sm-9">
+                                                                <input type="text" class="tpl-form-input"
+                                                                       id="" placeholder="请输入正整数">
+                                                                <small>向访客发起邀请后，如果访客没有响应，在多少秒后自动关闭邀请框？如果不关闭请输入：0</small>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                 </div>
@@ -515,18 +653,33 @@
                                                 <div class="am-u-sm-9">
 
 
-                                                    <select multiple class="" id="doc-select-2">
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4</option>
-                                                        <option>5</option>
-                                                    </select>
+                                                    <table class="am-table am-table-bordered" style="margin-bottom: 0;">
+
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="30"></th>
+                                                            <th>客服名称</th>
+                                                            <th>用户名</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td><input type="checkbox" value="option1"></td>
+                                                            <td>http://amazeui.org</td>
+                                                            <td>2012-10-01</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><input type="checkbox" value="option1"></td>
+                                                            <td>http://amazeui.org</td>
+                                                            <td>2012-10-01</td>
+                                                        </tr>
+                                                        </tbody>
+
+                                                    </table>
 
 
                                                     <small>
-                                                        windows：按住 Ctrl 选择多个客服<br>
-                                                        Mac：按住 command 选择多个客服
+                                                        被勾选的客服才能参与该实例的工作任务
                                                     </small>
                                                 </div>
                                             </div>
