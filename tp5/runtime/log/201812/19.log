@@ -1,0 +1,28 @@
+---------------------------------------------------------------
+[ 2018-12-19T11:38:49+08:00 ] 127.0.0.1 GET /index.php/client/jsonp/getSettings/access/5c16129ee67d1
+[ info ] serve.njim.vip/index.php/client/jsonp/getSettings/access/5c16129ee67d1 [运行时间：0.328962s][吞吐率：3.04req/s] [内存消耗：2,802.77kb] [文件加载：57]
+[ error ] [8]Trying to get property of non-object[F:\phpStudy\WWW\njim\tp5\application\client\controller\Jsonp.php:27]
+---------------------------------------------------------------
+[ 2018-12-19T11:38:49+08:00 ] 127.0.0.1 GET /index.php/client/index/index/device/pc_1/access/5c16129ee67d1/client_id/THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17/is_new/n
+[ info ] serve.njim.vip/index.php/client/index/index/device/pc_1/access/5c16129ee67d1/client_id/THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17/is_new/n [运行时间：0.591332s][吞吐率：1.69req/s] [内存消耗：2,875.98kb] [文件加载：58]
+[ error ] [2]Invalid argument supplied for foreach()[F:\phpStudy\WWW\njim\tp5\application\client\controller\Index.php:113]
+---------------------------------------------------------------
+[ 2018-12-19T11:38:52+08:00 ] 127.0.0.1 GET /index.php/client/jsonp/getSettings/access/5c16129ee67d1
+[ info ] serve.njim.vip/index.php/client/jsonp/getSettings/access/5c16129ee67d1 [运行时间：0.112349s][吞吐率：8.90req/s] [内存消耗：2,802.78kb] [文件加载：57]
+[ error ] [8]Trying to get property of non-object[F:\phpStudy\WWW\njim\tp5\application\client\controller\Jsonp.php:27]
+---------------------------------------------------------------
+[ 2018-12-19T11:44:42+08:00 ] 127.0.0.1 GET /index.php/client/jsonp/getSettings/access/5c16129ee67d1
+[ info ] serve.njim.vip/index.php/client/jsonp/getSettings/access/5c16129ee67d1 [运行时间：0.084949s][吞吐率：11.77req/s] [内存消耗：2,802.89kb] [文件加载：57]
+[ error ] [8]Trying to get property of non-object[F:\phpStudy\WWW\njim\tp5\application\client\controller\Jsonp.php:27]
+---------------------------------------------------------------
+[ 2018-12-19T11:44:42+08:00 ] 127.0.0.1 GET /index.php/client/index/index/device/pc_1/access/5c16129ee67d1/client_id/THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17/is_new/n
+[ info ] serve.njim.vip/index.php/client/index/index/device/pc_1/access/5c16129ee67d1/client_id/THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17/is_new/n [运行时间：0.199432s][吞吐率：5.01req/s] [内存消耗：2,876.03kb] [文件加载：58]
+[ error ] [2]Invalid argument supplied for foreach()[F:\phpStudy\WWW\njim\tp5\application\client\controller\Index.php:113]
+---------------------------------------------------------------
+[ 2018-12-19T11:44:43+08:00 ] 127.0.0.1 GET /index.php/client/jsonp/getSettings/access/5c16129ee67d1
+[ info ] serve.njim.vip/index.php/client/jsonp/getSettings/access/5c16129ee67d1 [运行时间：0.105241s][吞吐率：9.50req/s] [内存消耗：2,802.89kb] [文件加载：57]
+[ error ] [8]Trying to get property of non-object[F:\phpStudy\WWW\njim\tp5\application\client\controller\Jsonp.php:27]
+---------------------------------------------------------------
+[ 2018-12-19T11:44:43+08:00 ] 127.0.0.1 GET /index.php/client/index/index/device/pc_1/access/5c16129ee67d1/client_id/THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17/is_new/n
+[ info ] serve.njim.vip/index.php/client/index/index/device/pc_1/access/5c16129ee67d1/client_id/THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17/is_new/n [运行时间：0.137978s][吞吐率：7.25req/s] [内存消耗：2,876.03kb] [文件加载：58]
+[ error ] [2]Invalid argument supplied for foreach()[F:\phpStudy\WWW\njim\tp5\application\client\controller\Index.php:113]

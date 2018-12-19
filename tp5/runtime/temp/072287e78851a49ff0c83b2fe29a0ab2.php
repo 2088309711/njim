@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"F:\phpStudy\WWW\njim/tp5/application/staff\view\login\index.html";i:1541080025;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:64:"F:\phpStudy\WWW\njim/tp5/application/staff\view\login\index.html";i:1545009064;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -39,8 +39,8 @@
                 </div>
                 <div class="form-group">
                     <div class="field text-center">
-                        <p class="text-muted text-center"><a class="" href="#register.html">注册新账号</a> |
-                            <a class="" href="#login.html">忘记密码了？ </a>
+                        <p class="text-muted text-center"><a class="" href="/index.php/staff/register">没有账号？</a> |
+                            <a class="" href="#">忘记密码了？ </a>
                         </p>
                     </div>
                 </div>
