@@ -403,7 +403,6 @@ setInterval(function () {
     }
 
     var getType = 'n';// 只获取新记录
-
     if (im_object.state.get_old_msg) {
         getType = 'o';// 获取旧记录
         im_object.state.get_old_msg = false;
