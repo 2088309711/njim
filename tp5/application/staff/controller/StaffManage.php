@@ -24,13 +24,11 @@ class StaffManage extends Controller
         $s = new Staff();
         $list = $s->where('account', $data['user_name'])->select();
 
-
         return view('index', [
             'staff' => $staff,
             'menu' => 'staff_manage',
             'list' => $list
         ]);
-
     }
 
     public function create()

@@ -23,12 +23,17 @@ class Example extends Validate
         [
             'id',
             'require|number',
-            '实例ID必须存在|实例ID必须为数字'
+            '实例ID不能为空|实例ID必须为数字'
+        ],
+        [
+            'state',
+            'require|in:0,1',
+            '功能状态不能为空|功能状态必须为启用或禁用'
         ],
         [
             'name',
-            'require|chsDash|length:1,20',
-            '实例名必须填写|实例名只能填写汉字、字母、数字和下划线_及破折号-|实例名长度只能在1~20个字符'
+            'require|chsDash|max:20',
+            '名称不能为空|名称只能填写汉字、字母、数字和下划线_及破折号-|名称长度超过限制'
         ],
         [
             'style_id',
@@ -41,9 +46,44 @@ class Example extends Validate
             '描述长度超过限制'
         ],
         [
+            'color',
+            'require|regex:color',
+            'PC端主题色不能为空|PC端主题色必须为十六进制的颜色值，格式：#123456'
+        ],
+        [
+            'color_m',
+            'require|regex:color',
+            '移动端主题色不能为空|移动端主题色必须为十六进制的颜色值，格式：#123456'
+        ],
+        [
+            'icon_code',
+            'require|max:3000',
+            'PC端挂件代码不能为空|PC端挂件代码长度超过限制'
+        ],
+        [
+            'icon_code_m',
+            'require|max:3000',
+            '移动端挂件代码不能为空|移动端挂件代码长度超过限制'
+        ],
+        [
+            'invitation_code',
+            'require|max:3000',
+            'PC端邀请框代码不能为空|PC端邀请框代码长度超过限制'
+        ],
+        [
+            'invitation_code_m',
+            'require|max:3000',
+            '移动端邀请框代码不能为空|移动端邀请框代码长度超过限制'
+        ],
+        [
             'invitation_switch',
             'require|in:0,1',
-            '邀请开关必须存在|邀请开关必须为0或1'
+            'PC端邀请功能状态不能为空|PC端邀请功能状态只能为启用或禁用'
+        ],
+        [
+            'invitation_switch_m',
+            'require|in:0,1',
+            'PC端邀请功能状态不能为空|PC端邀请功能状态只能为启用或禁用'
         ],
         [
             'invitation_first',
@@ -63,7 +103,12 @@ class Example extends Validate
         [
             'invitation_time',
             'require|regex:time_frame',
-            '邀请功能时间范围必须存在|邀请功能时间范围格式错误'
+            'PC端邀请时间范围不能为空|PC端邀请时间范围格式错误'
+        ],
+        [
+            'invitation_time_m',
+            'require|regex:time_frame',
+            '移动端邀请时间范围不能为空|移动端邀请时间范围格式错误'
         ],
         [
             'invitation_auto_close',
@@ -72,10 +117,26 @@ class Example extends Validate
         ]
     ];
 
-    protected $regex = ['time_frame' => '^[0-9]{2}:[0-9]{2}:[0-9]{2} - [0-9]{2}:[0-9]{2}:[0-9]{2}$'];
+    protected $regex = [
+        'time_frame' => '^[0-9]{2}:[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}:[0-9]{2}$',
+        'color' => '^#[0-9a-fA-F]{6}$'
+    ];
 
     protected $scene = [
         'scene1' => ['id'],
+        'state' => ['id', 'state'],
+        'name' => ['id', 'name'],
+        'description' => ['id', 'description'],
+        'color' => ['id', 'color'],
+        'color_m' => ['id', 'color_m'],
+        'icon_code' => ['id', 'icon_code'],
+        'icon_code_m' => ['id', 'icon_code_m'],
+        'invitation_code' => ['id', 'invitation_code'],
+        'invitation_code_m' => ['id', 'invitation_code_m'],
+        'invitation_switch' => ['id', 'invitation_switch'],
+        'invitation_switch_m' => ['id', 'invitation_switch_m'],
+        'invitation_time' => ['id', 'invitation_time'],
+        'invitation_time_m' => ['id', 'invitation_time_m'],
         'add' => [
             '__token__', 'name', 'style_id', 'description', 'invitation_switch', 'invitation_first',
             'invitation_after', 'invitation_num', 'invitation_time', 'invitation_auto_close'

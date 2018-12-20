@@ -167,11 +167,11 @@ class Example extends Controller
      */
     public function updateExample()
     {
-
         $login = new Login();
+        $staff = $login->getUserData();
         $data = [
             'id' => Request::instance()->param('id'),
-            'user_name' => $login->getUserName(true)
+            'user_name' => $staff->user_name
         ];
 
         //验证数据
@@ -179,9 +179,6 @@ class Example extends Controller
         if (true !== $result) {
             $this->error($result);
         }
-
-        //查询可用的样式
-        $styleList = ExampleStyle::all(['user_name' => $data['user_name']]);
 
         //查询客服
         $staffList = Staff::all(['account' => $data['user_name']]);
@@ -193,11 +190,188 @@ class Example extends Controller
         $example->invitation_week = explode('|', $example->invitation_week);
 
         return view('update', [
+            'staff' => $staff,
             'example' => $example,
-            'style_list' => $styleList,
+            'menu' => 'example',
             'staff_list' => $staffList
         ]);
 
+    }
+
+
+    /**
+     * 修改单个字段
+     */
+    public function updateField()
+    {
+        $data = input('post.');
+        $login = new Login();
+        $data['user_name'] = $login->getUserName(true);
+
+        $example = new ExampleModel();
+        switch ($data['name']) {
+            //基本
+            case 'state':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.state');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['state' => $data['state']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? '功能状态修改成功' : '功能状态修改失败');
+                break;
+
+            case 'name':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.name');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['name' => $data['name']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? '名称修改成功' : '名称修改失败');
+                break;
+
+            case 'description':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.description');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['description' => $data['description']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? '描述修改成功' : '描述修改失败');
+                break;
+
+            //皮肤
+            case 'color':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.color');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['color' => $data['color']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? 'PC端主题色修改成功' : 'PC端主题色修改失败');
+                break;
+
+            case 'color_m':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.color_m');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['color_m' => $data['color_m']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? '移动端主题色修改成功' : '移动端主题色修改失败');
+                break;
+
+            case 'icon_code':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.icon_code');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['icon_code' => $data['icon_code']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? 'PC端挂件代码修改成功' : 'PC端挂件代码修改失败');
+                break;
+
+            case 'icon_code_m':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.icon_code_m');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['icon_code_m' => $data['icon_code_m']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? '移动端挂件代码修改成功' : '移动端挂件代码修改失败');
+                break;
+
+            case 'invitation_code':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.invitation_code');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['invitation_code' => $data['invitation_code']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? 'PC端邀请框代码修改成功' : 'PC端邀请框代码修改失败');
+                break;
+
+            case 'invitation_code_m':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.invitation_code_m');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['invitation_code_m' => $data['invitation_code_m']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? '移动端邀请框代码修改成功' : '移动端邀请框代码修改失败');
+                break;
+
+            //邀请功能
+            case 'invitation_switch':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.invitation_switch');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['invitation_switch' => $data['invitation_switch']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? 'PC端邀请功能状态修改成功' : 'PC端邀请功能状态修改失败');
+                break;
+
+            case 'invitation_switch_m':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.invitation_switch_m');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['invitation_switch_m' => $data['invitation_switch_m']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? '移动端邀请功能状态修改成功' : '移动端邀请功能状态修改失败');
+                break;
+
+            case 'invitation_time':
+                $data[$data['name']] = $data['value'];
+                $result = $this->validate($data, 'Example.invitation_time');
+                if (true !== $result) {
+                    $this->outJsonResult(false, $result);
+                }
+                $result = !!$example->save(['invitation_time' => $data['invitation_time']], ['id' => $data['id']]);
+                $this->outJsonResult($result, $result ? 'PC端邀请时间范围修改成功' : 'PC端邀请时间范围修改失败');
+                break;
+
+            case 'invitation_time_m':
+                $this->updateSingleData($data, 'invitation_time_m', '移动端邀请时间范围修改成功', '移动端邀请时间范围修改失败');
+                break;
+
+        }
+
+
+    }
+
+
+    /**
+     * 修改单项数据
+     * @param $data
+     * @param $name
+     * @param $succMsg
+     * @param $failMsg
+     */
+    private function updateSingleData($data, $name, $succMsg, $failMsg)
+    {
+        $data[$data['name']] = $data['value'];
+        $result = $this->validate($data, 'Example.' . $name);
+        if (true !== $result) {
+            $this->outJsonResult(false, $result);
+        }
+        $example = new ExampleModel();
+        $result = !!$example->save([$name => $data[$name]], ['id' => $data['id'], 'user_name' => $data['user_name']]);
+        $this->outJsonResult($result, $result ? $succMsg : $failMsg);
+    }
+
+
+    /**
+     * ajax输出json结果
+     * @param bool $state 状态
+     * @param string $msg 消息
+     */
+    private function outJsonResult($state, $msg)
+    {
+        echo json_encode(['state' => $state ? 1 : 0, 'msg' => $msg]);
+        die;
     }
 
 

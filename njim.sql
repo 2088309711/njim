@@ -1,6 +1,6 @@
 ﻿# Host: localhost  (Version 5.5.53)
-# Date: 2018-12-16 20:56:09
-# Generator: MySQL-Front 6.1  (Build 1.15)
+# Date: 2018-12-20 15:37:46
+# Generator: MySQL-Front 6.0  (Build 2.20)
 
 
 #
@@ -10,6 +10,7 @@
 DROP TABLE IF EXISTS `im_example`;
 CREATE TABLE `im_example` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `open` int(1) NOT NULL DEFAULT '1' COMMENT '实例功能：1=启用，0=禁用',
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '实例名',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '负责人',
   `access` varchar(30) NOT NULL DEFAULT '' COMMENT '接入口',
@@ -19,22 +20,35 @@ CREATE TABLE `im_example` (
   `description` text NOT NULL COMMENT '实例描述',
   `staff_pk` text NOT NULL COMMENT '可接入的客服，主键，分割符 |',
   `invitation_switch` int(1) NOT NULL DEFAULT '0' COMMENT '邀请功能：1=打开，0=关闭',
+  `invitation_switch_m` int(1) NOT NULL DEFAULT '0' COMMENT '手机邀请功能：1=打开，0=关闭',
   `invitation_first` int(6) NOT NULL DEFAULT '10' COMMENT '首次邀请延迟，默认10秒',
+  `invitation_first_m` int(6) NOT NULL DEFAULT '10' COMMENT '手机首次邀请延迟，默认10秒',
   `invitation_after` int(6) NOT NULL DEFAULT '20' COMMENT '后续邀请延迟，默认20秒',
+  `invitation_after_m` int(6) NOT NULL DEFAULT '20' COMMENT '手机后续邀请延迟，默认20秒',
   `invitation_num` int(11) NOT NULL DEFAULT '0' COMMENT '邀请次数，0=不限制',
+  `invitation_num_m` int(11) NOT NULL DEFAULT '0' COMMENT '手机邀请次数，0=不限制',
   `invitation_time` varchar(20) NOT NULL DEFAULT '' COMMENT '时间范围内邀请',
+  `invitation_time_m` varchar(20) NOT NULL DEFAULT '' COMMENT '手机时间范围内邀请',
   `invitation_week` varchar(20) NOT NULL DEFAULT '' COMMENT '星期范围，周一至周末(1-7)，分割符 |',
+  `invitation_week_m` varchar(20) NOT NULL DEFAULT '' COMMENT '手机星期范围，周一至周末(1-7)，分割符 |',
   `invitation_auto_close` int(11) NOT NULL DEFAULT '0' COMMENT '自动关闭邀请延迟，0=不限制',
+  `invitation_auto_close_m` int(11) NOT NULL DEFAULT '0' COMMENT '手机自动关闭邀请延迟，0=不限制',
+  `color` varchar(7) NOT NULL DEFAULT '' COMMENT '主题色',
+  `color_m` varchar(7) NOT NULL DEFAULT '' COMMENT '手机主题色',
+  `icon_code` text NOT NULL COMMENT '挂件代码',
+  `icon_code_m` text NOT NULL COMMENT '手机挂件代码',
+  `invitation_code` text NOT NULL COMMENT '邀请框代码',
+  `invitation_code_m` text NOT NULL COMMENT '手机邀请框代码',
   PRIMARY KEY (`id`),
   UNIQUE KEY `access` (`access`)
-) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='实例';
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='实例';
 
 #
 # Data for table "im_example"
 #
 
 /*!40000 ALTER TABLE `im_example` DISABLE KEYS */;
-INSERT INTO `im_example` VALUES (3,'测试实例','2088309711','5beac60b0e049',4,1542112779,1543651958,'开发测试使用','18|29',1,10,20,0,'00:00:00 - 23:59:59','7|1|2|3|4|5|6',0),(4,'132','2088309711','5bed4e0413843',4,1542278660,1542278660,'','',0,0,10000,0,'0','0',0),(5,'1','2088309711','5bed4e0c681f5',4,1542278668,1542280970,'123','',0,0,10000,0,'0','0',0),(6,'1561615','2088309711','5bf91e94f1f2a',4,1543052949,1543052949,'1321165','18|29',0,0,10000,0,'0','0',0),(7,'1321123333','2088309711','5bf92437080f6',4,1543054391,1543054400,'1221213213','18|29',0,0,10000,0,'0','0',0),(8,'111','2088309711','5c00e917821a6',7,1543563543,1543636692,'1351','18|29',1,10,20,30,'12:05:03 - 14:29:01','7|1|2|3|4|5|6',30),(11,'自动填写的实例','3333333','5c16129ee67d1',9,1544950430,1544950430,'除了绑定样式，其他字段均为系统自动填写的内容，请根据实际需求修改。','41',1,10,20,0,'00:00:00 - 23:59:59','7|1|2|3|4|5|6',0);
+INSERT INTO `im_example` VALUES (3,1,'测试实例','2088309711','5beac60b0e049',4,1542112779,1543651958,'开发测试使用','18|29',0,0,10,10,20,20,0,0,'00:00:00 - 23:59:59','','7|1|2|3|4|5|6','',0,0,'','','','','',''),(4,1,'132','2088309711','5bed4e0413843',4,1542278660,1542278660,'','',0,0,0,10,10000,20,0,0,'0','','0','',0,0,'','','','','',''),(5,1,'1','2088309711','5bed4e0c681f5',4,1542278668,1542280970,'123','',0,0,0,10,10000,20,0,0,'0','','0','',0,0,'','','','','',''),(6,1,'1561615','2088309711','5bf91e94f1f2a',4,1543052949,1543052949,'1321165','18',1,0,0,10,10000,20,0,0,'00:00:00 - 23:59:59','','7|1|2|3|4|5|6','',0,0,'#ff0000','#106515','161651','011601','001650650','1fsdf65'),(7,1,'1321123333','2088309711','5bf92437080f6',4,1543054391,1543054400,'1221213213','18|29',0,0,0,10,10000,20,0,0,'0','','0','',0,0,'','','','','',''),(8,1,'111','2088309711','5c00e917821a6',7,1543563543,1543636692,'1351','18|29',1,0,10,10,20,20,30,0,'12:05:03 - 14:29:01','','7|1|2|3|4|5|6','',30,0,'','','','','','');
 /*!40000 ALTER TABLE `im_example` ENABLE KEYS */;
 
 #
@@ -47,21 +61,24 @@ CREATE TABLE `im_example_style` (
   `name` varchar(50) NOT NULL DEFAULT '' COMMENT '样式名',
   `user_name` varchar(50) NOT NULL DEFAULT '' COMMENT '负责人',
   `color` varchar(7) NOT NULL DEFAULT '' COMMENT '主题色',
+  `color_m` varchar(7) NOT NULL DEFAULT '' COMMENT '主题色，手机',
   `icon_code` text NOT NULL COMMENT '挂件代码',
+  `icon_code_m` text NOT NULL COMMENT '挂件代码，手机',
   `invitation_code` text NOT NULL COMMENT '邀请框代码',
+  `invitation_code_m` text NOT NULL COMMENT '邀请框代码，手机',
   `style_type` int(1) NOT NULL DEFAULT '0' COMMENT '官方样式=1，用户样式=2',
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
   `description` text NOT NULL COMMENT '样式描述',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='实例样式';
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='实例样式';
 
 #
 # Data for table "im_example_style"
 #
 
 /*!40000 ALTER TABLE `im_example_style` DISABLE KEYS */;
-INSERT INTO `im_example_style` VALUES (4,'test','2088309711','#41b300','<div id=\"njim_open_click\" style=\"width:80px; height:80px; position:fixed; bottom:50px; right:50px; background:{njim:color}; cursor:pointer; margin:0; padding:0;\"><img src=\"http://njim.com/static/images/staff-icon.png\" style=\"position:absolute; top:13px; left:14px; width:50px; margin:0; padding:0;\"/><span style=\"position:absolute; bottom:6px; color:#fff; text-align:center; width:100%; font:15px \'宋体\'; margin:0; padding:0;\">在线客服</span></div>','<div style=\"width: 340px; height: 200px; background: #282828 url(http://njim.com/static/images/invitation.jpg) no-repeat;position: fixed; top:50%; left:50%; margin: -100px 0 0 -170px;\"><div style=\"position: absolute;bottom: 5px;right: 5px;\"><button id=\"njim_invitation_open_chat\" style=\"float: left; margin: 5px; border: 1px solid #b3a800;background: #fff000; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">现在咨询</button><button id=\"njim_invitation_continue\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">稍后再说</button><button id=\"njim_invitation_close\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">不在提示</button></div></div>',2,1542248439,1543570855,'000'),(6,'002','2088309711','#eeeeee','<div id=\"njim_open_click\" style=\"width:80px; height:80px; position:fixed; bottom:50px; right:50px; background:{njim:color}; cursor:pointer; margin:0; padding:0;\"><img src=\"http://njim.com/static/images/staff-icon.png\" style=\"position:absolute; top:13px; left:14px; width:50px; margin:0; padding:0;\"/><span style=\"position:absolute; bottom:6px; color:#fff; text-align:center; width:100%; font:15px \'宋体\'; margin:0; padding:0;\">在线客服</span></div>','',2,1543050772,1543054856,'和规范化股份'),(9,'自动填写的样式','3333333','#1c97f5','<div id=\"njim_open_click\" style=\"width:80px; height:80px; position:fixed; bottom:50px; right:50px; background:{njim:color}; cursor:pointer; margin:0; padding:0;\"><img src=\"http://njim.com/static/images/staff-icon.png\" style=\"position:absolute; top:13px; left:14px; width:50px; margin:0; padding:0;\"/><span style=\"position:absolute; bottom:6px; color:#fff; text-align:center; width:100%; font:15px \'宋体\'; margin:0; padding:0;\">在线客服</span></div>','<div style=\"width: 340px; height: 200px; background: #282828 url(http://njim.com/static/images/invitation.jpg) no-repeat;position: fixed; top:50%; left:50%; margin: -100px 0 0 -170px;\"><div style=\"position: absolute;bottom: 5px;right: 5px;\"><button id=\"njim_invitation_open_chat\" style=\"float: left; margin: 5px; border: 1px solid #b3a800;background: #fff000; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">现在咨询</button><button id=\"njim_invitation_continue\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">稍后再说</button><button id=\"njim_invitation_close\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">不在提示</button></div></div>',2,1544949487,1544949487,'以上所有字段均为系统自动填写的内容，请根据实际需求修改。');
+INSERT INTO `im_example_style` VALUES (4,'test','2088309711','#eeeeee','','<div id=\"njim_open_click\" style=\"width:80px; height:80px; position:fixed; bottom:50px; right:50px; background:{njim:color}; cursor:pointer; margin:0; padding:0;\"><img src=\"http://njim.com/static/images/staff-icon.png\" style=\"position:absolute; top:13px; left:14px; width:50px; margin:0; padding:0;\"/><span style=\"position:absolute; bottom:6px; color:#fff; text-align:center; width:100%; font:15px \'宋体\'; margin:0; padding:0;\">在线客服</span></div>','','<div style=\"width: 340px; height: 200px; background: #282828 url(http://njim.com/static/images/invitation.jpg) no-repeat;position: fixed; top:50%; left:50%; margin: -100px 0 0 -170px;\"><div style=\"position: absolute;bottom: 5px;right: 5px;\"><button id=\"njim_invitation_open_chat\" style=\"float: left; margin: 5px; border: 1px solid #b3a800;background: #fff000; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">现在咨询</button><button id=\"njim_invitation_continue\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">稍后再说</button><button id=\"njim_invitation_close\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">不在提示</button></div></div>','',2,1542248439,1543570855,'000'),(6,'002','2088309711','#eeeeee','','<div id=\"njim_open_click\" style=\"width:80px; height:80px; position:fixed; bottom:50px; right:50px; background:{njim:color}; cursor:pointer; margin:0; padding:0;\"><img src=\"http://njim.com/static/images/staff-icon.png\" style=\"position:absolute; top:13px; left:14px; width:50px; margin:0; padding:0;\"/><span style=\"position:absolute; bottom:6px; color:#fff; text-align:center; width:100%; font:15px \'宋体\'; margin:0; padding:0;\">在线客服</span></div>','','','',2,1543050772,1543054856,'和规范化股份');
 /*!40000 ALTER TABLE `im_example_style` ENABLE KEYS */;
 
 #
@@ -82,14 +99,14 @@ CREATE TABLE `im_msg` (
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间',
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "im_msg"
 #
 
 /*!40000 ALTER TABLE `im_msg` DISABLE KEYS */;
-INSERT INTO `im_msg` VALUES (1,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','123',0,1,1,1,0,1542789527,1544863162),(30,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','456',1,1,1,1,0,1542789527,1544863162),(31,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','发送到发送到',1,1,1,1,0,1543221604,1544863162),(32,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','防守打法大发',1,1,1,1,0,1543221710,1544863162),(33,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','撒大声地',1,1,1,1,0,1543373389,1544863162),(34,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','fsdf',1,1,1,1,0,1543392696,1544863162),(35,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','fdsfsdf',1,1,1,1,0,1543453913,1544863162),(36,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','gdfg',0,1,1,1,1,1544858110,1544884672),(37,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','fsdfsd',0,1,1,1,1,1544858278,1544884672),(38,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','fsdfsdf',0,1,1,1,1,1544858282,1544884672),(39,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','fsdfdsf',0,1,1,1,1,1544858284,1544884672),(40,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','dfbdfb',0,1,1,1,1,1544858287,1544884672),(41,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','tsdr  g fg h fgdh fhf',0,1,1,1,1,1544858292,1544884672),(42,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','hfbfbrh<br>gdfgrethfh<br>vsrdegfghf<br>gsedrg',0,1,1,1,1,1544858299,1544884672),(43,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','<img src=\"/static/images/emo/emo_30.gif\" />',0,1,1,1,1,1544859723,1544884672),(44,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','<img src=\"/static/images/emo/emo_13.gif\" /><img src=\"/static/images/emo/emo_17.gif\" /><img src=\"/static/images/emo/emo_15.gif\" /><img src=\"/static/images/emo/emo_21.gif\" /><img src=\"/static/images/emo/emo_41.gif\" /><img src=\"/static/images/emo/emo_42.gif\" /><img src=\"/static/images/emo/emo_11.gif\" /><img src=\"/static/images/emo/emo_52.gif\" /><img src=\"/static/images/emo/emo_14.gif\" />',0,1,1,1,1,1544859736,1544884672),(45,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','<img src=\"/static/images/emo/emo_60.gif\" /><img src=\"/static/images/emo/emo_60.gif\" /><img src=\"/static/images/emo/emo_60.gif\" /><img src=\"/static/images/emo/emo_60.gif\" /><img src=\"/static/images/emo/emo_60.gif\" />',0,1,1,1,1,1544860435,1544884672),(46,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','<img src=\"/static/images/emo/emo_18.gif\" /><img src=\"/static/images/emo/emo_18.gif\" /><img src=\"/static/images/emo/emo_18.gif\" />',0,1,1,1,1,1544860445,1544884672),(47,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','156165165<br>165161',0,1,1,1,1,1544860475,1544884672),(48,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','申达股份设定',0,0,1,0,1,1544862037,1544862038),(49,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','防守打法',0,0,1,0,1,1544862041,1544862042),(50,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','fdsfds',0,0,1,0,1,1544862043,1544862045),(51,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','fsdfsd',0,0,1,0,1,1544862045,1544862046),(52,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','fsdfsd',0,0,1,0,1,1544862046,1544862047),(53,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','gsdgfds',0,0,1,0,1,1544862047,1544862048),(54,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','fsdfsdf',0,0,1,0,1,1544862048,1544862049),(55,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','fsdgdsfg',0,0,1,0,1,1544862049,1544862051),(56,'lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789','dfsfsdf',0,0,1,0,1,1544862051,1544862052),(57,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','fsdfsdf',1,1,1,1,0,1544862389,1544884672),(58,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','fdsf',1,1,1,1,0,1544862394,1544884672),(59,'sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711','rdsgdr',0,1,1,1,1,1544862900,1544884672),(60,'jpeOxCUqiCMWnyhNBTIpYrJ87Z65gYomAveqClC6','3333333','1561',0,1,1,1,1,1544950496,1544960361),(61,'jpeOxCUqiCMWnyhNBTIpYrJ87Z65gYomAveqClC6','3333333','1964156',0,1,1,1,1,1544950510,1544960361),(62,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','您好',1,1,1,1,0,1544950697,1544960361),(63,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','大萨达',1,1,1,1,0,1544950714,1544960361),(64,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','16161',1,1,1,1,0,1544950734,1544960361),(65,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','15611',0,1,1,1,1,1544950743,1544960361),(66,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法',1,1,1,1,0,1544950753,1544960361),(67,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','个地方官的',1,1,1,1,0,1544950763,1544960361),(68,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','发送到发送到',0,1,1,1,1,1544950774,1544960361),(69,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','发送到发送到',0,1,1,1,1,1544950777,1544960361),(70,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','个电饭锅电饭锅',0,1,1,1,1,1544950779,1544960361),(71,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','<img src=\"/static/images/emo/emo_31.gif\" /><img src=\"/static/images/emo/emo_31.gif\" />',0,1,1,1,1,1544950829,1544960361),(72,'jpeOxCUqiCMWnyhNBTIpYrJ87Z65gYomAveqClC6','3333333','发送到发送到',1,1,0,1,0,1544950846,1544960361),(73,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','111',0,1,1,1,1,1544950901,1544960361),(74,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','发生地方都是',1,1,1,1,0,1544950935,1544960361),(75,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','方式发送到',1,1,1,1,0,1544951280,1544960361),(76,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法',1,1,1,1,0,1544951283,1544960361),(77,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','鬼地方个梵蒂冈',1,1,1,1,0,1544951286,1544960361),(78,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','佛挡杀佛',1,1,1,1,0,1544951640,1544964816),(79,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法',1,1,1,1,0,1544951647,1544964816),(80,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法1',1,1,1,1,0,1544951708,1544964816),(81,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法',1,1,1,1,0,1544951778,1544964816),(82,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','12313',1,1,1,1,0,1544951826,1544964816),(83,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法',1,1,1,1,0,1544951943,1544964816),(84,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','鼓捣鼓捣',1,1,1,1,0,1544951989,1544964816),(85,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','大哥大法官',1,1,1,1,0,1544952009,1544964816),(86,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','高大哥大法官 ',1,1,1,1,0,1544952022,1544964816),(87,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','发生地方都是',1,1,1,1,0,1544952373,1544964816),(88,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','方式发送到',1,1,1,1,0,1544952434,1544964816),(89,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法',1,1,1,1,0,1544952503,1544964816),(90,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','供热个',1,1,1,1,0,1544952507,1544964816),(91,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','股份公司东方',1,1,1,1,0,1544952512,1544964816),(92,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法',1,1,1,1,0,1544952615,1544964816),(93,'jpeOxCUqiCMWnyhNBTIpYrJ87Z65gYomAveqClC6','3333333','吃饭的观点',1,1,0,1,0,1544953254,1544960361),(94,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','放松放松',1,1,1,1,0,1544953258,1544964816),(95,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','16516',1,1,1,1,0,1544955103,1544964816),(96,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','个地方官的',1,1,1,1,0,1544960334,1544964816),(97,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','123',1,1,1,1,0,1544960365,1544964816),(98,'9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333','防守打法',0,1,1,1,1,1544960475,1544964816);
+INSERT INTO `im_msg` VALUES (1,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','123',0,1,1,1,0,1542789527,1545276354),(30,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','456',1,1,1,1,0,1542789527,1545276354),(31,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','发送到发送到',1,1,1,1,0,1543221604,1545276354),(32,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','防守打法大发',1,1,1,1,0,1543221710,1545276354),(33,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','撒大声地',1,1,1,1,0,1543373389,1545276354),(34,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','fsdf',1,1,1,1,0,1543392696,1545276354),(35,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','fdsfsdf',1,1,1,1,0,1543453913,1545276354);
 /*!40000 ALTER TABLE `im_msg` ENABLE KEYS */;
 
 #
@@ -99,7 +116,7 @@ INSERT INTO `im_msg` VALUES (1,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','20883
 DROP TABLE IF EXISTS `im_server_list`;
 CREATE TABLE `im_server_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL DEFAULT '新访客' COMMENT '备注客户',
+  `name` varchar(20) NOT NULL DEFAULT '' COMMENT '备注客户',
   `access` varchar(255) NOT NULL DEFAULT '' COMMENT '接口名',
   `client_id` varchar(50) NOT NULL DEFAULT '' COMMENT '客户ID',
   `staff_id` varchar(14) NOT NULL DEFAULT '' COMMENT '客服ID',
@@ -107,14 +124,14 @@ CREATE TABLE `im_server_list` (
   `update_time` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间',
   `active_time` int(11) NOT NULL DEFAULT '0' COMMENT '活动时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=869 DEFAULT CHARSET=utf8 COMMENT='接入列表';
+) ENGINE=MyISAM AUTO_INCREMENT=864 DEFAULT CHARSET=utf8 COMMENT='接入列表';
 
 #
 # Data for table "im_server_list"
 #
 
 /*!40000 ALTER TABLE `im_server_list` DISABLE KEYS */;
-INSERT INTO `im_server_list` VALUES (86,'0004654','5beac60b0e049','THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711',1542770232,1543478047,1542770232),(863,'2424','5beac60b0e049','sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711',1543573898,1543573898,1543573898),(864,'2452','5beac60b0e049','lXlhhlkrqseC4SgBq0Q6BFznkSzdjqRpqLuFkuCa','123456789',1544857157,1544857157,1544857157),(865,'2452','5beac60b0e049','anngQIWNKrslevLnqmYxCXDW8mvCR7FmAynIMexY','2088309711',1544857438,1544857438,1544857438),(866,'','5beac60b0e049','BvWerTKX2FcfltsOYcoVPBKpFPpGnkUk3PM4k05L','123456789',1544885766,1544885766,1544885766),(867,'','5beac60b0e049','jpeOxCUqiCMWnyhNBTIpYrJ87Z65gYomAveqClC6','2088309711',1544888653,1544888653,1544888653),(868,'','5c16129ee67d1','jpeOxCUqiCMWnyhNBTIpYrJ87Z65gYomAveqClC6','3333333',1544950484,1544950484,1544950484),(869,'新访客','5c16129ee67d1','9llBoIHhg39qxbSjoyVFNXS7qamrtgwaxNSTz1mW','3333333',1544950679,1544950679,1544950679);
+INSERT INTO `im_server_list` VALUES (86,'0004654','5beac60b0e049','THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711',1542770232,1543478047,1542770232),(863,'','5beac60b0e049','sJ8KpnefXEb46H1SEc0x8dix8JmPD2WO53DrGKlh','2088309711',1543573898,1543573898,1543573898);
 /*!40000 ALTER TABLE `im_server_list` ENABLE KEYS */;
 
 #
@@ -139,12 +156,12 @@ CREATE TABLE `im_staff` (
   `description` text NOT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`user_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "im_staff"
 #
 
 /*!40000 ALTER TABLE `im_staff` DISABLE KEYS */;
-INSERT INTO `im_staff` VALUES (18,1,'333333',0,'2088309711','2088309711','f28fed86680bea284cf0cfe0640ec4',10,25,'userImg.jpg',1,0,1544888653,'010231301'),(29,1,'fdfsdf',2,'123456789','2088309711','0200e00a005aac207704e7aabbaafb',10,25,'',0,1542517645,1544885766,'fsdfdsf'),(35,1,'未设置',0,'20883097111','','2b82a68d7ae470b115262975c25732',10,0,'',1,1544884442,1544884442,''),(36,1,'未设置',0,'2088309712','2088309712','2b82a68d7ae470b115262975c25732',10,0,'',1,1544884515,1544884515,''),(37,1,'未设置',0,'12345678','12345678','35b393b97552275a93324129549294',10,0,'',1,1544884667,1544884667,''),(38,1,'未设置',0,'141651','141651','2b82a68d7ae470b115262975c25732',10,0,'',1,1544884726,1544884726,''),(39,1,'未设置',0,'156416541654','156416541654','2b82a68d7ae470b115262975c25732',10,0,'',1,1544884830,1544884830,''),(40,1,'未设置',0,'2088309711112','2088309711112','2b82a68d7ae470b115262975c25732',10,0,'',1,1544884853,1544884853,''),(41,1,'未设置',0,'3333333','3333333','c1cc6dc700b7931427cad09a43a923',10,2,'',1,1544948537,1544950679,'');
+INSERT INTO `im_staff` VALUES (18,1,'333333',0,'2088309711','2088309711','f28fed86680bea284cf0cfe0640ec4',10,23,'userImg.jpg',1,0,1543726798,'010231301'),(29,1,'fdfsdf',2,'123456789','2088309711','0200e00a005aac207704e7aabbaafb',10,23,'',0,1542517645,1543636444,'fsdfdsf');
 /*!40000 ALTER TABLE `im_staff` ENABLE KEYS */;

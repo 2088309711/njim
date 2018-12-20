@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"F:\phpStudy\WWW\njim/tp5/application/staff\view\admin\index.html";i:1545272484;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545272225;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:64:"F:\phpStudy\WWW\njim/tp5/application/staff\view\admin\index.html";i:1545272484;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545289169;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +13,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
-    <script src="/static/assets/js/echarts.min.js"></script>
+   
     <link rel="stylesheet" href="/static/layui/css/layui.css">
     <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/static/assets/css/amazeui.datatables.min.css"/>

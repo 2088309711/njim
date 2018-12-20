@@ -86,3 +86,31 @@
 [ 2018-12-20T11:52:19+08:00 ] 127.0.0.1 GET /index.php/staff/Staff_Manage/index
 [ info ] njim.com/index.php/staff/Staff_Manage/index [运行时间：0.131030s][吞吐率：7.63req/s] [内存消耗：2,904.16kb] [文件加载：61]
 [ error ] [0]类的属性不存在:app\common\model\Staff->name[F:\phpStudy\WWW\njim\tp5\thinkphp\library\think\Model.php:624]
+---------------------------------------------------------------
+[ 2018-12-20T13:46:33+08:00 ] 127.0.0.1 GET /index.php/staff/Example/updateExample/id/3
+[ info ] njim.com/index.php/staff/Example/updateExample/id/3 [运行时间：0.209179s][吞吐率：4.78req/s] [内存消耗：3,292.32kb] [文件加载：68]
+[ error ] [8]未定义变量: staff[F:\phpStudy\WWW\njim\tp5\runtime\temp\8f6584e9887b79b4db3d70fdddaff03b.php:52]
+---------------------------------------------------------------
+[ 2018-12-20T13:50:06+08:00 ] 127.0.0.1 GET /index.php/staff/Example/updateExample/id/3
+[ info ] njim.com/index.php/staff/Example/updateExample/id/3 [运行时间：0.119339s][吞吐率：8.38req/s] [内存消耗：3,042.73kb] [文件加载：66]
+[ error ] [8]未定义变量: staff[F:\phpStudy\WWW\njim\tp5\runtime\temp\8f6584e9887b79b4db3d70fdddaff03b.php:52]
+---------------------------------------------------------------
+[ 2018-12-20T14:16:25+08:00 ] 127.0.0.1 GET /index.php/staff/Example/updateExample/id/6
+[ info ] njim.com/index.php/staff/Example/updateExample/id/6 [运行时间：0.133832s][吞吐率：7.47req/s] [内存消耗：3,313.80kb] [文件加载：68]
+[ error ] [8]未定义变量: invitation_switch[F:\phpStudy\WWW\njim\tp5\runtime\temp\8f6584e9887b79b4db3d70fdddaff03b.php:411]
+---------------------------------------------------------------
+[ 2018-12-20T14:33:28+08:00 ] 127.0.0.1 GET /index.php/staff/Example/updateExample/id/6
+[ info ] njim.com/index.php/staff/Example/updateExample/id/6 [运行时间：0.135080s][吞吐率：7.40req/s] [内存消耗：3,320.80kb] [文件加载：66]
+[ error ] [0]类的属性不存在:app\common\model\Example->invitation_switch_m[F:\phpStudy\WWW\njim\tp5\thinkphp\library\think\Model.php:624]
+---------------------------------------------------------------
+[ 2018-12-20T15:48:04+08:00 ] 127.0.0.1 GET /index.php/staff/Example/updateExample/id/6
+[ info ] njim.com/index.php/staff/Example/updateExample/id/6 [运行时间：0.126645s][吞吐率：7.90req/s] [内存消耗：3,280.77kb] [文件加载：65]
+[ error ] [0]类的属性不存在:app\common\model\Example->open[F:\phpStudy\WWW\njim\tp5\thinkphp\library\think\Model.php:624]
+---------------------------------------------------------------
+[ 2018-12-20T15:48:05+08:00 ] 127.0.0.1 GET /index.php/staff/Example/updateExample/id/6
+[ info ] njim.com/index.php/staff/Example/updateExample/id/6 [运行时间：0.108261s][吞吐率：9.24req/s] [内存消耗：3,000.46kb] [文件加载：63]
+[ error ] [0]类的属性不存在:app\common\model\Example->open[F:\phpStudy\WWW\njim\tp5\thinkphp\library\think\Model.php:624]
+---------------------------------------------------------------
+[ 2018-12-20T15:48:05+08:00 ] 127.0.0.1 GET /index.php/staff/Example/updateExample/id/6
+[ info ] njim.com/index.php/staff/Example/updateExample/id/6 [运行时间：0.114214s][吞吐率：8.76req/s] [内存消耗：3,000.45kb] [文件加载：63]
+[ error ] [0]类的属性不存在:app\common\model\Example->open[F:\phpStudy\WWW\njim\tp5\thinkphp\library\think\Model.php:624]

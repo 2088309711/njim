@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"F:\phpStudy\WWW\njim/tp5/application/staff\view\example\index.html";i:1545277257;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545272225;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"F:\phpStudy\WWW\njim/tp5/application/staff\view\example\index.html";i:1545284724;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545289220;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -302,7 +302,7 @@
                                     <td><?php echo $vo['update_time']; ?></td>
                                     <td>
                                         <div class="tpl-table-black-operation">
-                                            <a href="javascript:;">
+                                            <a href="/index.php/staff/Example/updateExample/id/<?php echo $vo['id']; ?>">
                                                 <i class="am-icon-pencil"></i> 编辑
                                             </a>
                                             <a href="javascript:;" class="tpl-table-black-operation-del">
