@@ -24,10 +24,21 @@ use app\common\model\ExampleStyle;
 class Example extends Controller
 {
 
-
     public function index()
     {
-        return view('index');
+        $login = new Login();
+        $staff = $login->getUserData();
+        $data = ['user_name' => $staff->user_name];
+
+        $em = new ExampleModel();
+        $list = $em->where('user_name', $data['user_name'])->select();
+
+        return view('index', [
+            'staff' => $staff,
+            'menu' => 'example',
+            'list' => $list
+        ]);
+
     }
 
     public function create()
@@ -62,7 +73,6 @@ class Example extends Controller
         $em = new ExampleModel();
         $list = $em->where('user_name', $data['user_name'])->select();
 
-        $date = new DateUtil();
         $jsonArr = [];
         foreach ($list as $key => $item) {
             $jsonArr[] = [

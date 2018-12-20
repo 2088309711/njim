@@ -25,7 +25,7 @@ class Admin extends Controller
         $login = new Login();
         $staff = $login->getUserData();
         if ($staff != null) {
-            return view('index', ['staff' => $staff]);
+            return view('index', ['staff' => $staff, 'menu' => 'index']);
         }
     }
 

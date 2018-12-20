@@ -17,9 +17,21 @@ class StaffManage extends Controller
 
     public function index()
     {
-        return view('index');
-    }
+        $login = new Login();
+        $staff = $login->getUserData();
+        $data = ['user_name' => $staff->user_name];
 
+        $s = new Staff();
+        $list = $s->where('account', $data['user_name'])->select();
+
+
+        return view('index', [
+            'staff' => $staff,
+            'menu' => 'staff_manage',
+            'list' => $list
+        ]);
+
+    }
 
     public function create()
     {
@@ -27,7 +39,6 @@ class StaffManage extends Controller
         $login->getUserName(true);
         return view('create');
     }
-
 
     /**
      * 获取一个账户下的所有客服（AJAX）

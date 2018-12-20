@@ -7,7 +7,7 @@
             </div>
             <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-              禁言小张
+            {$staff.name}
           </span>
             <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
         </div>
@@ -19,13 +19,13 @@
 
         <li class="sidebar-nav-link">
             <a href="/index.php/staff" {eq name="menu" value="index" }class="active" {/eq}>
-            <i class="am-icon-home sidebar-nav-link-logo"></i>系统主页
+            <i class="am-icon-home sidebar-nav-link-logo"></i>工作台主页
             </a>
         </li>
 
         <li class="sidebar-nav-link">
-            <a href="/index.php/staff/admin" {eq name="menu" value="console" }class="active" {/eq}>
-            <i class="am-icon-home sidebar-nav-link-logo"></i>控制台
+            <a href="/index.php/staff/admin">
+                <i class="am-icon-home sidebar-nav-link-logo"></i>控制台
             </a>
         </li>
 

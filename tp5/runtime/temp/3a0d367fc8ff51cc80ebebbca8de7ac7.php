@@ -1,11 +1,11 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:66:"F:\phpStudy\WWW\njim/tp5/application/staff\view\example\index.html";i:1545277257;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545272225;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:71:"F:\phpStudy\WWW\njim/tp5/application/staff\view\staff_manage\index.html";i:1545278359;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545272225;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>实例列表 - 客服控制台</title>
+    <title>客服列表 - 客服控制台</title>
     <meta name="description" content="">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -287,19 +287,29 @@
                                    id="example-r">
                                 <thead>
                                 <tr>
-                                    <th width="80">编号</th>
-                                    <th>实例名称</th>
-                                    <th width="180">修改时间</th>
-                                    <th width="160">操作</th>
+                                    <th>编号</th>
+                                    <th>客服名称</th>
+                                    <th>用户名</th>
+                                    <th>性别</th>
+                                    <th>状态</th>
+                                    <th>权限</th>
+                                    <th>修改时间</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+
 
                                 <?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                                 <tr class="gradeX">
                                     <td><?php echo $vo['id']; ?></td>
                                     <td><?php echo $vo['name']; ?></td>
+                                    <td><?php echo $vo['user_name']; ?></td>
+                                    <td><?php echo $vo['sex']; ?></td>
+                                    <td><?php echo $vo['open']; ?></td>
+                                    <td><?php echo $vo['power']; ?></td>
                                     <td><?php echo $vo['update_time']; ?></td>
+
                                     <td>
                                         <div class="tpl-table-black-operation">
                                             <a href="javascript:;">
@@ -312,6 +322,7 @@
                                     </td>
                                 </tr>
                                 <?php endforeach; endif; else: echo "" ;endif; ?>
+
 
                                 </tbody>
                             </table>
