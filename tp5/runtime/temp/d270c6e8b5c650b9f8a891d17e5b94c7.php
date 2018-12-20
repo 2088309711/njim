@@ -1,17 +1,16 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:68:"D:\php-workspace\njim/tp5/application/staff\view\example\update.html";i:1545230999;s:58:"D:\php-workspace\njim\tp5\application\staff\view\base.html";i:1545230867;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\php-workspace\njim/tp5/application/staff\view\example\update.html";i:1545319293;s:58:"D:\php-workspace\njim\tp5\application\staff\view\base.html";i:1545309173;s:64:"D:\php-workspace\njim\tp5\application\staff\view\left_admin.html";i:1545309173;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>管理中心</title>
+    <title>修改实例 - 客服控制台</title>
     <meta name="description" content="">
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <script src="/static/assets/js/echarts.min.js"></script>
@@ -22,7 +21,7 @@
     <script src="/static/assets/js/jquery.min.js"></script>
 </head>
 
-<body data-type="widgets">
+<body data-type="index">
 <script src="/static/assets/js/theme.js"></script>
 <div class="am-g tpl-g">
     <!-- 头部 -->
@@ -50,7 +49,7 @@
                 <ul>
                     <!-- 欢迎语 -->
                     <li class="am-text-sm tpl-header-navbar-welcome">
-                        <a href="javascript:;">欢迎你, <span>Amaze UI</span> </a>
+                        <a href="javascript:;">欢迎你，<span><?php echo $staff['name']; ?></span> </a>
                     </li>
 
                     <!-- 新邮件 -->
@@ -162,7 +161,7 @@
 
                     <!-- 退出 -->
                     <li class="am-text-sm">
-                        <a href="javascript:;">
+                        <a href="/index.php/staff/login/logout">
                             <span class="am-icon-sign-out"></span> 退出
                         </a>
                     </li>
@@ -187,90 +186,46 @@
     </div>
     <!-- 侧边导航栏 -->
     <div class="left-sidebar">
-        <!-- 用户信息 -->
-        <div class="tpl-sidebar-user-panel">
-            <div class="tpl-user-panel-slide-toggleable">
-                <div class="tpl-user-panel-profile-picture">
-                    <img src="/static/assets/img/user04.png" alt="">
-                </div>
-                <span class="user-panel-logged-in-text">
-              <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-              禁言小张
-          </span>
-                <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
+    <!-- 用户信息 -->
+    <div class="tpl-sidebar-user-panel">
+        <div class="tpl-user-panel-slide-toggleable">
+            <div class="tpl-user-panel-profile-picture">
+                <img src="/static/assets/img/user04.png" alt="">
             </div>
+            <span class="user-panel-logged-in-text">
+              <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+              <?php echo $staff['name']; ?>
+          </span>
+            <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
         </div>
-
-        <!-- 菜单 -->
-        <ul class="sidebar-nav">
-            <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 附加组件</span></li>
-            <li class="sidebar-nav-link">
-                <a href="index.html">
-                    <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
-                </a>
-            </li>
-            <li class="sidebar-nav-link">
-                <a href="tables.html">
-                    <i class="am-icon-table sidebar-nav-link-logo"></i> 表格
-                </a>
-            </li>
-            <li class="sidebar-nav-link">
-                <a href="calendar.html">
-                    <i class="am-icon-calendar sidebar-nav-link-logo"></i> 日历
-                </a>
-            </li>
-            <li class="sidebar-nav-link">
-                <a href="form.html" class="active">
-                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 表单
-
-                </a>
-            </li>
-            <li class="sidebar-nav-link">
-                <a href="chart.html">
-                    <i class="am-icon-bar-chart sidebar-nav-link-logo"></i> 图表
-
-                </a>
-            </li>
-
-            <li class="sidebar-nav-heading">Page<span class="sidebar-nav-heading-info"> 常用页面</span></li>
-            <li class="sidebar-nav-link">
-                <a href="javascript:;" class="sidebar-nav-sub-title">
-                    <i class="am-icon-table sidebar-nav-link-logo"></i> 数据列表
-                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
-                </a>
-                <ul class="sidebar-nav sidebar-nav-sub">
-                    <li class="sidebar-nav-link">
-                        <a href="table-list.html">
-                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 文字列表
-                        </a>
-                    </li>
-
-                    <li class="sidebar-nav-link">
-                        <a href="table-list-img.html">
-                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 图文列表
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="sidebar-nav-link">
-                <a href="sign-up.html">
-                    <i class="am-icon-clone sidebar-nav-link-logo"></i> 注册
-                    <span class="am-badge am-badge-secondary sidebar-nav-link-logo-ico am-round am-fr am-margin-right-sm">6</span>
-                </a>
-            </li>
-            <li class="sidebar-nav-link">
-                <a href="login.html">
-                    <i class="am-icon-key sidebar-nav-link-logo"></i> 登录
-                </a>
-            </li>
-            <li class="sidebar-nav-link">
-                <a href="404.html">
-                    <i class="am-icon-tv sidebar-nav-link-logo"></i> 404错误
-                </a>
-            </li>
-
-        </ul>
     </div>
+
+    <!-- 菜单 -->
+    <ul class="sidebar-nav">
+        <li class="sidebar-nav-heading">Components <span class="sidebar-nav-heading-info"> 附加组件</span></li>
+        <li class="sidebar-nav-link">
+            <a href="/index.php/staff/admin" <?php if($menu == 'index'): ?>class="active" <?php endif; ?>>
+            <i class="am-icon-home sidebar-nav-link-logo"></i>控制台首页
+            </a>
+        </li>
+        <li class="sidebar-nav-link">
+            <a href="/index.php/staff">
+                <i class="am-icon-table sidebar-nav-link-logo"></i>工作台
+            </a>
+        </li>
+        <li class="sidebar-nav-link">
+            <a href="/index.php/staff/Staff_Manage/index" <?php if($menu == 'staff_manage'): ?>class="active" <?php endif; ?>>
+            <i class="am-icon-calendar sidebar-nav-link-logo"></i>客服管理
+            </a>
+        </li>
+        <li class="sidebar-nav-link">
+            <a href="/index.php/staff/example/index" <?php if($menu == 'example'): ?>class="active" <?php endif; ?>>
+            <i class="am-icon-wpforms sidebar-nav-link-logo"></i>实例管理
+            </a>
+        </li>
+
+    </ul>
+</div>
 
     <!-- 内容区域 -->
     
@@ -302,6 +257,7 @@
                     </div>
                     <div class="widget-body am-fr">
                         <form class="am-form tpl-form-border-form tpl-form-border-br">
+                            <input type="hidden" id="id" value="<?php echo $example['id']; ?>">
                             <div class="am-tabs" data-am-tabs>
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
                                     <li class="am-active"><a href="#tab1">基本</a></li>
@@ -312,14 +268,13 @@
                                 <div class="am-tabs-bd">
                                     <div class="am-tab-panel am-fade am-in am-active" id="tab1">
 
-
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-form-label">启用实例</label>
                                             <div class="am-u-sm-9">
                                                 <div class="tpl-switch">
-                                                    <input type="checkbox" id="open-example"
+                                                    <input type="checkbox" id="example-switch"
                                                            class="ios-switch bigswitch tpl-switch-btn"
-                                                           checked="">
+                                                           <?php if($example['state'] == '1'): ?>checked<?php endif; ?>>
                                                     <div class="tpl-switch-btn-view">
                                                         <div></div>
                                                     </div>
@@ -327,21 +282,19 @@
                                             </div>
                                         </div>
 
-
                                         <div class="am-form-group">
-                                            <label for="example-name" class="am-u-sm-3 am-form-label">实例名称</label>
+                                            <label class="am-u-sm-3 am-form-label">实例名称</label>
                                             <div class="am-u-sm-9">
                                                 <input type="text" class="tpl-form-input" id="example-name"
-                                                       placeholder="请输入实例名称">
+                                                       placeholder="请输入实例名称" value="<?php echo $example['name']; ?>">
                                             </div>
                                         </div>
 
-
                                         <div class="am-form-group">
-                                            <label for="user-intro" class="am-u-sm-3 am-form-label">描述</label>
+                                            <label class="am-u-sm-3 am-form-label">描述</label>
                                             <div class="am-u-sm-9">
                                                     <textarea class="" rows="10" id="description"
-                                                              placeholder="请输入描述内容"></textarea>
+                                                              placeholder="请输入描述内容"><?php echo $example['description']; ?></textarea>
                                             </div>
                                         </div>
 
@@ -363,31 +316,31 @@
 
 
                                                     <div class="am-form-group">
-                                                        <label for="color"
-                                                               class="am-u-sm-3 am-form-label">主题色</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">主题色</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="color"
+                                                                   id="color" value="<?php echo $example['color']; ?>"
                                                                    placeholder="请输入十六进制颜色值">
                                                             <small>请填写十六进制颜色值，如：#1c97f5</small>
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-intro"
-                                                               class="am-u-sm-3 am-form-label">挂件代码</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">挂件代码</label>
                                                         <div class="am-u-sm-9">
-                                                                <textarea class="" rows="10"
-                                                                          placeholder="请输入HTML内容"></textarea>
+                                                                <textarea id="icon-code" rows="10"
+                                                                          placeholder="请输入HTML内容"><?php echo $example['icon_code']; ?></textarea>
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-intro"
-                                                               class="am-u-sm-3 am-form-label">邀请框代码</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">邀请框代码</label>
                                                         <div class="am-u-sm-9">
-                                                                <textarea class="" rows="10"
-                                                                          placeholder="请输入HTML内容"></textarea>
+                                                                <textarea id="invitation-code" rows="10"
+                                                                          placeholder="请输入HTML内容"><?php echo $example['invitation_code']; ?></textarea>
                                                         </div>
                                                     </div>
 
@@ -399,31 +352,31 @@
                                                         <p>以下是移动端皮肤参数</p>
                                                     </blockquote>
                                                     <div class="am-form-group">
-                                                        <label for="color"
-                                                               class="am-u-sm-3 am-form-label">主题色</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">主题色</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="color"
+                                                                   id="color-m" value="<?php echo $example['color_m']; ?>"
                                                                    placeholder="请输入十六进制颜色值">
                                                             <small>请填写十六进制颜色值，如：#1c97f5</small>
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-intro"
-                                                               class="am-u-sm-3 am-form-label">挂件代码</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">挂件代码</label>
                                                         <div class="am-u-sm-9">
-                                                                <textarea class="" rows="10"
-                                                                          placeholder="请输入HTML内容"></textarea>
+                                                                <textarea id="icon-code-m" rows="10"
+                                                                          placeholder="请输入HTML内容"><?php echo $example['icon_code_m']; ?></textarea>
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-intro"
-                                                               class="am-u-sm-3 am-form-label">邀请框代码</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">邀请框代码</label>
                                                         <div class="am-u-sm-9">
-                                                                <textarea class="" rows="10"
-                                                                          placeholder="请输入HTML内容"></textarea>
+                                                                <textarea id="invitation-code-m" rows="10"
+                                                                          placeholder="请输入HTML内容"><?php echo $example['invitation_code_m']; ?></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -443,19 +396,18 @@
                                             <div class="am-tabs-bd">
                                                 <div class="am-tab-panel am-fade am-in am-active" id="tab31">
 
-
                                                     <blockquote>
                                                         <p>以下是PC端邀请功能参数</p>
                                                     </blockquote>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-intro"
-                                                               class="am-u-sm-3 am-form-label">启用邀请</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">启用邀请</label>
                                                         <div class="am-u-sm-9">
                                                             <div class="tpl-switch">
-                                                                <input type="checkbox"
+                                                                <input type="checkbox" id="invitation-switch"
                                                                        class="ios-switch bigswitch tpl-switch-btn"
-                                                                       checked="">
+                                                                       <?php if($example['invitation_switch'] == '1'): ?>checked<?php endif; ?>>
                                                                 <div class="tpl-switch-btn-view">
                                                                     <div>
                                                                     </div>
@@ -465,82 +417,94 @@
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">星期范围</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">星期范围</label>
                                                         <div class="am-u-sm-9">
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="7">周日
+                                                                <input type="checkbox" value="7" id="invitation-week-7"
+                                                                       <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '7'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周日
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="1">周一
+                                                                <input type="checkbox" value="1" id="invitation-week-1"
+                                                                       <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '1'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周一
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="2">周二
+                                                                <input type="checkbox" value="2" id="invitation-week-2"
+                                                                       <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '2'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周二
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="3">周三
+                                                                <input type="checkbox" value="3" id="invitation-week-3"
+                                                                       <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '3'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周三
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="4">周四
+                                                                <input type="checkbox" value="4" id="invitation-week-4"
+                                                                       <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '4'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周四
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="5">周五
+                                                                <input type="checkbox" value="5" id="invitation-week-5"
+                                                                       <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '5'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周五
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="6">周六
+                                                                <input type="checkbox" value="6" id="invitation-week-6"
+                                                                       <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '6'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周六
                                                             </label>
 
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">时间范围</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">时间范围</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入时间范围">
+                                                                   id="invitation-time" placeholder="请输入时间范围"
+                                                                   value="<?php echo $example['invitation_time']; ?>">
                                                             <small>在某个时间段内发起邀请，格式：00:00:00-23:23:59</small>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">邀请次数</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">邀请次数</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入正整数">
+                                                                   id="invitation-num" placeholder="请输入正整数"
+                                                                   value="<?php echo $example['invitation_num']; ?>">
                                                             <small>邀请次数达到设定值后不再邀请，如果不限制请输入：0</small>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">首次邀请延迟</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">首次邀请延迟</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入正整数">
+                                                                   id="invitation-first" placeholder="请输入正整数"
+                                                                   value="<?php echo $example['invitation_first']; ?>">
                                                             <small>延迟多少秒发起第一次邀请？</small>
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">后续邀请延迟</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">后续邀请延迟</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入正整数">
+                                                                   id="invitation-after" placeholder="请输入正整数"
+                                                                   value="<?php echo $example['invitation_after']; ?>">
                                                             <small>首次邀请除外，之后的邀请需要延迟多少秒？</small>
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">自动关闭延迟</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">自动关闭延迟</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入正整数">
+                                                                   id="invitation-auto-close" placeholder="请输入正整数"
+                                                                   value="<?php echo $example['invitation_auto_close']; ?>">
                                                             <small>向访客发起邀请后，如果访客没有响应，在多少秒后自动关闭邀请框？如果不关闭请输入：0</small>
                                                         </div>
                                                     </div>
@@ -551,13 +515,13 @@
                                                         <p>以下是移动端邀请功能参数</p>
                                                     </blockquote>
                                                     <div class="am-form-group">
-                                                        <label for="user-intro"
-                                                               class="am-u-sm-3 am-form-label">启用邀请</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">启用邀请</label>
                                                         <div class="am-u-sm-9">
                                                             <div class="tpl-switch">
-                                                                <input type="checkbox"
+                                                                <input type="checkbox" id="invitation-switch-m"
                                                                        class="ios-switch bigswitch tpl-switch-btn"
-                                                                       checked="">
+                                                                       <?php if($example['invitation_switch_m'] == '1'): ?>checked<?php endif; ?>>
                                                                 <div class="tpl-switch-btn-view">
                                                                     <div>
                                                                     </div>
@@ -567,82 +531,101 @@
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">星期范围</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">星期范围</label>
                                                         <div class="am-u-sm-9">
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="7">周日
+                                                                <input type="checkbox" value="7"
+                                                                       id="invitation-week-m-7"
+                                                                       <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '7'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周日
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="1">周一
+                                                                <input type="checkbox" value="1"
+                                                                       id="invitation-week-m-1"
+                                                                       <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '1'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周一
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="2">周二
+                                                                <input type="checkbox" value="2"
+                                                                       id="invitation-week-m-2"
+                                                                       <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '2'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周二
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="3">周三
+                                                                <input type="checkbox" value="3"
+                                                                       id="invitation-week-m-3"
+                                                                       <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '3'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周三
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="4">周四
+                                                                <input type="checkbox" value="4"
+                                                                       id="invitation-week-m-4"
+                                                                       <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '4'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周四
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="5">周五
+                                                                <input type="checkbox" value="5"
+                                                                       id="invitation-week-m-5"
+                                                                       <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '5'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周五
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="6">周六
+                                                                <input type="checkbox" value="6"
+                                                                       id="invitation-week-m-6"
+                                                                       <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '6'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周六
                                                             </label>
 
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">时间范围</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">时间范围</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入时间范围">
+                                                                   id="invitation-time-m" placeholder="请输入时间范围"
+                                                                   value="<?php echo $example['invitation_time_m']; ?>">
                                                             <small>在某个时间段内发起邀请，格式：00:00:00-23:23:59</small>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">邀请次数</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">邀请次数</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入正整数">
+                                                                   id="invitation-num-m" placeholder="请输入正整数"
+                                                                   value="<?php echo $example['invitation_num_m']; ?>">
                                                             <small>邀请次数达到设定值后不再邀请，如果不限制请输入：0</small>
                                                         </div>
                                                     </div>
 
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">首次邀请延迟</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">首次邀请延迟</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入正整数">
+                                                                   id="invitation-first-m" placeholder="请输入正整数"
+                                                                   value="<?php echo $example['invitation_first_m']; ?>">
                                                             <small>延迟多少秒发起第一次邀请？</small>
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">后续邀请延迟</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">后续邀请延迟</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入正整数">
+                                                                   id="invitation-after-m" placeholder="请输入正整数"
+                                                                   value="<?php echo $example['invitation_after_m']; ?>">
                                                             <small>首次邀请除外，之后的邀请需要延迟多少秒？</small>
                                                         </div>
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label for="user-name"
-                                                               class="am-u-sm-3 am-form-label">自动关闭延迟</label>
+                                                        <label
+                                                                class="am-u-sm-3 am-form-label">自动关闭延迟</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
-                                                                   id="" placeholder="请输入正整数">
+                                                                   id="invitation-auto-close-m" placeholder="请输入正整数"
+                                                                   value="<?php echo $example['invitation_auto_close_m']; ?>">
                                                             <small>向访客发起邀请后，如果访客没有响应，在多少秒后自动关闭邀请框？如果不关闭请输入：0</small>
                                                         </div>
                                                     </div>
@@ -656,7 +639,7 @@
 
 
                                         <div class="am-form-group">
-                                            <label for="user-name" class="am-u-sm-3 am-form-label">选择客服</label>
+                                            <label class="am-u-sm-3 am-form-label">选择客服</label>
                                             <div class="am-u-sm-9">
 
 
@@ -665,42 +648,34 @@
                                                     <thead>
                                                     <tr>
                                                         <th width="30"></th>
+                                                        <th>编号</th>
                                                         <th>客服名称</th>
                                                         <th>用户名</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
+
+                                                    <?php if(is_array($staff_list) || $staff_list instanceof \think\Collection || $staff_list instanceof \think\Paginator): $i = 0; $__LIST__ = $staff_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                                                     <tr>
-                                                        <td><input type="checkbox" value="option1"></td>
-                                                        <td>http://amazeui.org</td>
-                                                        <td>2012-10-01</td>
+                                                        <td><input type="checkbox" value="<?php echo $vo['id']; ?>"
+                                                                   <?php if(is_array($example['staff_pk']) || $example['staff_pk'] instanceof \think\Collection || $example['staff_pk'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['staff_pk'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v2): $mod = ($i % 2 );++$i;if($v2 == $vo['id']): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>
+                                                        </td>
+                                                        <td><?php echo $vo['id']; ?></td>
+                                                        <td><?php echo $vo['name']; ?></td>
+                                                        <td><?php echo $vo['user_name']; ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" value="option1"></td>
-                                                        <td>http://amazeui.org</td>
-                                                        <td>2012-10-01</td>
-                                                    </tr>
+                                                    <?php endforeach; endif; else: echo "" ;endif; ?>
+
                                                     </tbody>
 
                                                 </table>
-
 
                                                 <small>
                                                     被勾选的客服才能参与该实例的工作任务
                                                 </small>
                                             </div>
                                         </div>
-
-
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="am-form-group" style="margin-top: 20px;">
-                                <div class="am-u-sm-9 am-u-sm-push-3">
-                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success ">
-                                        提交
-                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -716,21 +691,137 @@
     var layer = null;
     layui.use(['layer', 'form'], function () {
         layer = layui.layer;
-        colorpicker = layui.colorpicker;
         // layer.msg('msg', {icon: 6});
+    });
 
+    /**
+     * 发送请求
+     * @param name 参数名
+     * @param value 参数值
+     */
+    function sendRequest(name, value) {
+        $.ajax({
+            url: '/index.php/staff/Example/updateField',
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                id: $('#id').val(),
+                name: name,
+                value: value
+            },
+            success: function (data) {
+                layer.msg(data.msg, {icon: 6});
+            },
+            error: function () {
+                layer.msg('很遗憾，操作失败', {icon: 5});
+            }
+        });
+    }
+
+    $(function () {
+
+        //基本
+        $('#example-switch').click(function () {
+            sendRequest('state', ($(this).get(0).checked) ? 1 : 0);
+        });
+
+        $('#example-name').blur(function () {
+            sendRequest('name', $(this).val());
+        });
+
+        $('#description').blur(function () {
+            sendRequest('description', $(this).val());
+        });
+
+        //皮肤
+        $('#color').blur(function () {
+            sendRequest('color', $(this).val());
+        });
+
+        $('#color-m').blur(function () {
+            sendRequest('color_m', $(this).val());
+        });
+
+        $('#icon-code').blur(function () {
+            sendRequest('icon_code', $(this).val());
+        });
+        $('#icon-code-m').blur(function () {
+            sendRequest('icon_code_m', $(this).val());
+        });
+
+        $('#invitation-code').blur(function () {
+            sendRequest('invitation_code', $(this).val());
+        });
+
+        $('#invitation-code-m').blur(function () {
+            sendRequest('invitation_code_m', $(this).val());
+        });
+
+        //邀请功能
+        $('#invitation-switch').click(function () {
+            sendRequest('invitation_switch', ($(this).get(0).checked) ? 1 : 0);
+        });
+
+        $('#invitation-switch-m').click(function () {
+            sendRequest('invitation_switch_m', ($(this).get(0).checked) ? 1 : 0);
+        });
+
+
+        // 星期范围
+        // code...
+
+
+        $('#invitation-time').blur(function () {
+            sendRequest('invitation_time', $(this).val());
+        });
+
+        $('#invitation-time-m').blur(function () {
+            sendRequest('invitation_time_m', $(this).val());
+        });
+
+        $('#invitation-num').blur(function () {
+            sendRequest('invitation_num', $(this).val());
+        });
+
+        $('#invitation-num-m').blur(function () {
+            sendRequest('invitation_num_m', $(this).val());
+        });
+
+
+        $('#invitation-first').blur(function () {
+            sendRequest('invitation_first', $(this).val());
+        });
+
+        $('#invitation-first-m').blur(function () {
+            sendRequest('invitation_first_m', $(this).val());
+        });
+
+
+        $('#invitation-after').blur(function () {
+            sendRequest('invitation_after', $(this).val());
+        });
+
+        $('#invitation-after-m').blur(function () {
+            sendRequest('invitation_after_m', $(this).val());
+        });
+
+        $('#invitation-auto-close').blur(function () {
+            sendRequest('invitation_auto_close', $(this).val());
+        });
+
+
+        $('#invitation-auto-close-m').blur(function () {
+            sendRequest('invitation_auto_close_m', $(this).val());
+        });
 
     });
+
 </script>
 
-
 </div>
-
 <script src="/static/assets/js/amazeui.min.js"></script>
 <script src="/static/assets/js/amazeui.datatables.min.js"></script>
 <script src="/static/assets/js/dataTables.responsive.min.js"></script>
 <script src="/static/assets/js/app.js"></script>
-
 </body>
-
 </html>

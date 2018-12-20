@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"D:\php-workspace\njim/tp5/application/staff\view\index\index.html";i:1545233665;s:58:"D:\php-workspace\njim\tp5\application\staff\view\base.html";i:1545234026;s:63:"D:\php-workspace\njim\tp5\application\staff\view\left_work.html";i:1545234169;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:65:"D:\php-workspace\njim/tp5/application/staff\view\index\index.html";i:1545309173;s:58:"D:\php-workspace\njim\tp5\application\staff\view\base.html";i:1545309173;s:63:"D:\php-workspace\njim\tp5\application\staff\view\left_work.html";i:1545309173;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +11,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <script src="/static/assets/js/echarts.min.js"></script>
@@ -22,7 +21,7 @@
     <script src="/static/assets/js/jquery.min.js"></script>
 </head>
 
-<body data-type="widgets">
+<body data-type="index">
 <script src="/static/assets/js/theme.js"></script>
 <div class="am-g tpl-g">
     <!-- 头部 -->
@@ -195,7 +194,7 @@
             </div>
             <span class="user-panel-logged-in-text">
               <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-              禁言小张
+            <?php echo $staff['name']; ?>
           </span>
             <a href="javascript:;" class="tpl-user-panel-action-link"> <span class="am-icon-pencil"></span> 账号设置</a>
         </div>
@@ -207,13 +206,13 @@
 
         <li class="sidebar-nav-link">
             <a href="/index.php/staff" <?php if($menu == 'index'): ?>class="active" <?php endif; ?>>
-            <i class="am-icon-home sidebar-nav-link-logo"></i>系统主页
+            <i class="am-icon-home sidebar-nav-link-logo"></i>工作台主页
             </a>
         </li>
 
         <li class="sidebar-nav-link">
-            <a href="/index.php/staff/admin" <?php if($menu == 'console'): ?>class="active" <?php endif; ?>>
-            <i class="am-icon-home sidebar-nav-link-logo"></i>控制台
+            <a href="/index.php/staff/admin">
+                <i class="am-icon-home sidebar-nav-link-logo"></i>控制台
             </a>
         </li>
 
@@ -275,7 +274,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
                 <div class="widget widget-primary am-cf">

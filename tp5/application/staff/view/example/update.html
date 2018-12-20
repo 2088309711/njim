@@ -472,16 +472,7 @@
                                                 </small>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="am-form-group" style="margin-top: 20px;">
-                                <div class="am-u-sm-9 am-u-sm-push-3">
-                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success ">
-                                        提交
-                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -583,6 +574,40 @@
 
         $('#invitation-time-m').blur(function () {
             sendRequest('invitation_time_m', $(this).val());
+        });
+
+        $('#invitation-num').blur(function () {
+            sendRequest('invitation_num', $(this).val());
+        });
+
+        $('#invitation-num-m').blur(function () {
+            sendRequest('invitation_num_m', $(this).val());
+        });
+
+
+        $('#invitation-first').blur(function () {
+            sendRequest('invitation_first', $(this).val());
+        });
+
+        $('#invitation-first-m').blur(function () {
+            sendRequest('invitation_first_m', $(this).val());
+        });
+
+
+        $('#invitation-after').blur(function () {
+            sendRequest('invitation_after', $(this).val());
+        });
+
+        $('#invitation-after-m').blur(function () {
+            sendRequest('invitation_after_m', $(this).val());
+        });
+
+        $('#invitation-auto-close').blur(function () {
+            sendRequest('invitation_auto_close', $(this).val());
+        });
+
+        $('#invitation-auto-close-m').blur(function () {
+            sendRequest('invitation_auto_close_m', $(this).val());
         });
 
     });

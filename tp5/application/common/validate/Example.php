@@ -88,17 +88,32 @@ class Example extends Validate
         [
             'invitation_first',
             'require|number',
-            '首次邀请延迟必须存在|首次邀请延迟必须为数字'
+            'PC端首次邀请延迟不能为空|PC端首次邀请延迟必须为数字'
+        ],
+        [
+            'invitation_first_m',
+            'require|number',
+            '移动端首次邀请延迟不能为空|移动端首次邀请延迟必须为数字'
         ],
         [
             'invitation_after',
             'require|number',
-            '后续邀请延迟必须存在|后续邀请延迟必须为数字'
+            'PC端后续邀请延迟不能为空|PC端后续邀请延迟必须为数字'
+        ],
+        [
+            'invitation_after_m',
+            'require|number',
+            '移动端后续邀请延迟不能为空|移动端后续邀请延迟必须为数字'
         ],
         [
             'invitation_num',
             'require|number',
-            '邀请次数必须存在|邀请次数必须为数字'
+            'PC端邀请次数不能为空|PC端邀请次数必须为数字'
+        ],
+        [
+            'invitation_num_m',
+            'require|number',
+            '移动端邀请次数不能为空|移动端邀请次数必须为数字'
         ],
         [
             'invitation_time',
@@ -113,7 +128,12 @@ class Example extends Validate
         [
             'invitation_auto_close',
             'require|number',
-            '自动关闭邀请必须存在|自动关闭邀请必须为数字'
+            'PC端邀请框自动关闭延迟不能为空|PC端邀请框自动关闭延迟必须为数字'
+        ],
+        [
+            'invitation_auto_close_m',
+            'require|number',
+            '移动端邀请框自动关闭延迟不能为空|移动端邀请框自动关闭延迟必须为数字'
         ]
     ];
 
@@ -123,7 +143,6 @@ class Example extends Validate
     ];
 
     protected $scene = [
-        'scene1' => ['id'],
         'state' => ['id', 'state'],
         'name' => ['id', 'name'],
         'description' => ['id', 'description'],
@@ -137,6 +156,15 @@ class Example extends Validate
         'invitation_switch_m' => ['id', 'invitation_switch_m'],
         'invitation_time' => ['id', 'invitation_time'],
         'invitation_time_m' => ['id', 'invitation_time_m'],
+        'invitation_num' => ['id', 'invitation_num'],
+        'invitation_num_m' => ['id', 'invitation_num_m'],
+        'invitation_first' => ['id', 'invitation_first'],
+        'invitation_first_m' => ['id', 'invitation_first_m'],
+        'invitation_after' => ['id', 'invitation_after'],
+        'invitation_after_m' => ['id', 'invitation_after_m'],
+        'invitation_auto_close' => ['id', 'invitation_auto_close'],
+        'invitation_auto_close_m' => ['id', 'invitation_auto_close_m'],
+        'scene1' => ['id'],
         'add' => [
             '__token__', 'name', 'style_id', 'description', 'invitation_switch', 'invitation_first',
             'invitation_after', 'invitation_num', 'invitation_time', 'invitation_auto_close'

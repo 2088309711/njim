@@ -208,133 +208,92 @@ class Example extends Controller
         $login = new Login();
         $data['user_name'] = $login->getUserName(true);
 
-        $example = new ExampleModel();
         switch ($data['name']) {
             //基本
             case 'state':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.state');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['state' => $data['state']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? '功能状态修改成功' : '功能状态修改失败');
+                $this->updateSingleData($data, '功能状态修改成功', '功能状态修改失败');
                 break;
 
             case 'name':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.name');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['name' => $data['name']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? '名称修改成功' : '名称修改失败');
+                $this->updateSingleData($data, '名称修改成功', '名称修改失败');
                 break;
 
             case 'description':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.description');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['description' => $data['description']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? '描述修改成功' : '描述修改失败');
+                $this->updateSingleData($data, '描述修改成功', '描述修改失败');
                 break;
 
             //皮肤
             case 'color':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.color');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['color' => $data['color']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? 'PC端主题色修改成功' : 'PC端主题色修改失败');
+                $this->updateSingleData($data, 'PC端主题色修改成功', 'PC端主题色修改失败');
                 break;
 
             case 'color_m':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.color_m');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['color_m' => $data['color_m']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? '移动端主题色修改成功' : '移动端主题色修改失败');
+                $this->updateSingleData($data, '移动端主题色修改成功', '移动端主题色修改失败');
                 break;
 
             case 'icon_code':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.icon_code');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['icon_code' => $data['icon_code']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? 'PC端挂件代码修改成功' : 'PC端挂件代码修改失败');
+                $this->updateSingleData($data, 'PC端挂件代码修改成功', 'PC端挂件代码修改失败');
                 break;
 
             case 'icon_code_m':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.icon_code_m');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['icon_code_m' => $data['icon_code_m']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? '移动端挂件代码修改成功' : '移动端挂件代码修改失败');
+                $this->updateSingleData($data, '移动端挂件代码修改成功', '移动端挂件代码修改失败');
                 break;
 
             case 'invitation_code':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.invitation_code');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['invitation_code' => $data['invitation_code']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? 'PC端邀请框代码修改成功' : 'PC端邀请框代码修改失败');
+                $this->updateSingleData($data, 'PC端邀请框代码修改成功', 'PC端邀请框代码修改失败');
                 break;
 
             case 'invitation_code_m':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.invitation_code_m');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['invitation_code_m' => $data['invitation_code_m']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? '移动端邀请框代码修改成功' : '移动端邀请框代码修改失败');
+                $this->updateSingleData($data, '移动端邀请框代码修改成功', '移动端邀请框代码修改失败');
                 break;
 
             //邀请功能
             case 'invitation_switch':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.invitation_switch');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['invitation_switch' => $data['invitation_switch']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? 'PC端邀请功能状态修改成功' : 'PC端邀请功能状态修改失败');
+                $this->updateSingleData($data, 'PC端邀请功能状态修改成功', 'PC端邀请功能状态修改失败');
                 break;
 
             case 'invitation_switch_m':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.invitation_switch_m');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['invitation_switch_m' => $data['invitation_switch_m']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? '移动端邀请功能状态修改成功' : '移动端邀请功能状态修改失败');
+                $this->updateSingleData($data, '移动端邀请功能状态修改成功', '移动端邀请功能状态修改失败');
                 break;
 
             case 'invitation_time':
-                $data[$data['name']] = $data['value'];
-                $result = $this->validate($data, 'Example.invitation_time');
-                if (true !== $result) {
-                    $this->outJsonResult(false, $result);
-                }
-                $result = !!$example->save(['invitation_time' => $data['invitation_time']], ['id' => $data['id']]);
-                $this->outJsonResult($result, $result ? 'PC端邀请时间范围修改成功' : 'PC端邀请时间范围修改失败');
+                $this->updateSingleData($data, 'PC端邀请时间范围修改成功', 'PC端邀请时间范围修改失败');
                 break;
 
             case 'invitation_time_m':
-                $this->updateSingleData($data, 'invitation_time_m', '移动端邀请时间范围修改成功', '移动端邀请时间范围修改失败');
+                $this->updateSingleData($data, '移动端邀请时间范围修改成功', '移动端邀请时间范围修改失败');
+                break;
+
+            case 'invitation_num':
+                $this->updateSingleData($data, 'PC端邀请次数修改成功', 'PC端邀请次数修改失败');
+                break;
+
+            case 'invitation_num_m':
+                $this->updateSingleData($data, '移动端邀请次数修改成功', '移动端邀请次数修改失败');
+                break;
+
+            case 'invitation_first':
+                $this->updateSingleData($data, 'PC端首次邀请延迟修改成功', 'PC端首次邀请延迟修改失败');
+                break;
+
+            case 'invitation_first_m':
+                $this->updateSingleData($data, '移动端首次邀请延迟修改成功', '移动端首次邀请延迟修改失败');
+                break;
+
+            case 'invitation_after':
+                $this->updateSingleData($data, 'PC端后续邀请延迟修改成功', 'PC端后续邀请延迟修改失败');
+                break;
+
+            case 'invitation_after_m':
+                $this->updateSingleData($data, '移动端后续邀请延迟修改成功', '移动端后续邀请延迟修改失败');
+                break;
+
+            case 'invitation_auto_close':
+                $this->updateSingleData($data, 'PC端自动关闭邀请框延迟修改成功', 'PC端自动关闭邀请框延迟修改失败');
+                break;
+
+            case 'invitation_auto_close_m':
+                $this->updateSingleData($data, '移动端自动关闭邀请框延迟修改成功', '移动端自动关闭邀请框延迟修改失败');
                 break;
 
         }
@@ -350,16 +309,18 @@ class Example extends Controller
      * @param $succMsg
      * @param $failMsg
      */
-    private function updateSingleData($data, $name, $succMsg, $failMsg)
+    private function updateSingleData($data, $succMsg, $failMsg)
     {
-        $data[$data['name']] = $data['value'];
+        $name = $data['name'];
+        $data[$name] = $data['value'];
         $result = $this->validate($data, 'Example.' . $name);
-        if (true !== $result) {
+        if (true === $result) {
+            $example = new ExampleModel();
+            $result = !!$example->save([$name => $data[$name]], ['id' => $data['id'], 'user_name' => $data['user_name']]);
+            $this->outJsonResult($result, $result ? $succMsg : $failMsg);
+        } else {
             $this->outJsonResult(false, $result);
         }
-        $example = new ExampleModel();
-        $result = !!$example->save([$name => $data[$name]], ['id' => $data['id'], 'user_name' => $data['user_name']]);
-        $this->outJsonResult($result, $result ? $succMsg : $failMsg);
     }
 
 
