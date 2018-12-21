@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"F:\phpStudy\WWW\njim/tp5/application/staff\view\example\update.html";i:1545298519;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545289220;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"F:\phpStudy\WWW\njim/tp5/application/staff\view\example\update.html";i:1545361236;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545289220;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -421,31 +421,45 @@
                                                                 class="am-u-sm-3 am-form-label">星期范围</label>
                                                         <div class="am-u-sm-9">
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="7" id="invitation-week-7"
+                                                                <input type="checkbox" value="7"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '7'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周日
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="1" id="invitation-week-1"
+                                                                <input type="checkbox" value="1"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '1'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周一
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="2" id="invitation-week-2"
+                                                                <input type="checkbox" value="2"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '2'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周二
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="3" id="invitation-week-3"
+                                                                <input type="checkbox" value="3"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '3'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周三
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="4" id="invitation-week-4"
+                                                                <input type="checkbox" value="4"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '4'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周四
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="5" id="invitation-week-5"
+                                                                <input type="checkbox" value="5"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '5'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周五
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="6" id="invitation-week-6"
+                                                                <input type="checkbox" value="6"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        <?php if(is_array($example['invitation_week']) || $example['invitation_week'] instanceof \think\Collection || $example['invitation_week'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '6'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周六
                                                             </label>
 
@@ -459,7 +473,7 @@
                                                             <input type="text" class="tpl-form-input"
                                                                    id="invitation-time" placeholder="请输入时间范围"
                                                                    value="<?php echo $example['invitation_time']; ?>">
-                                                            <small>在某个时间段内发起邀请，格式：00:00:00-23:23:59</small>
+                                                            <small>在某个时间段内发起邀请，请填写有效的时间范围，格式：00:00:00-23:59:59</small>
                                                         </div>
                                                     </div>
 
@@ -536,37 +550,44 @@
                                                         <div class="am-u-sm-9">
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="7"
-                                                                       id="invitation-week-m-7"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '7'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周日
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="1"
-                                                                       id="invitation-week-m-1"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '1'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周一
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="2"
-                                                                       id="invitation-week-m-2"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '2'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周二
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="3"
-                                                                       id="invitation-week-m-3"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '3'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周三
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="4"
-                                                                       id="invitation-week-m-4"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '4'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周四
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="5"
-                                                                       id="invitation-week-m-5"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '5'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周五
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="6"
-                                                                       id="invitation-week-m-6"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        <?php if(is_array($example['invitation_week_m']) || $example['invitation_week_m'] instanceof \think\Collection || $example['invitation_week_m'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['invitation_week_m'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo == '6'): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>周六
                                                             </label>
 
@@ -580,10 +601,9 @@
                                                             <input type="text" class="tpl-form-input"
                                                                    id="invitation-time-m" placeholder="请输入时间范围"
                                                                    value="<?php echo $example['invitation_time_m']; ?>">
-                                                            <small>在某个时间段内发起邀请，格式：00:00:00-23:23:59</small>
+                                                            <small>在某个时间段内发起邀请，请填写有效的时间范围，格式：00:00:00-23:59:59</small>
                                                         </div>
                                                     </div>
-
 
                                                     <div class="am-form-group">
                                                         <label
@@ -658,6 +678,7 @@
                                                     <?php if(is_array($staff_list) || $staff_list instanceof \think\Collection || $staff_list instanceof \think\Paginator): $i = 0; $__LIST__ = $staff_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                                                     <tr>
                                                         <td><input type="checkbox" value="<?php echo $vo['id']; ?>"
+                                                                   class="staff-list-checkbox" name="staff_pk"
                                                                    <?php if(is_array($example['staff_pk']) || $example['staff_pk'] instanceof \think\Collection || $example['staff_pk'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['staff_pk'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v2): $mod = ($i % 2 );++$i;if($v2 == $vo['id']): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>
                                                         </td>
                                                         <td><?php echo $vo['id']; ?></td>
@@ -675,16 +696,7 @@
                                                 </small>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="am-form-group" style="margin-top: 20px;">
-                                <div class="am-u-sm-9 am-u-sm-push-3">
-                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success ">
-                                        提交
-                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -719,7 +731,7 @@
                 value: value
             },
             success: function (data) {
-                layer.msg(data.msg, {icon: 6});
+                layer.msg(data.msg, {icon: (data.state === 1 ? 6 : 5)});
             },
             error: function () {
                 layer.msg('很遗憾，操作失败', {icon: 5});
@@ -776,8 +788,75 @@
         });
 
 
+        // 星期范围
+        // code...
 
 
+        $('#invitation-time').blur(function () {
+            sendRequest('invitation_time', $(this).val());
+        });
+
+        $('#invitation-time-m').blur(function () {
+            sendRequest('invitation_time_m', $(this).val());
+        });
+
+        $('#invitation-num').blur(function () {
+            sendRequest('invitation_num', $(this).val());
+        });
+
+        $('#invitation-num-m').blur(function () {
+            sendRequest('invitation_num_m', $(this).val());
+        });
+
+
+        $('#invitation-first').blur(function () {
+            sendRequest('invitation_first', $(this).val());
+        });
+
+        $('#invitation-first-m').blur(function () {
+            sendRequest('invitation_first_m', $(this).val());
+        });
+
+        $('#invitation-after').blur(function () {
+            sendRequest('invitation_after', $(this).val());
+        });
+
+        $('#invitation-after-m').blur(function () {
+            sendRequest('invitation_after_m', $(this).val());
+        });
+
+        $('#invitation-auto-close').blur(function () {
+            sendRequest('invitation_auto_close', $(this).val());
+        });
+
+        $('#invitation-auto-close-m').blur(function () {
+            sendRequest('invitation_auto_close_m', $(this).val());
+        });
+
+        $('.invitation-week-checkbox').click(function () {
+            var arr_v = new Array();
+            $('input[name="invitation_week"]:checked').each(function () {
+                arr_v.push($(this).val());
+            });
+            sendRequest('invitation_week', arr_v.join('|'));
+        });
+
+        $('.invitation-week-m-checkbox').click(function () {
+            var arr_v = new Array();
+            $('input[name="invitation_week_m"]:checked').each(function () {
+                arr_v.push($(this).val());
+            });
+            sendRequest('invitation_week_m', arr_v.join('|'));
+        });
+
+        //客服
+        $('.staff-list-checkbox').click(function () {
+            var arr_v = new Array();
+            $('input[name="staff_pk"]:checked').each(function () {
+                arr_v.push($(this).val());
+            });
+            sendRequest('staff_pk', arr_v.join('|'));
+        });
 
 
     });

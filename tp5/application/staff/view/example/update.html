@@ -195,37 +195,51 @@
                                                                 class="am-u-sm-3 am-form-label">星期范围</label>
                                                         <div class="am-u-sm-9">
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="7" id="invitation-week-7"
+                                                                <input type="checkbox" value="7"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        {volist name="example.invitation_week" id="vo" }
                                                                        {eq name="vo" value="7" }checked{/eq}{/volist}>周日
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="1" id="invitation-week-1"
+                                                                <input type="checkbox" value="1"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        {volist name="example.invitation_week" id="vo" }
                                                                        {eq name="vo" value="1" }checked{/eq}{/volist}>周一
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="2" id="invitation-week-2"
+                                                                <input type="checkbox" value="2"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        {volist name="example.invitation_week" id="vo" }
                                                                        {eq name="vo" value="2" }checked{/eq}{/volist}>周二
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="3" id="invitation-week-3"
+                                                                <input type="checkbox" value="3"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        {volist name="example.invitation_week" id="vo" }
                                                                        {eq name="vo" value="3" }checked{/eq}{/volist}>周三
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="4" id="invitation-week-4"
+                                                                <input type="checkbox" value="4"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        {volist name="example.invitation_week" id="vo" }
                                                                        {eq name="vo" value="4" }checked{/eq}{/volist}>周四
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="5" id="invitation-week-5"
+                                                                <input type="checkbox" value="5"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        {volist name="example.invitation_week" id="vo" }
                                                                        {eq name="vo" value="5" }checked{/eq}{/volist}>周五
                                                             </label>
                                                             <label class="am-checkbox-inline">
-                                                                <input type="checkbox" value="6" id="invitation-week-6"
+                                                                <input type="checkbox" value="6"
+                                                                       class="invitation-week-checkbox"
+                                                                       name="invitation_week"
                                                                        {volist name="example.invitation_week" id="vo" }
                                                                        {eq name="vo" value="6" }checked{/eq}{/volist}>周六
                                                             </label>
@@ -240,7 +254,7 @@
                                                             <input type="text" class="tpl-form-input"
                                                                    id="invitation-time" placeholder="请输入时间范围"
                                                                    value="{$example.invitation_time}">
-                                                            <small>在某个时间段内发起邀请，格式：00:00:00-23:23:59</small>
+                                                            <small>在某个时间段内发起邀请，请填写有效的时间范围，格式：00:00:00-23:59:59</small>
                                                         </div>
                                                     </div>
 
@@ -318,49 +332,56 @@
                                                         <div class="am-u-sm-9">
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="7"
-                                                                       id="invitation-week-m-7"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        {volist name="example.invitation_week_m" id="vo"
                                                                        }
                                                                        {eq name="vo" value="7" }checked{/eq}{/volist}>周日
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="1"
-                                                                       id="invitation-week-m-1"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        {volist name="example.invitation_week_m" id="vo"
                                                                        }
                                                                        {eq name="vo" value="1" }checked{/eq}{/volist}>周一
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="2"
-                                                                       id="invitation-week-m-2"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        {volist name="example.invitation_week_m" id="vo"
                                                                        }
                                                                        {eq name="vo" value="2" }checked{/eq}{/volist}>周二
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="3"
-                                                                       id="invitation-week-m-3"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        {volist name="example.invitation_week_m" id="vo"
                                                                        }
                                                                        {eq name="vo" value="3" }checked{/eq}{/volist}>周三
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="4"
-                                                                       id="invitation-week-m-4"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        {volist name="example.invitation_week_m" id="vo"
                                                                        }
                                                                        {eq name="vo" value="4" }checked{/eq}{/volist}>周四
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="5"
-                                                                       id="invitation-week-m-5"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        {volist name="example.invitation_week_m" id="vo"
                                                                        }
                                                                        {eq name="vo" value="5" }checked{/eq}{/volist}>周五
                                                             </label>
                                                             <label class="am-checkbox-inline">
                                                                 <input type="checkbox" value="6"
-                                                                       id="invitation-week-m-6"
+                                                                       class="invitation-week-m-checkbox"
+                                                                       name="invitation_week_m"
                                                                        {volist name="example.invitation_week_m" id="vo"
                                                                        }
                                                                        {eq name="vo" value="6" }checked{/eq}{/volist}>周六
@@ -376,10 +397,9 @@
                                                             <input type="text" class="tpl-form-input"
                                                                    id="invitation-time-m" placeholder="请输入时间范围"
                                                                    value="{$example.invitation_time_m}">
-                                                            <small>在某个时间段内发起邀请，格式：00:00:00-23:23:59</small>
+                                                            <small>在某个时间段内发起邀请，请填写有效的时间范围，格式：00:00:00-23:59:59</small>
                                                         </div>
                                                     </div>
-
 
                                                     <div class="am-form-group">
                                                         <label
@@ -454,6 +474,7 @@
                                                     {volist name="staff_list" id="vo"}
                                                     <tr>
                                                         <td><input type="checkbox" value="{$vo.id}"
+                                                                   class="staff-list-checkbox" name="staff_pk"
                                                                    {volist name="example.staff_pk" id="v2" }
                                                                    {eq name="v2" value="$vo.id" }checked{/eq} {/volist}>
                                                         </td>
@@ -507,7 +528,7 @@
                 value: value
             },
             success: function (data) {
-                layer.msg(data.msg, {icon: 6});
+                layer.msg(data.msg, {icon: (data.state === 1 ? 6 : 5)});
             },
             error: function () {
                 layer.msg('很遗憾，操作失败', {icon: 5});
@@ -593,7 +614,6 @@
             sendRequest('invitation_first_m', $(this).val());
         });
 
-
         $('#invitation-after').blur(function () {
             sendRequest('invitation_after', $(this).val());
         });
@@ -609,6 +629,32 @@
         $('#invitation-auto-close-m').blur(function () {
             sendRequest('invitation_auto_close_m', $(this).val());
         });
+
+        $('.invitation-week-checkbox').click(function () {
+            var arr_v = new Array();
+            $('input[name="invitation_week"]:checked').each(function () {
+                arr_v.push($(this).val());
+            });
+            sendRequest('invitation_week', arr_v.join('|'));
+        });
+
+        $('.invitation-week-m-checkbox').click(function () {
+            var arr_v = new Array();
+            $('input[name="invitation_week_m"]:checked').each(function () {
+                arr_v.push($(this).val());
+            });
+            sendRequest('invitation_week_m', arr_v.join('|'));
+        });
+
+        //客服
+        $('.staff-list-checkbox').click(function () {
+            var arr_v = new Array();
+            $('input[name="staff_pk"]:checked').each(function () {
+                arr_v.push($(this).val());
+            });
+            sendRequest('staff_pk', arr_v.join('|'));
+        });
+
 
     });
 

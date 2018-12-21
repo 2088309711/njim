@@ -116,14 +116,24 @@ class Example extends Validate
             '移动端邀请次数不能为空|移动端邀请次数必须为数字'
         ],
         [
+            'invitation_week',
+            'regex:week_frame',
+            'PC端邀请星期范围格式错误'
+        ],
+        [
+            'invitation_week_m',
+            'regex:week_frame',
+            '移动端邀请星期范围格式错误'
+        ],
+        [
             'invitation_time',
             'require|regex:time_frame',
-            'PC端邀请时间范围不能为空|PC端邀请时间范围格式错误'
+            'PC端邀请时间范围不能为空|PC端邀请时间范围填写错误'
         ],
         [
             'invitation_time_m',
             'require|regex:time_frame',
-            '移动端邀请时间范围不能为空|移动端邀请时间范围格式错误'
+            '移动端邀请时间范围不能为空|移动端邀请时间范围填写错误'
         ],
         [
             'invitation_auto_close',
@@ -134,12 +144,19 @@ class Example extends Validate
             'invitation_auto_close_m',
             'require|number',
             '移动端邀请框自动关闭延迟不能为空|移动端邀请框自动关闭延迟必须为数字'
+        ],
+        [
+            'staff_pk',
+            'regex:staff_pk_frame',
+            '参与客服格式错误'
         ]
     ];
 
     protected $regex = [
-        'time_frame' => '^[0-9]{2}:[0-9]{2}:[0-9]{2}-[0-9]{2}:[0-9]{2}:[0-9]{2}$',
-        'color' => '^#[0-9a-fA-F]{6}$'
+        'time_frame' => '^([0-1]\d|2[0-3])(:[0-5]\d){2}-([0-1]\d|2[0-3])(:[0-5]\d){2}$',//有效时间范围
+        'color' => '^#[a-fA-F\d]{6}?$',
+        'week_frame' => '^([1-7]\|){0,6}[1-7]?$',//一周范围
+        'staff_pk_frame' => '^([1-9]\d*\|)*([1-9]\d*)*$',//客服ID
     ];
 
     protected $scene = [
@@ -156,6 +173,8 @@ class Example extends Validate
         'invitation_switch_m' => ['id', 'invitation_switch_m'],
         'invitation_time' => ['id', 'invitation_time'],
         'invitation_time_m' => ['id', 'invitation_time_m'],
+        'invitation_week' => ['id', 'invitation_week'],
+        'invitation_week_m' => ['id', 'invitation_week_m'],
         'invitation_num' => ['id', 'invitation_num'],
         'invitation_num_m' => ['id', 'invitation_num_m'],
         'invitation_first' => ['id', 'invitation_first'],
@@ -164,6 +183,7 @@ class Example extends Validate
         'invitation_after_m' => ['id', 'invitation_after_m'],
         'invitation_auto_close' => ['id', 'invitation_auto_close'],
         'invitation_auto_close_m' => ['id', 'invitation_auto_close_m'],
+        'staff_pk' => ['id', 'staff_pk'],
         'scene1' => ['id'],
         'add' => [
             '__token__', 'name', 'style_id', 'description', 'invitation_switch', 'invitation_first',

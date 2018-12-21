@@ -186,8 +186,8 @@ class Example extends Controller
         $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $data['user_name']]);
 
         $example->staff_pk = explode("|", $example->staff_pk);
-
         $example->invitation_week = explode('|', $example->invitation_week);
+        $example->invitation_week_m = explode('|', $example->invitation_week_m);
 
         return view('update', [
             'staff' => $staff,
@@ -294,6 +294,19 @@ class Example extends Controller
 
             case 'invitation_auto_close_m':
                 $this->updateSingleData($data, '移动端自动关闭邀请框延迟修改成功', '移动端自动关闭邀请框延迟修改失败');
+                break;
+
+            case 'invitation_week':
+                $this->updateSingleData($data, 'PC端邀请星期范围修改成功', 'PC端邀请星期范围修改失败');
+                break;
+
+            case 'invitation_week_m':
+                $this->updateSingleData($data, '移动端邀请星期范围修改成功', '移动端邀请星期范围修改失败');
+                break;
+
+            //客服
+            case 'staff_pk':
+                $this->updateSingleData($data, '参与客服修改成功', '参与客服修改失败');
                 break;
 
         }
