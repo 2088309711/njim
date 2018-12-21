@@ -10,6 +10,7 @@ namespace app\staff\controller;
 
 use app\common\model\Staff;
 use app\common\util\DateUtil;
+use think\captcha\Captcha;
 use think\Controller;
 use think\Request;
 use app\common\model\Example as ExampleModel;
@@ -43,19 +44,12 @@ class Example extends Controller
 
     public function create()
     {
-        $data = [];
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
-
-        //查询可用的样式
-        $styleList = ExampleStyle::all(['user_name' => $data['user_name']]);
-
-        //查询客服
-        $staffList = Staff::all(['account' => $data['user_name']]);
+        $staff = $login->getUserData();
 
         return view('create', [
-            'style_list' => $styleList,
-            'staff_list' => $staffList
+            'staff' => $staff,
+            'menu' => 'example'
         ]);
     }
 
@@ -97,21 +91,17 @@ class Example extends Controller
     public function createExample()
     {
         $data = input('post.');
-        $data['invitation_switch'] = isset($data['invitation_switch']) ? $data['invitation_switch'] : 0;
         $result = $this->validate($data, 'Example.add');
         if (true !== $result) {
             $this->error($result);
         }
 
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
-        $data['staff_pk'] = $this->numArrToStr(isset($data['staff_pk']) ? $data['staff_pk'] : []);
-        $data['invitation_week'] = $this->numArrToStr(isset($data['invitation_week']) ? $data['invitation_week'] : []);
-        $data['access'] = uniqid();
+        $staff = $login->getUserData();
 
         //保存数据
         $example = new ExampleModel();
-        if ($example->add($data)) {
+        if ($example->add($staff)) {
             $this->success('创建成功', 'staff/example/index');
         } else {
             $this->error('创建失败');
@@ -166,22 +156,26 @@ class Example extends Controller
      */
     public function delExample()
     {
-        $data = input();
-
+        $data = input('post.');
         $login = new Login();
         $data['user_name'] = $login->getUserName(true);
 
+        $delText = '我已了解后果并确认删除';
+        if ($data['del_text'] !== $delText) {
+            $this->error('请输入：' . $delText);
+        }
+
         //验证数据
-        $result = $this->validate($data, 'Example.scene1');
+        $result = $this->validate($data, 'Example.del');
         if (true !== $result) {
             $this->error($result);
         }
 
-        $example = ExampleModel::get($data['id']);
-        if ($data['user_name'] === $example->user_name) {
-            $example->delete();
+        if (ExampleModel::destroy(['id' => $data['id'], 'user_name' => $data['user_name']])) {
+            $this->success('删除成功', 'staff/Example/index');
+        } else {
+            $this->error('删除失败');
         }
-
     }
 
     /**

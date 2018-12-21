@@ -11,23 +11,13 @@
                         <div class="widget-title  am-cf">文章列表</div>
                     </div>
                     <div class="widget-body  am-fr">
-
                         <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
                             <div class="am-form-group">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <button type="button" class="am-btn am-btn-default am-btn-success"><span
-                                                class="am-icon-plus"></span> 新增
-                                        </button>
-                                        <button type="button" class="am-btn am-btn-default am-btn-secondary"><span
-                                                class="am-icon-save"></span> 保存
-                                        </button>
-                                        <button type="button" class="am-btn am-btn-default am-btn-warning"><span
-                                                class="am-icon-archive"></span> 审核
-                                        </button>
-                                        <button type="button" class="am-btn am-btn-default am-btn-danger"><span
-                                                class="am-icon-trash-o"></span> 删除
-                                        </button>
+                                        <a href="/index.php/staff/Example/create" class="am-btn am-btn-success">
+                                            <span class="am-icon-plus"></span> 新增
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -36,12 +26,12 @@
                             <div class="am-form-group tpl-table-list-select">
                                 <select data-am-selected="{btnSize: 'sm'}">
                                     <option value="option1">所有类别</option>
-                                    <option value="option2">IT业界</option>
-                                    <option value="option3">数码产品</option>
-                                    <option value="option3">笔记本电脑</option>
-                                    <option value="option3">平板电脑</option>
-                                    <option value="option3">只能手机</option>
-                                    <option value="option3">超极本</option>
+                                    <option value="option2">类别1</option>
+                                    <option value="option3">类别2</option>
+                                    <option value="option3">类别3</option>
+                                    <option value="option3">类别4</option>
+                                    <option value="option3">类别5</option>
+                                    <option value="option3">类别6</option>
                                 </select>
                             </div>
                         </div>
@@ -78,7 +68,8 @@
                                             <a href="/index.php/staff/Example/updateExample/id/{$vo.id}">
                                                 <i class="am-icon-pencil"></i> 编辑
                                             </a>
-                                            <a href="/index.php/staff/Example/deleteConfirm/id/{$vo.id}" class="tpl-table-black-operation-del">
+                                            <a href="/index.php/staff/Example/deleteConfirm/id/{$vo.id}"
+                                               class="tpl-table-black-operation-del">
                                                 <i class="am-icon-trash"></i> 删除
                                             </a>
                                         </div>

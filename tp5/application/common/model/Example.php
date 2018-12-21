@@ -15,21 +15,34 @@ class Example extends Model
 {
     protected $pk = 'id';
 
-    public function add($data)
+    public function add($staff)
     {
-        $this->setAttr('name', $data['name']);
-        $this->user_name = $data['user_name'];
-        $this->access = $data['access'];
-        $this->style_id = $data['style_id'];
-        $this->description = $data['description'];
-        $this->staff_pk = $data['staff_pk'];
-        $this->invitation_switch = $data['invitation_switch'];
-        $this->invitation_first = $data['invitation_first'];
-        $this->invitation_after = $data['invitation_after'];
-        $this->invitation_num = $data['invitation_num'];
-        $this->invitation_time = $data['invitation_time'];
-        $this->invitation_week = $data['invitation_week'];
-        $this->invitation_auto_close = $data['invitation_auto_close'];
+        $this->state = 1;
+        $this->setAttr('name', '系统自动填写的实例');
+        $this->user_name = $staff->user_name;
+        $this->access = uniqid();
+        $this->description = '系统自动填写的实例，请根据实际需求修改。';
+        $this->staff_pk = $staff->id;
+        $this->invitation_switch = 1;
+        $this->invitation_switch_m = 1;
+        $this->invitation_first = 10;
+        $this->invitation_first_m = 10;
+        $this->invitation_after = 20;
+        $this->invitation_after_m = 20;
+        $this->invitation_num = 0;
+        $this->invitation_num_m = 0;
+        $this->invitation_time = '00:00:00-23:59:59';
+        $this->invitation_time_m = '00:00:00-23:59:59';
+        $this->invitation_week = '7|1|2|3|4|5|6';
+        $this->invitation_week_m = '7|1|2|3|4|5|6';
+        $this->invitation_auto_close = 0;
+        $this->invitation_auto_close_m = 0;
+        $this->color = '#ff0000';
+        $this->color_m = '#ff0000';
+        $this->icon_code = 'code';
+        $this->icon_code_m = 'code';
+        $this->invitation_code = 'code';
+        $this->invitation_code_m = 'code';
         return !!$this->save();
     }
 

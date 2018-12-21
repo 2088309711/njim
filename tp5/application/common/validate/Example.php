@@ -18,7 +18,12 @@ class Example extends Validate
         [
             '__token__',
             'require|token',
-            '令牌必须存在|令牌无效,'
+            '令牌不能为空|令牌无效'
+        ],
+        [
+            'captcha',
+            'require|captcha',
+            '验证码不能为空|验证码错误'
         ],
         [
             'id',
@@ -185,10 +190,8 @@ class Example extends Validate
         'invitation_auto_close_m' => ['id', 'invitation_auto_close_m'],
         'staff_pk' => ['id', 'staff_pk'],
         'scene1' => ['id'],
-        'add' => [
-            '__token__', 'name', 'style_id', 'description', 'invitation_switch', 'invitation_first',
-            'invitation_after', 'invitation_num', 'invitation_time', 'invitation_auto_close'
-        ],
+        'del' => ['__token__', 'id'],
+        'add' => ['__token__', 'captcha'],
         'save' => [
             '__token__', 'id', 'name', 'style_id', 'description', 'invitation_switch', 'invitation_first',
             'invitation_after', 'invitation_num', 'invitation_time', 'invitation_auto_close'

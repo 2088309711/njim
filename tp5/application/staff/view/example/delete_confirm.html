@@ -1,5 +1,5 @@
 {extend name="base" /}
-{block name="title"}修改实例 - 客服控制台{/block}
+{block name="title"}删除确认 - 客服控制台{/block}
 {block name="left"}{include file="left_admin" /}{/block}
 {block name="content"}
 <div class="tpl-content-wrapper">
@@ -29,18 +29,20 @@
                         </div>
                     </div>
                     <div class="widget-body am-fr">
-                        <form class="am-form tpl-form-border-form tpl-form-border-br" onsubmit="return false">
-                            <input type="hidden" id="id" value="{$example.id}">
-
+                        <form action="/index.php/staff/Example/delExample"
+                              class="am-form tpl-form-border-form tpl-form-border-br"
+                              method="post" onsubmit="return check();">
+                            {:token()}
+                            <input type="hidden" name="id" value="{$example.id}">
 
                             <div class="am-u-sm-12">
                                 <div class="am-panel am-panel-default">
                                     <div class="am-panel-bd">
 
-                                        删除实例后会导致以下问题，请谨慎操作。<br>
+                                        删除实例后会导致以下后果，请谨慎操作：<br>
                                         <span class="am-text-danger">1. 该实例部署的所有网页会失去在线客服及相关的所有功能。</span><br>
-                                        <span class="am-text-danger">2. 该实例产生的所有数据无法找回。</span><br>
-                                        如果确认无误请将后面的文本输入后提交：<span class="delete-confirm-text"></span>
+                                        <span class="am-text-danger">2. 该实例的所有数据将被删除且无法找回。</span><br>
+                                        如果确认无误请输入后面的文本：<span class="delete-confirm-text"></span>
 
                                     </div>
                                 </div>
@@ -49,19 +51,16 @@
                             <div class="am-form-group">
                                 <label class="am-u-sm-2 am-form-label">输入确认文本</label>
                                 <div class="am-u-sm-10">
-
-
-                                    <input type="text" class="tpl-form-input" id="example-name"
-                                           placeholder="请输入上述确认文本" value="{$example.name}">
-                                    <small>将上述确认文本输入后才能提交</small>
+                                    <input type="text" class="tpl-form-input" id="delete-text"
+                                           placeholder="请输入确认删除文本" name="del_text">
+                                    <small>实例名称：{$example.name}</small>
                                 </div>
                             </div>
 
-
                             <div class="am-form-group">
                                 <div class="am-u-sm-10 am-u-sm-push-2">
-                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success ">
-                                        提交
+                                    <button type="submit" class="am-btn am-btn-danger">
+                                        确认删除
                                     </button>
                                 </div>
                             </div>
@@ -80,10 +79,12 @@
         layer = layui.layer;
     });
 
-    $(function () {
-        // layer.msg('很遗憾，操作失败', {icon: 5});
-
-    });
-
+    function check() {
+        if ($('#delete-text').val() === '我已了解后果并确认删除') {
+            return true;
+        }
+        layer.msg('请输入：我已了解后果并确认删除', {icon: 5});
+        return false;
+    }
 </script>
 {/block}
