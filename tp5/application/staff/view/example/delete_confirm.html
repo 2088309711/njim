@@ -1,0 +1,89 @@
+{extend name="base" /}
+{block name="title"}修改实例 - 客服控制台{/block}
+{block name="left"}{include file="left_admin" /}{/block}
+{block name="content"}
+<div class="tpl-content-wrapper">
+    <div class="container-fluid am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+                <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 删除确认
+                    <small>Delete confirm</small>
+                </div>
+                <p class="page-header-description">这个操作很危险，你需要仔细阅读并确认。</p>
+            </div>
+            <div class="am-u-lg-3 tpl-index-settings-button">
+                <button type="button" class="page-header-button"><span class="am-icon-paint-brush"></span> 设置
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">请阅读以下内容</div>
+                        <div class="widget-function am-fr">
+                            <a href="javascript:;" class="am-icon-cog"></a>
+                        </div>
+                    </div>
+                    <div class="widget-body am-fr">
+                        <form class="am-form tpl-form-border-form tpl-form-border-br" onsubmit="return false">
+                            <input type="hidden" id="id" value="{$example.id}">
+
+
+                            <div class="am-u-sm-12">
+                                <div class="am-panel am-panel-default">
+                                    <div class="am-panel-bd">
+
+                                        删除实例后会导致以下问题，请谨慎操作。<br>
+                                        <span class="am-text-danger">1. 该实例部署的所有网页会失去在线客服及相关的所有功能。</span><br>
+                                        <span class="am-text-danger">2. 该实例产生的所有数据无法找回。</span><br>
+                                        如果确认无误请将后面的文本输入后提交：<span class="delete-confirm-text"></span>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-2 am-form-label">输入确认文本</label>
+                                <div class="am-u-sm-10">
+
+
+                                    <input type="text" class="tpl-form-input" id="example-name"
+                                           placeholder="请输入上述确认文本" value="{$example.name}">
+                                    <small>将上述确认文本输入后才能提交</small>
+                                </div>
+                            </div>
+
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-10 am-u-sm-push-2">
+                                    <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success ">
+                                        提交
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/layui/layui.js"></script>
+<script>
+    var layer = null;
+    layui.use(['layer', 'form'], function () {
+        layer = layui.layer;
+    });
+
+    $(function () {
+        // layer.msg('很遗憾，操作失败', {icon: 5});
+
+    });
+
+</script>
+{/block}

@@ -136,6 +136,30 @@ class Example extends Controller
         return implode('|', $temp);
     }
 
+
+    public function deleteConfirm()
+    {
+        $login = new Login();
+        $staff = $login->getUserData();
+        $data = input();
+        $data['user_name'] = $staff->user_name;
+
+        //验证数据
+        $result = $this->validate($data, 'Example.scene1');
+        if (true !== $result) {
+            $this->error($result);
+        }
+
+        $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $data['user_name']]);
+
+        return view('delete_confirm', [
+            'staff' => $staff,
+            'menu' => 'example',
+            'example' => $example
+        ]);
+    }
+
+
     /**
      * 删除实例
      * @throws \think\exception\DbException
