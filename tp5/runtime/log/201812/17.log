@@ -18,3 +18,4 @@
 [ 2018-12-17T11:07:04+08:00 ] 127.0.0.1 GET /index.php/client/jsonp/getSettings/access/5c16129ee67d1
 [ info ] serve.njim.vip/index.php/client/jsonp/getSettings/access/5c16129ee67d1 [运行时间：0.117194s][吞吐率：8.53req/s] [内存消耗：2,802.78kb] [文件加载：57]
 [ error ] [8]Trying to get property of non-object[F:\phpStudy\WWW\njim\tp5\application\client\controller\Jsonp.php:27]
+123145646
