@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"F:\phpStudy\WWW\njim/tp5/application/staff\view\example\update.html";i:1545361236;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545289220;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:67:"F:\phpStudy\WWW\njim/tp5/application/staff\view\example\update.html";i:1545377101;s:57:"F:\phpStudy\WWW\njim\tp5\application\staff\view\base.html";i:1545289220;s:63:"F:\phpStudy\WWW\njim\tp5\application\staff\view\left_admin.html";i:1545276348;}*/ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -256,9 +256,9 @@
                         </div>
                     </div>
                     <div class="widget-body am-fr">
-                        <form class="am-form tpl-form-border-form tpl-form-border-br">
+                        <form class="am-form tpl-form-border-form tpl-form-border-br" onsubmit="return false">
                             <input type="hidden" id="id" value="<?php echo $example['id']; ?>">
-                            <div class="am-tabs" data-am-tabs>
+                            <div class="am-tabs" data-am-tabs="{noSwipe: 1}">
                                 <ul class="am-tabs-nav am-nav am-nav-tabs">
                                     <li class="am-active"><a href="#tab1">基本</a></li>
                                     <li><a href="#tab2">皮肤</a></li>
@@ -301,7 +301,7 @@
                                     </div>
                                     <div class="am-tab-panel am-fade" id="tab2">
 
-                                        <div class="am-tabs" data-am-tabs>
+                                        <div class="am-tabs" data-am-tabs="{noSwipe: 1}">
                                             <ul class="am-tabs-nav am-nav am-nav-tabs">
                                                 <li class="am-active"><a href="#tab21">PC端</a></li>
                                                 <li><a href="#tab22">移动端</a></li>
@@ -309,11 +309,6 @@
 
                                             <div class="am-tabs-bd">
                                                 <div class="am-tab-panel am-fade am-in am-active" id="tab21">
-
-                                                    <blockquote>
-                                                        <p>以下是PC端皮肤参数</p>
-                                                    </blockquote>
-
 
                                                     <div class="am-form-group">
                                                         <label
@@ -325,35 +320,38 @@
                                                             <small>请填写十六进制颜色值，如：#1c97f5</small>
                                                         </div>
                                                     </div>
-
                                                     <div class="am-form-group">
-                                                        <label
-                                                                class="am-u-sm-3 am-form-label">挂件代码</label>
+                                                        <label class="am-u-sm-3 am-form-label">挂件代码</label>
                                                         <div class="am-u-sm-9">
                                                                 <textarea id="icon-code" rows="10"
                                                                           placeholder="请输入HTML内容"><?php echo $example['icon_code']; ?></textarea>
+                                                            <div class="am-margin-top-sm">
+                                                                <button type="button"
+                                                                        class="am-btn am-btn-primary am-btn-xs">
+                                                                    <i class="am-icon-code"></i>
+                                                                    默认代码
+                                                                </button>
+                                                                <button type="button"
+                                                                        class="am-btn am-btn-success am-btn-xs am-margin-left-xs">
+                                                                    <i class="am-icon-pencil"></i>
+                                                                    编写说明
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-
                                                     <div class="am-form-group">
-                                                        <label
-                                                                class="am-u-sm-3 am-form-label">邀请框代码</label>
+                                                        <label class="am-u-sm-3 am-form-label">邀请框代码</label>
                                                         <div class="am-u-sm-9">
                                                                 <textarea id="invitation-code" rows="10"
                                                                           placeholder="请输入HTML内容"><?php echo $example['invitation_code']; ?></textarea>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                                 <div class="am-tab-panel am-fade" id="tab22">
 
-                                                    <blockquote>
-                                                        <p>以下是移动端皮肤参数</p>
-                                                    </blockquote>
+
                                                     <div class="am-form-group">
-                                                        <label
-                                                                class="am-u-sm-3 am-form-label">主题色</label>
+                                                        <label class="am-u-sm-3 am-form-label">主题色</label>
                                                         <div class="am-u-sm-9">
                                                             <input type="text" class="tpl-form-input"
                                                                    id="color-m" value="<?php echo $example['color_m']; ?>"
@@ -363,8 +361,7 @@
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label
-                                                                class="am-u-sm-3 am-form-label">挂件代码</label>
+                                                        <label class="am-u-sm-3 am-form-label">挂件代码</label>
                                                         <div class="am-u-sm-9">
                                                                 <textarea id="icon-code-m" rows="10"
                                                                           placeholder="请输入HTML内容"><?php echo $example['icon_code_m']; ?></textarea>
@@ -372,8 +369,7 @@
                                                     </div>
 
                                                     <div class="am-form-group">
-                                                        <label
-                                                                class="am-u-sm-3 am-form-label">邀请框代码</label>
+                                                        <label class="am-u-sm-3 am-form-label">邀请框代码</label>
                                                         <div class="am-u-sm-9">
                                                                 <textarea id="invitation-code-m" rows="10"
                                                                           placeholder="请输入HTML内容"><?php echo $example['invitation_code_m']; ?></textarea>
@@ -387,7 +383,7 @@
                                     </div>
                                     <div class="am-tab-panel am-fade" id="tab3">
 
-                                        <div class="am-tabs" data-am-tabs>
+                                        <div class="am-tabs" data-am-tabs="{noSwipe: 1}">
                                             <ul class="am-tabs-nav am-nav am-nav-tabs">
                                                 <li class="am-active"><a href="#tab31">PC端</a></li>
                                                 <li><a href="#tab32">移动端</a></li>
@@ -396,9 +392,6 @@
                                             <div class="am-tabs-bd">
                                                 <div class="am-tab-panel am-fade am-in am-active" id="tab31">
 
-                                                    <blockquote>
-                                                        <p>以下是PC端邀请功能参数</p>
-                                                    </blockquote>
 
                                                     <div class="am-form-group">
                                                         <label
@@ -477,7 +470,6 @@
                                                         </div>
                                                     </div>
 
-
                                                     <div class="am-form-group">
                                                         <label
                                                                 class="am-u-sm-3 am-form-label">邀请次数</label>
@@ -488,7 +480,6 @@
                                                             <small>邀请次数达到设定值后不再邀请，如果不限制请输入：0</small>
                                                         </div>
                                                     </div>
-
 
                                                     <div class="am-form-group">
                                                         <label
@@ -525,9 +516,7 @@
 
                                                 </div>
                                                 <div class="am-tab-panel am-fade" id="tab32">
-                                                    <blockquote>
-                                                        <p>以下是移动端邀请功能参数</p>
-                                                    </blockquote>
+
                                                     <div class="am-form-group">
                                                         <label
                                                                 class="am-u-sm-3 am-form-label">启用邀请</label>
@@ -638,7 +627,6 @@
                                                             <small>首次邀请除外，之后的邀请需要延迟多少秒？</small>
                                                         </div>
                                                     </div>
-
                                                     <div class="am-form-group">
                                                         <label
                                                                 class="am-u-sm-3 am-form-label">自动关闭延迟</label>
@@ -650,31 +638,23 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
-
                                     </div>
                                     <div class="am-tab-panel am-fade" id="tab4">
-
-
                                         <div class="am-form-group">
                                             <label class="am-u-sm-3 am-form-label">选择客服</label>
                                             <div class="am-u-sm-9">
-
-
                                                 <table class="am-table am-table-bordered" style="margin-bottom: 0;">
-
                                                     <thead>
                                                     <tr>
                                                         <th width="30"></th>
-                                                        <th>编号</th>
+                                                        <th width="80">编号</th>
+                                                        <th width="160">用户名</th>
                                                         <th>客服名称</th>
-                                                        <th>用户名</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-
                                                     <?php if(is_array($staff_list) || $staff_list instanceof \think\Collection || $staff_list instanceof \think\Paginator): $i = 0; $__LIST__ = $staff_list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                                                     <tr>
                                                         <td><input type="checkbox" value="<?php echo $vo['id']; ?>"
@@ -682,15 +662,12 @@
                                                                    <?php if(is_array($example['staff_pk']) || $example['staff_pk'] instanceof \think\Collection || $example['staff_pk'] instanceof \think\Paginator): $i = 0; $__LIST__ = $example['staff_pk'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v2): $mod = ($i % 2 );++$i;if($v2 == $vo['id']): ?>checked<?php endif; endforeach; endif; else: echo "" ;endif; ?>>
                                                         </td>
                                                         <td><?php echo $vo['id']; ?></td>
-                                                        <td><?php echo $vo['name']; ?></td>
                                                         <td><?php echo $vo['user_name']; ?></td>
+                                                        <td><?php echo $vo['name']; ?></td>
                                                     </tr>
                                                     <?php endforeach; endif; else: echo "" ;endif; ?>
-
                                                     </tbody>
-
                                                 </table>
-
                                                 <small>
                                                     被勾选的客服才能参与该实例的工作任务
                                                 </small>
@@ -706,162 +683,8 @@
         </div>
     </div>
 </div>
-
 <script src="/static/layui/layui.js"></script>
-<script>
-    var layer = null;
-    layui.use(['layer', 'form'], function () {
-        layer = layui.layer;
-        // layer.msg('msg', {icon: 6});
-    });
-
-    /**
-     * 发送请求
-     * @param name 参数名
-     * @param value 参数值
-     */
-    function sendRequest(name, value) {
-        $.ajax({
-            url: '/index.php/staff/Example/updateField',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                id: $('#id').val(),
-                name: name,
-                value: value
-            },
-            success: function (data) {
-                layer.msg(data.msg, {icon: (data.state === 1 ? 6 : 5)});
-            },
-            error: function () {
-                layer.msg('很遗憾，操作失败', {icon: 5});
-            }
-        });
-    }
-
-    $(function () {
-
-        //基本
-        $('#example-switch').click(function () {
-            sendRequest('state', ($(this).get(0).checked) ? 1 : 0);
-        });
-
-        $('#example-name').blur(function () {
-            sendRequest('name', $(this).val());
-        });
-
-        $('#description').blur(function () {
-            sendRequest('description', $(this).val());
-        });
-
-        //皮肤
-        $('#color').blur(function () {
-            sendRequest('color', $(this).val());
-        });
-
-        $('#color-m').blur(function () {
-            sendRequest('color_m', $(this).val());
-        });
-
-        $('#icon-code').blur(function () {
-            sendRequest('icon_code', $(this).val());
-        });
-        $('#icon-code-m').blur(function () {
-            sendRequest('icon_code_m', $(this).val());
-        });
-
-        $('#invitation-code').blur(function () {
-            sendRequest('invitation_code', $(this).val());
-        });
-
-        $('#invitation-code-m').blur(function () {
-            sendRequest('invitation_code_m', $(this).val());
-        });
-
-        //邀请功能
-        $('#invitation-switch').click(function () {
-            sendRequest('invitation_switch', ($(this).get(0).checked) ? 1 : 0);
-        });
-
-        $('#invitation-switch-m').click(function () {
-            sendRequest('invitation_switch_m', ($(this).get(0).checked) ? 1 : 0);
-        });
-
-
-        // 星期范围
-        // code...
-
-
-        $('#invitation-time').blur(function () {
-            sendRequest('invitation_time', $(this).val());
-        });
-
-        $('#invitation-time-m').blur(function () {
-            sendRequest('invitation_time_m', $(this).val());
-        });
-
-        $('#invitation-num').blur(function () {
-            sendRequest('invitation_num', $(this).val());
-        });
-
-        $('#invitation-num-m').blur(function () {
-            sendRequest('invitation_num_m', $(this).val());
-        });
-
-
-        $('#invitation-first').blur(function () {
-            sendRequest('invitation_first', $(this).val());
-        });
-
-        $('#invitation-first-m').blur(function () {
-            sendRequest('invitation_first_m', $(this).val());
-        });
-
-        $('#invitation-after').blur(function () {
-            sendRequest('invitation_after', $(this).val());
-        });
-
-        $('#invitation-after-m').blur(function () {
-            sendRequest('invitation_after_m', $(this).val());
-        });
-
-        $('#invitation-auto-close').blur(function () {
-            sendRequest('invitation_auto_close', $(this).val());
-        });
-
-        $('#invitation-auto-close-m').blur(function () {
-            sendRequest('invitation_auto_close_m', $(this).val());
-        });
-
-        $('.invitation-week-checkbox').click(function () {
-            var arr_v = new Array();
-            $('input[name="invitation_week"]:checked').each(function () {
-                arr_v.push($(this).val());
-            });
-            sendRequest('invitation_week', arr_v.join('|'));
-        });
-
-        $('.invitation-week-m-checkbox').click(function () {
-            var arr_v = new Array();
-            $('input[name="invitation_week_m"]:checked').each(function () {
-                arr_v.push($(this).val());
-            });
-            sendRequest('invitation_week_m', arr_v.join('|'));
-        });
-
-        //客服
-        $('.staff-list-checkbox').click(function () {
-            var arr_v = new Array();
-            $('input[name="staff_pk"]:checked').each(function () {
-                arr_v.push($(this).val());
-            });
-            sendRequest('staff_pk', arr_v.join('|'));
-        });
-
-
-    });
-
-</script>
+<script src="/static/js/example_update.js"></script>
 
 </div>
 <script src="/static/assets/js/amazeui.min.js"></script>
