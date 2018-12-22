@@ -422,7 +422,7 @@ class Example extends Controller
             $this->error('修改失败');
         }
     }
-    
+
     /**
      * 部署
      * @return \think\response\View
