@@ -1,40 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>部署实例</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
-</head>
-<body style="padding: 0 10px;">
+{extend name="base" /}
+{block name="title"}实例对接 - 客服控制台{/block}
+{block name="left"}{include file="left_admin" /}{/block}
+{block name="content"}
+<div class="tpl-content-wrapper">
+    <div class="container-fluid am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+                <div class="page-header-heading"><span class="am-icon-plug page-header-heading-icon"></span> 实例对接
+                    <small>Example docking</small>
+                </div>
+                <p class="page-header-description">你的网页与实例对接成功后即可使用在线客服及相关功能。</p>
+            </div>
+            <div class="am-u-lg-3 tpl-index-settings-button">
+                <button type="button" class="page-header-button"><span class="am-icon-paint-brush"></span> 设置
+                </button>
+            </div>
+        </div>
+    </div>
 
-<blockquote class="layui-elem-quote layui-text" style="margin-top: 10px;">部署实例</blockquote>
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">您正在对接<span class="am-text-primary">{$example.name}</span>，请手动复制以下代码</div>
+                        <div class="widget-function am-fr">
+                            <a href="javascript:;" class="am-icon-cog"></a>
+                        </div>
+                    </div>
+                    <div class="widget-body am-fr">
 
-<fieldset class="layui-elem-field layui-field-title">
-    <legend>部署到网页</legend>
-</fieldset>
+
+                        <section class="am-panel am-panel-default">
+                            <main class="am-panel-bd" id="example-code">
+                                &lt;div id="njim_container" access="{$example.access}"&gt;&lt;/div&gt;&lt;script
+                                src="http://serve.njim.vip/static/js/im.js" charset="utf-8"&gt;&lt;/script&gt;
+                            </main>
+                            <footer class="am-panel-footer">请将以上代码粘贴到你的网页&lt;/body&gt;前面即可完成网页与实例的对接。</footer>
+                        </section>
 
 
-<pre class="layui-code">
-&lt;div id="njim_container" access="{$example.access}"&gt;&lt;/div&gt;
-&lt;script src="http://serve.njim.vip/static/js/im.js" charset="utf-8"&gt;&lt;/script&gt;
-</pre>
-
-<blockquote class="layui-elem-quote layui-quote-nm">请将以上代码粘贴到您的网页&lt;/body&gt;（注意有个“/”）之前即可完成网页部署。</blockquote>
-
-<a href="/index.php/staff/example/index" class="layui-btn">返回</a>
-
-<script src="/static/layui/layui.js" charset="utf-8"></script>
-<script>
-    layui.use('code', function () { //加载code模块
-        layui.code({
-            title: '您正在部署“{$example.name}”，请手动复制这些代码',
-            skin: 'notepad',
-            about: false
-        });
-    });
-</script>
-</body>
-</html>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

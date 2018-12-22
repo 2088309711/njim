@@ -327,6 +327,22 @@ class Example extends Controller
                 $this->updateSingleData($data, '参与客服设置成功', '参与客服设置失败');
                 break;
 
+            //设置默认代码
+            case 'default_icon_code':
+                $this->updateStyleCode($data, 'icon_code', ExampleModel::$iconCode);
+                break;
+
+            case 'default_icon_code_m':
+                $this->updateStyleCode($data, 'icon_code_m', ExampleModel::$iconCodeM);
+                break;
+
+            case 'default_invitation_code':
+                $this->updateStyleCode($data, 'invitation_code', ExampleModel::$invitationCode);
+                break;
+
+            case 'default_invitation_code_m':
+                $this->updateStyleCode($data, 'invitation_code_m', ExampleModel::$invitationCodeM);
+                break;
         }
     }
 
@@ -351,14 +367,31 @@ class Example extends Controller
         }
     }
 
+    private function updateStyleCode($data, $name, $code)
+    {
+        $result = $this->validate($data, 'Example.scene1');
+        if (true === $result) {
+            $example = new ExampleModel();
+            $result = !!$example->save([
+                $name => $code
+            ], [
+                'id' => $data['id'],
+                'user_name' => $data['user_name']
+            ]);
+            $this->outJsonResult($result, $result ? '设置成功，刷新后可见代码' : '设置失败，请重试', $data['value']);
+        } else {
+            $this->outJsonResult(false, $result);
+        }
+    }
+
     /**
      * ajax输出json结果
      * @param bool $state 状态
      * @param string $msg 消息
      */
-    private function outJsonResult($state, $msg)
+    private function outJsonResult($state, $msg, $field = '')
     {
-        echo json_encode(['state' => $state ? 1 : 0, 'msg' => $msg]);
+        echo json_encode(['state' => $state ? 1 : 0, 'msg' => $msg, 'field' => $field]);
         die;
     }
 
@@ -377,9 +410,7 @@ class Example extends Controller
 
         $login = new Login();
         $data['user_name'] = $login->getUserName(true);
-
         $data['staff_pk'] = $this->numArrToStr(isset($data['staff_pk']) ? $data['staff_pk'] : []);
-
         $data['invitation_week'] = $this->numArrToStr(isset($data['invitation_week']) ? $data['invitation_week'] : []);
 
         //保存数据
@@ -389,7 +420,6 @@ class Example extends Controller
         } else {
             $this->error('修改失败');
         }
-
     }
 
 
@@ -405,15 +435,12 @@ class Example extends Controller
             $this->error($result);
         }
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $staff = $login->getUserData();
 
         //获取实例数据
-        $example = ExampleModel::get([
-            'id' => $data['id'],
-            'user_name' => $data['user_name']
-        ]);
+        $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $staff->user_name]);
 
-        return view('deploy', ['example' => $example]);
+        return view('deploy', ['example' => $example, 'staff' => $staff, 'menu' => 'example']);
     }
 
 

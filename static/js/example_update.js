@@ -20,6 +20,9 @@ function sendRequest(name, value) {
         },
         success: function (data) {
             layer.msg(data.msg, {icon: (data.state === 1 ? 6 : 5)});
+            if (data.state === 1 && data.field != '') {
+                $('#' + data.field).val(data.msg);
+            }
         },
         error: function () {
             layer.msg('很遗憾，操作失败', {icon: 5});
@@ -91,7 +94,6 @@ $(function () {
         sendRequest('invitation_num_m', $(this).val());
     });
 
-
     $('#invitation-first').blur(function () {
         sendRequest('invitation_first', $(this).val());
     });
@@ -140,5 +142,22 @@ $(function () {
         });
         sendRequest('staff_pk', arr_v.join('|'));
     });
-    
+
+    //设置默认代码
+    $('#default-icon-code').click(function () {
+        sendRequest('default_icon_code', 'icon-code');
+    });
+
+    $('#default-icon-code-m').click(function () {
+        sendRequest('default_icon_code_m', 'icon-code-m');
+    });
+
+    $('#default-invitation-code').click(function () {
+        sendRequest('default_invitation_code', 'invitation-code');
+    });
+
+    $('#default-invitation-code-m').click(function () {
+        sendRequest('default_invitation_code_m', 'invitation-code-m');
+    });
+
 });
