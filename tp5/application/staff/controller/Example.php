@@ -10,6 +10,7 @@ namespace app\staff\controller;
 
 use app\common\model\Staff;
 use app\common\util\DateUtil;
+use PHPMailer\Email;
 use think\captcha\Captcha;
 use think\Controller;
 use think\Request;
@@ -421,8 +422,7 @@ class Example extends Controller
             $this->error('修改失败');
         }
     }
-
-
+    
     /**
      * 部署
      * @return \think\response\View
