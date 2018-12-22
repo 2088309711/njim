@@ -34,8 +34,11 @@ class StaffManage extends Controller
     public function create()
     {
         $login = new Login();
-        $login->getUserName(true);
-        return view('create');
+        $staff = $login->getUserData();
+        return view('create', [
+            'staff' => $staff,
+            'menu' => 'staff_manage'
+        ]);
     }
 
     /**
