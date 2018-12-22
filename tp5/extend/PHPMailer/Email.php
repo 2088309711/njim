@@ -14,7 +14,7 @@ class Email
     private static $From = '2088309711@qq.com'; //发送者的邮件地址
     private static $FromName = '柠吉在线客服系统'; //发送邮件的用户昵称
     private static $Username = '2088309711@qq.com'; //登录到邮箱的用户名
-    private static $Password = '2222222'; //第三方登录的授权码，在邮箱里面设置
+    private static $Password = '33333'; //第三方登录的授权码，在邮箱里面设置
 
     // $result = Email::SendEmail('测试', '测试邮件', '17602373802@163.com');
 
