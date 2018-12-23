@@ -1,6 +1,6 @@
 ﻿# Host: localhost  (Version 5.5.53)
-# Date: 2018-12-21 15:25:17
-# Generator: MySQL-Front 6.0  (Build 2.20)
+# Date: 2018-12-23 17:04:49
+# Generator: MySQL-Front 6.1  (Build 1.15)
 
 
 #
@@ -41,14 +41,14 @@ CREATE TABLE `im_example` (
   `invitation_code_m` text NOT NULL COMMENT '手机邀请框代码',
   PRIMARY KEY (`id`),
   UNIQUE KEY `access` (`access`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='实例';
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='实例';
 
 #
 # Data for table "im_example"
 #
 
 /*!40000 ALTER TABLE `im_example` DISABLE KEYS */;
-INSERT INTO `im_example` VALUES (3,1,'测试实例','2088309711','5beac60b0e049',4,1542112779,1543651958,'开发测试使用','18|29',0,0,10,10,20,20,0,0,'00:00:00 - 23:59:59','','7|1|2|3|4|5|6','',0,0,'','','','','',''),(4,1,'132','2088309711','5bed4e0413843',4,1542278660,1542278660,'','',0,0,0,10,10000,20,0,0,'0','','0','',0,0,'','','','','',''),(5,1,'1','2088309711','5bed4e0c681f5',4,1542278668,1542280970,'123','',0,0,0,10,10000,20,0,0,'0','','0','',0,0,'','','','','',''),(6,1,'132123','2088309711','5bf91e94f1f2a',4,1543052949,1545376000,'4654654','18|29',1,1,12,5,15,6,9,4,'08:00:00-20:30:00','00:00:00-23:50:30','','',5,7,'#ff0000','#222222','11111','333333','22222','44444'),(7,1,'1321123333','2088309711','5bf92437080f6',4,1543054391,1543054400,'1221213213','18|29',0,0,0,10,10000,20,0,0,'0','','0','',0,0,'','','','','',''),(8,1,'111','2088309711','5c00e917821a6',7,1543563543,1543636692,'1351','18|29',1,0,10,10,20,20,30,0,'12:05:03 - 14:29:01','','7|1|2|3|4|5|6','',30,0,'','','','','','');
+INSERT INTO `im_example` VALUES (3,1,'测试实例','2088309711','5beac60b0e049',4,1542112779,1543651958,'开发测试使用','18|29',0,0,10,10,20,20,0,0,'00:00:00 - 23:59:59','','7|1|2|3|4|5|6','',0,0,'','','','','',''),(4,1,'132','2088309711','5bed4e0413843',4,1542278660,1542278660,'','',0,0,0,10,10000,20,0,0,'0','','0','',0,0,'','','','','',''),(5,1,'1','2088309711','5bed4e0c681f5',4,1542278668,1545462081,'123','18|29',0,0,0,10,10000,20,0,0,'0','','0','',0,0,'','','<div id=\"njim_open_click\" style=\"width:80px; height:80px; position:fixed; bottom:50px; right:50px; background:{njim:color}; cursor:pointer; margin:0; padding:0;\"><img src=\"http://njim.com/static/images/staff-icon.png\" style=\"position:absolute; top:13px; left:14px; width:50px; margin:0; padding:0;\"/><span style=\"position:absolute; bottom:6px; color:#fff; text-align:center; width:100%; font:15px \'宋体\'; margin:0; padding:0;\">在线客服</span></div>','还没设计完成','<div style=\"width: 340px; height: 200px; background: #282828 url(http://njim.com/static/images/invitation.jpg) no-repeat;position: fixed; top:50%; left:50%; margin: -100px 0 0 -170px;\"><div style=\"position: absolute;bottom: 5px;right: 5px;\"><button id=\"njim_invitation_open_chat\" style=\"float: left; margin: 5px; border: 1px solid #b3a800;background: #fff000; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">现在咨询</button><button id=\"njim_invitation_continue\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">稍后再说</button><button id=\"njim_invitation_close\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">不在提示</button></div></div>','还没设计完成'),(6,1,'132123','2088309711','5bf91e94f1f2a',4,1543052949,1545376000,'4654654','18|29',1,1,12,5,15,6,9,4,'08:00:00-20:30:00','00:00:00-23:50:30','','',5,7,'#ff0000','#222222','11111','333333','22222','44444'),(11,1,'系统自动填写的实例','2088309711','5c1d0e79ecd6f',0,1545408121,1545478668,'系统自动填写的实例，请根据实际需求修改。','18|29',1,1,10,10,20,20,0,0,'00:00:00-23:59:59','00:00:00-23:59:59','7|1|2|3|4|5|6','7|1|2|3|4|5|6',0,0,'#ff0000','#ff0000','code','code','code','code'),(12,1,'系统自动配置的实例','2088309711','5c1dc95e4579b',0,1545455966,1545456028,'系统自动配置的实例，请根据实际需求修改。','18',1,1,10,10,20,20,0,0,'00:00:00-23:59:59','00:00:00-23:59:59','7|1|2|3|4|5|6','7|1|2|3|4|5|6',0,0,'#007aff','#007aff','<div id=\"njim_open_click\" style=\"width:80px; height:80px; position:fixed; bottom:50px; right:50px; background:{njim:color}; cursor:pointer; margin:0; padding:0;\"><img src=\"http://njim.com/static/images/staff-icon.png\" style=\"position:absolute; top:13px; left:14px; width:50px; margin:0; padding:0;\"/><span style=\"position:absolute; bottom:6px; color:#fff; text-align:center; width:100%; font:15px \'宋体\'; margin:0; padding:0;\">在线客服</span></div>','','<div style=\"width: 340px; height: 200px; background: #282828 url(http://njim.com/static/images/invitation.jpg) no-repeat;position: fixed; top:50%; left:50%; margin: -100px 0 0 -170px;\"><div style=\"position: absolute;bottom: 5px;right: 5px;\"><button id=\"njim_invitation_open_chat\" style=\"float: left; margin: 5px; border: 1px solid #b3a800;background: #fff000; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">现在咨询</button><button id=\"njim_invitation_continue\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">稍后再说</button><button id=\"njim_invitation_close\" style=\"float: left; margin: 5px; border: 1px solid #aaa;background: #ccc; padding: 3px 10px; font:12px \'宋体\'; color: #333;\">不在提示</button></div></div>','');
 /*!40000 ALTER TABLE `im_example` ENABLE KEYS */;
 
 #
@@ -106,7 +106,7 @@ CREATE TABLE `im_msg` (
 #
 
 /*!40000 ALTER TABLE `im_msg` DISABLE KEYS */;
-INSERT INTO `im_msg` VALUES (1,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','123',0,1,1,1,0,1542789527,1545276354),(30,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','456',1,1,1,1,0,1542789527,1545276354),(31,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','发送到发送到',1,1,1,1,0,1543221604,1545276354),(32,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','防守打法大发',1,1,1,1,0,1543221710,1545276354),(33,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','撒大声地',1,1,1,1,0,1543373389,1545276354),(34,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','fsdf',1,1,1,1,0,1543392696,1545276354),(35,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','fdsfsdf',1,1,1,1,0,1543453913,1545276354);
+INSERT INTO `im_msg` VALUES (1,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','123',0,1,1,1,0,1542789527,1545474027),(30,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','456',1,1,1,1,0,1542789527,1545474027),(31,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','发送到发送到',1,1,1,1,0,1543221604,1545474027),(32,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','防守打法大发',1,1,1,1,0,1543221710,1545474027),(33,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','撒大声地',1,1,1,1,0,1543373389,1545474027),(34,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','fsdf',1,1,1,1,0,1543392696,1545474027),(35,'THemyTlGzjb1fNDbassoCu7HdVo7vj5J7pn2lZ17','2088309711','fdsfsdf',1,1,1,1,0,1543453913,1545474027);
 /*!40000 ALTER TABLE `im_msg` ENABLE KEYS */;
 
 #
@@ -143,6 +143,7 @@ CREATE TABLE `im_staff` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `open` int(1) NOT NULL DEFAULT '1' COMMENT '开启=1，禁用=0',
   `name` varchar(20) NOT NULL DEFAULT '未设置' COMMENT '客服名称',
+  `e_mail` varchar(30) NOT NULL DEFAULT '' COMMENT '邮箱地址',
   `sex` int(11) NOT NULL DEFAULT '0' COMMENT '保密=0，男=1，女=2',
   `user_name` varchar(14) NOT NULL DEFAULT '' COMMENT '用户名',
   `account` varchar(20) NOT NULL DEFAULT '' COMMENT '开户用户名',
@@ -156,12 +157,12 @@ CREATE TABLE `im_staff` (
   `description` text NOT NULL COMMENT '描述',
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_name` (`user_name`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "im_staff"
 #
 
 /*!40000 ALTER TABLE `im_staff` DISABLE KEYS */;
-INSERT INTO `im_staff` VALUES (18,1,'333333',0,'2088309711','2088309711','f28fed86680bea284cf0cfe0640ec4',10,23,'userImg.jpg',1,0,1543726798,'010231301'),(29,1,'fdfsdf',2,'123456789','2088309711','0200e00a005aac207704e7aabbaafb',10,23,'',0,1542517645,1543636444,'fsdfdsf');
+INSERT INTO `im_staff` VALUES (18,1,'333333','',0,'2088309711','2088309711','f28fed86680bea284cf0cfe0640ec4',10,23,'userImg.jpg',1,0,1543726798,'010231301'),(29,1,'fdfsdf','',2,'123456789','2088309711','0200e00a005aac207704e7aabbaafb',10,23,'',0,1542517645,1543636444,'fsdfdsf'),(35,1,'16165165','',1,'20897111561','2088309711','a59a2995a5ae98583fa1c49bbeb90e',10,0,'',0,1545490071,1545490071,' 156161'),(36,0,'1651156','',2,'123123','2088309711','cc0c8f00dcc4fbce7bc401fc7ccf2c',10,0,'',0,1545490175,1545490175,' 16151561'),(37,1,'未设置','2088309711@qq.com',0,'12315611','12315611','35b393b97552275a93324129549294',10,0,'',1,1545555733,1545555733,'');
 /*!40000 ALTER TABLE `im_staff` ENABLE KEYS */;

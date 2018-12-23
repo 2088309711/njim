@@ -34,7 +34,7 @@ class Login extends Controller
         }
 
         if ($skip) {
-            $this->error('请登录', 'staff/login/index');
+            $this->redirect('staff/login/index');
         }
 
         return false;
@@ -100,7 +100,7 @@ class Login extends Controller
         if ($user != null && $user->user_name != null) {
             // 登录成功
             $_SESSION['user_name'] = $user->user_name;
-            $this->success('登录成功', 'staff/index/index');
+            $this->redirect('staff/index/index');
         } else {
             // 登录失败
             $this->error('用户名或密码输入错误');
@@ -113,7 +113,7 @@ class Login extends Controller
     public function logout()
     {
         Session::destroySession();
-        $this->success('退出成功', '/');
+        $this->redirect('/');
     }
 
 }

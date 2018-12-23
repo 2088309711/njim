@@ -45,6 +45,11 @@ class Staff extends Validate
             '用户名必须存在|用户名只能为字母和数字，下划线_及破折号-|用户名长度只能为5~14个字符'
         ],
         [
+            'e_mail',
+            'require|email',
+            '邮箱不能为空|邮箱格式有误'
+        ],
+        [
             'password',
             'require|alphaDash|length:6,16',
             '密码必须填写|密码只能为字母和数字，下划线_及破折号-|密码长度只能为6~16个字符'
@@ -68,8 +73,9 @@ class Staff extends Validate
 
     protected $scene = [
         'scene1' => ['id'],
+        'scene2' => ['e_mail'],
         'login' => ['__token__', 'user_name', 'password'],
-        'regist' => ['__token__', 'user_name', 'password', 'repassword', 'agreement'],
+        'regist' => ['__token__', 'e_mail', 'user_name', 'password', 'repassword', 'agreement'],
         'ck_user_name' => ['user_name'],
         'update_open' => ['id', 'open'],
         'add' => ['__token__', 'open', 'name', 'sex', 'user_name', 'password', 'description'],

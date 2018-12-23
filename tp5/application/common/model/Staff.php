@@ -19,6 +19,7 @@ class Staff extends Model
     {
         $su = new SundryUtil();
         $this->user_name = $data['user_name'];
+        $this->e_mail = $data['e_mail'];
         $this->account = $data['user_name'];
         $this->password = $su->pwdConfusion($data['password']);
         $this->power = $data['power'];

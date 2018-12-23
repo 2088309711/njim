@@ -2238,6 +2238,7 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
         padding-left: 10px;
         padding-right: 10px;
     }
+
 }
 
 @media screen and (max-width: 641px) {
@@ -2269,12 +2270,13 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
     }
 }
 
-/*附加*/
+/*删除实例*/
 .delete-confirm-text:before {
     content: '我已了解后果并确认删除';
     color: #007eee;
 }
 
+/*创建实例*/
 .create-example-captcha-img {
     height: 33px;
     transition: height 0.6s;
@@ -2283,4 +2285,10 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
 
 .create-example-captcha-img:hover {
     height: 64px;
+}
+
+/*注册*/
+.tips-1450 {
+    display: block;
+    clear: both;
 }

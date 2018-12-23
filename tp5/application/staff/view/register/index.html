@@ -4,20 +4,17 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amaze UI Admin index Examples</title>
-    <meta name="description" content="这是一个 index 页面">
-    <meta name="keywords" content="index">
+    <title>用户注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="icon" type="image/png" href="/static/assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/static/assets/i/app-icon72x72@2x.png">
     <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="stylesheet" href="/static/layui/css/layui.css">
     <link rel="stylesheet" href="/static/assets/css/amazeui.min.css"/>
     <link rel="stylesheet" href="/static/assets/css/amazeui.datatables.min.css"/>
     <link rel="stylesheet" href="/static/assets/css/app.css">
     <script src="/static/assets/js/jquery.min.js"></script>
-
 </head>
 
 <body data-type="login">
@@ -39,29 +36,43 @@
     </div>
     <div class="tpl-login">
         <div class="tpl-login-content">
-            <div class="tpl-login-title">注册用户</div>
+            <div class="tpl-login-title">用户注册</div>
             <span class="tpl-login-content-info">
-                  创建一个新的用户
+                  创建一个新的客服管理账户
               </span>
 
 
             <form action="/index.php/staff/register/save" method="post" class="am-form tpl-form-line-form">
                 {:token()}
                 <div class="am-form-group">
-                    <input type="text" class="tpl-form-input" id="email" placeholder="邮箱">
-
+                    <input type="text" class="tpl-form-input" id="e-mail" name="e_mail" placeholder="请输入邮箱地址">
                 </div>
 
                 <div class="am-form-group">
-                    <input type="text" class="tpl-form-input" id="user-name" name="user_name" placeholder="用户名">
+                    <div class="am-u-lg-7 am-u-md-7 am-u-sm-6" style="padding-left: 0;">
+                        <input type="text" class="tpl-form-input" name="email_captcha" id="email-captcha" placeholder="请输入邮箱验证码">
+                    </div>
+                    <div class="am-u-lg-5 am-u-md-5 am-u-sm-6" style="padding: 0;">
+                        <button type="button" id="send-captcha" class="am-btn am-btn-secondary am-btn-xs am-btn-block">
+                            获取验证码
+                        </button>
+                    </div>
+                    <small class="tips-1450 am-text-warning">如果没收到验证邮件请查看垃圾箱</small>
                 </div>
 
                 <div class="am-form-group">
-                    <input type="password" class="tpl-form-input" id="password" name="password" placeholder="请输入密码">
+                    <input type="text" class="tpl-form-input" autocomplete="off" id="user-name" name="user_name"
+                           placeholder="请输入用户名">
                 </div>
 
                 <div class="am-form-group">
-                    <input type="password" class="tpl-form-input" id="repassword" name="repassword"
+                    <input type="password" class="tpl-form-input" autocomplete="new-password" id="password"
+                           name="password" placeholder="请输入密码">
+                </div>
+
+                <div class="am-form-group">
+                    <input type="password" class="tpl-form-input" autocomplete="new-password" id="repassword"
+                           name="repassword"
                            placeholder="再次输入密码">
                 </div>
 
@@ -82,16 +93,48 @@
                 </div>
 
                 <div class="am-form-group am-text-right">
-                    <a href="/">首页</a> | <a class="" href="/index.php/staff/login">已有账号？请直接登录</a>
+                    <a href="/">首页</a> | <a class="" href="/index.php/staff/login">已有账号？请登录</a>
                 </div>
-
             </form>
         </div>
     </div>
 </div>
 <script src="/static/assets/js/amazeui.min.js"></script>
 <script src="/static/assets/js/app.js"></script>
+<script src="/static/layui/layui.js"></script>
+<script>
+    var layer = null;
+    layui.use(['layer', 'form'], function () {
+        layer = layui.layer;
+    });
 
+    $(function () {
+        $('#send-captcha').click(function () {
+
+            var eMail = $('#e-mail').val();
+            if (!/^[\w.-]+@[\w-.]+$/.test(eMail)) {
+                layer.msg('邮箱格式有误', {icon: 5});
+                return;
+            }
+
+            $.ajax({
+                url: '/index.php/staff/Register/sendCaptchaMail',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    e_mail: eMail
+                },
+                success: function (data) {
+                    layer.msg(data.msg, {icon: (data.state === 1 ? 6 : 5)});
+                },
+                error: function () {
+                    layer.msg('邮件发送失败，请重试', {icon: 5});
+                }
+            });
+        });
+    });
+
+
+</script>
 </body>
-
 </html>
