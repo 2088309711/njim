@@ -5,7 +5,7 @@ namespace app\staff\controller;
 
 use app\common\model\Staff;
 use think\Controller;
-use think\Request;
+use think\Session;
 
 class Login extends Controller
 {
@@ -22,18 +22,11 @@ class Login extends Controller
      */
     public function getUserName($skip = false)
     {
-        session([
-            'prefix' => 'module',
-            'type' => '',
-            'auto_start' => true,
-        ]);
 
-        if (session('?user_name')) {
-            $data = ['user_name' => session('user_name')];
-            $result = $this->validate($data, 'Staff.ck_user_name');
-            if (true === $result) {
-                return $data['user_name'];
-            }
+        $data = ['user_name' => Session::get('user_name', 'login')];
+        $result = $this->validate($data, 'Staff.ck_user_name');
+        if (true === $result) {
+            return $data['user_name'];
         }
 
         if ($skip) {
@@ -81,18 +74,7 @@ class Login extends Controller
 
     public function loginCheck()
     {
-        // 初始化session
-        session([
-            'prefix' => 'module',
-            'type' => '',
-            'auto_start' => true,
-        ]);
-
-        $data = [
-            '__token__' => Request::instance()->post('__token__'),
-            'user_name' => Request::instance()->post('user_name'),
-            'password' => Request::instance()->post('password')
-        ];
+        $data = input('post.');
 
         //验证数据
         $result = $this->validate($data, 'Staff.login');
@@ -106,7 +88,7 @@ class Login extends Controller
 
         if ($user != null && $user->user_name != null) {
             // 登录成功
-            session('user_name', $user->user_name);
+            Session::set('user_name', $user->user_name, 'login');
             $this->redirect('staff/index/index');
         } else {
             // 登录失败
@@ -119,15 +101,7 @@ class Login extends Controller
      */
     public function logout()
     {
-        // 初始化session
-        session([
-            'prefix' => 'module',
-            'type' => '',
-            'auto_start' => true,
-        ]);
-
-        session(null);
-
+        Session::clear('login');
         $this->redirect('/');
     }
 
@@ -135,7 +109,6 @@ class Login extends Controller
     {
         return view('reset_password');
     }
-
 
     public function resetPasswordSave()
     {
@@ -147,21 +120,11 @@ class Login extends Controller
         }
 
         //邮箱和验证码必须同时对应
-        // 初始化session
-        session([
-            'prefix' => 'module',
-            'type' => '',
-            'auto_start' => true,
-        ]);
-
-        if ($data['email_captcha'] != session('e_mail_captcha') ||
-            $data['e_mail'] != session('e_mail')) {
+        Session::prefix('rest_pass');
+        if ($data['email_captcha'] != Session::pull('e_mail_captcha') ||
+            $data['e_mail'] != Session::pull('e_mail')) {
             $this->error('邮箱验证码错误');
         }
-
-        //验证之后销毁验证码
-        session('e_mail_captcha', null);
-        session('e_mail', null);
 
         //重置密码
         $staff = new Staff();
@@ -194,20 +157,14 @@ class Login extends Controller
             $this->outJsonResult(false, '邮箱未注册');
         }
 
-        session([
-            'prefix' => 'module',
-            'type' => '',
-            'auto_start' => true,
-        ]);
-
-
-        session('e_mail', $data['e_mail']);
-        session('e_mail_captcha', rand(100000, 999999));
+        Session::prefix('rest_pass');
+        Session::set('e_mail', $data['e_mail']);
+        Session::set('e_mail_captcha', rand(100000, 999999));
 
         //发送验证码邮件
         $title = '您正在重置密码，请验证邮箱';
         $content = '<div style="background: #f4f4f4; border: 1px solid #20b4ff; width: 100%;max-width: 600px; margin: 0 auto; font-size: 18px;"><div style="padding: 15px;background: #20b4ff; color: #fff;">您正在重置密码，请验证邮箱</div><div style="padding:30px; line-height: 1.8;"><P style="">尊敬的用户：<br>您好，感谢您使用柠吉IM！<br>您正在重置密码，验证码：<strong style="color: #0063ff;">' .
-            session('e_mail') . '</strong></P><p style="color: #666;">如您未做出此操作，可能是他人误填，请忽略此邮件。<br>本邮件为系统发送，请勿回复。</p><p style="text-align: right;">柠吉IM（柠吉在线客服系统）</p></div></div>';
+            Session::get('e_mail') . '</strong></P><p style="color: #666;">如您未做出此操作，可能是他人误填，请忽略此邮件。<br>本邮件为系统发送，请勿回复。</p><p style="text-align: right;">柠吉IM（柠吉在线客服系统）</p></div></div>';
         $result = Email::SendEmail($title, $content, $data['e_mail']);
         if ($result === true) {
             $this->outJsonResult(true, '验证码已发送到你的邮箱，请查收');
