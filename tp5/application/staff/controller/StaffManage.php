@@ -117,7 +117,6 @@ class StaffManage extends Controller
     public function delStaff()
     {
         $data = input();
-
         $login = new Login();
         $data['user_name'] = $login->getUserName(true);
 
@@ -131,7 +130,7 @@ class StaffManage extends Controller
         if ($data['user_name'] === $staff->account && $staff->user_name != $staff->account) {
             $staff->delete();
         }
-
+        $this->redirect('staff/StaffManage/index');
     }
 
 
