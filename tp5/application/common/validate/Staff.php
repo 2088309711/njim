@@ -76,6 +76,7 @@ class Staff extends Validate
         'scene2' => ['e_mail'],
         'login' => ['__token__', 'user_name', 'password'],
         'regist' => ['__token__', 'e_mail', 'user_name', 'password', 'repassword', 'agreement'],
+        'resetPass' => ['__token__', 'e_mail', 'password', 'repassword'],
         'ck_user_name' => ['user_name'],
         'update_open' => ['id', 'open'],
         'add' => ['__token__', 'open', 'name', 'sex', 'user_name', 'password', 'description'],

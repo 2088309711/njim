@@ -17,24 +17,24 @@ class Staff extends Model
      */
     public function regist($data)
     {
-        $su = new SundryUtil();
+
         $this->user_name = $data['user_name'];
         $this->e_mail = $data['e_mail'];
         $this->account = $data['user_name'];
-        $this->password = $su->pwdConfusion($data['password']);
+        $this->password = SundryUtil::pwdConfusion($data['password']);
         $this->power = $data['power'];
         return $this->save();
     }
 
     public function add($data)
     {
-        $su = new SundryUtil();
+
         $this->setAttr('name', $data['name']);
         $this->open = $data['open'];
         $this->user_name = $data['user_name'];
         $this->sex = $data['sex'];
         $this->account = $data['account'];
-        $this->password = $su->pwdConfusion($data['password']);
+        $this->password = SundryUtil::pwdConfusion($data['password']);
         $this->power = $data['power'];
         $this->description = $data['description'];
         return !!$this->save();
@@ -56,8 +56,7 @@ class Staff extends Model
         ];
 
         if ($data['password'] != '') {//密码被修改了
-            $su = new SundryUtil();
-            $saveArr['password'] = $su->pwdConfusion($data['password']);//f28fed86680bea284cf0cfe0640ec4
+            $saveArr['password'] = SundryUtil::pwdConfusion($data['password']);//f28fed86680bea284cf0cfe0640ec4
         }
 
 
@@ -90,9 +89,8 @@ class Staff extends Model
      */
     public function updatePass($data)
     {
-        $su = new SundryUtil();
         return !!$this->save([
-            'password' => $su->pwdConfusion($data['password'])
+            'password' => SundryUtil::pwdConfusion($data['password'])
         ], [
             'user_name' => $data['user_name']
         ]);

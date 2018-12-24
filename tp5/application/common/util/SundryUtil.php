@@ -15,7 +15,7 @@ class SundryUtil
      * @param $password
      * @return string
      */
-    public function pwdConfusion($password)
+    public static function pwdConfusion($password)
     {
         $pwdMd5 = md5($password);
 

@@ -51,12 +51,17 @@ class Register extends Controller
         if (true !== $result) {
             $this->error($result);
         }
-        
-        //检查邮箱验证码
+
+        //邮箱和验证码必须同时对应
         Session::startSession();
-        if ($data['email_captcha'] != $_SESSION['e_mail']) {
+        if ($data['email_captcha'] != $_SESSION['e_mail_captcha'] ||
+            $data['e_mail'] != $_SESSION['e_mail']) {
             $this->error('邮箱验证码错误');
         }
+
+        //验证之后销毁验证码
+        unset($_SESSION['e_mail_captcha']);
+        unset($_SESSION['e_mail']);
 
         if (!$this->userNameNotExist($data['user_name'])) {
             $this->error('用户名已存在，请更换');
@@ -92,7 +97,8 @@ class Register extends Controller
         }
 
         Session::startSession();
-        $_SESSION['e_mail'] = rand(100000, 999999);
+        $_SESSION['e_mail'] = $data['e_mail'];
+        $_SESSION['e_mail_captcha'] = rand(100000, 999999);
         //发送验证码邮件
         $title = '欢迎您注册柠吉IM，请验证邮箱';
         $content = '<div style="background: #f4f4f4; border: 1px solid #20b4ff; width: 100%;max-width: 600px; margin: 0 auto; font-size: 18px;"><div style="padding: 15px;background: #20b4ff; color: #fff;">欢迎您注册柠吉IM，请验证邮箱</div><div style="padding:30px; line-height: 1.8;"><P style="">尊敬的用户：<br>您好，感谢您注册柠吉IM！<br>验证码：<strong style="color: #0063ff;">' .
