@@ -14,8 +14,8 @@
 
 
 <script type="text/html" id="switchTpl">
-    <input type="checkbox" name="open" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="openDemo"
-           {{ d.open== 1 ? 'checked' : '' }}>
+    <input type="checkbox" name="state" value="{{d.id}}" lay-skin="switch" lay-text="启用|禁用" lay-filter="stateDemo"
+           {{ d.state== 1 ? 'checked' : '' }}>
 </script>
 
 <script type="text/html" id="toolbarDemo">
@@ -60,15 +60,15 @@
                     }
                 }
                 , {field: 'update_time', title: '修改时间', width: 180, sort: true}
-                , {field: 'open', title: '状态', width: 100, sort: true, templet: '#switchTpl', unresize: true}
+                , {field: 'state', title: '状态', width: 100, sort: true, templet: '#switchTpl', unresize: true}
                 , {fixed: 'right', title: '操作', toolbar: '#barDemo', width: 180}
             ]]
             , page: true
         });
 
         // 监听开关
-        form.on('switch(openDemo)', function (obj) { //18 open：false
-            $.get('/index.php/staff/Staff_Manage/updateOpen/id/' + this.value + '/open/' + (obj.elem.checked ? '1' : '0'));
+        form.on('switch(stateDemo)', function (obj) { //18 state：false
+            $.get('/index.php/staff/Staff_Manage/updateState/id/' + this.value + '/state/' + (obj.elem.checked ? '1' : '0'));
         });
 
         //监听行工具事件

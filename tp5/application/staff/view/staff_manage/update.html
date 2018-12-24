@@ -1,75 +1,96 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>修改客服</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
-</head>
-<body style="padding: 0 10px;">
+{extend name="base" /}
+{block name="title"}修改客服信息 - 客服控制台{/block}
+{block name="left"}{include file="left_admin" /}{/block}
+{block name="content"}
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">修改客服信息</div>
+                        <div class="widget-function am-fr">
+                            <a href="javascript:;" class="am-icon-cog"></a>
+                        </div>
+                    </div>
+                    <div class="widget-body am-fr">
+                        <form action="/index.php/staff/Staff_Manage/saveStaff" method="post"
+                              class="am-form tpl-form-border-form tpl-form-border-br" onsubmit="return true;">
+                            {:token()}
+                            <input type="hidden" name="id" value="{$staff.id}">
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">客服状态</label>
+                                <div class="am-u-sm-9">
+                                    <div class="tpl-switch">
+                                        <input type="checkbox" id="open"
+                                               class="ios-switch bigswitch tpl-switch-btn"
+                                               name="state" value="1"
+                                               {eq name="$staff.state" value="1" }checked{/eq}>
+                                        <div class="tpl-switch-btn-view">
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                    <small>员工账户被关闭后将无法登录系统</small>
+                                </div>
+                            </div>
 
-<blockquote class="layui-elem-quote layui-text" style="margin-top: 10px;">修改客服</blockquote>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">客服名称</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="name"
+                                           value="{$staff.name}" name="name" placeholder="请输入客服名称">
+                                </div>
+                            </div>
 
-<form class="layui-form" action="/index.php/staff/Staff_Manage/saveStaff" method="post">
-    {:token()}
-    <input type="hidden" name="id" value="{$staff.id}">
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">客服名称</label>
-            <div class="layui-input-inline">
-                <input type="text" name="name" value="{$staff.name}" placeholder="请输入客服名" lay-verify="required"
-                       class="layui-input">
-            </div>
-        </div>
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">密码</label>
+                                <div class="am-u-sm-9">
+                                    <input type="text" class="tpl-form-input" id="example-name"
+                                           name="password" placeholder="请输入新密码">
+                                    <small>不修改请留空</small>
+                                </div>
+                            </div>
 
-        <div class="layui-inline">
-            <label class="layui-form-label">客服状态</label>
-            <div class="layui-input-block">
-                <input type="checkbox" name="open" value="1" lay-skin="switch" lay-text="启用|禁用"
-                       {eq name="$staff.open" value="1" }checked{/eq} >
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">性别</label>
+                                <div class="am-u-sm-9">
+                                    <label class="am-radio-inline">
+                                        <input type="radio" value="1" name="sex" {eq name="$staff.sex" value="1"
+                                               }checked{/eq}>男
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" value="2" name="sex" {eq name="$staff.sex" value="2"
+                                               }checked{/eq}>女
+                                    </label>
+                                    <label class="am-radio-inline">
+                                        <input type="radio" value="0" name="sex" {eq name="$staff.sex" value="0"
+                                               }checked{/eq}>保密
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-3 am-form-label">描述</label>
+                                <div class="am-u-sm-9">
+                                    <textarea rows="5" id="description"
+                                              name="description" placeholder="请输入描述内容">{$staff.description}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group" style="margin-top: 20px;">
+                                <div class="am-u-sm-9 am-u-sm-push-3">
+                                    <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success">提交
+                                    </button>
+
+                                    <button type="button" class="am-btn am-btn-success am-margin-left-xs">返回</button>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="layui-form-item">
-
-        <div class="layui-inline">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-inline">
-                <input type="text" name="password" placeholder="不修改请留空" class="layui-input">
-            </div>
-        </div>
-
-        <div class="layui-inline">
-            <label class="layui-form-label">性别</label>
-            <div class="layui-input-block">
-                <input type="radio" name="sex" value="1" title="男" {eq name="$staff.sex" value="1" }checked{/eq}>
-                <input type="radio" name="sex" value="2" title="女" {eq name="$staff.sex" value="2" }checked{/eq}>
-                <input type="radio" name="sex" value="0" title="保密" {eq name="$staff.sex" value="0" }checked{/eq}>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">描述</label>
-        <div class="layui-input-block">
-            <textarea placeholder="请输入内容" name="description" class="layui-textarea">{$staff.description}</textarea>
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <a href="/index.php/staff/Staff_Manage/index" class="layui-btn">返回</a>
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
-    </div>
-</form>
-<script src="/static/layui/layui.js" charset="utf-8"></script>
-<script>layui.use('form');</script>
-</body>
-</html>
+</div>
+{/block}

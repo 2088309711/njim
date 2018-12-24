@@ -28,7 +28,7 @@ class Staff extends Model
     public function add($data)
     {
         $this->setAttr('name', $data['name']);
-        $this->open = $data['open'];
+        $this->state = $data['state'];
         $this->user_name = $data['user_name'];
         $this->sex = $data['sex'];
         $this->account = $data['account'];
@@ -48,7 +48,7 @@ class Staff extends Model
     {
         $saveArr = [
             'name' => $data['name'],
-            'open' => $data['open'],
+            'state' => $data['state'],
             'sex' => $data['sex'],
             'description' => $data['description']
         ];

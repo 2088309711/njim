@@ -59,7 +59,7 @@ class StaffManage extends Controller
         foreach ($list as $key => $item) {
             $jsonArr[] = [
                 'id' => $item->id,
-                'open' => $item->open,
+                'state' => $item->state,
                 'name' => $item->name,
                 'sex' => $item->sex,
                 'user_name' => $item->user_name,
@@ -85,7 +85,7 @@ class StaffManage extends Controller
         $login = new Login();
         $data['account'] = $login->getUserName(true);
 
-        $data['open'] = isset($data['open']) ? $data['open'] : 0;
+        $data['state'] = isset($data['state']) ? $data['state'] : 0;
 
         $result = $this->validate($data, 'Staff.add');
         if (true !== $result) {
@@ -139,26 +139,25 @@ class StaffManage extends Controller
      * 客服数据单项修改
      * @throws \think\exception\DbException
      */
-    public function updateOpen()
+    public function updateState()
     {
         $data = input();
         $login = new Login();
         $data['user_name'] = $login->getUserName(true);
 
-        $result = $this->validate($data, 'Staff.update_open');
+        $result = $this->validate($data, 'Staff.update_state');
         if (true !== $result) {
             $this->error($result);
         }
 
         $staff = new Staff();
         $staff->save([
-            'open' => $data['open']
+            'state' => $data['state']
         ], [
             'id' => $data['id'],
             'account' => $data['user_name']
         ]);
     }
-
 
     /**
      * 修改
@@ -182,9 +181,11 @@ class StaffManage extends Controller
             'account' => $data['user_name']
         ]);
 
-        return view('update', ['staff' => $staff]);
+        return view('update', [
+            'staff' => $staff,
+            'menu' => 'staff_manage'
+        ]);
     }
-
 
     /**
      * 修改当前登录的客服
@@ -233,7 +234,7 @@ class StaffManage extends Controller
         $data['scene'] = $data['password'] == '' ? 'save1' : 'save2';
 
         //open赋初始值
-        $data['open'] = isset($data['open']) ? $data['open'] : 0;
+        $data['state'] = isset($data['state']) ? $data['state'] : 0;
 
         //验证数据
         $result = $this->validate($data, 'Staff.' . $data['scene']);

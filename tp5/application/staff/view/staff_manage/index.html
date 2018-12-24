@@ -59,13 +59,13 @@
                                     <td>{$vo.name}</td>
                                     <td>{$vo.user_name}</td>
                                     <td>{$vo.sex}</td>
-                                    <td>{$vo.open}</td>
+                                    <td>{$vo.state}</td>
                                     <td>{$vo.power}</td>
                                     <td>{$vo.update_time}</td>
 
                                     <td>
                                         <div class="tpl-table-black-operation">
-                                            <a href="javascript:;">
+                                            <a href="/index.php/staff/Staff_Manage/updateStaff/id/{$vo.id}">
                                                 <i class="am-icon-pencil"></i> 编辑
                                             </a>
                                             <a href="javascript:;" class="tpl-table-black-operation-del">
@@ -75,8 +75,7 @@
                                     </td>
                                 </tr>
                                 {/volist}
-
-
+                                
                                 </tbody>
                             </table>
                         </div>

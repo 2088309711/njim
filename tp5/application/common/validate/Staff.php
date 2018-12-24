@@ -25,7 +25,7 @@ class Staff extends Validate
             '客服ID必须存在|客服ID必须为数字'
         ],
         [
-            'open',
+            'state',
             'require|in:0,1',
             '客服状态必须存在|客服状态必须为0或1'
         ],
@@ -78,10 +78,10 @@ class Staff extends Validate
         'regist' => ['__token__', 'e_mail', 'user_name', 'password', 'repassword', 'agreement'],
         'resetPass' => ['__token__', 'e_mail', 'password', 'repassword'],
         'ck_user_name' => ['user_name'],
-        'update_open' => ['id', 'open'],
-        'add' => ['__token__', 'open', 'name', 'sex', 'user_name', 'password', 'description'],
-        'save1' => ['__token__', 'id', 'open', 'name', 'sex', 'description'],
-        'save2' => ['__token__', 'id', 'open', 'name', 'sex', 'password', 'description'],
+        'update_state' => ['id', 'state'],
+        'add' => ['__token__', 'state', 'name', 'sex', 'user_name', 'password', 'description'],
+        'save1' => ['__token__', 'id', 'state', 'name', 'sex', 'description'],
+        'save2' => ['__token__', 'id', 'state', 'name', 'sex', 'password', 'description'],
         'save3' => ['__token__', 'name', 'sex', 'description'],
         'save4' => ['__token__', 'password', 'repassword']
     ];
