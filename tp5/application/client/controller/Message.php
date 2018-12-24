@@ -9,8 +9,6 @@
 namespace app\client\controller;
 
 use app\common\model\Msg;
-use app\common\model\ServerList;
-use app\common\util\DateUtil;
 use think\Controller;
 use think\Request;
 

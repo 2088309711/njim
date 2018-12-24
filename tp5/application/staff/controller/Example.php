@@ -9,13 +9,9 @@
 namespace app\staff\controller;
 
 use app\common\model\Staff;
-use app\common\util\DateUtil;
-use PHPMailer\Email;
-use think\captcha\Captcha;
 use think\Controller;
 use think\Request;
 use app\common\model\Example as ExampleModel;
-use app\common\model\ExampleStyle;
 
 
 /**
@@ -216,7 +212,6 @@ class Example extends Controller
         ]);
 
     }
-
 
     /**
      * 修改单个字段

@@ -2,7 +2,7 @@
 
 namespace app\common\model;
 
-use app\common\util\SundryUtil;
+
 use think\Model;
 
 class Staff extends Model
@@ -17,24 +17,22 @@ class Staff extends Model
      */
     public function regist($data)
     {
-
         $this->user_name = $data['user_name'];
         $this->e_mail = $data['e_mail'];
         $this->account = $data['user_name'];
-        $this->password = SundryUtil::pwdConfusion($data['password']);
+        $this->password = password_encryption($data['password']);
         $this->power = $data['power'];
         return $this->save();
     }
 
     public function add($data)
     {
-
         $this->setAttr('name', $data['name']);
         $this->open = $data['open'];
         $this->user_name = $data['user_name'];
         $this->sex = $data['sex'];
         $this->account = $data['account'];
-        $this->password = SundryUtil::pwdConfusion($data['password']);
+        $this->password = password_encryption($data['password']);
         $this->power = $data['power'];
         $this->description = $data['description'];
         return !!$this->save();
@@ -56,13 +54,11 @@ class Staff extends Model
         ];
 
         if ($data['password'] != '') {//密码被修改了
-            $saveArr['password'] = SundryUtil::pwdConfusion($data['password']);//f28fed86680bea284cf0cfe0640ec4
+            $saveArr['password'] = password_encryption($data['password']);//f28fed86680bea284cf0cfe0640ec4
         }
-
 
         return !!$this->save($saveArr, ['id' => $data['id'], 'account' => $data['user_name']]);
     }
-
 
     /**
      * 修改登录客服的资料
@@ -90,7 +86,7 @@ class Staff extends Model
     public function updatePass($data)
     {
         return !!$this->save([
-            'password' => SundryUtil::pwdConfusion($data['password'])
+            'password' => password_encryption($data['password'])
         ], [
             'user_name' => $data['user_name']
         ]);
