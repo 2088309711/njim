@@ -26,7 +26,7 @@ class Index extends Controller
     {
 
         $data = input();
-        
+
         //设备信息验证
         if (isset($data['device'])) {
             if ($data['device'] !== 'pc_1' && $data['device'] !== 'phone_1') {
@@ -35,6 +35,7 @@ class Index extends Controller
         } else {
             return '缺少 url 参数';
         }
+
 
         //验证数据
         $result = $this->validate($data, 'ServerList.scene1');
@@ -82,7 +83,6 @@ class Index extends Controller
         if ($data['sel_staff']) {//on select staff, get style data
             return view($data['device'], [
                 'staff' => $data['staff'],
-                'style' => ExampleStyle::get($this->example->style_id),
                 'client' => ['client_id' => $data['client_id']],
                 'example' => $this->example
             ]);

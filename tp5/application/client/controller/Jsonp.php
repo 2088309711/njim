@@ -23,10 +23,7 @@ class Jsonp extends Controller
             return $result;
         }
 
-        $example = Example::get([
-            'access' => $data['access'],
-            'state' => 1
-        ]);
+        $example = Example::get(['access' => $data['access'], 'state' => 1]);
 
         if ($example != null) {//实例可用
             $result = ['state' => 1];
