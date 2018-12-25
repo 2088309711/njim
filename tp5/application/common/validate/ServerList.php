@@ -18,7 +18,7 @@ class ServerList extends Validate
         [
             'access',
             'require|alphaNum|length:13',
-            '接入口必须存在|接入口只能由字母和数字组成|接入口长度为13个字符'
+            '接入口不能为空|接入口只能由字母和数字组成|接入口长度为13个字符'
         ],
         [
             'client_id',

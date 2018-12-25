@@ -246,7 +246,7 @@ function njim_invitation_time_out() {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.charset = "utf-8";
-    script.src = njim_object.data.domain + "index.php/client/jsonp/getSettings/access/" + njim_object.data.access;
+    script.src = njim_object.data.domain + "index.php/client/jsonp/getSettings/is_phone/" + (njim_object.data.is_phone ? 'y' : 'n') + "/access/" + njim_object.data.access;
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(script, s);//插入节点
     s.parentNode.removeChild(script);//删除节点

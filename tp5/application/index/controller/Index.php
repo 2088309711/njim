@@ -14,4 +14,5 @@ class Index
     {
         return view('faq');
     }
+
 }
