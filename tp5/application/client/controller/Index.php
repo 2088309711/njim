@@ -6,7 +6,6 @@
 namespace app\client\controller;
 
 use app\common\model\Example;
-use app\common\model\ExampleStyle;
 use app\common\model\ServerList;
 use app\common\model\Staff;
 use think\Controller;

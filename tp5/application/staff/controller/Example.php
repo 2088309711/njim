@@ -374,7 +374,7 @@ class Example extends Controller
                 'id' => $data['id'],
                 'user_name' => $data['user_name']
             ]);
-            $this->outJsonResult($result, $result ? '设置成功，刷新后可见代码' : '设置失败，请重试', $data['value']);
+            $this->outJsonResult($result, $result ? '设置成功，刷新后可见代码，不要点击当前的输入框！' : '设置失败，请重试', $data['value']);
         } else {
             $this->outJsonResult(false, $result);
         }
