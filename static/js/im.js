@@ -3,7 +3,6 @@ var njim_object = {
     data: {
         is_new_client: 'n',
         domain: 'http://serve.njim.vip/',
-        access: '',
         client_id: '',
         bind_count: 0,
         is_phone: false,//是否为移动设备
@@ -16,7 +15,6 @@ var njim_object = {
         is_draging: false
     },
     el: {
-        container: '',
         container_id: 'njim_container',
         icon: ''
     },
@@ -223,17 +221,35 @@ function nj_set_viewport(type) {
 
 //引导一
 (function () {
+    //创建容器
+    var container = document.createElement('div');
+    container.id = njim_object.el.container_id;
+    document.getElementsByTagName('body')[0].appendChild(container);
+
+    //读取access
+    var access = false;
+    var script = document.getElementsByTagName('script');
+    for (var i = 0; i < script.length; i++) {
+        //读取access
+        var index = script[i].src.search(/\?njim[0-9a-fA-F]{13}bd8a053f0821cb2132ed614a3d4234d$/);
+        if (index != -1) {//解决冲突，以最后匹配值为准
+            access = script[i].src.substr(index + 5, 13);
+        }
+    }
+    if (!access) {
+        return;
+    }
+
     njim_object.data.client_id = nj_get_client_id();
-    njim_object.el.container = nj_get(njim_object.el.container_id);
-    njim_object.el.container.style.zIndex = 2147483647;
-    njim_object.el.container.style.position = 'fixed';
-    njim_object.data.access = njim_object.el.container.getAttribute("access");// 获取实例编号
+    container = nj_get(njim_object.el.container_id);
+    container.style.zIndex = 2147483647;
+    container.style.position = 'fixed';
     njim_object.data.is_phone = navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i);//是否为移动设备
 
     //插入元素
     if (njim_object.data.is_phone) {//移动端
         nj_set_viewport(2);//初始化视口
-        njim_object.el.container.innerHTML = '<div id="njim_icon_box"></div><div id="njim_window_box" ' +
+        container.innerHTML = '<div id="njim_icon_box"></div><div id="njim_window_box" ' +
             'style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; position: fixed; ' +
             'top:0; left:0; display: none;"><div id="njim_window_top_close" style="width: 100%; height: 50px; ' +
             'background: rgba(0,0,0,0.3);"></div><div style="border: none; margin: 0; padding: 0; ' +
@@ -241,7 +257,7 @@ function nj_set_viewport(type) {
             'id="njim_window_iframe" style="width: 100%; height: 100%; border: none; margin: 0; ' +
             'padding: 0; overflow: hidden; position: absolute; top:0; left: 0;" src="' +
             njim_object.data.domain + 'index.php/client/index/index/device/phone_1/access/' +
-            njim_object.data.access + '/client_id/' + njim_object.data.client_id + '/is_new/' +
+            access + '/client_id/' + njim_object.data.client_id + '/is_new/' +
             njim_object.data.is_new_client + '"></iframe>' +
             '<div id="njim_window_minimize" style="position: absolute; top: 11px; left: 15px; ' +
             'width: 25px;height: 20px; background: url(/static/images/icon-desktop.png) ' +
@@ -251,14 +267,14 @@ function nj_set_viewport(type) {
             '</a></div></div><div id="njim_invitation_box" style="display: none;"></div>';
 
     } else {//PC端
-        njim_object.el.container.innerHTML = '<div id="njim_icon_box"></div>' +
+        container.innerHTML = '<div id="njim_icon_box"></div>' +
             '<div id="njim_window_box" style=" width: 370px; height: 510px;  margin: 0; ' +
             'padding: 0; overflow: hidden;  position: fixed; bottom: -10px; right: -10px; display: none;">' +
             '<div style="width: 370px; height: 510px; background: url(' +
             njim_object.data.domain + 'static/images/move.png) no-repeat;"></div>' +
             '<iframe id="njim_window_iframe" style="width: 350px; height: 500px; border: none; ' +
             'margin: 0; padding: 0; overflow: hidden; position: absolute; top:0; left: 10px; " src="' +
-            njim_object.data.domain + 'index.php/client/index/index/device/pc_1/access/' + njim_object.data.access +
+            njim_object.data.domain + 'index.php/client/index/index/device/pc_1/access/' + access +
             '/client_id/' + njim_object.data.client_id + '/is_new/' + njim_object.data.is_new_client +
             '"></iframe><div id="njim_window_move_layer" ' +
             'style=" width: 310px; height: 40px; position: absolute; top:0; left: 10px; cursor: move;"></div>' +
@@ -272,7 +288,7 @@ function nj_set_viewport(type) {
     var script = document.createElement("script");
     script.type = "text/javascript";
     script.charset = "utf-8";
-    script.src = njim_object.data.domain + "index.php/client/jsonp/getSettings/is_phone/" + (njim_object.data.is_phone ? 'y' : 'n') + "/access/" + njim_object.data.access;
+    script.src = njim_object.data.domain + "index.php/client/jsonp/getSettings/is_phone/" + (njim_object.data.is_phone ? 'y' : 'n') + "/access/" + access;
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(script, s);//插入节点
     s.parentNode.removeChild(script);//删除节点
