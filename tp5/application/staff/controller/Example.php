@@ -225,102 +225,106 @@ class Example extends Controller
         switch ($data['name']) {
             //基本
             case 'state':
-                $this->updateSingleData($data, '功能状态设置成功', '功能状态设置失败');
+                $this->updateSingleData($data, '功能状态');
                 break;
 
             case 'name':
-                $this->updateSingleData($data, '名称设置成功', '名称设置失败');
+                $this->updateSingleData($data, '名称');
+                break;
+
+            case 'phone':
+                $this->updateSingleData($data, '电话');
                 break;
 
             case 'description':
-                $this->updateSingleData($data, '描述设置成功', '描述设置失败');
+                $this->updateSingleData($data, '描述');
                 break;
 
             //皮肤
             case 'color':
-                $this->updateSingleData($data, 'PC端主题色设置成功', 'PC端主题色设置失败');
+                $this->updateSingleData($data, 'PC端主题色');
                 break;
 
             case 'color_m':
-                $this->updateSingleData($data, '移动端主题色设置成功', '移动端主题色设置失败');
+                $this->updateSingleData($data, '移动端主题色');
                 break;
 
             case 'icon_code':
-                $this->updateSingleData($data, 'PC端挂件代码设置成功', 'PC端挂件代码设置失败');
+                $this->updateSingleData($data, 'PC端挂件代码');
                 break;
 
             case 'icon_code_m':
-                $this->updateSingleData($data, '移动端挂件代码设置成功', '移动端挂件代码设置失败');
+                $this->updateSingleData($data, '移动端挂件代码');
                 break;
 
             case 'invitation_code':
-                $this->updateSingleData($data, 'PC端邀请框代码设置成功', 'PC端邀请框代码设置失败');
+                $this->updateSingleData($data, 'PC端邀请框代码');
                 break;
 
             case 'invitation_code_m':
-                $this->updateSingleData($data, '移动端邀请框代码设置成功', '移动端邀请框代码设置失败');
+                $this->updateSingleData($data, '移动端邀请框代码');
                 break;
 
             //邀请功能
             case 'invitation_switch':
-                $this->updateSingleData($data, 'PC端邀请功能状态设置成功', 'PC端邀请功能状态设置失败');
+                $this->updateSingleData($data, 'PC端邀请功能状态');
                 break;
 
             case 'invitation_switch_m':
-                $this->updateSingleData($data, '移动端邀请功能状态设置成功', '移动端邀请功能状态设置失败');
+                $this->updateSingleData($data, '移动端邀请功能状态');
                 break;
 
             case 'invitation_time':
-                $this->updateSingleData($data, 'PC端邀请时间范围设置成功', 'PC端邀请时间范围设置失败');
+                $this->updateSingleData($data, 'PC端邀请时间范围');
                 break;
 
             case 'invitation_time_m':
-                $this->updateSingleData($data, '移动端邀请时间范围设置成功', '移动端邀请时间范围设置失败');
+                $this->updateSingleData($data, '移动端邀请时间范围');
                 break;
 
             case 'invitation_num':
-                $this->updateSingleData($data, 'PC端邀请次数设置成功', 'PC端邀请次数设置失败');
+                $this->updateSingleData($data, 'PC端邀请次数');
                 break;
 
             case 'invitation_num_m':
-                $this->updateSingleData($data, '移动端邀请次数设置成功', '移动端邀请次数设置失败');
+                $this->updateSingleData($data, '移动端邀请次数');
                 break;
 
             case 'invitation_first':
-                $this->updateSingleData($data, 'PC端首次邀请延迟设置成功', 'PC端首次邀请延迟设置失败');
+                $this->updateSingleData($data, 'PC端首次邀请延迟');
                 break;
 
             case 'invitation_first_m':
-                $this->updateSingleData($data, '移动端首次邀请延迟设置成功', '移动端首次邀请延迟设置失败');
+                $this->updateSingleData($data, '移动端首次邀请延迟');
                 break;
 
             case 'invitation_after':
-                $this->updateSingleData($data, 'PC端后续邀请延迟设置成功', 'PC端后续邀请延迟设置失败');
+                $this->updateSingleData($data, 'PC端后续邀请延迟');
                 break;
 
             case 'invitation_after_m':
-                $this->updateSingleData($data, '移动端后续邀请延迟设置成功', '移动端后续邀请延迟设置失败');
+                $this->updateSingleData($data, '移动端后续邀请延迟');
                 break;
 
             case 'invitation_auto_close':
-                $this->updateSingleData($data, 'PC端自动关闭邀请框延迟设置成功', 'PC端自动关闭邀请框延迟设置失败');
+                $this->updateSingleData($data, 'PC端自动关闭邀请框延迟');
                 break;
 
             case 'invitation_auto_close_m':
-                $this->updateSingleData($data, '移动端自动关闭邀请框延迟设置成功', '移动端自动关闭邀请框延迟设置失败');
+                $this->updateSingleData($data, '移动端自动关闭邀请框延迟');
                 break;
 
             case 'invitation_week':
-                $this->updateSingleData($data, 'PC端邀请星期范围设置成功', 'PC端邀请星期范围设置失败');
+                $this->updateSingleData($data, 'PC端邀请星期范围');
                 break;
 
             case 'invitation_week_m':
-                $this->updateSingleData($data, '移动端邀请星期范围设置成功', '移动端邀请星期范围设置失败');
+                $this->updateSingleData($data, '移动端邀请星期范围');
                 break;
 
             //客服
             case 'staff_pk':
-                $this->updateSingleData($data, '参与客服设置成功', '参与客服设置失败');
+                $this->updateSingleData($data, '参与客服');
                 break;
 
             //设置默认代码
@@ -349,7 +353,7 @@ class Example extends Controller
      * @param $succMsg
      * @param $failMsg
      */
-    private function updateSingleData($data, $succMsg, $failMsg)
+    private function updateSingleData($data, $msg)
     {
         $name = $data['name'];
         $data[$name] = $data['value'];
@@ -357,7 +361,7 @@ class Example extends Controller
         if (true === $result) {
             $example = new ExampleModel();
             $result = !!$example->save([$name => $data[$name]], ['id' => $data['id'], 'user_name' => $data['user_name']]);
-            $this->outJsonResult($result, $result ? $succMsg : $failMsg);
+            $this->outJsonResult($result, $result ? $msg . '设置成功' : $msg . '设置失败');
         } else {
             $this->outJsonResult(false, $result);
         }

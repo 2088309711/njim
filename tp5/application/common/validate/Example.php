@@ -41,6 +41,11 @@ class Example extends Validate
             '名称不能为空|名称只能填写汉字、字母、数字和下划线_及破折号-|名称长度超过限制'
         ],
         [
+            'phone',
+            'require|number|max:20',
+            '电话不能为空|电话格式错误|电话长度超过限制'
+        ],
+        [
             'style_id',
             'require|number|min:1',
             '样式ID必须填写|样式ID只能是数字|样式ID最小长度为1'
@@ -189,6 +194,7 @@ class Example extends Validate
         'invitation_auto_close' => ['id', 'invitation_auto_close'],
         'invitation_auto_close_m' => ['id', 'invitation_auto_close_m'],
         'staff_pk' => ['id', 'staff_pk'],
+        'phone' => ['id', 'phone'],
         'scene1' => ['id'],
         'del' => ['__token__', 'id'],
         'add' => ['__token__', 'captcha'],

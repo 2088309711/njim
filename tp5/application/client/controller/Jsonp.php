@@ -28,6 +28,7 @@ class Jsonp extends Controller
         if ($example != null) {//实例可用
             $result = ['state' => 1];
             if ($data['is_phone'] === 'y') {//移动端
+                $result['phone'] = $example->phone;
                 $result['invitation_switch'] = $example->invitation_switch_m;
                 $result['invitation_first'] = $example->invitation_first_m;
                 $result['invitation_after'] = $example->invitation_after_m;

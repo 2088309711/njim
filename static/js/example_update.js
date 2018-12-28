@@ -40,6 +40,10 @@ $(function () {
     $('#example-name').blur(function () {
         sendRequest('name', $(this).val());
     });
+    
+    $('#phone').blur(function () {
+        sendRequest('phone', $(this).val());
+    });
 
     $('#description').blur(function () {
         sendRequest('description', $(this).val());
