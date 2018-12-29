@@ -55,7 +55,7 @@ class Jsonp extends Controller
             $result = ['state' => 0];
         }
 
-        echo 'nj_loading_settings(' . json_encode($result) . ')';
+        echo 'njim_application_object().options(' . json_encode($result) . ')';
     }
 }
 
