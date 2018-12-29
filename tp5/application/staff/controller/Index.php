@@ -8,7 +8,7 @@ class Index
     public function __construct()
     {
         $login = new Login();
-        $login->getUserName(true);
+        $login->getUserName();
     }
 
     /**

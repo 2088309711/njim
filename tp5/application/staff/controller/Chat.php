@@ -21,7 +21,7 @@ class Chat extends Controller
     {
         $login = new Login();
         $data = [
-            'staff_id' => $login->getUserName(true),//客服ID
+            'staff_id' => $login->getUserName(),//客服ID
             'get_type' => Request::instance()->param('t'),//获取消息类型new|old(n|o)
             'client_id' => Request::instance()->param('r'),//窗口显示的访客ID
             'old_msg_ids' => explode(":", Request::instance()->param('b', '')),//反馈的旧消息ID数组
@@ -81,7 +81,7 @@ class Chat extends Controller
     {
         $data = input('post.');
         $login = new Login();
-        $data['staff_id'] = $login->getUserName(true);
+        $data['staff_id'] = $login->getUserName();
 
         $result = $this->validate($data, 'Msg.scene1');
         if (true !== $result) {
@@ -100,7 +100,7 @@ class Chat extends Controller
     {
         $data = input();
         $login = new Login();
-        $data['staff_id'] = $login->getUserName(true);
+        $data['staff_id'] = $login->getUserName();
 
         $result = $this->validate($data, 'ServerList.scene3');
         if (true !== $result) {

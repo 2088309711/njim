@@ -20,9 +20,8 @@ class Login extends Controller
      * @param bool $skip 没登录的情况是否需要跳转，默认false
      * @return bool 已登录返回用户名，否则返回false
      */
-    public function getUserName($skip = false)
+    public function getUserName($skip = true)
     {
-
         $data = ['user_name' => Session::get('user_name', 'login')];
         $result = $this->validate($data, 'Staff.ck_user_name');
         if (true === $result) {
@@ -32,8 +31,6 @@ class Login extends Controller
         if ($skip) {
             $this->redirect('staff/login/index');
         }
-
-        return false;
     }
 
 
@@ -44,7 +41,7 @@ class Login extends Controller
      */
     public function getUserData()
     {
-        $userName = $this->getUserName(true);
+        $userName = $this->getUserName();
         if ($userName) {
             return Staff::get(['user_name' => $userName]);
         }

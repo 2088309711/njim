@@ -50,7 +50,7 @@ class StaffManage extends Controller
     public function getAllStaffByUser()
     {
         $login = new Login();
-        $data = ['user_name' => $login->getUserName(true)];
+        $data = ['user_name' => $login->getUserName()];
 
         $staff = new Staff();
         $list = $staff->where('account', $data['user_name'])->select();
@@ -83,7 +83,7 @@ class StaffManage extends Controller
     {
         $data = input('post.');
         $login = new Login();
-        $data['account'] = $login->getUserName(true);
+        $data['account'] = $login->getUserName();
 
         $data['state'] = isset($data['state']) ? $data['state'] : 0;
 
@@ -118,7 +118,7 @@ class StaffManage extends Controller
     {
         $data = input();
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         //验证数据
         $result = $this->validate($data, 'Staff.scene1');
@@ -142,7 +142,7 @@ class StaffManage extends Controller
     {
         $data = input();
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         $result = $this->validate($data, 'Staff.update_state');
         if (true !== $result) {
@@ -167,7 +167,7 @@ class StaffManage extends Controller
     {
         $data = input();
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         //验证数据
         $result = $this->validate($data, 'Staff.scene1');
@@ -194,7 +194,7 @@ class StaffManage extends Controller
     public function updateStaffByLogin()
     {
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         //不验证数据
 
@@ -214,7 +214,7 @@ class StaffManage extends Controller
     public function updatePass()
     {
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
         //不验证数据
         return view('update_password');
     }
@@ -227,7 +227,7 @@ class StaffManage extends Controller
 
         $data = input('post.');
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         //选择验证场景
         $data['scene'] = $data['password'] == '' ? 'save1' : 'save2';
@@ -258,7 +258,7 @@ class StaffManage extends Controller
     {
         $data = input('post.');
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         //验证数据
         $result = $this->validate($data, 'Staff.save3');
@@ -282,7 +282,7 @@ class StaffManage extends Controller
     {
         $data = input('post.');
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         //验证数据
         $result = $this->validate($data, 'Staff.save4');
@@ -304,7 +304,7 @@ class StaffManage extends Controller
     {
         $data = input();
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         //验证数据
         $result = $this->validate($data, 'Staff.scene1');

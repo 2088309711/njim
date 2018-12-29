@@ -6,13 +6,7 @@ use think\Controller;
 
 class Admin extends Controller
 {
-
-    function __construct()
-    {
-        $login = new Login();
-        $login->isAdmin(true);
-    }
-
+    
     public function index()
     {
         $login = new Login();

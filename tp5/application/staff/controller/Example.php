@@ -59,7 +59,7 @@ class Example extends Controller
     public function getAllExampleByUser()
     {
         $login = new Login();
-        $data = ['user_name' => $login->getUserName(true)];
+        $data = ['user_name' => $login->getUserName()];
 
         $em = new ExampleModel();
         $list = $em->where('user_name', $data['user_name'])->select();
@@ -155,7 +155,7 @@ class Example extends Controller
     {
         $data = input('post.');
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         $delText = '我已了解后果并确认删除';
         if ($data['del_text'] !== $delText) {
@@ -220,7 +220,7 @@ class Example extends Controller
     {
         $data = input('post.');
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         switch ($data['name']) {
             //基本
@@ -409,7 +409,7 @@ class Example extends Controller
         }
 
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
         $data['staff_pk'] = $this->numArrToStr(isset($data['staff_pk']) ? $data['staff_pk'] : []);
         $data['invitation_week'] = $this->numArrToStr(isset($data['invitation_week']) ? $data['invitation_week'] : []);
 
@@ -447,7 +447,7 @@ class Example extends Controller
     {
         $data = input();
         $login = new Login();
-        $data['user_name'] = $login->getUserName(true);
+        $data['user_name'] = $login->getUserName();
 
         //验证数据
         $result = $this->validate($data, 'Example.scene1');
