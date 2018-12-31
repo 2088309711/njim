@@ -35,6 +35,5 @@ class CorpusGroup extends Validate
         'add' => ['__token__', 'name'],
         'ck_id' => ['id'],
         'update' => ['__token__', 'id', 'name']
-
     ];
 }
