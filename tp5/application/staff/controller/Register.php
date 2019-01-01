@@ -12,7 +12,39 @@ class Register extends Controller
 
     public function index()
     {
-        return view('index');
+        if (request()->isPost()) {
+            $data = input('post.');
+            $result = $this->validate($data, 'Staff.regist');
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+            //邮箱和验证码必须同时对应
+            Session::prefix('regist');
+            if ($data['e_mail_captcha'] != Session::pull('e_mail_captcha') ||
+                $data['e_mail'] != Session::pull('e_mail')) {
+                $this->error('邮箱验证码错误');
+            }
+
+            if (!$this->userNameNotExist($data['user_name'])) {
+                $this->error('用户名已存在，请更换');
+                return;
+            }
+
+            // 保存客服
+            $staff = new Staff();
+            $data['power'] = 1;
+            if ($staff->regist($data)) {
+                // 注册成功，同时完成登录
+                Session::set('user_name', $data['user_name'], 'login');
+                $this->success('恭喜，注册成功！', '/index.php/staff/admin');
+            } else {
+                $this->error('注册失败，请重试');
+            }
+        } else {
+            return view('index');
+        }
+
     }
 
     /**
@@ -37,42 +69,6 @@ class Register extends Controller
     public function userNameNotExist($userName)
     {
         return Staff::get(['user_name' => $userName]) === null;
-    }
-
-    /**
-     * 保存注册用户
-     * @throws \think\exception\DbException
-     */
-    public function save()
-    {
-        $data = input('post.');
-        $result = $this->validate($data, 'Staff.regist');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        //邮箱和验证码必须同时对应
-        Session::prefix('regist');
-        if ($data['e_mail_captcha'] != Session::pull('e_mail_captcha') ||
-            $data['e_mail'] != Session::pull('e_mail')) {
-            $this->error('邮箱验证码错误');
-        }
-
-        if (!$this->userNameNotExist($data['user_name'])) {
-            $this->error('用户名已存在，请更换');
-            return;
-        }
-
-        // 保存客服
-        $staff = new Staff();
-        $data['power'] = 1;
-        if ($staff->regist($data)) {
-            // 注册成功，同时完成登录
-            Session::set('user_name', $data['user_name'], 'login');
-            $this->success('恭喜，注册成功！', '/index.php/staff/admin');
-        } else {
-            $this->error('注册失败，请重试');
-        }
     }
 
 

@@ -102,8 +102,8 @@
         <td>操作</td>
         <td>
             <a href="/index.php/staff/example/index" class="layui-btn layui-btn-sm">返回</a>
-            <a href="/index.php/staff/Example/deployExample/id/{$example.id}" class="layui-btn layui-btn-sm">部署</a>
-            <a href="/index.php/staff/Example/updateExample/id/{$example.id}" class="layui-btn layui-btn-normal layui-btn-sm">修改</a>
+            <a href="/index.php/staff/Example/deploy/id/{$example.id}" class="layui-btn layui-btn-sm">部署</a>
+            <a href="/index.php/staff/Example/update/id/{$example.id}" class="layui-btn layui-btn-normal layui-btn-sm">修改</a>
             <button id="update" class="layui-btn layui-btn-danger layui-btn-sm">删除</button>
 
         </td>
@@ -121,7 +121,7 @@
             $('#update').click(function () {
                 layer.confirm('确定删除“{$example.name}”吗？<br>确认后，该实例部署的所有网页将<strong style="color: #FF5722;">失去</strong>在线客服的所有功能，请<strong style="color: #FF5722;">谨慎</strong>操作！', function (index) {
                     layer.close(index);
-                    $.get('/index.php/staff/Example/delExample/id/{$example.id}');
+                    $.get('/index.php/staff/Example/delete/id/{$example.id}');
                     location.href = '/index.php/staff/example/index';
                 });
             });

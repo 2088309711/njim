@@ -12,7 +12,31 @@ class Login extends Controller
 
     public function index()
     {
-        return view('index');
+        if (request()->isPost()) {
+            $data = input('post.');
+
+            //验证数据
+            $result = $this->validate($data, 'Staff.login');
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+            $staff = new Staff();
+            $user = $staff->where('user_name', $data['user_name'])
+                ->where('password', password_encryption($data['password']))->find();
+
+            if ($user != null && $user->user_name != null) {
+                // 登录成功
+                Session::set('user_name', $user->user_name, 'login');
+                $this->redirect('staff/index/index');
+            } else {
+                // 登录失败
+                $this->error('用户名或密码输入错误');
+            }
+        } else {
+
+            return view('index');
+        }
     }
 
     /**
@@ -69,29 +93,6 @@ class Login extends Controller
         return false;
     }
 
-    public function loginCheck()
-    {
-        $data = input('post.');
-
-        //验证数据
-        $result = $this->validate($data, 'Staff.login');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        $staff = new Staff();
-        $user = $staff->where('user_name', $data['user_name'])
-            ->where('password', password_encryption($data['password']))->find();
-
-        if ($user != null && $user->user_name != null) {
-            // 登录成功
-            Session::set('user_name', $user->user_name, 'login');
-            $this->redirect('staff/index/index');
-        } else {
-            // 登录失败
-            $this->error('用户名或密码输入错误');
-        }
-    }
 
     /**
      * 退出登录
@@ -104,40 +105,46 @@ class Login extends Controller
 
     public function resetPassword()
     {
-        return view('reset_password');
-    }
 
-    public function resetPasswordSave()
-    {
-        $data = input('post.');
+        if (request()->isPost()) {
 
-        $result = $this->validate($data, 'Staff.resetPass');
-        if (true !== $result) {
-            $this->error($result);
-        }
 
-        //邮箱和验证码必须同时对应
-        Session::prefix('rest_pass');
-        if ($data['email_captcha'] != Session::pull('e_mail_captcha') ||
-            $data['e_mail'] != Session::pull('e_mail')) {
-            $this->error('邮箱验证码错误');
-        }
+            $data = input('post.');
 
-        //重置密码
-        $staff = new Staff();
-        $result = !!$staff->save([
-            'password' => password_encryption($data['password'])
-        ], [
-            'e_mail' => $data['e_mail']
-        ]);
+            $result = $this->validate($data, 'Staff.resetPass');
+            if (true !== $result) {
+                $this->error($result);
+            }
 
-        if ($result) {
-            $this->success('重置成功，请使用新密码登录', 'staff/Login/index');
+            //邮箱和验证码必须同时对应
+            Session::prefix('rest_pass');
+            if ($data['email_captcha'] != Session::pull('e_mail_captcha') ||
+                $data['e_mail'] != Session::pull('e_mail')) {
+                $this->error('邮箱验证码错误');
+            }
+
+            //重置密码
+            $staff = new Staff();
+            $result = !!$staff->save([
+                'password' => password_encryption($data['password'])
+            ], [
+                'e_mail' => $data['e_mail']
+            ]);
+
+            if ($result) {
+                $this->success('重置成功，请使用新密码登录', 'staff/Login/index');
+            } else {
+                $this->error('重置失败，请重试');
+            }
+
+
         } else {
-            $this->error('重置失败，请重试');
+
+            return view('reset_password');
         }
 
     }
+
 
     public function resetPasswordCaptchaMail()
     {

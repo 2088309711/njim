@@ -12,7 +12,6 @@ namespace app\staff\controller;
 use app\common\model\CorpusData;
 use app\common\model\CorpusGroup;
 use think\Controller;
-use think\Log;
 
 class Corpus extends Controller
 {
@@ -190,7 +189,7 @@ class Corpus extends Controller
         }
     }
 
-    public function delete()
+    public function deleteGroup()
     {
         $data = input();
         $login = new Login();

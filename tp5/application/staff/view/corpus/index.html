@@ -8,7 +8,7 @@
             <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                 <div class="widget am-cf">
                     <div class="widget-head am-cf">
-                        <div class="widget-title  am-cf">词库组列表</div>
+                        <div class="widget-title  am-cf">组列表</div>
                     </div>
                     <div class="widget-body  am-fr">
                         <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
@@ -16,7 +16,7 @@
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
                                         <a href="/index.php/staff/corpus/createGroup" class="am-btn am-btn-success">
-                                            <span class="am-icon-plus"></span> 添加词库组
+                                            <span class="am-icon-plus"></span> 添加组
                                         </a>
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@
                                 <thead>
                                 <tr>
                                     <th width="80">编号</th>
-                                    <th>名称</th>
+                                    <th>组名称</th>
                                     <th width="180">修改时间</th>
                                     <th width="220">操作</th>
                                 </tr>
@@ -104,9 +104,9 @@
         $('.del-corpus-group').click(function () {
             var id = $(this).attr('data-id');
             var name = $(this).attr('data-name');
-            layer.confirm('确定删除“' + name + '”？', function (index) {
+            layer.confirm('确定删除“' + name + '”？<br>该组包含的词条会被设置为“未分组”', function (index) {
                 layer.close(index);
-                location.href = '/index.php/staff/corpus/delete/id/' + id;
+                location.href = '/index.php/staff/corpus/deleteGroup/id/' + id;
             });
         });
     });

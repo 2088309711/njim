@@ -5,12 +5,6 @@ namespace app\staff\controller;
 class Index
 {
 
-    public function __construct()
-    {
-        $login = new Login();
-        $login->getUserName();
-    }
-
     /**
      * @return \think\response\View
      */

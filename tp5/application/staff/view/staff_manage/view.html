@@ -76,7 +76,7 @@
         <td>操作</td>
         <td>
             <a href="/index.php/staff/Staff_Manage/index" class="layui-btn layui-btn-sm">返回</a>
-            <a href="/index.php/staff/Staff_Manage/updateStaff/id/{$staff.id}" class="layui-btn layui-btn-normal layui-btn-sm">修改</a>
+            <a href="/index.php/staff/Staff_Manage/update/id/{$staff.id}" class="layui-btn layui-btn-normal layui-btn-sm">修改</a>
             {eq name="$staff.power" value="0"}
             <button id="update" class="layui-btn layui-btn-danger layui-btn-sm">删除</button>
             {/eq}
@@ -95,7 +95,7 @@
             $('#update').click(function () {
                 layer.confirm('确定删除“{$staff.name}”？', function (index) {
                     layer.close(index);
-                    $.get('/index.php/staff/Staff_Manage/delStaff/id/{$staff.id}');
+                    $.get('/index.php/staff/Staff_Manage/delete/id/{$staff.id}');
                     location.href = '/index.php/staff/Staff_Manage/index';
                 });
             });

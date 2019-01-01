@@ -33,88 +33,48 @@ class StaffManage extends Controller
 
     public function create()
     {
-        $login = new Login();
-        $staff = $login->getUserData();
-        return view('create', [
-            'staff' => $staff,
-            'menu' => 'staff_manage'
-        ]);
-    }
+        if (request()->isPost()) {
+            $data = input('post.');
+            $login = new Login();
+            $data['account'] = $login->getUserName();
 
-    /**
-     * 获取一个账户下的所有客服（AJAX）
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     */
-    public function getAllStaffByUser()
-    {
-        $login = new Login();
-        $data = ['user_name' => $login->getUserName()];
+            $data['state'] = isset($data['state']) ? $data['state'] : 0;
 
-        $staff = new Staff();
-        $list = $staff->where('account', $data['user_name'])->select();
+            $result = $this->validate($data, 'Staff.add');
+            if (true !== $result) {
+                $this->error($result);
+            }
 
-        $jsonArr = [];
-        foreach ($list as $key => $item) {
-            $jsonArr[] = [
-                'id' => $item->id,
-                'state' => $item->state,
-                'name' => $item->name,
-                'sex' => $item->sex,
-                'user_name' => $item->user_name,
-                'power' => $item->power,
-                'update_time' => $item->update_time,
-            ];
-        }
+            //检查重复
+            $register = new Register();
+            if (!$register->userNameNotExist($data['user_name'])) {
+                $this->error('用户名已被注册，请更换');
+            }
 
-        echo json_encode([
-            'code' => 0,
-            'msg' => '',
-            'count' => count($jsonArr),
-            'data' => $jsonArr
-        ]);
-    }
+            $data['power'] = 0;
 
-    /**
-     * 添加
-     */
-    public function addStaff()
-    {
-        $data = input('post.');
-        $login = new Login();
-        $data['account'] = $login->getUserName();
-
-        $data['state'] = isset($data['state']) ? $data['state'] : 0;
-
-        $result = $this->validate($data, 'Staff.add');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        //检查重复
-        $register = new Register();
-        if (!$register->userNameNotExist($data['user_name'])) {
-            $this->error('用户名已被注册，请更换');
-        }
-
-        $data['power'] = 0;
-
-        //保存数据
-        $staff = new Staff();
-        if ($staff->add($data)) {
-            $this->success('添加成功', 'staff/StaffManage/index');
+            //保存数据
+            $staff = new Staff();
+            if ($staff->add($data)) {
+                $this->success('添加成功', 'staff/StaffManage/index');
+            } else {
+                $this->error('添加失败');
+            }
         } else {
-            $this->error('添加失败');
+            $login = new Login();
+            $staff = $login->getUserData();
+            return view('create', [
+                'staff' => $staff,
+                'menu' => 'staff_manage'
+            ]);
         }
-
     }
 
     /**
      * 删除一个
      * @throws \think\exception\DbException
      */
-    public function delStaff()
+    public function delete()
     {
         $data = input();
         $login = new Login();
@@ -135,56 +95,64 @@ class StaffManage extends Controller
 
 
     /**
-     * 客服数据单项修改
-     * @throws \think\exception\DbException
-     */
-    public function updateState()
-    {
-        $data = input();
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
-
-        $result = $this->validate($data, 'Staff.update_state');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        $staff = new Staff();
-        $staff->save([
-            'state' => $data['state']
-        ], [
-            'id' => $data['id'],
-            'account' => $data['user_name']
-        ]);
-    }
-
-    /**
      * 修改
      * @return \think\response\View|void
      * @throws \think\exception\DbException
      */
-    public function updateStaff()
+    public function update()
     {
-        $data = input();
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
 
-        //验证数据
-        $result = $this->validate($data, 'Staff.scene1');
-        if (true !== $result) {
-            $this->error($result);
+        if (request()->isPost()) {
+
+            $data = input('post.');
+            $login = new Login();
+            $data['user_name'] = $login->getUserName();
+
+            //选择验证场景
+            $data['scene'] = $data['password'] == '' ? 'save1' : 'save2';
+
+            //open赋初始值
+            $data['state'] = isset($data['state']) ? $data['state'] : 0;
+
+            //验证数据
+            $result = $this->validate($data, 'Staff.' . $data['scene']);
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+            //保存数据
+            $staff = new Staff();
+            if ($staff->updateStaff($data)) {
+                $this->success('修改成功', 'staff/StaffManage/index');
+            } else {
+                $this->error('修改失败');
+            }
+
+        } else {
+
+
+            $data = input();
+            $login = new Login();
+            $data['user_name'] = $login->getUserName();
+
+            //验证数据
+            $result = $this->validate($data, 'Staff.scene1');
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+            $staff = Staff::get([
+                'id' => $data['id'],
+                'account' => $data['user_name']
+            ]);
+
+            return view('update', [
+                'staff' => $staff,
+                'menu' => 'staff_manage'
+            ]);
         }
-
-        $staff = Staff::get([
-            'id' => $data['id'],
-            'account' => $data['user_name']
-        ]);
-
-        return view('update', [
-            'staff' => $staff,
-            'menu' => 'staff_manage'
-        ]);
     }
+
 
     /**
      * 修改当前登录的客服
@@ -193,18 +161,39 @@ class StaffManage extends Controller
      */
     public function updateStaffByLogin()
     {
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
 
-        //不验证数据
+        if (request()->isPost()) {
+            $data = input('post.');
+            $login = new Login();
+            $data['user_name'] = $login->getUserName();
 
-        $staff = Staff::get([
-            'user_name' => $data['user_name']
-        ]);
+            //验证数据
+            $result = $this->validate($data, 'Staff.save3');
+            if (true !== $result) {
+                $this->error($result);
+            }
 
-        return view('update_login', ['staff' => $staff]);
+            //保存数据
+            $staff = new Staff();
+            if ($staff->updateStaffByLogin($data)) {
+                $this->success('修改成功', 'staff/admin/welcome');
+            } else {
+                $this->error('修改失败');
+            }
+        } else {
+
+            $login = new Login();
+            $data['user_name'] = $login->getUserName();
+
+            //不验证数据
+
+            $staff = Staff::get([
+                'user_name' => $data['user_name']
+            ]);
+
+            return view('update_login', ['staff' => $staff]);
+        }
     }
-
 
     /**
      * 修改当前登录的密码
@@ -213,113 +202,32 @@ class StaffManage extends Controller
      */
     public function updatePass()
     {
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
-        //不验证数据
-        return view('update_password');
-    }
+        if (request()->isPost()) {
 
-    /**
-     * 保存客服
-     */
-    public function saveStaff()
-    {
+            $data = input('post.');
+            $login = new Login();
+            $data['user_name'] = $login->getUserName();
 
-        $data = input('post.');
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
+            //验证数据
+            $result = $this->validate($data, 'Staff.save4');
+            if (true !== $result) {
+                $this->error($result);
+            }
 
-        //选择验证场景
-        $data['scene'] = $data['password'] == '' ? 'save1' : 'save2';
+            //保存数据
+            $staff = new Staff();
+            if ($staff->updatePass($data)) {
+                $this->success('修改成功', 'staff/admin/welcome');
+            } else {
+                $this->error('修改失败');
+            }
 
-        //open赋初始值
-        $data['state'] = isset($data['state']) ? $data['state'] : 0;
-
-        //验证数据
-        $result = $this->validate($data, 'Staff.' . $data['scene']);
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        //保存数据
-        $staff = new Staff();
-        if ($staff->updateStaff($data)) {
-            $this->success('修改成功', 'staff/StaffManage/index');
         } else {
-            $this->error('修改失败');
-        }
-    }
 
-
-    /**
-     * 保存客服
-     */
-    public function saveStaffByLogin()
-    {
-        $data = input('post.');
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
-
-        //验证数据
-        $result = $this->validate($data, 'Staff.save3');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        //保存数据
-        $staff = new Staff();
-        if ($staff->updateStaffByLogin($data)) {
-            $this->success('修改成功', 'staff/admin/welcome');
-        } else {
-            $this->error('修改失败');
-        }
-    }
-
-    /**
-     * 保存密码
-     */
-    public function savePass()
-    {
-        $data = input('post.');
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
-
-        //验证数据
-        $result = $this->validate($data, 'Staff.save4');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        //保存数据
-        $staff = new Staff();
-        if ($staff->updatePass($data)) {
-            $this->success('修改成功', 'staff/admin/welcome');
-        } else {
-            $this->error('修改失败');
-        }
-    }
-
-
-    public function viewStaff()
-    {
-        $data = input();
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
-
-        //验证数据
-        $result = $this->validate($data, 'Staff.scene1');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        $staff = Staff::get([
-            'id' => $data['id'],
-            'account' => $data['user_name']
-        ]);
-        if ($staff != null) {
-            return view('view', ['staff' => $staff]);
-        } else {
-            $this->error('客服不存在');
+            $login = new Login();
+            $data['user_name'] = $login->getUserName();
+            //不验证数据
+            return view('update_password');
         }
     }
 

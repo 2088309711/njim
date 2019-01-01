@@ -42,70 +42,28 @@ class Example extends Controller
     public function create()
     {
         $login = new Login();
-        $staff = $login->getUserData();
-
-        return view('create', [
-            'staff' => $staff,
-            'menu' => 'example'
-        ]);
-    }
-
-    /**
-     * 获取一个用户的所有实例（AJAX）
-     * @throws \think\db\exception\DataNotFoundException
-     * @throws \think\db\exception\ModelNotFoundException
-     * @throws \think\exception\DbException
-     */
-    public function getAllExampleByUser()
-    {
-        $login = new Login();
-        $data = ['user_name' => $login->getUserName()];
-
-        $em = new ExampleModel();
-        $list = $em->where('user_name', $data['user_name'])->select();
-
-        $jsonArr = [];
-        foreach ($list as $key => $item) {
-            $jsonArr[] = [
-                'id' => $item->id,
-                'name' => $item->name,
-                'create_time' => $item->create_time,
-                'update_time' => $item->update_time,
-            ];
-        }
-
-        echo json_encode([
-            'code' => 0,
-            'msg' => '',
-            'count' => count($jsonArr),
-            'data' => $jsonArr
-        ]);
-    }
-
-    /**
-     * 添加实例
-     */
-    public function createExample()
-    {
-        $data = input('post.');
-        $result = $this->validate($data, 'Example.add');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        $login = new Login();
-        $staff = $login->getUserData();
-
-        //保存数据
-        $example = new ExampleModel();
-        if ($example->add($staff)) {
-            $this->success('创建成功', 'staff/example/index');
+        if (request()->isPost()) {
+            $data = input('post.');
+            $result = $this->validate($data, 'Example.add');
+            if (true !== $result) {
+                $this->error($result);
+            }
+            $staff = $login->getUserData();
+            //保存数据
+            $example = new ExampleModel();
+            if ($example->add($staff)) {
+                $this->success('创建成功', 'staff/example/index');
+            } else {
+                $this->error('创建失败');
+            }
         } else {
-            $this->error('创建失败');
+            $staff = $login->getUserData();
+            return view('create', [
+                'staff' => $staff,
+                'menu' => 'example'
+            ]);
         }
-
     }
-
 
     /**
      * 正整数数组转字符串格式
@@ -124,63 +82,59 @@ class Example extends Controller
     }
 
 
-    public function deleteConfirm()
+    public function delete()
     {
         $login = new Login();
-        $staff = $login->getUserData();
-        $data = input();
-        $data['user_name'] = $staff->user_name;
+        if (request()->isPost()) {
+            $data = input('post.');
+            $data['user_name'] = $login->getUserName();
 
-        //验证数据
-        $result = $this->validate($data, 'Example.scene1');
-        if (true !== $result) {
-            $this->error($result);
-        }
+            $delText = '我已了解后果并确认删除';
+            if ($data['del_text'] !== $delText) {
+                $this->error('请输入：' . $delText);
+            }
 
-        $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $data['user_name']]);
+            //验证数据
+            $result = $this->validate($data, 'Example.del');
+            if (true !== $result) {
+                $this->error($result);
+            }
 
-        return view('delete_confirm', [
-            'staff' => $staff,
-            'menu' => 'example',
-            'example' => $example
-        ]);
-    }
-
-
-    /**
-     * 删除实例
-     * @throws \think\exception\DbException
-     */
-    public function delExample()
-    {
-        $data = input('post.');
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
-
-        $delText = '我已了解后果并确认删除';
-        if ($data['del_text'] !== $delText) {
-            $this->error('请输入：' . $delText);
-        }
-
-        //验证数据
-        $result = $this->validate($data, 'Example.del');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        if (ExampleModel::destroy(['id' => $data['id'], 'user_name' => $data['user_name']])) {
-            $this->success('删除成功', 'staff/Example/index');
+            if (ExampleModel::destroy(['id' => $data['id'], 'user_name' => $data['user_name']])) {
+                $this->success('删除成功', 'staff/Example/index');
+            } else {
+                $this->error('删除失败');
+            }
         } else {
-            $this->error('删除失败');
+
+
+            $staff = $login->getUserData();
+            $data = input();
+            $data['user_name'] = $staff->user_name;
+
+            //验证数据
+            $result = $this->validate($data, 'Example.scene1');
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+            $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $data['user_name']]);
+
+            return view('delete_confirm', [
+                'staff' => $staff,
+                'menu' => 'example',
+                'example' => $example
+            ]);
         }
     }
+
 
     /**
      * 修改实例
      * @return \think\response\View|void
      * @throws \think\exception\DbException
      */
-    public function updateExample()
+    public function update()
     {
         $login = new Login();
         $staff = $login->getUserData();
@@ -395,38 +349,12 @@ class Example extends Controller
         die;
     }
 
-    /**
-     * 保存实例
-     */
-    public function saveExample()
-    {
-        $data = input('post.');
-        $data['invitation_switch'] = isset($data['invitation_switch']) ? $data['invitation_switch'] : 0;
-        //验证数据
-        $result = $this->validate($data, 'Example.save');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
-        $data['staff_pk'] = $this->numArrToStr(isset($data['staff_pk']) ? $data['staff_pk'] : []);
-        $data['invitation_week'] = $this->numArrToStr(isset($data['invitation_week']) ? $data['invitation_week'] : []);
-
-        //保存数据
-        $example = new ExampleModel();
-        if ($example->saveExample($data)) {
-            $this->success('修改成功', 'staff/Example/index');
-        } else {
-            $this->error('修改失败');
-        }
-    }
 
     /**
      * 部署
      * @return \think\response\View
      */
-    public function deployExample()
+    public function deploy()
     {
         $data = input();
         $result = $this->validate($data, 'Example.scene1');
@@ -440,41 +368,6 @@ class Example extends Controller
         $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $staff->user_name]);
 
         return view('deploy', ['example' => $example, 'staff' => $staff, 'menu' => 'example']);
-    }
-
-
-    public function viewExample()
-    {
-        $data = input();
-        $login = new Login();
-        $data['user_name'] = $login->getUserName();
-
-        //验证数据
-        $result = $this->validate($data, 'Example.scene1');
-        if (true !== $result) {
-            $this->error($result);
-        }
-
-        $example = ExampleModel::get([
-            'id' => $data['id'],
-            'user_name' => $data['user_name']
-        ]);
-        if ($example != null) {
-
-            $style = ExampleStyle::get($example->style_id);
-
-            $staffList = Staff::all(explode('|', $example->staff_pk));
-
-            $example->invitation_week = explode('|', $example->invitation_week);
-
-            return view('view', [
-                'example' => $example,
-                'style' => $style,
-                'staffList' => $staffList
-            ]);
-        } else {
-            $this->error('实例不存在');
-        }
     }
 
 }
