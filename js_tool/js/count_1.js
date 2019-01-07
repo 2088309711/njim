@@ -38,36 +38,36 @@ $(function () {
         set_num('now-balance', 'now_balance', 'add');
     });
 
-
     $('#submit').click(function () {
         show_result();
     });
 
-});
+    $('#result-4').click(function () {
+        $('#now-balance').val($(this).text());
+    });
 
+});
 
 function show_result() {
     var start_num = $('#start-num').val();//开局
     var profit_num = $('#profit-num').val();//收益
     var now_balance = $('#now-balance').val();//余额
-    var result = count(start_num, profit_num, now_balance, 1);
+    var result = count(parseInt(start_num), parseInt(profit_num), parseInt(now_balance), 1);
 }
 
 function count(start_num, profit_num, now_balance, input) {
 
-    //本次投入之后的余额 = 当前余额 - 投注金额 * 2
-    var balance = now_balance - input * 2;
-
-    //胜利的奖金 = 投注金额 * 2 * 2
-    var bonus = input * 2 * 2;
+    //本次投入之后的余额 = 当前余额 - 投注金额
+    var balance = now_balance - input;
 
     //结算之后的余额
-    var _balance = balance + bonus;
+    var _balance = balance + input * 2 * 2;
 
     if ((_balance - profit_num) >= start_num) {//输出结果
         $('#result-1').text(input);//本局应该投注金额
         $('#result-2').text(input * 2);//如果本局胜利，下局应该投注金额
         $('#result-3').text(_balance - start_num);//两连胜收入
+        $('#result-4').text(balance);//本局投注后的余额
     } else {
         count(start_num, profit_num, now_balance, ++input);
     }
