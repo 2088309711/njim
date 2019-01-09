@@ -24,8 +24,7 @@
 .container .message-box {
 	height: 309px;
 	width: 100%;
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow: auto;
 	border-bottom: 1px solid #eee;
 	background: #fafafa;
 }

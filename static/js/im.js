@@ -1,5 +1,5 @@
 //封装成插件
-(function () {
+!function () {
     "use strict";
     //data
     var is_new_client = 'n',
@@ -9,6 +9,8 @@
         is_phone = false,//是否为移动设备
         viewport = '',//页面视口信息
         state = 2,//实例状态，2=加载中，1=启用，0=禁用
+        access = false,
+        current_url = '',//当前网页地址
 
         //move
         mouse_offset_x = 0,
@@ -112,9 +114,18 @@
                     invitation = false;//秒数超时
                 }
             }
+            
+            if (invitation) {
+                //如果是PC端，聊天窗口必须处于关闭状态
+                if (!is_phone) {
+                    if (get("njim_window_box").style.display != 'none') {
+                        invitation = false;
+                    }
+                }
+            }
 
-            //确保聊天窗口没有打开才能邀请
-            if (get("njim_window_box").style.display == 'none' && invitation) {
+            //所有条件达成发起邀请
+            if (invitation) {
                 invitation_count++;//成功弹出邀请框才计数
                 invitation_box.style.display = 'block';
                 //一段时间后自动关闭邀请框
@@ -123,12 +134,12 @@
                         invitation_time_out();
                     }, auto_close * 1000);
                 }
-            } else {//聊天窗口已打开或不满足打开条件，进入递归，关闭聊天窗口再次发出邀请
+            }
+            else {//聊天窗口已打开或不满足打开条件，进入递归，关闭聊天窗口再次发出邀请
                 invitation_time_out();
             }
         }, delay);
     }
-
 
     /**
      * 设置viewport
@@ -140,7 +151,7 @@
         for (var i = 0; i < meta.length; i++) {
             if (typeof meta[i].name != "undefined" && meta[i].name.toLowerCase() == "viewport") {
                 exist = true;
-                if (viewport === '') {//只赋值一次
+                if (viewport === '') {//只能赋值一次
                     viewport = meta[i].content;
                 }
                 if (type === 1) {//设置
@@ -165,7 +176,7 @@
      * @param data
      * @returns
      */
-    function load_settings(data) {
+    window.njim_application_settings = function (data) {
         state = data.state;
         if (data.state === 1) {//实例可用
             //载入配置参数
@@ -189,11 +200,6 @@
                 invitation_week[i] = parseInt(invitation_week[i]);
             }
 
-            var njim_top_phone = get('njim_top_phone');
-            if (njim_top_phone) {//写入电话
-                njim_top_phone.href = 'tel:' + data.phone;
-            }
-
             //变量替换
             var regArr = [['{njim:color}', data.color]];
             for (var i = 0; i < regArr.length; i++) {
@@ -214,17 +220,22 @@
         }
     }
 
-
     /**
      * 打开聊天面板
      */
     function open_chat_panel() {
         invitation_time_out();
         // 显示客服窗口
-        get("njim_window_box").style.display = "block";
-        // 隐藏客服图标
-        if (icon) {
-            icon.style.display = "none";
+        if (is_phone) {
+            //移动端跳转到聊天窗口页面
+            window.location.href = domain + 'index.php/client/index/index/device/phone_1/access/' +
+                access + '/client_id/' + client_id + '/is_new/' + is_new_client;
+        } else {
+            get("njim_window_box").style.display = "block";
+            // 隐藏挂件图标
+            if (icon) {
+                icon.style.display = "none";
+            }
         }
     }
 
@@ -387,18 +398,18 @@
         }
     }, 1000);
 
+    function log(obj) {
+        console.log(obj);
+    }
+
     /**
      * 开始引导
      */
-    (function () {
+    !function () {
 
-        //创建容器
-        var container = document.createElement('div');
-        container.id = container_id;
-        document.getElementsByTagName('body')[0].appendChild(container);
+
 
         //读取access
-        var access = false;
         var script = document.getElementsByTagName('script');
         for (var i = 0; i < script.length; i++) {
             //读取access
@@ -411,30 +422,27 @@
             return;
         }
 
+        //创建容器
+        var container = document.createElement('div');
+        container.id = container_id;
+        document.getElementsByTagName('body')[0].appendChild(container);
+
         client_id = get_client_id();
         container = get(container_id);
         container.style.zIndex = 2147483647;
         container.style.position = 'fixed';
-        is_phone = navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i);//是否为移动设备
+        current_url = window.location.href;//获取当前页面地址
+        is_phone = !!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i);//是否为移动设备
 
         //插入元素
         if (is_phone) {//移动端
             set_viewport(2);//初始化视口
-            container.innerHTML = '<div id="njim_icon_box"></div><div id="njim_window_box" ' +
-                'style="width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; position: fixed; ' +
-                'top:0; left:0; display: none;"><div id="njim_window_top_close" style="width: 100%; height: 50px; ' +
-                'background: rgba(0,0,0,0.3);"></div><div style="border: none; margin: 0; padding: 0; ' +
-                'position: absolute; top:50px; right:0; bottom:0; left: 0; background: #ccc;"><iframe ' +
-                'id="njim_window_iframe" style="width: 100%; height: 100%; border: none; margin: 0; ' +
-                'padding: 0; overflow: hidden; position: absolute; top:0; left: 0;" src="' +
-                domain + 'index.php/client/index/index/device/phone_1/access/' +
-                access + '/client_id/' + client_id + '/is_new/' + is_new_client + '"></iframe>' +
-                '<div id="njim_window_minimize" style="position: absolute; top: 11px; left: 15px; ' +
-                'width: 25px;height: 20px; background: url(/static/images/icon-desktop.png) ' +
-                'no-repeat -20px -66px;"></div><a id="njim_top_phone" href="javascript:;" style="position: absolute; ' +
-                'top: 11px; right: 15px; width: 22px;height: 20px; background: ' +
-                'url(/static/images/icon-desktop.png) no-repeat -21px -572px;">' +
-                '</a></div></div><div id="njim_invitation_box" style="display: none;"></div>';
+
+            /*
+            2019-1-9 14:22:15
+            取消移动端嵌入式聊天窗口
+             */
+            container.innerHTML = '<div id="njim_icon_box"></div><div id="njim_invitation_box" style="display: none;"></div>';
 
         } else {//PC端
             container.innerHTML = '<div id="njim_icon_box"></div>' +
@@ -461,7 +469,7 @@
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(script, s);//插入节点
         s.parentNode.removeChild(script);//删除节点
-    }());
+    }();
 
 
     document.onmousemove = function (e) {
@@ -504,10 +512,10 @@
     document.onmouseup = function () {
         is_draging = false;
         // 显示
-        get("njim_window_iframe").style.display = "block";
-        get("njim_window_minimize").style.display = "block";
+        if (!is_phone) {
+            get("njim_window_iframe").style.display = "block";
+            get("njim_window_minimize").style.display = "block";
+        }
     }
 
-    window.njim_application_settings = load_settings;
-
-}());
+}();

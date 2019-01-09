@@ -4,17 +4,37 @@ html, body {
     overflow: hidden;
 }
 
-.title {
-    height: 40px;
+.top {
+    height: 39px;
     background: #aaa;
-    font-size: 14px;
-    line-height: 40px;
-    text-align: center;
+    padding-top: 1px;
+}
+
+.top .back-icon {
+    background: url(/static/images/icon-desktop.png) no-repeat -42px -22px;
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin: 7px 0 0 6px;
+}
+
+.top .title {
     color: #fff;
+    margin-top: 10px;
+    margin-left: 32px;
+    font-size: 14px;
+}
+
+.top .phone-icon {
+    background: url(/static/images/icon-desktop.png) no-repeat -21px -572px;
+    width: 22px;
+    height: 22px;
+    float: right;
+    margin: 8px 7px 0 0;
 }
 
 .msg-box {
-    height: 1000px;
+    height: 500px;
     transition: height 0.5s;
     overflow-x: hidden;
     overflow-y: auto;
@@ -67,12 +87,13 @@ html, body {
 
 .bottom .input button {
     flex: none;
-    border: none;
+    border: 1px solid #ddd;
     outline: none;
     border-radius: 4px;
     font-size: 12px;
-    color: #555;
+    color: #888;
     padding: 0 10px;
+    background: #ddd;
 }
 
 .emo-container {
