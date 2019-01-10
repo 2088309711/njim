@@ -13,7 +13,7 @@
 <body>
 <div class="container-layout padding-top">
     <div class="line-middle">
-        <div class="x9">
+        <div class="x9" style="height: 488px; overflow: auto;">
 
             <table id="vue-node" class="table table-bordered">
                 <tr>
@@ -80,15 +80,15 @@
                 </div>
                 <div class="field">
 
-                    <label>
+                    <label class="margin-big-right">
                         <input name="type" value="1" type="radio">
                         大
                     </label>
-                    <label>
+                    <label class="margin-big-right">
                         <input name="type" value="2" type="radio">
                         小
                     </label>
-                    <label>
+                    <label class="margin-big-right">
                         <input name="type" value="3" type="radio">
                         单
                     </label>
@@ -105,7 +105,7 @@
                     <label>方法</label>
                 </div>
                 <div class="field">
-                    <label>
+                    <label class="margin-big-right">
                         <input name="method" value="1" type="radio">
                         正常
                     </label>
@@ -117,18 +117,17 @@
             </div>
 
             <div class="form-group">
-                <div class="label">
-                    <label>结果</label>
-                </div>
                 <div class="field">
-                    <textarea id="result" class="input" rows="3"></textarea>
+                    <textarea id="result" class="input" rows="3">   1   2   3
+1   2    3
+             1             2            3    </textarea>
                 </div>
             </div>
 
             <div class="form-button">
                 <button id="count" class="button border-sub">计算</button>
-                <button class="button border-dot">清除</button>
-                <button class="button border-dot">重新开局</button>
+                <button id="clear" class="button border-dot">清除</button>
+                <button id="start" class="button border-dot">重新开局</button>
             </div>
 
         </div>

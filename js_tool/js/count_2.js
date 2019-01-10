@@ -1,3 +1,5 @@
+var cookie_prefix = 'count_2_';
+
 $(function () {
     load_cookie('num');
     load_cookie('add');
@@ -22,13 +24,23 @@ $(function () {
     });
 
     $('#count').click(function () {
-        var value = $('#result').val();
+        if (!confirm('确定计算结果？')) {
+            return;
+        }
 
+        var num = parseInt($('#num').val());
+        var max = parseInt($('#max').val());
+
+        if (num >= max) {
+            alert('基础大小不能大于等于封顶数额');
+        }
+
+        var value = $('#result').val();
 
         var strArr = value.split(/[\n]/);
 
         if (strArr.length < 3) {
-            log('结果必须输入3次');
+            alert('结果必须输入3次');
             return;
         }
 
@@ -36,20 +48,40 @@ $(function () {
 
         for (var i = 0; i < strArr.length; i++) {
             var temp = strArr[i].split(/[ ]+/);
-            var str = temp.join('-');
-            if (temp.length > 1) {
-                str = str.substr(1, str.length)
+
+            var str = '';
+            for (var j = 0; j < temp.length; j++) {
+                if (temp[j].length > 0) {
+                    str += temp[j] + '-';
+                }
             }
+
+            str = str.substr(0, str.length - 1);
+
             resultArr.push(str);
         }
 
         if (resultArr[0] === resultArr[1] && resultArr[0] === resultArr[2]) {
             show_result(resultArr[0]);
         } else {
-            log('3次结果不一致');
+            alert('3次结果不一致');
         }
     });
 
+    $('#clear').click(function () {
+        if (!confirm('确定清空输入内容？')) {
+            return;
+        }
+        $('#result').val('');
+    });
+
+    $('#start').click(function () {//新开局
+        if (!confirm('确定重新开局？')) {
+            return;
+        }
+        var num = parseInt($('#num').val());
+        vueObj.trs = [[num, num, num, num, num, num, num, num, num, num]];
+    });
 
 });
 
@@ -73,48 +105,65 @@ function trim(str) {
 var vueObj = new Vue({
     el: '#vue-node',
     data: {
-        trs: [
-            [
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-                '6',
-                '7',
-                '8',
-                '9',
-                '10'
-            ]
-        ]
+        trs: []
     }
 });
 
+function show_result(data) {
 
-function show_result(result) {
-    log(result);
-    // var start_num = $('#start-num').val();//开局
-    // var profit_num = $('#profit-num').val();//收益
-    // var now_balance = $('#now-balance').val();//余额
-    // var result = count(parseInt(start_num), parseInt(profit_num), parseInt(now_balance), 1);
-}
+    var numArr = data.split('-');
 
-function count(start_num, profit_num, now_balance, input) {
+    var type = $("input[name='type']:checked").val();
 
-    //本次投入之后的余额 = 当前余额 - 投注金额
-    var balance = now_balance - input;
+    var preArr = vueObj.trs[vueObj.trs.length - 1];//上次的投注数据
 
-    //结算之后的余额
-    var _balance = balance + input * 2 * 2;
-
-    if ((_balance - profit_num) >= start_num) {//输出结果
-        $('#result-1').text(input);//本局应该投注金额
-        $('#result-2').text(input * 2);//如果本局胜利，下局应该投注金额
-        $('#result-3').text(_balance - start_num);//两连胜收入
-        $('#result-4').text(balance);//本局投注后的余额
-    } else {
-        count(start_num, profit_num, now_balance, ++input);
+    if (preArr == null || preArr.length < numArr.length) {//没有参考数据
+        return;
     }
+
+    var num = parseInt($('#num').val());//基础大小
+    var add = parseInt($('#add').val());//翻倍增加
+    var max = parseInt($('#max').val());//封顶
+
+    var resultArr = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'];
+
+    for (var i = 0; i < numArr.length; i++) {//i 是名次（冠军，亚军...）
+
+        var flag;
+
+        switch (type) {
+            case '1'://大
+                flag = parseInt(numArr[i]) > 5;
+                break;
+
+            case '2'://小
+                flag = parseInt(numArr[i]) < 6;
+                break;
+
+            case '3'://单
+                flag = parseInt(numArr[i]) % 2 != 0;
+                break;
+
+            case '4'://双
+                flag = parseInt(numArr[i]) % 2 == 0;
+                break;
+        }
+
+        if (flag) {
+            resultArr[i] = num;
+        } else {
+            var temp;
+            if (preArr[i] * 2 >= max) {
+                temp = preArr[i] + add;
+            } else {
+                temp = preArr[i] * 2 + add;
+            }
+            resultArr[i] = temp;
+        }
+
+    }
+
+    vueObj.trs.push(resultArr);
 }
 
 function load_cookie(name) {
@@ -138,14 +187,14 @@ function load_cookie(name) {
 function set_cookie(name, value) {
     var d = new Date();
     d.setDate(d.getDate() + 90);
-    document.cookie = name + "=" + escape(value) + ";expires=" + d.toGMTString() + ";path=/";
+    document.cookie = cookie_prefix + name + "=" + escape(value) + ";expires=" + d.toGMTString() + ";path=/";
 }
 
 function get_cookie(name) {
     if (document.cookie.length > 0) {
-        var c_start = document.cookie.indexOf(name + "=");
+        var c_start = document.cookie.indexOf(cookie_prefix + name + "=");//cookie所在位置
         if (c_start != -1) {
-            c_start = c_start + name.length + 1;
+            c_start = c_start + (cookie_prefix + name).length + 1;
             var c_end = document.cookie.indexOf(";", c_start);
             if (c_end == -1) {
                 c_end = document.cookie.length;
