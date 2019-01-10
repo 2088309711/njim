@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <title>统计</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/pintuer/pintuer.css">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/pintuer/pintuer.js"></script>
+    <script src="/static/js/vue.js"></script>
+</head>
+<body>
+<div class="container-layout padding-top">
+    <div class="line-middle">
+        <div class="x9">
+
+            <table id="vue-node" class="table table-bordered">
+                <tr>
+                    <th>冠</th>
+                    <th>亚</th>
+                    <th>三</th>
+                    <th>四</th>
+                    <th>五</th>
+                    <th>六</th>
+                    <th>七</th>
+                    <th>八</th>
+                    <th>九</th>
+                    <th>十</th>
+                </tr>
+                <tr v-for="tr in trs">
+                    <td>{{tr[0]}}</td>
+                    <td>{{tr[1]}}</td>
+                    <td>{{tr[2]}}</td>
+                    <td>{{tr[3]}}</td>
+                    <td>{{tr[4]}}</td>
+                    <td>{{tr[5]}}</td>
+                    <td>{{tr[6]}}</td>
+                    <td>{{tr[7]}}</td>
+                    <td>{{tr[8]}}</td>
+                    <td>{{tr[9]}}</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div class="x3">
+
+            <div class="form-group">
+                <div class="label">
+                    <label>大小</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" id="num"/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label>翻倍增加</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" id="add"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>封顶</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" id="max"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>类型</label>
+                </div>
+                <div class="field">
+
+                    <label>
+                        <input name="type" value="1" type="radio">
+                        大
+                    </label>
+                    <label>
+                        <input name="type" value="2" type="radio">
+                        小
+                    </label>
+                    <label>
+                        <input name="type" value="3" type="radio">
+                        单
+                    </label>
+                    <label>
+                        <input name="type" value="4" type="radio">
+                        双
+                    </label>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>方法</label>
+                </div>
+                <div class="field">
+                    <label>
+                        <input name="method" value="1" type="radio">
+                        正常
+                    </label>
+                    <label>
+                        <input name="method" value="2" type="radio">
+                        收尾
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="label">
+                    <label>结果</label>
+                </div>
+                <div class="field">
+                    <textarea id="result" class="input" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="form-button">
+                <button id="count" class="button border-sub">计算</button>
+                <button class="button border-dot">清除</button>
+                <button class="button border-dot">重新开局</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script src="js/count_2.js"></script>
+</body>
+</html>
