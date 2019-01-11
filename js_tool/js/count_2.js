@@ -170,8 +170,8 @@ function show_result(data) {
             if (preArr[i] == stopStr) {
                 temp = stopStr;
             } else {
-                if (preArr[i] * 2 >= max) {
-                    temp = preArr[i] + add;
+                if (preArr[i] * 2 + add > max) {//封顶
+                    temp = num;
                 } else {
                     temp = preArr[i] * 2 + add;
                 }
