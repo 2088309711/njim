@@ -1,7 +1,6 @@
 var cookie_prefix = 'count_2_';
 var stopStr = '--';
 
-
 $(function () {
     load_cookie('num');
     load_cookie('add');
@@ -111,9 +110,16 @@ var vueObj = new Vue({
     },
     methods: {
         trClass: function (index) {
-            if (index + 1 == this.trs.length) {
+            if (index === 0) {
                 return {
                     'cur': true
+                }
+            }
+        },
+        tdClass: function (index) {
+            if (index % 2 !== 0) {
+                return {
+                    'bg': true
                 }
             }
         }
@@ -127,7 +133,7 @@ function show_result(data) {
     var type = $("input[name='type']:checked").val();//玩法
     var method = $("input[name='method']:checked").val();//方法
 
-    var preArr = vueObj.trs[vueObj.trs.length - 1];//上次的投注数据
+    var preArr = vueObj.trs[0];//上次的投注数据
 
     if (preArr == null || preArr.length < numArr.length) {//没有参考数据
         return;
@@ -180,7 +186,7 @@ function show_result(data) {
         }
     }
 
-    vueObj.trs.push(resultArr);
+    vueObj.trs.unshift(resultArr);
 }
 
 function load_cookie(name) {

@@ -11,49 +11,51 @@
     <script src="/static/js/vue.js"></script>
     <style>
         .cur td {
-            background: #00bbff;
-            border-color: #62e6ff;
+            background: #00d5ff;
+            border-color: #00bbff;
             color: #fff;
             font-size: 16px;
             font-weight: bold;
         }
+
+        .cur .bg {
+            background: #00bbff;
+        }
+
+        .controll {
+            position: fixed !important;
+            top: 8px;
+            right: 3px;
+        }
+
     </style>
 </head>
 <body>
-<div class="container-layout padding-top">
+<div class="container-layout padding-top padding-bottom">
     <div class="line-middle">
-        <div class="x9" style="height: 488px; overflow: auto;">
+        <div class="x9">
 
             <table id="vue-node" class="table table-bordered">
                 <tr>
                     <th>冠</th>
-                    <th>亚</th>
+                    <th class="bg">亚</th>
                     <th>三</th>
-                    <th>四</th>
+                    <th class="bg">四</th>
                     <th>五</th>
-                    <th>六</th>
+                    <th class="bg">六</th>
                     <th>七</th>
-                    <th>八</th>
+                    <th class="bg">八</th>
                     <th>九</th>
-                    <th>十</th>
+                    <th class="bg">十</th>
                 </tr>
-                <tr v-for="(tr,index) in trs" v-bind:class="trClass(index)">
-                    <td>{{tr[0]}}</td>
-                    <td>{{tr[1]}}</td>
-                    <td>{{tr[2]}}</td>
-                    <td>{{tr[3]}}</td>
-                    <td>{{tr[4]}}</td>
-                    <td>{{tr[5]}}</td>
-                    <td>{{tr[6]}}</td>
-                    <td>{{tr[7]}}</td>
-                    <td>{{tr[8]}}</td>
-                    <td>{{tr[9]}}</td>
+                <tr v-for="(tr,index) in trs" :class="trClass(index)">
+                    <td v-for="(v,i) in tr" :class="tdClass(i)">{{v}}</td>
                 </tr>
             </table>
 
         </div>
 
-        <div class="x3">
+        <div class="x3 controll">
 
             <div class="form-group">
                 <div class="label">
@@ -126,8 +128,8 @@
 
             <div class="form-group">
                 <div class="field">
-                    <textarea id="result" class="input" rows="2">   1   2   3  4  5   6   7   8   9  10
-1   2    3   4   5   6   7   8   9   10  </textarea>
+                    <textarea id="result" class="input" rows="2">1 2 3 4 5 6 7 8 9 10
+1 2 3 4 5 6 7 8 9 10</textarea>
                 </div>
             </div>
 
