@@ -1,4 +1,6 @@
 var cookie_prefix = 'count_2_';
+var stopStr = '--';
+
 
 $(function () {
     load_cookie('num');
@@ -39,8 +41,8 @@ $(function () {
 
         var strArr = value.split(/[\n]/);
 
-        if (strArr.length < 3) {
-            alert('结果必须输入3次');
+        if (strArr.length < 2) {
+            alert('结果必须输入2次');
             return;
         }
 
@@ -61,10 +63,10 @@ $(function () {
             resultArr.push(str);
         }
 
-        if (resultArr[0] === resultArr[1] && resultArr[0] === resultArr[2]) {
+        if (resultArr[0] === resultArr[1]) {
             show_result(resultArr[0]);
         } else {
-            alert('3次结果不一致');
+            alert('2次结果不一致');
         }
     });
 
@@ -106,6 +108,15 @@ var vueObj = new Vue({
     el: '#vue-node',
     data: {
         trs: []
+    },
+    methods: {
+        trClass: function (index) {
+            if (index + 1 == this.trs.length) {
+                return {
+                    'cur': true
+                }
+            }
+        }
     }
 });
 
@@ -113,7 +124,8 @@ function show_result(data) {
 
     var numArr = data.split('-');
 
-    var type = $("input[name='type']:checked").val();
+    var type = $("input[name='type']:checked").val();//玩法
+    var method = $("input[name='method']:checked").val();//方法
 
     var preArr = vueObj.trs[vueObj.trs.length - 1];//上次的投注数据
 
@@ -125,7 +137,7 @@ function show_result(data) {
     var add = parseInt($('#add').val());//翻倍增加
     var max = parseInt($('#max').val());//封顶
 
-    var resultArr = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'];
+    var resultArr = [stopStr, stopStr, stopStr, stopStr, stopStr, stopStr, stopStr, stopStr, stopStr, stopStr];
 
     for (var i = 0; i < numArr.length; i++) {//i 是名次（冠军，亚军...）
 
@@ -150,17 +162,22 @@ function show_result(data) {
         }
 
         if (flag) {
-            resultArr[i] = num;
+            if (method == '1') {//正常
+                resultArr[i] = num;
+            }
         } else {
             var temp;
-            if (preArr[i] * 2 >= max) {
-                temp = preArr[i] + add;
+            if (preArr[i] == stopStr) {
+                temp = stopStr;
             } else {
-                temp = preArr[i] * 2 + add;
+                if (preArr[i] * 2 >= max) {
+                    temp = preArr[i] + add;
+                } else {
+                    temp = preArr[i] * 2 + add;
+                }
             }
             resultArr[i] = temp;
         }
-
     }
 
     vueObj.trs.push(resultArr);
