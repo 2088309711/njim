@@ -2,6 +2,7 @@ var cookie_prefix = 'count_2_';
 var stopStr = '--';
 
 $(function () {
+
     load_cookie('num');
     load_cookie('add');
     load_cookie('max');
@@ -24,7 +25,14 @@ $(function () {
         set_cookie($(this).attr('name'), $(this).val());
     });
 
+    $('#result').blur(function () {
+        updateResultVal();
+    });
+
     $('#count').click(function () {
+
+        updateResultVal()
+
         if (!confirm('确定计算结果？')) {
             return;
         }
@@ -38,54 +46,46 @@ $(function () {
 
         var value = $('#result').val();
 
-        var strArr = value.split(/[\n]/);
-
-        if (strArr.length < 2) {
-            alert('结果必须输入2次');
-            return;
+        if (value.length === 20) {
+            show_result(value);
         }
 
-        var resultArr = [];
-
-        for (var i = 0; i < strArr.length; i++) {
-            var temp = strArr[i].split(/[ ]+/);
-
-            var str = '';
-            for (var j = 0; j < temp.length; j++) {
-                if (temp[j].length > 0) {
-                    str += temp[j] + '-';
-                }
-            }
-
-            str = str.substr(0, str.length - 1);
-
-            resultArr.push(str);
-        }
-
-        if (resultArr[0] === resultArr[1]) {
-            show_result(resultArr[0]);
-        } else {
-            alert('2次结果不一致');
-        }
     });
 
-    $('#clear').click(function () {
-        if (!confirm('确定清空输入内容？')) {
-            return;
-        }
-        $('#result').val('');
-    });
 
     $('#start').click(function () {//新开局
         if (!confirm('确定重新开局？')) {
             return;
         }
-        var num = parseInt($('#num').val());
-        vueObj.trs = [[num, num, num, num, num, num, num, num, num, num]];
+        startNew();
     });
 
+    startNew();
 });
 
+
+function startNew() {
+    var num = parseInt($('#num').val());
+    vueObj.trs = [[num, num, num, num, num, num, num, num, num, num]];
+}
+
+
+function updateResultVal() {
+    var value = $('#result').val();
+    value = value.match(/([01][0-9],){9}[01][0-9]/);
+
+    if (value == null) {
+        return;
+    }
+
+    value = value[0].split(',');
+    var _v = '';
+    for (var i = 0; i < value.length; i++) {
+        _v += parseInt(value[i]) + '-';
+    }
+    _v = _v.substr(0, _v.length - 1);
+    $('#result').val(_v);
+}
 
 function ckNum(name) {
     var obj = $('#' + name);
@@ -102,6 +102,13 @@ function ckNum(name) {
 function trim(str) {
     return str.replace(/(^\s*)|(\s*$)/g, "");
 }
+
+setInterval(function () {
+    $('#data').children('iframe').each(function (index, el) {
+        var url = this.src.split('?');
+        this.src = url[0] + '?_t=' + new Date().getTime();
+    });
+}, 5000);
 
 var vueObj = new Vue({
     el: '#vue-node',
