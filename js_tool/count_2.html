@@ -11,15 +11,23 @@
     <script src="/static/js/vue.js"></script>
     <style>
         .cur td {
-            background: #00d5ff;
-            border-color: #00bbff;
-            color: #fff;
-            font-size: 16px;
-            font-weight: bold;
+            background: #ffd1a7;
+            border-color: #ffa762;
+            font-size: 30px;
         }
 
         .cur .bg {
-            background: #00bbff;
+            background: #ffa762;
+        }
+
+        th {
+            color: #ff6800;
+        }
+
+        .no-show {
+            background: #fff !important;
+            color: #fff !important;
+            border-color: #ddd !important;
         }
 
         .table-1 {
@@ -44,15 +52,15 @@
             <table id="vue-node" class="table table-bordered">
                 <tr>
                     <th>冠</th>
-                    <th class="bg">亚</th>
+                    <th>亚</th>
                     <th>三</th>
-                    <th class="bg">四</th>
+                    <th>四</th>
                     <th>五</th>
-                    <th class="bg">六</th>
+                    <th>六</th>
                     <th>七</th>
-                    <th class="bg">八</th>
+                    <th>八</th>
                     <th>九</th>
-                    <th class="bg">十</th>
+                    <th>十</th>
                 </tr>
                 <tr v-for="(tr,index) in trs" :class="trClass(index)">
                     <td v-for="(v,i) in tr" :class="tdClass(i)">{{v}}</td>
@@ -87,6 +95,16 @@
                 </div>
                 <div class="field">
                     <input type="text" class="input" id="max"/>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="label">
+                    <label>车道数量</label>
+                </div>
+                <div class="field">
+                    <input type="text" class="input" id="col"/>
                 </div>
             </div>
 

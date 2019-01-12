@@ -1,11 +1,12 @@
 var cookie_prefix = 'count_2_';
 var stopStr = '--';
-
+var colNum = 10;
 $(function () {
 
     load_cookie('num');
     load_cookie('add');
     load_cookie('max');
+    load_cookie('col');
     load_cookie('type');
     load_cookie('method');
 
@@ -21,6 +22,11 @@ $(function () {
         ckNum('max');
     });
 
+    $('#col').blur(function () {
+        ckNum('col');
+        colNum = parseInt($(this).val());
+    });
+
     $(":radio").click(function () {
         set_cookie($(this).attr('name'), $(this).val());
     });
@@ -31,6 +37,7 @@ $(function () {
 
     $('#count').click(function () {
 
+        colNum = parseInt($('#col').val());
         updateResultVal()
 
         if (!confirm('确定计算结果？')) {
@@ -124,11 +131,16 @@ var vueObj = new Vue({
             }
         },
         tdClass: function (index) {
-            if (index % 2 !== 0) {
-                return {
-                    'bg': true
-                }
+
+            var no_show = false;
+            if (index >= colNum) {
+                no_show = true;
             }
+            var bg = false;
+            if (index % 2 !== 0) {
+                bg = true;
+            }
+            return {'bg': bg, 'no-show': no_show};
         }
     }
 });
