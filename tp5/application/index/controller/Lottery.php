@@ -13,6 +13,28 @@ use think\Controller;
 
 class Lottery extends Controller
 {
+
+
+    public function index()
+    {
+
+        $url = 'https://api.speedlottery.com/data/racing/last.xml';
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+//        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, false);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return $result;
+//        ****
+//        https://api.speedlottery.com/data/racing/last.xml //秒速赛车官方接口
+    }
+
     public function getSecondSpeedRacingData()
     {
 

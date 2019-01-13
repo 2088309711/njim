@@ -1,13 +1,11 @@
 var cookie_prefix = 'count_2_';
-var stopStr = '--';
-var colNum = 10;
+
 $(function () {
 
     load_cookie('num');
     load_cookie('add');
     load_cookie('max');
-    load_cookie('col');
-    load_cookie('type');
+    load_cookie('miss');
     load_cookie('method');
 
     $('#num').blur(function () {
@@ -22,9 +20,9 @@ $(function () {
         ckNum('max');
     });
 
-    $('#col').blur(function () {
-        ckNum('col');
-        colNum = parseInt($(this).val());
+
+    $('#miss').blur(function () {
+        ckNum('miss');
     });
 
     $(":radio").click(function () {
@@ -33,65 +31,49 @@ $(function () {
 
     $('#result').blur(function () {
         updateResultVal();
-    });
-
-    $('#count').click(function () {
-
-        colNum = parseInt($('#col').val());
-        updateResultVal()
-
-        if (!confirm('确定计算结果？')) {
-            return;
-        }
-
-        var num = parseInt($('#num').val());
-        var max = parseInt($('#max').val());
-
-        if (num >= max) {
-            alert('基础大小不能大于等于封顶数额');
-        }
-
-        var value = $('#result').val();
-
-        if (value.length === 20) {
-            show_result(value);
-        }
-
+        compute();
     });
 
 
-    $('#start').click(function () {//新开局
-        if (!confirm('确定重新开局？')) {
-            return;
-        }
-        startNew();
-    });
-
-    startNew();
 });
-
-
-function startNew() {
-    var num = parseInt($('#num').val());
-    vueObj.trs = [[num, num, num, num, num, num, num, num, num, num]];
-}
 
 
 function updateResultVal() {
     var value = $('#result').val();
-    value = value.match(/([01][0-9],){9}[01][0-9]/);
 
-    if (value == null) {
+    var nums = value.match(/([01][0-9],){9}[01][0-9]/);
+    var issue = value.match(/\d{9}/);
+
+    if (nums == null || issue == null) {
+        $('#result').val('数据不完整');
         return;
     }
 
-    value = value[0].split(',');
-    var _v = '';
-    for (var i = 0; i < value.length; i++) {
-        _v += parseInt(value[i]) + '-';
+    nums = nums[0].split(',');
+    issue = parseInt(issue[0]);
+
+
+    for (var i = 0; i < nums.length; i++) {
+        nums[i] = parseInt(nums[i]);
+
     }
-    _v = _v.substr(0, _v.length - 1);
-    $('#result').val(_v);
+
+    var flag = true;
+    for (var i = 0; i < vueData.trs.length; i++) {
+        if (vueData.trs[i].issue == issue) {
+            flag = false;
+            break;
+        }
+    }
+
+    if (flag) {
+        vueData.trs.unshift({issue: issue, nums: nums});
+        $('#result').val('数据录入成功');
+    } else {
+        $('#result').val('数据已存在');
+    }
+
+
 }
 
 function ckNum(name) {
@@ -111,16 +93,295 @@ function trim(str) {
 }
 
 setInterval(function () {
-    $('#data').children('iframe').each(function (index, el) {
+    $('#data').children('iframe').each(function () {
         var url = this.src.split('?');
-        this.src = url[0] + '?_t=' + new Date().getTime();
+        // this.src = url[0] + '?_t=' + new Date().getTime();
     });
 }, 5000);
 
-var vueObj = new Vue({
-    el: '#vue-node',
+function compute() {
+    var miss = parseInt($('#miss').val());
+
+    //检查数据量是否足够
+    if (vueData.trs.length < miss) {
+        return;
+    }
+
+    //检查数据是否断层
+    for (var i = 0; i < miss - 1; i++) {
+        if (vueData.trs[i].issue !== vueData.trs[i + 1].issue + 1) {
+            return;
+        }
+    }
+
+    var missResult = [];
+
+    //以最新的数据遍历车道，从冠军到第十名
+    for (var i = 0; i < vueData.trs[0].nums.length; i++) {
+        // log(vueData.trs[0].nums[i]);
+
+        // ranking 名次
+        var temp = {ranking: i + 1, big: true, small: true, single: true, double: true};
+
+        for (var j = 0; j < miss; j++) {
+            //计算大
+            if (is_big(vueData.trs[j].nums[i])) {
+                temp.big = false;
+            }
+            //计算小
+            if (is_small(vueData.trs[j].nums[i])) {
+                temp.small = false;
+            }
+            //计算单
+            if (is_single(vueData.trs[j].nums[i])) {
+                temp.single = false;
+            }
+            //计算双
+            if (is_double(vueData.trs[j].nums[i])) {
+                temp.double = false;
+            }
+        }
+
+        missResult.push(temp);
+
+    }
+
+    // missResult 计算完成的遗漏结果
+
+    log(missResult)
+
+    //计算投注金额
+
+}
+
+var vueResult = new Vue({
+    el: '#vue-result',
     data: {
-        trs: []
+        result: [
+            {
+                issue: 190113767,
+                betting: [
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+
+
+                    {
+                        ranking: '冠军',
+                        big: true,
+                        small: false,
+                        single: false,
+                        double: false,
+                        loong: true,
+                        tiger: true,
+                        _Loong: 10,
+                        _tiger: 10,
+                        _big: 10,
+                        _small: 10,
+                        _single: 10,
+                        _double: 10,
+                    },
+                ]
+            }
+        ]
+    },
+    methods: {
+        activeClass: function (o) {
+            if (o) {
+                return 'active'
+            } else {
+                return ''
+            }
+        },
+        showLH: function (index) {
+            if (index < 5) {
+                return true;
+            }
+            return false;
+        }
+    }
+});
+
+
+function is_big(num) {
+    return num > 5;
+}
+
+
+function is_small(num) {
+    return num < 6;
+}
+
+function is_single(num) {
+    return num % 2 != 0;
+}
+
+function is_double(num) {
+    return num % 2 == 0;
+}
+
+var vueData = new Vue({
+    el: '#vue-data',
+    data: {
+        trs: [
+            {issue: 190113709, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113708, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113707, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113706, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113705, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113704, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113703, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113702, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113701, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+            {issue: 190113700, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
+        ]
     },
     methods: {
         trClass: function (index) {
@@ -129,18 +390,6 @@ var vueObj = new Vue({
                     'cur': true
                 }
             }
-        },
-        tdClass: function (index) {
-
-            var no_show = false;
-            if (index >= colNum) {
-                no_show = true;
-            }
-            var bg = false;
-            if (index % 2 !== 0) {
-                bg = true;
-            }
-            return {'bg': bg, 'no-show': no_show};
         }
     }
 });
@@ -209,7 +458,6 @@ function show_result(data) {
 }
 
 function load_cookie(name) {
-
     switch (name) {
         case 'type':
         case 'method':
