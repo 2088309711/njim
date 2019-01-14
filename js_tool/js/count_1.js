@@ -84,6 +84,7 @@ function set_num(id, name, action) {
     set_cookie(name, value, 90, '/');
 }
 
+
 function load_cookie() {
     var start_num = get_cookie('start_num');
     if (start_num != '') {

@@ -33,10 +33,7 @@ $(function () {
         updateResultVal();
         compute();
     });
-
-
 });
-
 
 function updateResultVal() {
     var value = $('#result').val();
@@ -100,7 +97,15 @@ setInterval(function () {
 }, 5000);
 
 function compute() {
+    var num = parseInt($('#num').val());
+    var add = parseInt($('#add').val());
+    var max = parseInt($('#max').val());
     var miss = parseInt($('#miss').val());
+
+    if (num == '' || add == '' || max == '' || miss == '') {
+        alert('参数不全');
+        return;
+    }
 
     //检查数据量是否足够
     if (vueData.trs.length < miss) {
@@ -114,15 +119,36 @@ function compute() {
         }
     }
 
-    var missResult = [];
+    var resultArr = [];
+
+    var nameArr = ['冠军', '亚军', '第三名', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
 
     //以最新的数据遍历车道，从冠军到第十名
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
         // log(vueData.trs[0].nums[i]);
 
-        // ranking 名次
-        var temp = {ranking: i + 1, big: true, small: true, single: true, double: true};
+        var temp = {
+            name: nameArr[i],
+            big: true,
+            small: true,
+            single: true,
+            double: true,
 
+            _big: 0,
+            _small: 0,
+            _single: 0,
+            _double: 0
+        };
+
+        //前5个对象有龙虎
+        if (i < 5) {
+            temp.loong = true;
+            temp.tiger = true;
+            temp._Loong = 0;
+            temp._tiger = 0;
+        }
+
+        //和前几期的数据比较
         for (var j = 0; j < miss; j++) {
             //计算大
             if (is_big(vueData.trs[j].nums[i])) {
@@ -140,18 +166,100 @@ function compute() {
             if (is_double(vueData.trs[j].nums[i])) {
                 temp.double = false;
             }
+            if (i < 5) {
+                //计算龙
+                if (is_loong(vueData.trs[j].nums, index)) {
+                    temp.loong = false;
+                }
+                //计算虎
+                if (is_tiger(vueData.trs[j].nums, index)) {
+                    temp.tiger = false;
+                }
+            }
         }
 
-        missResult.push(temp);
+        //所有项目遗漏数据计算完成 temp
+        // 开始计算金额，和上次投注额比较 vueResult.result[0].betting[i]
+        // i 索引是名次
+        if (vueResult.result[0].betting[i] !== null && vueResult.result[0].betting[i].name === temp.name) {//确保选择的对象是正确的
+            if (temp.big) {
+                temp._big = getNum(vueResult.result[0].betting[i]._big, num, add, max);
+            }
+            if (temp.small) {
+                temp._small = getNum(vueResult.result[0].betting[i]._small, num, add, max);
+            }
+            if (temp.single) {
+                temp._single = getNum(vueResult.result[0].betting[i]._single, num, add, max);
+            }
+            if (temp.double) {
+                temp._double = getNum(vueResult.result[0].betting[i]._double, num, add, max);
+            }
+            if (i < 5) {
+                if (temp.loong) {
+                    temp._loong = getNum(vueResult.result[0].betting[i]._loong, num, add, max);
+                }
+                if (temp.tiger) {
+                    temp._tiger = getNum(vueResult.result[0].betting[i]._tiger, num, add, max);
+                }
+            }
+        } else {//没有上次的投注信息
+            if (temp.big) {
+                temp._big = num;
+            }
+            if (temp.small) {
+                temp._small = num;
+            }
+            if (temp.single) {
+                temp._single = num;
+            }
+            if (temp.double) {
+                temp._double = num;
+            }
+            if (i < 5) {
+                if (temp.loong) {
+                    temp._loong = num;
+                }
+                if (temp.tiger) {
+                    temp._tiger = num;
+                }
+            }
+        }
+
+        //投注额计算完成
+
+        resultArr.push(temp);
 
     }
 
-    // missResult 计算完成的遗漏结果
+    // resultArr 投注结果和遗漏数据都计算完成
 
-    log(missResult)
+    //组织结果对象
+    var resultObj = {
+        issue: vueData.trs[0].issue + 1,//最新期号 + 1
+        betting: resultArr
+    }
 
-    //计算投注金额
+    vueResult.result.unshift(resultObj);
+}
 
+/**
+ *
+ * @param preNum 上次的数量
+ * @param num 最低
+ * @param add 增加
+ * @param max 封顶
+ * @returns int
+ */
+function getNum(preNum, num, add, max) {
+    if (preNum === 0) {//上次没有投注这个项目
+        return num;
+    } else {
+        var temp = preNum * 2 + add;
+        if (temp > max) {//封顶
+            temp = num;
+        }
+        return temp;
+    }
 }
 
 var vueResult = new Vue({
@@ -160,175 +268,7 @@ var vueResult = new Vue({
         result: [
             {
                 issue: 190113767,
-                betting: [
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-
-
-                    {
-                        ranking: '冠军',
-                        big: true,
-                        small: false,
-                        single: false,
-                        double: false,
-                        loong: true,
-                        tiger: true,
-                        _Loong: 10,
-                        _tiger: 10,
-                        _big: 10,
-                        _small: 10,
-                        _single: 10,
-                        _double: 10,
-                    },
-                ]
+                betting: []
             }
         ]
     },
@@ -366,6 +306,15 @@ function is_single(num) {
 function is_double(num) {
     return num % 2 == 0;
 }
+
+function is_loong(arr, index) {
+    return arr[index] > arr[9 - index];
+}
+
+function is_tiger(arr, index) {
+    return arr[index] < arr[9 - index];
+}
+
 
 var vueData = new Vue({
     el: '#vue-data',
