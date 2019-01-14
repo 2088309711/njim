@@ -36,12 +36,6 @@ $(function () {
 });
 
 
-/*
-1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
- */
-
 function updateResultVal() {
     var value = $('#result').val();
 
@@ -97,17 +91,11 @@ function trim(str) {
 
 setInterval(function () {
     $('#data').children('iframe').each(function () {
-        // var url = this.src.split('?');
-        // this.src = url[0] + '?_t=' + new Date().getTime();
+        var url = this.src.split('?');
+        this.src = url[0] + '?_t=' + new Date().getTime();
     });
 }, 5000);
 
-
-/*
-1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
- */
 
 function compute() {
     var num = parseInt($('#num').val());
@@ -116,13 +104,14 @@ function compute() {
     var miss = parseInt($('#miss').val());
     var method = $("input[name='method']:checked").val();//方法
 
+
     if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)) {
         alert('参数不全');
         return;
     }
 
     //检查数据量是否足够
-    if (vueData.trs.length < miss) {
+    if (vueData.trs.length < miss || vueData.trs.length == 0) {
         return;
     }
 
@@ -141,13 +130,6 @@ function compute() {
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
 
 
-        /*
-1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
- */
-
-
         var temp = {
             name: nameArr[i],
             big: true,
@@ -161,11 +143,12 @@ function compute() {
             __double: 0
         };
 
+
         //前5个对象有龙虎
         if (i < 5) {
             temp.loong = true;
             temp.tiger = true;
-            temp._Loong = 0;
+            temp._loong = 0;
             temp._tiger = 0;
         }
 
@@ -199,19 +182,23 @@ function compute() {
             }
         }
 
+
         //所有项目遗漏数据计算完成 temp
         // 开始计算金额，和上次投注额比较 vueResult.result[0].betting[i]
         // i 索引是名次
 
+        //找出上一期的投注数据
+        var preArr = null;
+        for (var j = 0; j < vueResult.result.length; j++) {
+            if (vueResult.result[j].issue === vueData.trs[0].issue) {
+                preArr = vueResult.result[j];//上一期的投注期号必须和本期开奖期号一致
+            }
+        }
 
-        /*
-1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
- */
 
         //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致
-        if (vueResult.result.length == 0 || vueResult.result[0].issue !== vueData.trs.issue) {
+        if (vueResult.result.length == 0 || preArr === null || preArr.issue !== vueData.trs[0].issue) {
+
             if (temp.big) {
                 temp._big = num;
             }
@@ -232,26 +219,28 @@ function compute() {
                     temp._tiger = num;
                 }
             }
+
+
         } else {//之前有投注数据
 
             if (temp.big) {
-                temp._big = getNum(vueResult.result[0].betting[i]._big, num, add, max);
+                temp._big = getNum(preArr.betting[i]._big, num, add, max);
             }
             if (temp.small) {
-                temp._small = getNum(vueResult.result[0].betting[i]._small, num, add, max);
+                temp._small = getNum(preArr.betting[i]._small, num, add, max);
             }
             if (temp.single) {
-                temp._single = getNum(vueResult.result[0].betting[i]._single, num, add, max);
+                temp._single = getNum(preArr.betting[i]._single, num, add, max);
             }
             if (temp._double) {
-                temp.__double = getNum(vueResult.result[0].betting[i].__double, num, add, max);
+                temp.__double = getNum(preArr.betting[i].__double, num, add, max);
             }
             if (i < 5) {
                 if (temp.loong) {
-                    temp._loong = getNum(vueResult.result[0].betting[i]._loong, num, add, max);
+                    temp._loong = getNum(preArr.betting[i]._loong, num, add, max);
                 }
                 if (temp.tiger) {
-                    temp._tiger = getNum(vueResult.result[0].betting[i]._tiger, num, add, max);
+                    temp._tiger = getNum(preArr.betting[i]._tiger, num, add, max);
                 }
             }
         }
@@ -358,7 +347,7 @@ var vueResult = new Vue({
                 afterCopy: function () {
                     layer.msg('复制成功', {
                         icon: 1,
-                        time: 800 //2秒关闭（如果不配置，默认是3秒）
+                        time: 500 //2秒关闭（如果不配置，默认是3秒）
                     });
                 }
             });
@@ -391,11 +380,6 @@ function is_tiger(arr, index) {
     return arr[index] < arr[9 - index];
 }
 
-/*
-1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
-3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
- */
 
 var vueData = new Vue({
     el: '#vue-data',

@@ -31,6 +31,8 @@ iframe {
 
 .out-result {
     width: 298px;
+    max-height: 423px;
+    overflow: auto;
 }
 
 .content {
@@ -82,7 +84,7 @@ iframe {
 
 .badge-1 {
     display: inline-block;
-    margin: 3px 8px;
+    margin: 3px 6px;
     width: 20px;
     height: 20px;
     background: url(../img/ball-pk.png) no-repeat;
