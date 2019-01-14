@@ -8,23 +8,24 @@
     <link rel="stylesheet" href="/static/pintuer/pintuer.css">
     <link rel="stylesheet" href="css/count_2.css">
     <script src="/static/js/jquery.js"></script>
+    <script src="/static/zclip/jquery.zclip.min.js"></script>
     <script src="/static/pintuer/pintuer.js"></script>
     <script src="/static/js/vue.js"></script>
+    <script src="/static/layer-v3.1.1/layer/layer.js"></script>
 </head>
 <body>
 <div class="container-layout padding-top padding-bottom">
 
     <div id="data">
-        <!--<iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>-->
-        <!--<iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>-->
-        <!--<iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>-->
-        <!--<iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>-->
+        <iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>
+        <iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>
+        <iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>
+        <iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>
     </div>
 
-    <input type="text" class="input" id="result"/>
+    <input type="text" class="input" id="result" value=''/>
 
     <div class="line-middle margin-top">
-
 
         <div class="x2 option-panel">
 
@@ -99,28 +100,34 @@
                         <div :class="activeClass(data.big) + ' row clearfix'">
                             <div class="left">大</div>
                             <div class="right">
-                                <input disabled type="text" :value="data._big" class="input input-small"/>
+                                <input readonly type="text" @click="selectText($event)" v-show="data.big"
+                                       :value="data._big"
+                                       class="input2"/>
                             </div>
                         </div>
 
                         <div :class="activeClass(data.small) + ' row clearfix'">
                             <div class="left">小</div>
                             <div class="right">
-                                <input disabled type="text" :value="data._small" class="input input-small"/>
+                                <input readonly type="text" @click="selectText($event)" v-show="data.small"
+                                       :value="data._small" class="input2"/>
                             </div>
                         </div>
 
                         <div :class="activeClass(data.single) + ' row clearfix'">
                             <div class="left">单</div>
                             <div class="right">
-                                <input disabled type="text" :value="data._single" class="input input-small"/>
+                                <input readonly type="text" @click="selectText($event)" v-show="data.single"
+                                       :value="data._single" class="input2"/>
                             </div>
                         </div>
 
-                        <div :class="activeClass(data.double) + ' row clearfix'">
+                        <div :class="activeClass(data._double) + ' row clearfix'">
                             <div class="left">双</div>
                             <div class="right">
-                                <input disabled type="text" :value="data._double" class="input input-small"/>
+                                <input readonly type="text" @click="selectText($event)" v-show="data._double"
+                                       :value="data.__double"
+                                       class="input2"/>
                             </div>
                         </div>
 
@@ -128,14 +135,18 @@
                             <div :class="activeClass(data.loong) + ' row clearfix'">
                                 <div class="left">龙</div>
                                 <div class="right">
-                                    <input disabled type="text" :value="data._Loong" class="input input-small"/>
+                                    <input readonly type="text" @click="selectText($event)" v-show="data.loong"
+                                           :value="data._Loong"
+                                           class="input2"/>
                                 </div>
                             </div>
 
                             <div :class="activeClass(data.tiger) + ' row clearfix'">
                                 <div class="left">虎</div>
                                 <div class="right">
-                                    <input disabled type="text" :value="data._tiger" class="input input-small"/>
+                                    <input readonly type="text" @click="selectText($event)" v-show="data.tiger"
+                                           :value="data._tiger"
+                                           class="input2"/>
                                 </div>
                             </div>
                         </template>

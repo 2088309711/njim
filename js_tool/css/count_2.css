@@ -30,12 +30,12 @@ iframe {
 }
 
 .out-result {
-    width: 304px;
+    width: 298px;
 }
 
 .content {
     height: 61px;
-    border: 1px solid #aaa;
+    border: 1px solid #ddd;
 }
 
 .content h1 {
@@ -46,7 +46,7 @@ iframe {
 .mingci {
     float: left;
     width: 164px;
-    border: 1px solid #aaa;
+    border: 1px solid #ddd;
     margin: 10px 1px 0 1px;
 }
 
@@ -57,7 +57,7 @@ iframe {
 }
 
 .mingci .row {
-    border-top: 1px solid #aaa;
+    border-top: 1px solid #ddd;
 }
 
 .mingci .left, .mingci .right {
@@ -68,7 +68,7 @@ iframe {
 .mingci .left {
     width: 33%;
     text-align: center;
-    border-right: 1px solid #aaa;
+    border-right: 1px solid #ddd;
 }
 
 .mingci .right {
@@ -122,4 +122,15 @@ iframe {
 
 .badge-color-10 {
     background-position: 0 -189px;
+}
+
+.input2 {
+    background: #ffeabe !important;
+    width: 100%;
+    height: 28px;
+    border: none;
+    padding: 0 6px;
+    font-size: 16px;
+    display: block;
+    cursor: pointer !important;
 }

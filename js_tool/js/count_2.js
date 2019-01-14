@@ -114,8 +114,9 @@ function compute() {
     var add = parseInt($('#add').val());
     var max = parseInt($('#max').val());
     var miss = parseInt($('#miss').val());
+    var method = $("input[name='method']:checked").val();//方法
 
-    if (num == 0 || add == 0 || max == 0 || miss == 0) {
+    if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)) {
         alert('参数不全');
         return;
     }
@@ -152,12 +153,12 @@ function compute() {
             big: true,
             small: true,
             single: true,
-            double: true,
+            _double: true,
 
             _big: 0,
             _small: 0,
             _single: 0,
-            _double: 0
+            __double: 0
         };
 
         //前5个对象有龙虎
@@ -184,7 +185,7 @@ function compute() {
             }
             //计算双
             if (is_double(vueData.trs[j].nums[i])) {
-                temp.double = false;
+                temp._double = false;
             }
             if (i < 5) {
                 //计算龙
@@ -202,7 +203,7 @@ function compute() {
         // 开始计算金额，和上次投注额比较 vueResult.result[0].betting[i]
         // i 索引是名次
 
-        log()
+
         /*
 1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
 2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
@@ -220,8 +221,8 @@ function compute() {
             if (temp.single) {
                 temp._single = num;
             }
-            if (temp.double) {
-                temp._double = num;
+            if (temp._double) {
+                temp.__double = num;
             }
             if (i < 5) {
                 if (temp.loong) {
@@ -242,8 +243,8 @@ function compute() {
             if (temp.single) {
                 temp._single = getNum(vueResult.result[0].betting[i]._single, num, add, max);
             }
-            if (temp.double) {
-                temp._double = getNum(vueResult.result[0].betting[i]._double, num, add, max);
+            if (temp._double) {
+                temp.__double = getNum(vueResult.result[0].betting[i].__double, num, add, max);
             }
             if (i < 5) {
                 if (temp.loong) {
@@ -256,6 +257,37 @@ function compute() {
         }
 
         //投注额计算完成
+
+
+        //如果方法是收尾，则取消新的投注项目
+        if (method == '2') {
+            if (temp._big == num) {
+                temp._big = 0;
+                temp.big = false;
+            }
+            if (temp._small == num) {
+                temp._small = 0;
+                temp.small = false;
+            }
+            if (temp._single == num) {
+                temp._single = 0;
+                temp.single = false;
+            }
+            if (temp.__double == num) {
+                temp.__double = 0;
+                temp._double = false;
+            }
+            if (i < 5) {
+                if (temp._loong == num) {
+                    temp._loong = 0;
+                    temp.loong = false;
+                }
+                if (temp._tiger == num) {
+                    temp._tiger = 0;
+                    temp.tiger = false;
+                }
+            }
+        }
 
         resultArr.push(temp);
 
@@ -313,6 +345,23 @@ var vueResult = new Vue({
         },
         isShow: function () {
             return this.result.length > 0
+        },
+        selectText: function (e) {
+            var el = $(e.currentTarget);
+            el.select();
+
+            el.zclip({
+                path: '/static/zclip/ZeroClipboard.swf',
+                copy: function () { //复制内容
+                    return el.val();
+                },
+                afterCopy: function () {
+                    layer.msg('复制成功', {
+                        icon: 1,
+                        time: 800 //2秒关闭（如果不配置，默认是3秒）
+                    });
+                }
+            });
         }
     }
 });
@@ -364,72 +413,9 @@ var vueData = new Vue({
     }
 });
 
-function show_result(data) {
-
-    var numArr = data.split('-');
-
-    var type = $("input[name='type']:checked").val();//玩法
-    var method = $("input[name='method']:checked").val();//方法
-
-    var preArr = vueObj.trs[0];//上次的投注数据
-
-    if (preArr == null || preArr.length < numArr.length) {//没有参考数据
-        return;
-    }
-
-    var num = parseInt($('#num').val());//基础大小
-    var add = parseInt($('#add').val());//翻倍增加
-    var max = parseInt($('#max').val());//封顶
-
-    var resultArr = [stopStr, stopStr, stopStr, stopStr, stopStr, stopStr, stopStr, stopStr, stopStr, stopStr];
-
-    for (var i = 0; i < numArr.length; i++) {//i 是名次（冠军，亚军...）
-
-        var flag;
-
-        switch (type) {
-            case '1'://大
-                flag = parseInt(numArr[i]) > 5;
-                break;
-
-            case '2'://小
-                flag = parseInt(numArr[i]) < 6;
-                break;
-
-            case '3'://单
-                flag = parseInt(numArr[i]) % 2 != 0;
-                break;
-
-            case '4'://双
-                flag = parseInt(numArr[i]) % 2 == 0;
-                break;
-        }
-
-        if (flag) {
-            if (method == '1') {//正常
-                resultArr[i] = num;
-            }
-        } else {
-            var temp;
-            if (preArr[i] == stopStr) {
-                temp = stopStr;
-            } else {
-                if (preArr[i] * 2 + add > max) {//封顶
-                    temp = num;
-                } else {
-                    temp = preArr[i] * 2 + add;
-                }
-            }
-            resultArr[i] = temp;
-        }
-    }
-
-    vueObj.trs.unshift(resultArr);
-}
 
 function load_cookie(name) {
     switch (name) {
-        case 'type':
         case 'method':
             var value = get_cookie(name);
             $("input[name='" + name + "'][value='" + value + "']").attr('checked', true);
