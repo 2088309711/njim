@@ -35,6 +35,13 @@ $(function () {
     });
 });
 
+
+/*
+1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+ */
+
 function updateResultVal() {
     var value = $('#result').val();
 
@@ -70,7 +77,6 @@ function updateResultVal() {
         $('#result').val('数据已存在');
     }
 
-
 }
 
 function ckNum(name) {
@@ -91,10 +97,17 @@ function trim(str) {
 
 setInterval(function () {
     $('#data').children('iframe').each(function () {
-        var url = this.src.split('?');
+        // var url = this.src.split('?');
         // this.src = url[0] + '?_t=' + new Date().getTime();
     });
 }, 5000);
+
+
+/*
+1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+ */
 
 function compute() {
     var num = parseInt($('#num').val());
@@ -102,7 +115,7 @@ function compute() {
     var max = parseInt($('#max').val());
     var miss = parseInt($('#miss').val());
 
-    if (num == '' || add == '' || max == '' || miss == '') {
+    if (num == 0 || add == 0 || max == 0 || miss == 0) {
         alert('参数不全');
         return;
     }
@@ -125,7 +138,14 @@ function compute() {
 
     //以最新的数据遍历车道，从冠军到第十名
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
-        // log(vueData.trs[0].nums[i]);
+
+
+        /*
+1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+ */
+
 
         var temp = {
             name: nameArr[i],
@@ -168,11 +188,11 @@ function compute() {
             }
             if (i < 5) {
                 //计算龙
-                if (is_loong(vueData.trs[j].nums, index)) {
+                if (is_loong(vueData.trs[j].nums, i)) {
                     temp.loong = false;
                 }
                 //计算虎
-                if (is_tiger(vueData.trs[j].nums, index)) {
+                if (is_tiger(vueData.trs[j].nums, i)) {
                     temp.tiger = false;
                 }
             }
@@ -181,28 +201,16 @@ function compute() {
         //所有项目遗漏数据计算完成 temp
         // 开始计算金额，和上次投注额比较 vueResult.result[0].betting[i]
         // i 索引是名次
-        if (vueResult.result[0].betting[i] !== null && vueResult.result[0].betting[i].name === temp.name) {//确保选择的对象是正确的
-            if (temp.big) {
-                temp._big = getNum(vueResult.result[0].betting[i]._big, num, add, max);
-            }
-            if (temp.small) {
-                temp._small = getNum(vueResult.result[0].betting[i]._small, num, add, max);
-            }
-            if (temp.single) {
-                temp._single = getNum(vueResult.result[0].betting[i]._single, num, add, max);
-            }
-            if (temp.double) {
-                temp._double = getNum(vueResult.result[0].betting[i]._double, num, add, max);
-            }
-            if (i < 5) {
-                if (temp.loong) {
-                    temp._loong = getNum(vueResult.result[0].betting[i]._loong, num, add, max);
-                }
-                if (temp.tiger) {
-                    temp._tiger = getNum(vueResult.result[0].betting[i]._tiger, num, add, max);
-                }
-            }
-        } else {//没有上次的投注信息
+
+        log()
+        /*
+1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+ */
+
+        //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致
+        if (vueResult.result.length == 0 || vueResult.result[0].issue !== vueData.trs.issue) {
             if (temp.big) {
                 temp._big = num;
             }
@@ -221,6 +229,28 @@ function compute() {
                 }
                 if (temp.tiger) {
                     temp._tiger = num;
+                }
+            }
+        } else {//之前有投注数据
+
+            if (temp.big) {
+                temp._big = getNum(vueResult.result[0].betting[i]._big, num, add, max);
+            }
+            if (temp.small) {
+                temp._small = getNum(vueResult.result[0].betting[i]._small, num, add, max);
+            }
+            if (temp.single) {
+                temp._single = getNum(vueResult.result[0].betting[i]._single, num, add, max);
+            }
+            if (temp.double) {
+                temp._double = getNum(vueResult.result[0].betting[i]._double, num, add, max);
+            }
+            if (i < 5) {
+                if (temp.loong) {
+                    temp._loong = getNum(vueResult.result[0].betting[i]._loong, num, add, max);
+                }
+                if (temp.tiger) {
+                    temp._tiger = getNum(vueResult.result[0].betting[i]._tiger, num, add, max);
                 }
             }
         }
@@ -265,12 +295,7 @@ function getNum(preNum, num, add, max) {
 var vueResult = new Vue({
     el: '#vue-result',
     data: {
-        result: [
-            {
-                issue: 190113767,
-                betting: []
-            }
-        ]
+        result: []
     },
     methods: {
         activeClass: function (o) {
@@ -285,10 +310,12 @@ var vueResult = new Vue({
                 return true;
             }
             return false;
+        },
+        isShow: function () {
+            return this.result.length > 0
         }
     }
 });
-
 
 function is_big(num) {
     return num > 5;
@@ -315,22 +342,16 @@ function is_tiger(arr, index) {
     return arr[index] < arr[9 - index];
 }
 
+/*
+1. e":"190114236","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+2. e":"190114237","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+3. e":"190114238","opentime":"2019-01-14 12:23:45","nums":"09,04,02,10,08,01,06,07,03,05","n12":
+ */
 
 var vueData = new Vue({
     el: '#vue-data',
     data: {
-        trs: [
-            {issue: 190113709, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113708, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113707, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113706, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113705, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113704, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113703, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113702, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113701, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-            {issue: 190113700, nums: [3, 5, 1, 8, 6, 2, 9, 10, 4, 7]},
-        ]
+        trs: []
     },
     methods: {
         trClass: function (index) {

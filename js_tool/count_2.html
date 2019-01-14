@@ -15,10 +15,10 @@
 <div class="container-layout padding-top padding-bottom">
 
     <div id="data">
-        <iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>
+        <!--<iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>-->
+        <!--<iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>-->
+        <!--<iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>-->
+        <!--<iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>-->
     </div>
 
     <input type="text" class="input" id="result"/>
@@ -55,7 +55,6 @@
                 </div>
             </div>
 
-
             <div class="form-group">
                 <div class="label">
                     <label>遗漏</label>
@@ -86,65 +85,65 @@
 
 
         <div id="vue-result" class="x8 table-1">
-
-            <div class="content">
-                <h1>{{result[0].issue}} 期清单</h1>
-            </div>
-
-            <template v-for="(data,index) in result[0].betting">
-
-
-                <div class="mingci margin-top">
-                    <h1>{{data.ranking}}</h1>
-
-                    <div :class="activeClass(data.big) + ' row clearfix'">
-                        <div class="left">大</div>
-                        <div class="right">
-                            <input disabled type="text" :value="data._big" class="input input-small"/>
-                        </div>
-                    </div>
-
-                    <div :class="activeClass(data.small) + ' row clearfix'">
-                        <div class="left">小</div>
-                        <div class="right">
-                            <input disabled type="text" :value="data._small" class="input input-small"/>
-                        </div>
-                    </div>
-
-                    <div :class="activeClass(data.single) + ' row clearfix'">
-                        <div class="left">单</div>
-                        <div class="right">
-                            <input disabled type="text" :value="data._single" class="input input-small"/>
-                        </div>
-                    </div>
-
-                    <div :class="activeClass(data.double) + ' row clearfix'">
-                        <div class="left">双</div>
-                        <div class="right">
-                            <input disabled type="text" :value="data._double" class="input input-small"/>
-                        </div>
-                    </div>
-
-                    <template v-if="showLH(index)">
-                        <div :class="activeClass(data.loong) + ' row clearfix'">
-                            <div class="left">龙</div>
-                            <div class="right">
-                                <input disabled type="text" :value="data._Loong" class="input input-small"/>
-                            </div>
-                        </div>
-
-                        <div :class="activeClass(data.tiger) + ' row clearfix'">
-                            <div class="left">虎</div>
-                            <div class="right">
-                                <input disabled type="text" :value="data._tiger" class="input input-small"/>
-                            </div>
-                        </div>
-                    </template>
-
+            <template v-if="isShow()">
+                <div class="content">
+                    <h1>{{result[0].issue}} 期清单</h1>
                 </div>
 
-            </template>
+                <template v-for="(data,index) in result[0].betting">
 
+
+                    <div class="mingci margin-top">
+                        <h1>{{data.name}}</h1>
+
+                        <div :class="activeClass(data.big) + ' row clearfix'">
+                            <div class="left">大</div>
+                            <div class="right">
+                                <input disabled type="text" :value="data._big" class="input input-small"/>
+                            </div>
+                        </div>
+
+                        <div :class="activeClass(data.small) + ' row clearfix'">
+                            <div class="left">小</div>
+                            <div class="right">
+                                <input disabled type="text" :value="data._small" class="input input-small"/>
+                            </div>
+                        </div>
+
+                        <div :class="activeClass(data.single) + ' row clearfix'">
+                            <div class="left">单</div>
+                            <div class="right">
+                                <input disabled type="text" :value="data._single" class="input input-small"/>
+                            </div>
+                        </div>
+
+                        <div :class="activeClass(data.double) + ' row clearfix'">
+                            <div class="left">双</div>
+                            <div class="right">
+                                <input disabled type="text" :value="data._double" class="input input-small"/>
+                            </div>
+                        </div>
+
+                        <template v-if="showLH(index)">
+                            <div :class="activeClass(data.loong) + ' row clearfix'">
+                                <div class="left">龙</div>
+                                <div class="right">
+                                    <input disabled type="text" :value="data._Loong" class="input input-small"/>
+                                </div>
+                            </div>
+
+                            <div :class="activeClass(data.tiger) + ' row clearfix'">
+                                <div class="left">虎</div>
+                                <div class="right">
+                                    <input disabled type="text" :value="data._tiger" class="input input-small"/>
+                                </div>
+                            </div>
+                        </template>
+
+                    </div>
+
+                </template>
+            </template>
         </div>
 
         <div id="vue-data" class="x2 out-result">
