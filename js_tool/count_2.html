@@ -86,11 +86,14 @@
 
 
         <div id="vue-result" class="x8 table-1">
-            <template v-if="isShow()">
-                <div class="content">
-                    <h1>{{result[0].issue}} 期清单</h1>
-                </div>
+            <div class="content">
+                <h1>
+                    <span v-if="isShow()">{{result[0].issue}} 期投注清单</span>
+                    <span v-else>{{info}}</span>
+                </h1>
+            </div>
 
+            <template v-if="isShow()">
                 <template v-for="(data,index) in result[0].betting">
 
 

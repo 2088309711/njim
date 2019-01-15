@@ -1,11 +1,6 @@
-.cur td {
-    background: #ffd1a7;
-    border-color: #ffa762;
-    font-size: 30px;
-}
-
-.cur .bg {
-    background: #ffa762;
+.container-layout {
+    width: 1343px;
+    margin: 0;
 }
 
 .no-show {
@@ -18,9 +13,13 @@
     width: 840px;
 }
 
+#result {
+    width: 1323px;
+}
+
 iframe {
     display: block;
-    width: 100%;
+    width: 1323px;
     height: 37px;
     border-top: 1px solid #ddd;
 }

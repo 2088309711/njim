@@ -1,5 +1,5 @@
 var cookie_prefix = 'count_2_';
-
+var loss_count = 0;
 $(function () {
 
     load_cookie('num');
@@ -10,23 +10,28 @@ $(function () {
 
     $('#num').blur(function () {
         ckNum('num');
+        compute();
     });
 
     $('#add').blur(function () {
         ckNum('add');
+        compute();
     });
 
     $('#max').blur(function () {
         ckNum('max');
+        compute();
     });
 
 
     $('#miss').blur(function () {
         ckNum('miss');
+        compute();
     });
 
     $(":radio").click(function () {
         set_cookie($(this).attr('name'), $(this).val());
+        compute();
     });
 
     $('#result').blur(function () {
@@ -39,8 +44,8 @@ $(function () {
 function updateResultVal() {
     var value = $('#result').val();
 
-    var nums = value.match(/([01][0-9],){9}[01][0-9]/);
     var issue = value.match(/\d{9}/);
+    var nums = value.match(/([01][0-9],){9}[01][0-9]/);
 
     if (nums == null || issue == null) {
         $('#result').val('数据不完整');
@@ -53,7 +58,6 @@ function updateResultVal() {
 
     for (var i = 0; i < nums.length; i++) {
         nums[i] = parseInt(nums[i]);
-
     }
 
     var flag = true;
@@ -104,20 +108,21 @@ function compute() {
     var miss = parseInt($('#miss').val());
     var method = $("input[name='method']:checked").val();//方法
 
-
     if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)) {
-        alert('参数不全');
+        showMsg('参数不全', 2, 1000);
         return;
     }
 
     //检查数据量是否足够
     if (vueData.trs.length < miss || vueData.trs.length == 0) {
+        showMsg('数据量不足，无法计算', 2, 1000);
         return;
     }
 
     //检查数据是否断层
     for (var i = 0; i < miss - 1; i++) {
         if (vueData.trs[i].issue !== vueData.trs[i + 1].issue + 1) {
+            showMsg('数据断层，停止计算', 2, 1000);
             return;
         }
     }
@@ -307,6 +312,7 @@ function getNum(preNum, num, add, max) {
     } else {
         var temp = preNum * 2 + add;
         if (temp > max) {//封顶
+            showMsg('已亏损：' + (++loss_count) + '次', 5, 2000);
             temp = num;
         }
         return temp;
@@ -316,6 +322,7 @@ function getNum(preNum, num, add, max) {
 var vueResult = new Vue({
     el: '#vue-result',
     data: {
+        info: '录入数据',
         result: []
     },
     methods: {
@@ -345,15 +352,24 @@ var vueResult = new Vue({
                     return el.val();
                 },
                 afterCopy: function () {
-                    layer.msg('复制成功', {
-                        icon: 1,
-                        time: 500 //2秒关闭（如果不配置，默认是3秒）
-                    });
+                    showMsg('复制成功', 1, 500);
                 }
             });
         }
     }
 });
+
+window.onbeforeunload = function (e) {
+    // return '';
+}
+
+function showMsg(msg, icon, time) {
+    layer.msg(msg, {
+        icon: icon,
+        time: time //默认3秒关闭
+    });
+}
+
 
 function is_big(num) {
     return num > 5;
@@ -386,15 +402,7 @@ var vueData = new Vue({
     data: {
         trs: []
     },
-    methods: {
-        trClass: function (index) {
-            if (index === 0) {
-                return {
-                    'cur': true
-                }
-            }
-        }
-    }
+    methods: {}
 });
 
 

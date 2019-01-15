@@ -7,7 +7,27 @@
 </head>
 <body>
 <a href="/index.php/staff">使用入口</a>
-<script src="http://serve.njim.vip/static/js/im.js?njim5c1d0e79ecd6fbd8a053f0821cb2132ed614a3d4234d"
-        charset="utf-8"></script>
+<!--<script src="http://serve.njim.vip/static/js/im.js?njim5c1d0e79ecd6fbd8a053f0821cb2132ed614a3d4234d"-->
+<!--charset="utf-8"></script>-->
+
+
+<script>
+
+    //2019-01-12 16:23:45
+
+    var timeStr = '2019-1-15 15:32:11';
+
+    var nextTime = parseInt(new Date(timeStr).getTime() / 1000) + 75;
+
+    var nowTime = parseInt(new Date().getTime() / 1000);
+
+
+    log(nextTime - nowTime);
+
+    function log(o) {
+        console.log(o);
+    }
+
+</script>
 </body>
 </html>
