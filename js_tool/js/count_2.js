@@ -226,154 +226,11 @@ function compute() {
     //以最新的数据遍历车道，从冠军到第十名
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
 
+        // 计算两面结果
+        var twoSides = computeTwoSides(i, nameArr[i], num, add, max, miss);
 
-        var temp = {
-            name: nameArr[i],
-            big: true,
-            small: true,
-            single: true,
-            _double: true,
-
-            _big: 0,
-            _small: 0,
-            _single: 0,
-            __double: 0
-        };
-
-
-        //前5个对象有龙虎
-        if (i < 5) {
-            temp.loong = true;
-            temp.tiger = true;
-            temp._loong = 0;
-            temp._tiger = 0;
-        }
-
-        //和前几期的数据比较
-        for (var j = 0; j < miss; j++) {
-            //计算大
-            if (is_big(vueData.trs[j].nums[i])) {
-                temp.big = false;
-            }
-            //计算小
-            if (is_small(vueData.trs[j].nums[i])) {
-                temp.small = false;
-            }
-            //计算单
-            if (is_single(vueData.trs[j].nums[i])) {
-                temp.single = false;
-            }
-            //计算双
-            if (is_double(vueData.trs[j].nums[i])) {
-                temp._double = false;
-            }
-            if (i < 5) {
-                //计算龙
-                if (is_loong(vueData.trs[j].nums, i)) {
-                    temp.loong = false;
-                }
-                //计算虎
-                if (is_tiger(vueData.trs[j].nums, i)) {
-                    temp.tiger = false;
-                }
-            }
-        }
-
-
-        //所有项目遗漏数据计算完成 temp
-        // 开始计算金额，和上次投注额比较 vueResult.result[0].betting[i]
-        // i 索引是名次
-
-        //找出上一期的投注数据
-        var preArr = null;
-        for (var j = 0; j < vueResult.result.length; j++) {
-            if (vueResult.result[j].issue === vueData.trs[0].issue) {
-                preArr = vueResult.result[j];//上一期的投注期号必须和本期开奖期号一致
-            }
-        }
-
-
-        //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致
-        if (vueResult.result.length == 0 || preArr === null || preArr.issue !== vueData.trs[0].issue) {
-
-            if (temp.big) {
-                temp._big = num;
-            }
-            if (temp.small) {
-                temp._small = num;
-            }
-            if (temp.single) {
-                temp._single = num;
-            }
-            if (temp._double) {
-                temp.__double = num;
-            }
-            if (i < 5) {
-                if (temp.loong) {
-                    temp._loong = num;
-                }
-                if (temp.tiger) {
-                    temp._tiger = num;
-                }
-            }
-
-
-        } else {//之前有投注数据
-
-            if (temp.big) {
-                temp._big = getNum(preArr.betting[i]._big, num, add, max);
-            }
-            if (temp.small) {
-                temp._small = getNum(preArr.betting[i]._small, num, add, max);
-            }
-            if (temp.single) {
-                temp._single = getNum(preArr.betting[i]._single, num, add, max);
-            }
-            if (temp._double) {
-                temp.__double = getNum(preArr.betting[i].__double, num, add, max);
-            }
-            if (i < 5) {
-                if (temp.loong) {
-                    temp._loong = getNum(preArr.betting[i]._loong, num, add, max);
-                }
-                if (temp.tiger) {
-                    temp._tiger = getNum(preArr.betting[i]._tiger, num, add, max);
-                }
-            }
-        }
-
-        //投注额计算完成
-
-
-        //如果方法是收尾，则取消新的投注项目
-        if (method == '2') {
-            if (temp._big == num) {
-                temp._big = 0;
-                temp.big = false;
-            }
-            if (temp._small == num) {
-                temp._small = 0;
-                temp.small = false;
-            }
-            if (temp._single == num) {
-                temp._single = 0;
-                temp.single = false;
-            }
-            if (temp.__double == num) {
-                temp.__double = 0;
-                temp._double = false;
-            }
-            if (i < 5) {
-                if (temp._loong == num) {
-                    temp._loong = 0;
-                    temp.loong = false;
-                }
-                if (temp._tiger == num) {
-                    temp._tiger = 0;
-                    temp.tiger = false;
-                }
-            }
-        }
+        // 计算 1-10 结果
+        var oneToTen = computeOneToTen(i, nameArr[i], num, add, max, miss);
 
         resultArr.push(temp);
 
@@ -388,6 +245,257 @@ function compute() {
     }
 
     vueResult.result.unshift(resultObj);
+}
+
+
+function alertObj(obj) {
+    alert(JSON.stringify(obj));
+}
+
+/**
+ * 计算两面
+ * @param index
+ * @param name
+ * @param num
+ * @param add
+ * @param max
+ * @param miss
+ * @returns {{name: *, big: boolean, small: boolean, single: boolean, _double: boolean, _big: number, _small: number, _single: number, __double: number}}
+ */
+function computeTwoSides(index, name, num, add, max, miss) {
+
+    var temp = {
+        name: name,
+        big: true,
+        small: true,
+        single: true,
+        _double: true,
+
+        _big: 0,
+        _small: 0,
+        _single: 0,
+        __double: 0
+    };
+
+
+    //前5个对象有龙虎
+    if (index < 5) {
+        temp.loong = true;
+        temp.tiger = true;
+        temp._loong = 0;
+        temp._tiger = 0;
+    }
+
+    //和前几期的数据比较
+    for (var j = 0; j < miss; j++) {
+        //计算大
+        if (is_big(vueData.trs[j].nums[index])) {
+            temp.big = false;
+        }
+        //计算小
+        if (is_small(vueData.trs[j].nums[index])) {
+            temp.small = false;
+        }
+        //计算单
+        if (is_single(vueData.trs[j].nums[index])) {
+            temp.single = false;
+        }
+        //计算双
+        if (is_double(vueData.trs[j].nums[index])) {
+            temp._double = false;
+        }
+        if (index < 5) {
+            //计算龙
+            if (is_loong(vueData.trs[j].nums, index)) {
+                temp.loong = false;
+            }
+            //计算虎
+            if (is_tiger(vueData.trs[j].nums, index)) {
+                temp.tiger = false;
+            }
+        }
+    }
+
+
+    //所有项目遗漏数据计算完成 temp
+    // 开始计算金额，和上次投注额比较 vueResult.result[0].betting[index]
+    // index 索引是名次
+
+    //找出上一期的投注数据
+    var preArr = null;
+    for (var j = 0; j < vueResult.result.length; j++) {
+        if (vueResult.result[j].issue === vueData.trs[0].issue) {
+            preArr = vueResult.result[j];
+        }
+    }
+
+    //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致
+    if (preArr === null || preArr.issue !== vueData.trs[0].issue) {
+
+        if (temp.big) {
+            temp._big = num;
+        }
+        if (temp.small) {
+            temp._small = num;
+        }
+        if (temp.single) {
+            temp._single = num;
+        }
+        if (temp._double) {
+            temp.__double = num;
+        }
+        if (index < 5) {
+            if (temp.loong) {
+                temp._loong = num;
+            }
+            if (temp.tiger) {
+                temp._tiger = num;
+            }
+        }
+
+
+    } else {//之前有投注数据
+
+        if (temp.big) {
+            temp._big = getNum(preArr.betting[index]._big, num, add, max);
+        }
+        if (temp.small) {
+            temp._small = getNum(preArr.betting[index]._small, num, add, max);
+        }
+        if (temp.single) {
+            temp._single = getNum(preArr.betting[index]._single, num, add, max);
+        }
+        if (temp._double) {
+            temp.__double = getNum(preArr.betting[index].__double, num, add, max);
+        }
+        if (index < 5) {
+            if (temp.loong) {
+                temp._loong = getNum(preArr.betting[index]._loong, num, add, max);
+            }
+            if (temp.tiger) {
+                temp._tiger = getNum(preArr.betting[index]._tiger, num, add, max);
+            }
+        }
+    }
+
+    //投注额计算完成
+
+
+    //如果方法是收尾，则取消新的投注项目
+    if (method == '2') {
+        if (temp._big == num) {
+            temp._big = 0;
+            temp.big = false;
+        }
+        if (temp._small == num) {
+            temp._small = 0;
+            temp.small = false;
+        }
+        if (temp._single == num) {
+            temp._single = 0;
+            temp.single = false;
+        }
+        if (temp.__double == num) {
+            temp.__double = 0;
+            temp._double = false;
+        }
+        if (index < 5) {
+            if (temp._loong == num) {
+                temp._loong = 0;
+                temp.loong = false;
+            }
+            if (temp._tiger == num) {
+                temp._tiger = 0;
+                temp.tiger = false;
+            }
+        }
+    }
+
+    return temp;
+}
+
+
+function computeOneToTen(index, name, num, add, max, miss) {
+
+    var minMiss = 20;//达到这个数量开启投注
+
+    var numObj = function (number) {
+        return {
+            number: number,
+            betting: false,
+            num: 0,//当期投注金额
+            miss: 0,//当期遗漏值
+            frequency: 0,//当期投注次数
+            total_sum: 0//本轮投注总金额
+        }
+    }
+
+    var countMiss = function (number, index) {
+        for (var i = 0; i < vueData.trs.length; i++) {
+            if (vueData.trs[i].nums[index] === number) {
+                return i;
+            }
+        }
+    }
+
+    var temp = {
+        name: name,
+        nums: []
+    };
+
+    //创建十个号码对象
+    for (var i = 0; i < 10; i++) {
+        temp.nums[i] = new numObj(i + 1);
+    }
+
+
+    //获取上一期的投注方案
+    var preData = vueResult.get(vueData.trs[0].issue);
+
+    //和往期数据对比，计算出 10 个号码的遗漏值
+    for (var i = 0; i < temp.nums.length; i++) {
+        temp.nums[i].miss = countMiss(temp.nums[i].number, i);
+
+        if (temp.nums[i].miss >= minMiss) {//达到遗漏值开启投注
+            temp.nums[i].betting = true;
+
+            //获取上期的投注方案，计算当前投注额
+            if (preData == null) {//没有上期的投注信息
+                temp.nums[i].num = num;
+                temp.nums[i].frequency = 1;
+                temp.nums[i].total_sum = num;
+            } else {//有上期的投注方案
+                var preNum = preData.oneToTen[index].nums[i].num;//上期投注额
+                var total_sum = preData.oneToTen[index].nums[i].total_sum;//截止到上期投注总额
+                var preFrequency = preData.oneToTen[index].nums[i].frequency;//上期的投注次数
+
+                var nowNum = 1;//当前投注额
+                var odds = 9.99;//赔率
+                var flag = true;
+                while (flag) {
+                    if (nowNum * odds > total_sum + nowNum) {
+                        flag = true;
+                    } else {
+                        nowNum++;
+                    }
+                }
+
+
+                temp.nums[i].num = nowNum;
+                temp.nums[i].frequency = preFrequency + 1;
+                temp.nums[i].total_sum = total_sum + nowNum;
+
+
+            }
+
+        }
+
+    }
+
+
+    return temp;
+
+
 }
 
 /**
@@ -436,8 +544,7 @@ var vueResult = new Vue({
         },
         selectText: function (e) {
             var el = $(e.currentTarget);
-            el.select();
-
+            // el.select();//选中文本
             el.zclip({
                 path: '/static/zclip/ZeroClipboard.swf',
                 copy: function () { //复制内容
@@ -447,6 +554,36 @@ var vueResult = new Vue({
                     showMsg('复制成功', 1, 500);
                 }
             });
+        },
+
+        /**
+         * 获取期号索引
+         * @param issue
+         * @returns {number}
+         */
+        getIndex: function (issue) {
+            for (var i = 0; i < this.result.length; i++) {
+                if (this.result[i].issue === issue) {
+                    return i;
+                }
+            }
+            return -1;
+        },
+        get: function (issue) {
+            for (var i = 0; i < this.result.length; i++) {
+                if (this.result[i].issue === issue) {
+                    return this.result[i];
+                }
+            }
+            return null;
+        },
+        add: function (obj) {
+            var index = this.getIndex(obj.isssue);
+            if (index > -1) {
+                this.result[index] = obj;
+            } else {
+                this.unshift(obj);
+            }
         }
     }
 });
@@ -565,7 +702,6 @@ var vueData = new Vue({
         }
     }
 });
-
 
 function load_cookie(name) {
     switch (name) {
