@@ -23,7 +23,6 @@ $(function () {
         compute();
     });
 
-
     $('#miss').blur(function () {
         ckNum('miss');
         compute();
@@ -34,47 +33,140 @@ $(function () {
         compute();
     });
 
+    $('#result').focus(function () {
+        $(this).val('');
+    });
+
     $('#result').blur(function () {
-        updateResultVal();
+        parseData();
         compute();
     });
 });
 
 
-function updateResultVal() {
+function parseData() {
     var value = $('#result').val();
+    $('#result').val('正在解析数据');
 
     var issue = value.match(/\d{9}/);
     var nums = value.match(/([01][0-9],){9}[01][0-9]/);
+    var allData = value.match(/\[\{"id":\d+,"betEndTime":"\d{4}(-\d{2}){2} (\d{2}:){2}\d{2}","turnNum":"\d+","openNum":"(\d{2},){9}\d{2}"/);
 
-    if (nums == null || issue == null) {
-        $('#result').val('数据不完整');
-        return;
+    if (allData != null) {//完整数据
+
+        var data = $.parseJSON(value);
+
+        // 时间 data[0].openTime
+
+        //添加数据
+        for (var i = 0; i < data.length; i++) {
+            if (vueData.add(parseInt(data[i].turnNum), splitNumsToInt(data[i].openNum))) {
+                $('#result').val('数据录入成功');
+            } else {
+                $('#result').val('数据已存在');
+            }
+        }
+
+        //排序
+        vueData.sort();
+        vueData.check();
+
+        data = null;
+
+    } else if (allData == null && nums != null && issue != null) {//当期数据
+
+        //转整
+        issue = parseInt(issue[0]);
+        nums = splitNumsToInt(nums[0]);
+
+        if (vueData.add(issue, nums)) {
+            $('#result').val('数据录入成功');
+        } else {
+            $('#result').val('数据已存在');
+        }
+
+    } else {
+        $('#result').val('无法识别的数据');
     }
 
-    nums = nums[0].split(',');
-    issue = parseInt(issue[0]);
+}
 
-
-    for (var i = 0; i < nums.length; i++) {
-        nums[i] = parseInt(nums[i]);
+//二叉树算法
+function BinaryTree() {
+    //构造节点
+    var Node = function (key) {
+        this.key = key;
+        this.left = null;
+        this.right = null;
     }
 
-    var flag = true;
-    for (var i = 0; i < vueData.trs.length; i++) {
-        if (vueData.trs[i].issue == issue) {
-            flag = false;
-            break;
+    //根节点
+    var root = null;
+
+    //插入节点（父节点，新节点）
+    var insertNode = function (node, newNode) {
+        if (newNode.key.issue > node.key.issue) {
+            //新节点值大于父节点向左传递
+            if (node.left === null) {
+                //如果左节点为空则插入到左边
+                node.left = newNode;
+            } else {
+                //否则向左下递归
+                insertNode(node.left, newNode);
+            }
+        } else {
+            //新节点值小于等于父节点向右传递
+            if (node.right === null) {
+                //如果右节点为空则插入到右边
+                node.right = newNode;
+            } else {
+                //否则向右下递归
+                insertNode(node.right, newNode);
+            }
         }
     }
 
-    if (flag) {
-        vueData.trs.unshift({issue: issue, nums: nums});
-        $('#result').val('数据录入成功');
-    } else {
-        $('#result').val('数据已存在');
+    //插入值
+    this.insert = function (key) {
+        //构造一个新节点
+        var newNode = new Node(key);
+        if (root === null) {
+            //如果没有根节点，赋值到根
+            root = newNode;
+        } else {
+            //向根节点下面添加子节点
+            insertNode(root, newNode);
+        }
     }
 
+    //中序遍历节点（节点， 回调函数）
+    var inOrderTraverseNode = function (node, callback) {
+        if (node !== null) {
+            inOrderTraverseNode(node.left, callback);//左下递归
+            callback(node.key);//将节点的值传入回调函数
+            inOrderTraverseNode(node.right, callback);//右下递归
+        }
+    }
+
+    //中序遍历
+    this.inOrderTraverse = function (callback) {
+        //从根节点开始，并传入回调函数
+        inOrderTraverseNode(root, callback);
+    }
+}
+
+
+/**
+ * 拆分号码字符串并转整型
+ * @param str
+ * @returns {*|string[]}
+ */
+function splitNumsToInt(str) {
+    str = str.split(',');
+    for (var i = 0; i < str.length; i++) {
+        str[i] = parseInt(str[i]);
+    }
+    return str;
 }
 
 function ckNum(name) {
@@ -396,13 +488,82 @@ function is_tiger(arr, index) {
     return arr[index] < arr[9 - index];
 }
 
-
+//开奖数据
 var vueData = new Vue({
     el: '#vue-data',
     data: {
         trs: []
     },
-    methods: {}
+    methods: {
+
+        /**
+         * 添加一条数据，如果已存在则不添加并返回 false
+         * @param issue
+         * @param nums
+         * @returns {boolean}
+         */
+        add: function (issue, nums) {
+            if (this.get(issue) == null) {
+                this.trs.unshift({issue: issue, nums: nums});
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        /**
+         * 通过期号获取数据，不存在返回 null
+         * @param issue
+         * @returns {*}
+         */
+        get: function (issue) {
+            for (var i = 0; i < this.trs.length; i++) {
+                if (this.trs[i].issue == issue) {
+                    return this.trs[i];
+                }
+            }
+            return null;
+        },
+
+        /**
+         * 采用二叉树算法
+         */
+        sort: function () {
+            //二叉树排序
+            var binaryTree = new BinaryTree();
+            for (var i = 0; i < this.trs.length; i++) {
+                binaryTree.insert(this.trs[i]);//将数组元素插入二叉树
+            }
+            //中序遍历，传入回调函数
+            var tempArr = [];
+            binaryTree.inOrderTraverse(function (key) {
+                tempArr.push(key);
+            });
+
+            log(tempArr);
+
+            this.trs = tempArr;
+            //二叉树结束
+        },
+
+        /**
+         * 检查数据是否缺失
+         * @returns {boolean}
+         */
+        check: function () {
+            for (var i = 0; i < this.trs.length; i++) {
+                if (i + 1 === this.trs.length) {//最后的索引，全部检查通过
+                    return true;
+                }
+                if (this.trs[i].issue !== this.trs[i + 1].issue + 1) {
+                    if (this.get(this.trs[i].issue - 1) == null) {
+                        alert((this.trs[i].issue - 1) + ' 期数据不存在');
+                        return false;
+                    }
+                }
+            }
+        }
+    }
 });
 
 
