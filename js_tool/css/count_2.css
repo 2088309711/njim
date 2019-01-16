@@ -137,3 +137,48 @@ iframe {
     display: block;
     cursor: pointer !important;
 }
+
+/*一到十*/
+.one-to-ten {
+    background: url(../img/1-10.jpg) no-repeat;
+    width: 827px;
+    height: 640px;
+    overflow: hidden;
+    margin-top: 10px;
+    float: left;
+}
+
+.one-to-ten .item {
+    float: left;
+    width: 165px;
+    margin: 25px 0 0 0;
+    height: 300px;
+}
+
+.one-to-ten .item .num {
+    /*background: #aaa;*/
+    height: 29px;
+}
+
+.item .num span {
+    float: left;
+    margin: 3px 0 0 65px;
+    font-size: 16px;
+}
+
+.item .num input {
+    float: right;
+    width: 55px;
+    height: 18px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    padding: 0 5px;
+    margin: 4px 3px 0 0;
+    background: rgba(255, 255, 255, 0);
+}
+
+.item .num .active {
+    background: #ff6e00;
+}
+

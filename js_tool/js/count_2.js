@@ -6,6 +6,10 @@ $(function () {
     load_cookie('add');
     load_cookie('max');
     load_cookie('miss');
+    load_cookie('num_1_10');
+    load_cookie('min_1_10');
+    load_cookie('max_1_10');
+    load_cookie('miss_1_10');
     load_cookie('method');
 
     $('#num').blur(function () {
@@ -28,6 +32,26 @@ $(function () {
         compute();
     });
 
+    $('#num_1_10').blur(function () {
+        ckNum('num_1_10');
+        compute();
+    });
+
+    $('#min_1_10').blur(function () {
+        ckNum('min_1_10');
+        compute();
+    });
+
+    $('#max_1_10').blur(function () {
+        ckNum('max_1_10');
+        compute();
+    });
+
+    $('#miss_1_10').blur(function () {
+        ckNum('miss_1_10');
+        compute();
+    });
+
     $(":radio").click(function () {
         set_cookie($(this).attr('name'), $(this).val());
         compute();
@@ -41,6 +65,30 @@ $(function () {
         parseData();
         compute();
     });
+
+    $('.open-window').click(function () {
+
+        var d = new Date();
+
+        var month = d.getMonth() + 1;
+        month = month < 10 ? '0' + month : month;
+        var day = d.getDate();
+        day = day < 10 ? '0' + day : day;
+
+        var dateStr = '' + d.getFullYear() + month + day;
+
+        var domain = [
+            'https://www.sh1333.com',
+            'https://www.yyc91.com',
+            'https://www.rd2255.com',
+            'http://www.9h991.com'
+        ];
+
+        var url = domain[$(this).attr('index')] + '/static//data/' + dateStr + '80HistoryLottery.json?_=' + d.getTime();
+
+        window.open(url, "all_data", "toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=400, height=400");
+    });
+
 });
 
 
@@ -194,10 +242,20 @@ setInterval(function () {
 
 
 function compute() {
+
+    //两面参数
     var num = parseInt($('#num').val());
     var add = parseInt($('#add').val());
     var max = parseInt($('#max').val());
     var miss = parseInt($('#miss').val());
+
+    //1~10名参数
+    var num_1_10 = parseInt($('#num_1_10').val());//大小
+    var min_1_10 = parseInt($('#min_1_10').val());//保底收益
+    var max_1_10 = parseInt($('#max_1_10').val());//封顶
+    var miss_1_10 = parseInt($('#miss_1_10').val());//遗漏
+
+
     var method = $("input[name='method']:checked").val();//方法
 
     if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)) {
@@ -219,7 +277,8 @@ function compute() {
         }
     }
 
-    var resultArr = [];
+    var twoSidesResultArr = [];
+    var oneToTenResultArr = [];
 
     var nameArr = ['冠军', '亚军', '第三名', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
 
@@ -227,13 +286,13 @@ function compute() {
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
 
         // 计算两面结果
-        var twoSides = computeTwoSides(i, nameArr[i], num, add, max, miss);
+        var twoSides = computeTwoSides(i, nameArr[i], num, add, max, miss, method);
 
         // 计算 1-10 结果
-        var oneToTen = computeOneToTen(i, nameArr[i], num, add, max, miss);
+        var oneToTen = computeOneToTen(i, nameArr[i], num_1_10, min_1_10, max_1_10, miss_1_10, method);
 
-        resultArr.push(temp);
-
+        twoSidesResultArr.push(twoSides);
+        oneToTenResultArr.push(oneToTen);
     }
 
     // resultArr 投注结果和遗漏数据都计算完成
@@ -241,15 +300,114 @@ function compute() {
     //组织结果对象
     var resultObj = {
         issue: vueData.trs[0].issue + 1,//最新期号 + 1
-        betting: resultArr
+        twoSides: twoSidesResultArr,
+        oneToTen: oneToTenResultArr,
     }
 
     vueResult.result.unshift(resultObj);
+    outObj(vueResult.result)
+}
+
+/**
+ *
+ * @param index
+ * @param name
+ * @param num 大小
+ * @param min 保底收益
+ * @param max 封顶
+ * @param miss 遗漏
+ * @param method
+ * @returns {{name: *, nums: Array}}
+ */
+function computeOneToTen(index, name, num, min, max, miss, method) {
+
+    /*
+    0:0 1:"冠军" 2:10 3:10 4:10 5:10 6:"1"
+     */
+
+    var numObj = function (number) {
+        return {
+            number: number,
+            betting: false,
+            num: 0,//当期投注金额
+            miss: 0,//当期遗漏值
+            frequency: 0,//当期投注次数
+            total_sum: 0//本轮投注总金额
+        }
+    }
+
+    var countMiss = function (number) {
+        for (var i = 0; i < vueData.trs.length; i++) {
+            if (vueData.trs[i].nums[index] === number) {
+                return i;
+            }
+        }
+    }
+
+    var temp = {
+        name: name,
+        nums: []
+    };
+
+    //创建十个号码对象
+    for (var i = 0; i < 10; i++) {
+        temp.nums[i] = numObj(i + 1);
+    }
+
+    //获取上一期的投注方案
+    var preData = vueResult.get(vueData.trs[0].issue);
+
+    //和往期数据对比，计算出 10 个号码的遗漏值
+    for (var i = 0; i < temp.nums.length; i++) {
+        temp.nums[i].miss = countMiss(temp.nums[i].number);
+
+        if (temp.nums[i].miss >= miss) {//达到遗漏值开启投注
+            temp.nums[i].betting = true;
+
+            //获取上期的投注方案，计算当前投注额
+            if (preData == null) {//没有上期的投注信息
+                temp.nums[i].num = num;
+                temp.nums[i].frequency = 1;
+                temp.nums[i].total_sum = num;
+            } else {//有上期的投注方案
+                var preNum = preData.oneToTen[index].nums[i].num;//上期投注额
+                var total_sum = preData.oneToTen[index].nums[i].total_sum;//截止到上期投注总额
+                var preFrequency = preData.oneToTen[index].nums[i].frequency;//上期的投注次数
+
+                var nowNum = 1;//当前投注额
+                var odds = 9.99;//赔率
+                var flag = true;
+                while (flag) {
+                    if (nowNum * odds > total_sum + nowNum) {
+                        flag = true;
+                    } else {
+                        nowNum++;
+                    }
+                }
+
+
+                temp.nums[i].num = nowNum;
+                temp.nums[i].frequency = preFrequency + 1;
+                temp.nums[i].total_sum = total_sum + nowNum;
+
+
+            }
+
+        }
+
+    }
+
+
+    return temp;
+}
+
+function stop() {
+    throw 0;
 }
 
 
-function alertObj(obj) {
-    alert(JSON.stringify(obj));
+function outObj(obj) {
+    $('#out-obj').val(JSON.stringify(obj));
 }
 
 /**
@@ -262,7 +420,7 @@ function alertObj(obj) {
  * @param miss
  * @returns {{name: *, big: boolean, small: boolean, single: boolean, _double: boolean, _big: number, _small: number, _single: number, __double: number}}
  */
-function computeTwoSides(index, name, num, add, max, miss) {
+function computeTwoSides(index, name, num, add, max, miss, method) {
 
     var temp = {
         name: name,
@@ -414,89 +572,6 @@ function computeTwoSides(index, name, num, add, max, miss) {
     return temp;
 }
 
-
-function computeOneToTen(index, name, num, add, max, miss) {
-
-    var minMiss = 20;//达到这个数量开启投注
-
-    var numObj = function (number) {
-        return {
-            number: number,
-            betting: false,
-            num: 0,//当期投注金额
-            miss: 0,//当期遗漏值
-            frequency: 0,//当期投注次数
-            total_sum: 0//本轮投注总金额
-        }
-    }
-
-    var countMiss = function (number, index) {
-        for (var i = 0; i < vueData.trs.length; i++) {
-            if (vueData.trs[i].nums[index] === number) {
-                return i;
-            }
-        }
-    }
-
-    var temp = {
-        name: name,
-        nums: []
-    };
-
-    //创建十个号码对象
-    for (var i = 0; i < 10; i++) {
-        temp.nums[i] = new numObj(i + 1);
-    }
-
-
-    //获取上一期的投注方案
-    var preData = vueResult.get(vueData.trs[0].issue);
-
-    //和往期数据对比，计算出 10 个号码的遗漏值
-    for (var i = 0; i < temp.nums.length; i++) {
-        temp.nums[i].miss = countMiss(temp.nums[i].number, i);
-
-        if (temp.nums[i].miss >= minMiss) {//达到遗漏值开启投注
-            temp.nums[i].betting = true;
-
-            //获取上期的投注方案，计算当前投注额
-            if (preData == null) {//没有上期的投注信息
-                temp.nums[i].num = num;
-                temp.nums[i].frequency = 1;
-                temp.nums[i].total_sum = num;
-            } else {//有上期的投注方案
-                var preNum = preData.oneToTen[index].nums[i].num;//上期投注额
-                var total_sum = preData.oneToTen[index].nums[i].total_sum;//截止到上期投注总额
-                var preFrequency = preData.oneToTen[index].nums[i].frequency;//上期的投注次数
-
-                var nowNum = 1;//当前投注额
-                var odds = 9.99;//赔率
-                var flag = true;
-                while (flag) {
-                    if (nowNum * odds > total_sum + nowNum) {
-                        flag = true;
-                    } else {
-                        nowNum++;
-                    }
-                }
-
-
-                temp.nums[i].num = nowNum;
-                temp.nums[i].frequency = preFrequency + 1;
-                temp.nums[i].total_sum = total_sum + nowNum;
-
-
-            }
-
-        }
-
-    }
-
-
-    return temp;
-
-
-}
 
 /**
  *
@@ -677,7 +752,6 @@ var vueData = new Vue({
                 tempArr.push(key);
             });
 
-            log(tempArr);
 
             this.trs = tempArr;
             //二叉树结束

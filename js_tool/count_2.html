@@ -17,10 +17,10 @@
 <div class="container-layout padding-top padding-bottom">
 
     <div id="data">
-        <iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>
+        <!--<iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>-->
+        <!--<iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>-->
+        <!--<iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>-->
+        <!--<iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>-->
     </div>
 
     <textarea id="result" rows="1" class="input"></textarea>
@@ -29,58 +29,141 @@
 
         <div class="x2 option-panel">
 
-            <div class="form-group">
-                <div class="label">
-                    <label>大小</label>
+
+            <div class="panel">
+                <div class="panel-head">
+                    通用
                 </div>
-                <div class="field">
-                    <input type="text" class="input" id="num"/>
+
+                <div class="panel-body padding-little-bottom">
+                    <div class="form-group">
+                        <div class="label">
+                            <label>数据</label>
+                        </div>
+                        <div class="field">
+                            <button index="0" class="open-window button button-little margin-small">线路1</button>
+                            <button index="1" class="open-window button button-little margin-small">线路2</button>
+                            <button index="2" class="open-window button button-little margin-small">线路3</button>
+                            <button index="3" class="open-window button button-little margin-small">线路4</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel-body padding-little-top">
+                    <div class="form-group">
+                        <div class="label">
+                            <label>方法</label>
+                        </div>
+                        <div class="field">
+                            <label class="margin-big-right">
+                                <input name="method" value="1" type="radio">
+                                正常
+                            </label>
+                            <label>
+                                <input name="method" value="2" type="radio">
+                                收尾
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="label">
-                    <label>增加</label>
+
+            <div class="panel margin-top">
+                <div class="panel-head">
+                    两面参数
                 </div>
-                <div class="field">
-                    <input type="text" class="input" id="add"/>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="label">
+                            <label>大小</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" class="input" id="num"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label">
+                            <label>增加</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" class="input" id="add"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="label">
+                            <label>封顶</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" class="input" id="max"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label">
+                            <label>遗漏</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" class="input" id="miss"/>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="label">
-                    <label>封顶</label>
+
+            <div class="panel margin-top">
+                <div class="panel-head">
+                    1~10 名参数
                 </div>
-                <div class="field">
-                    <input type="text" class="input" id="max"/>
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <div class="label">
+                            <label>大小</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" class="input" id="num_1_10"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label">
+                            <label>保底</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" class="input" id="min_1_10"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="label">
+                            <label>封顶</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" class="input" id="max_1_10"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="label">
+                            <label>遗漏</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" class="input" id="miss_1_10"/>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="label">
-                    <label>遗漏</label>
-                </div>
-                <div class="field">
-                    <input type="text" class="input" id="miss"/>
-                </div>
-            </div>
-
-
-            <div class="form-group">
-                <div class="label">
-                    <label>方法</label>
-                </div>
-                <div class="field">
-                    <label class="margin-big-right">
-                        <input name="method" value="1" type="radio">
-                        正常
-                    </label>
-                    <label>
-                        <input name="method" value="2" type="radio">
-                        收尾
-                    </label>
-                </div>
-            </div>
 
         </div>
 
@@ -158,6 +241,19 @@
 
                 </template>
             </template>
+
+
+            <div class="one-to-ten">
+
+                <div class="item">
+                    <div class="num">
+                        <span>6</span>
+                        <input class="active" readonly type="text" value="1">
+                    </div>
+                </div>
+
+
+            </div>
         </div>
 
         <div id="vue-data" class="x2 out-result">
@@ -176,6 +272,8 @@
         </div>
 
     </div>
+
+    <textarea id="out-obj" rows="15" class="input margin-top text-large height-large"></textarea>
 
 </div>
 <script src="js/count_2.js"></script>
