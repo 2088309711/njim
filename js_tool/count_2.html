@@ -17,10 +17,10 @@
 <div class="container-layout padding-top padding-bottom">
 
     <div id="data">
-        <!--<iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>-->
-        <!--<iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>-->
-        <!--<iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>-->
-        <!--<iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>-->
+        <iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>
+        <iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>
+        <iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>
+        <iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>
     </div>
 
     <textarea id="result" rows="1" class="input"></textarea>
@@ -160,13 +160,10 @@
                         </div>
                     </div>
 
-
                 </div>
             </div>
 
-
         </div>
-
 
         <div id="vue-result" class="x8 table-1">
             <div class="content">
@@ -177,76 +174,33 @@
             </div>
 
             <template v-if="isShow()">
-                <template v-for="(data,index) in result[0].twoSides">
 
+                <div class="two-sides">
+                    <template v-for="(data,index) in result[0].twoSides">
 
-                    <div class="mingci margin-top">
-                        <h1>{{data.name}}</h1>
+                        <div class="item">
 
-                        <div :class="activeClass(data.big) + ' row clearfix'">
-                            <div class="left">大</div>
-                            <div class="right">
-                                <input readonly type="text" @click="selectText($event)" v-show="data.big"
-                                       :value="data._big"
-                                       class="input2"/>
-                            </div>
-                        </div>
-
-                        <div :class="activeClass(data.small) + ' row clearfix'">
-                            <div class="left">小</div>
-                            <div class="right">
-                                <input readonly type="text" @click="selectText($event)" v-show="data.small"
-                                       :value="data._small" class="input2"/>
-                            </div>
-                        </div>
-
-                        <div :class="activeClass(data.single) + ' row clearfix'">
-                            <div class="left">单</div>
-                            <div class="right">
-                                <input readonly type="text" @click="selectText($event)" v-show="data.single"
-                                       :value="data._single" class="input2"/>
-                            </div>
-                        </div>
-
-                        <div :class="activeClass(data._double) + ' row clearfix'">
-                            <div class="left">双</div>
-                            <div class="right">
-                                <input readonly type="text" @click="selectText($event)" v-show="data._double"
-                                       :value="data.__double"
-                                       class="input2"/>
-                            </div>
-                        </div>
-
-                        <template v-if="showLH(index)">
-                            <div :class="activeClass(data.loong) + ' row clearfix'">
-                                <div class="left">龙</div>
-                                <div class="right">
-                                    <input readonly type="text" @click="selectText($event)" v-show="data.loong"
-                                           :value="data._loong"
-                                           class="input2"/>
+                            <template v-for="(obj,index) in data.item">
+                                <div class="num">
+                                    <span>{{obj.miss}}</span>
+                                    <input readonly type="text" @click="selectText($event)" v-show="obj.is_betting"
+                                           :value="obj.betting_amount">
                                 </div>
-                            </div>
 
-                            <div :class="activeClass(data.tiger) + ' row clearfix'">
-                                <div class="left">虎</div>
-                                <div class="right">
-                                    <input readonly type="text" @click="selectText($event)" v-show="data.tiger"
-                                           :value="data._tiger"
-                                           class="input2"/>
-                                </div>
-                            </div>
-                        </template>
+                            </template>
+                        </div>
 
-                    </div>
+                    </template>
+                </div>
 
-                </template>
 
                 <div class="one-to-ten">
 
                     <div class="item" v-for="(data,index) in result[0].oneToTen">
-                        <div class="num" v-for="(nums,index) in result[0].data">
-                            <span>{{nums.number}}:{{nums.miss}}</span>
-                            <input v-show="nums.betting" readonly type="text" :value="nums.num">
+                        <div class="num" v-for="(obj,index) in data.nums">
+                            <span>{{obj.miss}}</span>
+                            <input v-show="obj.betting" readonly type="text" @click="selectText($event)"
+                                   :value="obj.num">
                         </div>
                     </div>
 

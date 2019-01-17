@@ -138,6 +138,24 @@ iframe {
     cursor: pointer !important;
 }
 
+/*两面*/
+.two-sides {
+    background: url(../img/two-sides.jpg) no-repeat;
+    width: 827px;
+    height: 350px;
+    overflow: hidden;
+    margin-top: 10px;
+    float: left;
+}
+
+.two-sides .item {
+    float: left;
+    width: 165px;
+    margin: 25px 0 0 0;
+    height: 183px;
+
+}
+
 /*一到十*/
 .one-to-ten {
     background: url(../img/1-10.jpg) no-repeat;
@@ -155,8 +173,7 @@ iframe {
     height: 300px;
 }
 
-.one-to-ten .item .num {
-    /*background: #aaa;*/
+.item .num {
     height: 29px;
 }
 
