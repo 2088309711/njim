@@ -177,7 +177,7 @@
             </div>
 
             <template v-if="isShow()">
-                <template v-for="(data,index) in result[0].betting">
+                <template v-for="(data,index) in result[0].twoSides">
 
 
                     <div class="mingci margin-top">
@@ -240,20 +240,18 @@
                     </div>
 
                 </template>
-            </template>
 
+                <div class="one-to-ten">
 
-            <div class="one-to-ten">
-
-                <div class="item">
-                    <div class="num">
-                        <span>6</span>
-                        <input class="active" readonly type="text" value="1">
+                    <div class="item" v-for="(data,index) in result[0].oneToTen">
+                        <div class="num" v-for="(nums,index) in result[0].data">
+                            <span>{{nums.number}}:{{nums.miss}}</span>
+                            <input v-show="nums.betting" readonly type="text" :value="nums.num">
+                        </div>
                     </div>
+
                 </div>
-
-
-            </div>
+            </template>
         </div>
 
         <div id="vue-data" class="x2 out-result">
@@ -265,7 +263,7 @@
                 </tr>
                 <tr v-for="tr in trs">
                     <td>{{tr.issue}}</td>
-                    <td><span :class="'badge-1 badge-color-'+num" v-for="num in tr.nums"></span></td>
+                    <td><span :class="'badge-1 badge-color-' + num" v-for="num in tr.nums"></span></td>
                 </tr>
             </table>
 

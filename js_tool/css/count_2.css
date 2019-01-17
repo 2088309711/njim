@@ -176,9 +176,5 @@ iframe {
     padding: 0 5px;
     margin: 4px 3px 0 0;
     background: rgba(255, 255, 255, 0);
-}
-
-.item .num .active {
     background: #ff6e00;
 }
-

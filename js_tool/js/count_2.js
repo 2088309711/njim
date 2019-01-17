@@ -104,7 +104,25 @@ function parseData() {
 
         var data = $.parseJSON(value);
 
-        // 时间 data[0].openTime
+        // 时间 data[0].openTime  2019-01-16 06:30:00
+
+        //核对日期
+        var date1 = data[0].openTime.split(' ')[0];
+
+        var d = new Date();
+
+        var month = d.getMonth() + 1;
+        month = month < 10 ? '0' + month : month;
+        var day = d.getDate();
+        day = day < 10 ? '0' + day : day;
+
+        var date2 = d.getFullYear() + '-' + month + '-' + day;
+
+        if (date1 !== date2) {
+            if (!confirm('检测到不是今天的数据，是否继续？')) {
+                return;
+            }
+        }
 
         //添加数据
         for (var i = 0; i < data.length; i++) {
@@ -185,7 +203,7 @@ function BinaryTree() {
             //向根节点下面添加子节点
             insertNode(root, newNode);
         }
-    }
+    };
 
     //中序遍历节点（节点， 回调函数）
     var inOrderTraverseNode = function (node, callback) {
@@ -194,7 +212,7 @@ function BinaryTree() {
             callback(node.key);//将节点的值传入回调函数
             inOrderTraverseNode(node.right, callback);//右下递归
         }
-    }
+    };
 
     //中序遍历
     this.inOrderTraverse = function (callback) {
@@ -202,7 +220,6 @@ function BinaryTree() {
         inOrderTraverseNode(root, callback);
     }
 }
-
 
 /**
  * 拆分号码字符串并转整型
@@ -258,24 +275,11 @@ function compute() {
 
     var method = $("input[name='method']:checked").val();//方法
 
-    if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)) {
+    if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss) || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(max_1_10) || isNaN(miss_1_10)) {
         showMsg('参数不全', 2, 1000);
         return;
     }
 
-    //检查数据量是否足够
-    if (vueData.trs.length < miss || vueData.trs.length == 0) {
-        showMsg('数据量不足，无法计算', 2, 1000);
-        return;
-    }
-
-    //检查数据是否断层
-    for (var i = 0; i < miss - 1; i++) {
-        if (vueData.trs[i].issue !== vueData.trs[i + 1].issue + 1) {
-            showMsg('数据断层，停止计算', 2, 1000);
-            return;
-        }
-    }
 
     var twoSidesResultArr = [];
     var oneToTenResultArr = [];
@@ -302,10 +306,10 @@ function compute() {
         issue: vueData.trs[0].issue + 1,//最新期号 + 1
         twoSides: twoSidesResultArr,
         oneToTen: oneToTenResultArr,
-    }
+    };
 
-    vueResult.result.unshift(resultObj);
-    outObj(vueResult.result)
+    vueResult.add(resultObj);
+    outObj(vueResult.result);
 }
 
 /**
