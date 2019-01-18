@@ -151,6 +151,10 @@ function parseData() {
             $('#result').val('数据已存在');
         }
 
+        //排序
+        vueData.sort();
+        vueData.check();
+
     } else {
         $('#result').val('无法识别的数据');
     }
@@ -285,6 +289,14 @@ function compute() {
         return;
     }
 
+
+    if (!vueData.check()) {
+        if (!confirm('数据断层是否继续？')) {
+            return;
+        }
+    }
+
+
     var twoSidesResultArr = [];
     var oneToTenResultArr = [];
 
@@ -377,7 +389,7 @@ function computeOneToTen(index, name, num, min, max, miss, method) {
                 if (preNum === 0) {//如果上期的投注额等于0，采用起始投注
                     start = true;
                 } else {
-                    var nowNum = 1;//当前投注额
+                    var nowNum = num;//当前投注额
                     var odds = 9.99;//赔率
                     var flag = true;
                     while (flag) {
@@ -401,7 +413,6 @@ function computeOneToTen(index, name, num, min, max, miss, method) {
 
             }
 
-
             if (start) {//起始投注
                 temp.nums[i].num = num;
                 temp.nums[i].frequency = 1;
@@ -418,15 +429,13 @@ function computeOneToTen(index, name, num, min, max, miss, method) {
 
         }
 
-
     }
-
 
     return temp;
 }
 
 function stop() {
-    throw 0;
+    throw '手动停止脚本';
 }
 
 
