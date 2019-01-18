@@ -161,6 +161,71 @@ function parseData() {
 
 }
 
+
+function countMiss() {
+
+    //存储遗漏值 [10,60,5,56,2,0,1,56,45,65]
+    var result = [];
+
+    var count = 0;//记录遗漏值
+
+    //遍历 1~10 名，从冠军开始，作为号码数组取值的索引
+    for (var i = 0; i < 10; i++) {
+        //遍历 1~10 个号码
+        for (var j = 1; j <= 10; j++) {
+            //遍历所有数据
+            for (var k = 0; k < vueData.trs.length; k++) {
+                //nums[] 使用名次索引 i
+                // j = 范围1~10，要比较的号码
+                if (vueData.trs[k].nums[i] === j) {
+                    //如果等于，将统计保存到结果数组并置零统计
+                    result.push(count);
+                    count = 0;
+                } else {
+                    //如果不等于，统计+1
+                    count++;
+                }
+            }
+        }
+    }
+
+
+    //排序
+    result.sort(function sortNumber(a, b) {
+        return a - b;
+    });
+
+
+    // *****
+
+    //计算相同元素的数量
+    var miss = [];
+
+    for (var i = 0; i < result.length;) {
+        var count = 0;
+        for (var j = i; j < result.length; j++) {
+            if (result[i] === result[j]) {
+                count++;
+            }
+        }
+        miss.push({
+            num: result[i],
+            count: count
+        })
+        i += count;
+    }
+
+    for (var i = 0; i < arr.length; i++) {
+        log(miss[i])
+    }
+
+
+    // *****
+
+
+}
+
+
 //二叉树算法
 function BinaryTree() {
     //构造节点
