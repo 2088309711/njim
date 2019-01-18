@@ -8,7 +8,7 @@ $(function () {
     load_cookie('miss');
     load_cookie('num_1_10');
     load_cookie('min_1_10');
-    load_cookie('max_1_10');
+    load_cookie('max_miss_1_10');
     load_cookie('miss_1_10');
     load_cookie('method');
 
@@ -42,8 +42,8 @@ $(function () {
         compute();
     });
 
-    $('#max_1_10').blur(function () {
-        ckNum('max_1_10');
+    $('#max_miss_1_10').blur(function () {
+        ckNum('max_miss_1_10');
         compute();
     });
 
@@ -139,6 +139,11 @@ function parseData() {
 
         data = null;
 
+
+        //统计遗漏次数
+        countTwoSidesMiss();
+        // countOneToTenMiss();
+
     } else if (allData == null && nums != null && issue != null) {//当期数据
 
         //转整
@@ -162,7 +167,151 @@ function parseData() {
 }
 
 
-function countMiss() {
+//计算两面遗漏
+function countTwoSidesMiss() {
+
+    //存储遗漏值 [10,60,5,56,2,0,1,56,45,65]
+    var result = [//记录次数
+        [],//大
+        [],//小
+        [],//单
+        [],//双
+        [],//龙
+        []//虎
+    ];
+
+    var count = [//记录遗漏值
+        0,//大
+        0,//小
+        0,//单
+        0,//双
+        0,//龙
+        0//虎
+    ];
+
+    //遍历 1~10 名，从冠军开始，作为号码数组取值的索引
+    for (var i = 0; i < 10; i++) {
+
+        //遍历所有数据
+        for (var k = 0; k < vueData.trs.length; k++) {
+
+            //大
+            if (is_big(vueData.trs[k].nums[i])) {
+                //如果等于，将统计保存到结果数组并置零统计
+                result[0].push(count[0]);
+                count[0] = 0;
+            } else {
+                //如果不等于，统计+1
+                count[0]++;
+            }
+
+
+            //小
+            if (is_small(vueData.trs[k].nums[i])) {
+                //如果等于，将统计保存到结果数组并置零统计
+                result[1].push(count[1]);
+                count[1] = 0;
+            } else {
+                //如果不等于，统计+1
+                count[1]++;
+            }
+
+
+            //单
+            if (is_single(vueData.trs[k].nums[i])) {
+                //如果等于，将统计保存到结果数组并置零统计
+                result[2].push(count[2]);
+                count[2] = 0;
+            } else {
+                //如果不等于，统计+1
+                count[2]++;
+            }
+
+
+            //双
+            if (is_double(vueData.trs[k].nums[i])) {
+                //如果等于，将统计保存到结果数组并置零统计
+                result[3].push(count[3]);
+                count[3] = 0;
+            } else {
+                //如果不等于，统计+1
+                count[3]++;
+            }
+
+            if (i < 5) {
+                //龙
+                if (is_loong(vueData.trs[k].nums, i)) {
+                    //如果等于，将统计保存到结果数组并置零统计
+                    result[4].push(count[4]);
+                    count[4] = 0;
+                } else {
+                    //如果不等于，统计+1
+                    count[4]++;
+                }
+
+
+                //虎
+                if (is_tiger(vueData.trs[k].nums, i)) {
+                    //如果等于，将统计保存到结果数组并置零统计
+                    result[5].push(count[5]);
+                    count[5] = 0;
+                } else {
+                    //如果不等于，统计+1
+                    count[5]++;
+                }
+            }
+        }
+    }
+
+    //排序
+    for (var i = 0; i < result.length; i++) {
+        result[i].sort(function sortNumber(a, b) {
+            return a - b;
+        });
+    }
+
+
+    // *****
+
+    //计算相同元素的数量
+    var miss = [
+        {name: '大', miss: []},
+        {name: '小', miss: []},
+        {name: '单', miss: []},
+        {name: '双', miss: []},
+        {name: '龙', miss: []},
+        {name: '虎', miss: []}
+    ];
+
+    for (var i = 0; i < result.length; i++) {
+
+// ***
+        for (var j = 0; j < result[i].length;) {
+            count = 0;
+            for (var k = j; k < result[i].length; k++) {
+                if (result[i][j] === result[i][k]) {
+                    count++;
+                }
+            }
+            miss[i].miss.push({
+                num: result[i][j],
+                count: count
+            });
+            j += count;
+        }
+
+// ***
+
+    }
+
+    // *****
+    outObj(miss)
+
+}
+
+
+//计算1~10名遗漏
+function countOneToTenMiss() {
 
     //存储遗漏值 [10,60,5,56,2,0,1,56,45,65]
     var result = [];
@@ -202,7 +351,7 @@ function countMiss() {
     var miss = [];
 
     for (var i = 0; i < result.length;) {
-        var count = 0;
+        count = 0;
         for (var j = i; j < result.length; j++) {
             if (result[i] === result[j]) {
                 count++;
@@ -215,13 +364,9 @@ function countMiss() {
         i += count;
     }
 
-    for (var i = 0; i < arr.length; i++) {
-        log(miss[i])
-    }
-
 
     // *****
-
+    outObj(miss)
 
 }
 
@@ -336,15 +481,15 @@ function compute() {
     var miss = parseInt($('#miss').val());
 
     //1~10名参数
-    var num_1_10 = parseInt($('#num_1_10').val());//大小
-    var min_1_10 = parseInt($('#min_1_10').val());//保底收益
-    var max_1_10 = parseInt($('#max_1_10').val());//封顶
-    var miss_1_10 = parseInt($('#miss_1_10').val());//遗漏
+    var num_1_10 = parseInt($('#num_1_10').val());//初始投注额
+    var min_1_10 = parseInt($('#min_1_10').val());//最低收益
+    var max_miss_1_10 = parseInt($('#max_miss_1_10').val());//最大遗漏
+    var miss_1_10 = parseInt($('#miss_1_10').val());//最小遗漏
 
 
     var method = $("input[name='method']:checked").val();//方法
 
-    if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss) || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(max_1_10) || isNaN(miss_1_10)) {
+    if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss) || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(max_miss_1_10) || isNaN(miss_1_10)) {
         showMsg('参数不全', 2, 1000);
         return;
     }
@@ -374,7 +519,7 @@ function compute() {
         twoSidesResultArr.push(computeTwoSides(i, nameArr[i], num, add, max, miss, method));
 
         // 计算 1-10 结果
-        oneToTenResultArr.push(computeOneToTen(i, nameArr[i], num_1_10, min_1_10, max_1_10, miss_1_10, method));
+        oneToTenResultArr.push(computeOneToTen(i, nameArr[i], num_1_10, min_1_10, max_miss_1_10, miss_1_10, method));
     }
 
     //组织结果对象
@@ -399,7 +544,7 @@ function compute() {
  * @param method
  * @returns {{name: *, nums: Array}}
  */
-function computeOneToTen(index, name, num, min, max, miss, method) {
+function computeOneToTen(index, name, num, min, max_miss, miss, method) {
 
     var numObj = function (number) {
         return {
@@ -438,63 +583,66 @@ function computeOneToTen(index, name, num, min, max, miss, method) {
     for (var i = 0; i < temp.nums.length; i++) {
         temp.nums[i].miss = countMiss(temp.nums[i].number);
 
-        if (temp.nums[i].miss >= miss) {//达到遗漏值开启投注
+
+        //在最小遗漏和最大遗漏之间才能投注
+        if (temp.nums[i].miss >= miss && temp.nums[i].miss <= max_miss) {
             temp.nums[i].betting = true;
 
             var start = true;//起始投注
 
             if (preData != null) { //有上期的投注方案
-                start = false;
+
 
                 var preNum = preData.oneToTen[index].nums[i].num;//上期投注额
                 var total_sum = preData.oneToTen[index].nums[i].total_sum;//截止到上期投注总额
                 var preFrequency = preData.oneToTen[index].nums[i].frequency;//上期的投注次数
 
 
-                if (preNum === 0) {//如果上期的投注额等于0，采用起始投注
-                    start = true;
-                } else {
-                    var nowNum = num;//当前投注额
+                if (preNum !== 0) {
+                    start = false;//上期投注额不等于0，非起始投注
+                    var nowNum = num;//初始投注额
                     var odds = 9.99;//赔率
                     var flag = true;
                     while (flag) {
-                        if (nowNum * odds > total_sum + nowNum + min) {
-                            flag = false;
+
+                        //本次投注额 * 赔率 >= 截止上期的投注总额 + 本次投注额 + 最低收益
+                        if (nowNum * odds >= total_sum + nowNum + min) {
+                            flag = false;//已计算出本次投注额
                         } else {
-                            nowNum++;
+                            nowNum++;//不满足条件，本次投注额 + 1
                         }
                     }
 
-                    //封顶范围内投注
-                    if (nowNum <= max) {
-                        temp.nums[i].num = nowNum;
-                        temp.nums[i].frequency = preFrequency + 1;
-                        temp.nums[i].total_sum = total_sum + nowNum;
-                    } else {//超出封顶使用起始投注
-                        start = true;
-                    }
+
                 }
 
 
             }
 
-            if (start) {//起始投注
+
+            if (start) {
                 temp.nums[i].num = num;
                 temp.nums[i].frequency = 1;
                 temp.nums[i].total_sum = num;
+
+
+                //如果是收尾并且为起始投注，取消投注
+                if (method == '2') {
+                    temp.nums[i].betting = false;
+                    temp.nums[i].num = 0;
+                    temp.nums[i].frequency = 0;
+                    temp.nums[i].total_sum = 0;
+                }
             }
 
-            //如果是收尾则取消投注
-            if (method == '2') {
-                temp.nums[i].betting = false;
-                temp.nums[i].num = 0;
-                temp.nums[i].frequency = 0;
-                temp.nums[i].total_sum = 0;
-            }
 
         }
 
     }
+
+
+    outObj(temp)
+    // stop()
 
     return temp;
 }

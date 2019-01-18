@@ -3,12 +3,6 @@
     margin: 0;
 }
 
-.no-show {
-    background: #fff !important;
-    color: #fff !important;
-    border-color: #ddd !important;
-}
-
 .table-1 {
     width: 840px;
 }
@@ -32,7 +26,7 @@ iframe {
 
 .out-result {
     width: 298px;
-    max-height: 423px;
+    max-height: 1000px;
     overflow: auto;
 }
 
@@ -44,43 +38,6 @@ iframe {
 .content h1 {
     text-align: center;
     line-height: 59px;
-}
-
-.mingci {
-    float: left;
-    width: 164px;
-    border: 1px solid #ddd;
-    margin: 10px 1px 0 1px;
-}
-
-.mingci h1 {
-    font-size: 14px;
-    text-align: center;
-    line-height: 24px;
-}
-
-.mingci .row {
-    border-top: 1px solid #ddd;
-}
-
-.mingci .left, .mingci .right {
-    float: left;
-    line-height: 28px;
-}
-
-.mingci .left {
-    width: 33%;
-    text-align: center;
-    border-right: 1px solid #ddd;
-}
-
-.mingci .right {
-    width: 67%;
-}
-
-.mingci .active {
-    background: #ff6a00;
-    color: #fff;
 }
 
 .badge-1 {
@@ -125,17 +82,6 @@ iframe {
 
 .badge-color-10 {
     background-position: 0 -189px;
-}
-
-.input2 {
-    background: #ffeabe !important;
-    width: 100%;
-    height: 28px;
-    border: none;
-    padding: 0 6px;
-    font-size: 16px;
-    display: block;
-    cursor: pointer !important;
 }
 
 /*两面*/
