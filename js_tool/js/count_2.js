@@ -57,6 +57,26 @@ $(function () {
         compute();
     });
 
+
+    $(":checkbox").click(function () {
+
+        vueResult.panel.two_sides = false;
+        vueResult.panel.one_to_ten = false;
+
+        $('input[name="show_panel"]:checked').each(function () {
+
+            var value = $(this).val();
+
+            if (value == '1') {
+                vueResult.panel.two_sides = true;
+            } else if (value == '2') {
+                vueResult.panel.one_to_ten = true;
+            }
+
+        });
+
+    });
+
     $('#result').focus(function () {
         $(this).val('');
     });
@@ -87,6 +107,17 @@ $(function () {
         var url = domain[$(this).attr('index')] + '/static//data/' + dateStr + '80HistoryLottery.json?_=' + d.getTime();
 
         window.open(url, "all_data", "toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=400, height=400");
+    });
+
+
+    //统计遗漏次数
+    $('#two-sides-miss').click(function () {
+        countTwoSidesMiss();
+    });
+
+
+    $('#one-to-ten-miss').click(function () {
+        countOneToTenMiss();
     });
 
 });
@@ -139,10 +170,6 @@ function parseData() {
 
         data = null;
 
-
-        //统计遗漏次数
-        countTwoSidesMiss();
-        // countOneToTenMiss();
 
     } else if (allData == null && nums != null && issue != null) {//当期数据
 
@@ -586,17 +613,24 @@ function computeOneToTen(index, name, num, min, max_miss, miss, method) {
 
         //在最小遗漏和最大遗漏之间才能投注
         if (temp.nums[i].miss >= miss && temp.nums[i].miss <= max_miss) {
-            temp.nums[i].betting = true;
+
+            temp.nums[i].betting = true;//开启投注
 
             var start = true;//起始投注
 
             if (preData != null) { //有上期的投注方案
 
 
+                //如果遗漏 = 0，说明上期中奖了
+                if (temp.nums[i].miss === 0) {
+                    preData.oneToTen[index].nums[i].total_sum = 0;//截止到上期投注总额设置为 0
+                    preData.oneToTen[index].nums[i].frequency = 0;//截止到上期投注次数设置为 0
+                }
+
+
                 var preNum = preData.oneToTen[index].nums[i].num;//上期投注额
                 var total_sum = preData.oneToTen[index].nums[i].total_sum;//截止到上期投注总额
                 var preFrequency = preData.oneToTen[index].nums[i].frequency;//上期的投注次数
-
 
                 if (preNum !== 0) {
                     start = false;//上期投注额不等于0，非起始投注
@@ -605,8 +639,8 @@ function computeOneToTen(index, name, num, min, max_miss, miss, method) {
                     var flag = true;
                     while (flag) {
 
-                        //本次投注额 * 赔率 >= 截止上期的投注总额 + 本次投注额 + 最低收益
-                        if (nowNum * odds >= total_sum + nowNum + min) {
+                        //本次投注额 * 赔率 > 截止上期的投注总额 + 本次投注额 + 最低收益
+                        if (nowNum * odds > total_sum + nowNum + min) {
                             flag = false;//已计算出本次投注额
                         } else {
                             nowNum++;//不满足条件，本次投注额 + 1
@@ -614,12 +648,25 @@ function computeOneToTen(index, name, num, min, max_miss, miss, method) {
                     }
 
 
+                    //投注
+                    temp.nums[i].num = nowNum;
+                    temp.nums[i].frequency = preFrequency + 1;
+                    temp.nums[i].total_sum = total_sum + nowNum;
+
+
+                } else {//上期没有投注该号码，为起始投注
+
+
                 }
 
+
+            } else {
+                //没有上期的投注方案，为起始投注
 
             }
 
 
+            //起始投注
             if (start) {
                 temp.nums[i].num = num;
                 temp.nums[i].frequency = 1;
@@ -726,7 +773,7 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
                 } else {
                     var temp2 = preNum * 2 + add;
                     if (temp2 > max) {//封顶
-                        showMsg('已亏损', 5, 2000);
+                        // showMsg('已亏损', 5, 2000);
                         temp2 = num;
                     }
                     temp.item[subObjIndex].betting_amount = temp2;
@@ -795,7 +842,11 @@ var vueResult = new Vue({
     el: '#vue-result',
     data: {
         info: '录入数据',
-        result: []
+        result: [],
+        panel: {
+            two_sides: true,
+            one_to_ten: true
+        }
     },
     methods: {
         activeClass: function (o) {

@@ -50,7 +50,7 @@
                 </div>
 
 
-                <div class="panel-body padding-little-top">
+                <div class="panel-body padding-little-top padding-small-bottom">
                     <div class="form-group">
                         <div class="label">
                             <label>方法</label>
@@ -67,6 +67,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel-body padding-little-top padding-bottom">
+                    <div class="form-group">
+                        <div class="label">
+                            <label>显示</label>
+                        </div>
+                        <div class="field">
+                            <label class="margin-big-right">
+                                <input name="show_panel" value="1" type="checkbox" checked>
+                                两面
+                            </label>
+                            <label>
+                                <input name="show_panel" value="2" type="checkbox" checked>
+                                1~10名
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
 
@@ -176,7 +196,7 @@
 
             <template v-if="isShow()">
 
-                <div class="two-sides">
+                <div class="two-sides" v-if="panel.two_sides">
                     <template v-for="(data,index) in result[0].twoSides">
 
                         <div class="item">
@@ -195,7 +215,7 @@
                 </div>
 
 
-                <div class="one-to-ten">
+                <div class="one-to-ten" v-if="panel.one_to_ten">
 
                     <div class="item" v-for="(data,index) in result[0].oneToTen">
                         <div class="num" v-for="(obj,index) in data.nums">
@@ -226,7 +246,22 @@
 
     </div>
 
-    <textarea id="out-obj" rows="15" class="input margin-top text-large height-large"></textarea>
+
+    <div class="panel margin-top">
+        <div class="panel-head">数据分析</div>
+        <div class="panel-body">
+
+
+            <div>
+                <button class="button border-sub margin-right" id="two-sides-miss">两面遗漏</button>
+                <button class="button border-sub" id="one-to-ten-miss">1~10名遗漏</button>
+            </div>
+
+            <textarea id="out-obj" rows="5" class="input margin-top text-large height-large"></textarea>
+
+        </div>
+    </div>
+
 
 </div>
 <script src="js/count_2.js"></script>
