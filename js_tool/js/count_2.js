@@ -120,6 +120,12 @@ $(function () {
         countOneToTenMiss();
     });
 
+    // 统计规律发生次数
+    $('#count-law').click(function () {
+        countLaw();
+    });
+
+
 });
 
 
@@ -394,6 +400,124 @@ function countOneToTenMiss() {
 
     // *****
     outObj(miss)
+
+}
+
+
+//统计规律
+function countLaw() {
+
+    var result = {
+        size: 0,
+        single_double: 0,
+        dragon_tiger: 0,
+        num: 0
+    };
+
+    //遍历开奖每行结果
+    for (var i = 0; i < vueData.trs.length; i++) {
+        //遍历一行中的10个号码
+        for (var j = 0; j < vueData.trs[i].nums.length; j++) {
+
+            if (i + 7 >= vueData.trs.length) {
+                break;
+            }
+
+            //选出6个需要比对的号码
+            var temp = [];
+            temp[0] = vueData.trs[i].nums[j];
+            temp[1] = vueData.trs[i + 1].nums[j];
+            temp[2] = vueData.trs[i + 2].nums[j];
+            temp[3] = vueData.trs[i + 3].nums[j];
+            temp[4] = vueData.trs[i + 4].nums[j];
+            temp[5] = vueData.trs[i + 5].nums[j];
+            temp[6] = vueData.trs[i + 6].nums[j];
+            temp[7] = vueData.trs[i + 7].nums[j];
+
+            //第一个是大
+            if (is_big(temp[0])) {
+                if (is_small(temp[1])) {
+                    if (is_big(temp[2])) {
+                        if (is_small(temp[3])) {
+                            if (is_big(temp[4])) {
+                                if (is_small(temp[5])) {
+                                    if (is_big(temp[6])) {
+                                        if (is_small(temp[7])) {
+                                            result.size++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //第一个是小
+            if (is_small(temp[0])) {
+                if (is_big(temp[1])) {//大
+                    if (is_small(temp[2])) {
+                        if (is_big(temp[3])) {
+                            if (is_small(temp[4])) {
+                                if (is_big(temp[5])) {
+                                    if (is_small(temp[6])) {
+                                        if (is_big(temp[7])) {
+                                            result.size++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            //第一个是单
+            if (is_single(temp[0])) {
+                if (is_double(temp[1])) {
+                    if (is_single(temp[2])) {
+                        if (is_double(temp[3])) {
+                            if (is_single(temp[4])) {
+                                if (is_double(temp[5])) {
+                                    if (is_single(temp[6])) {
+                                        if (is_double(temp[7])) {
+                                            result.single_double++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //第一个是双
+            if (is_double(temp[0])) {
+                if (is_single(temp[1])) {
+                    if (is_double(temp[2])) {
+                        if (is_single(temp[3])) {
+                            if (is_double(temp[4])) {
+                                if (is_single(temp[5])) {
+                                    if (is_double(temp[6])) {
+                                        if (is_single(temp[7])) {
+                                            result.single_double++;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            result.num++
+
+
+        }
+    }
+
+    outObj(result);
 
 }
 
