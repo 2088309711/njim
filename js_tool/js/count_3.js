@@ -605,33 +605,33 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
     var preArr = vueResult.get(vueData.trs[0].issue);
 
     //计算投注额
-    var computeBettingAmount = function (bettingIndex) {
+    var computeBettingAmount = function (itemIndex) {
 
-        temp.item[bettingIndex].is_betting = true;//开启投注
+        temp.item[itemIndex].is_betting = true;//开启投注
 
         var start = true;
 
         //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致
         if (preArr != null && preArr.issue === vueData.trs[0].issue) {
             //之前有投注数据并且有效
-            var preNum = preArr.twoSides[index].item[bettingIndex].betting_amount;//上期的投注额
+            var preNum = preArr.twoSides[index].item[itemIndex].betting_amount;//上期的投注额
             if (preNum > 0) {//上次有投注这个项目
                 var betting_amount = preNum * 2 + add;
                 if (betting_amount <= max) {//没超过封顶
                     start = false;//非初始投注
-                    temp.item[bettingIndex].betting_amount = betting_amount;
+                    temp.item[itemIndex].betting_amount = betting_amount;
                 }
             }
         }
 
         //初始投注
         if (start) {
-            temp.item[bettingIndex].betting_amount = num;
+            temp.item[itemIndex].betting_amount = num;
 
             //如果方法是收尾，取消新的投注项目
             if (method == '2') {
-                temp.item[bettingIndex].is_betting = false;
-                temp.item[bettingIndex].betting_amount = 0;
+                temp.item[itemIndex].is_betting = false;
+                temp.item[itemIndex].betting_amount = 0;
             }
         }
 
