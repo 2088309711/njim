@@ -5,7 +5,7 @@ $(function () {
     load_cookie('num');
     load_cookie('add');
     load_cookie('max');
-    load_cookie('miss');
+
     load_cookie('method');
 
     $('#num').blur(function () {
@@ -23,10 +23,6 @@ $(function () {
         compute();
     });
 
-    $('#miss').blur(function () {
-        ckNum('miss');
-        compute();
-    });
 
     $(":radio").click(function () {
         set_cookie($(this).attr('name'), $(this).val());
@@ -72,6 +68,10 @@ $(function () {
         countLaw();
     });
 
+
+    $('#count-continuity').click(function () {
+        countContinuity();
+    });
 
 });
 
@@ -282,6 +282,69 @@ function countTwoSidesMiss() {
 }
 
 
+function countContinuity() {
+
+    var result = {
+        item: [],
+        count: 0
+    };
+
+    //遍历开奖每行结果
+    for (var i = 0; i < vueData.trs.length; i++) {
+
+        if (i + 2 >= vueData.trs.length) {
+            break;
+        }
+
+        var temp = [];
+
+        temp[0] = vueData.trs[i].nums[0];
+        temp[1] = vueData.trs[i + 1].nums[0];
+        temp[2] = vueData.trs[i + 2].nums[0];
+
+        if (temp[0] === 9) {
+            if (temp[1] === 10) {
+                if (temp[2] === 1) {
+                    result.count++;
+
+                    result.item.push({
+                        issue: vueData.trs[i + 2].issue,
+                        nums: temp[0] + '-' + temp[1] + '-' + temp[2]
+                    })
+
+                }
+            }
+        } else if (temp[0] === 10) {
+            if (temp[1] === 1) {
+                if (temp[2] === 2) {
+                    result.count++;
+
+                    result.item.push({
+                        issue: vueData.trs[i + 2].issue,
+                        nums: temp[0] + '-' + temp[1] + '-' + temp[2]
+                    })
+
+                }
+            }
+        } else {
+            if (temp[0] === temp[1] - 1) {
+                if (temp[1] === temp[2] - 1) {
+                    result.count++;
+
+                    result.item.push({
+                        issue: vueData.trs[i + 2].issue,
+                        nums: temp[0] + '-' + temp[1] + '-' + temp[2]
+                    })
+
+                }
+            }
+        }
+    }
+
+    outObj(result);
+}
+
+
 //统计规律
 function countLaw() {
 
@@ -315,12 +378,12 @@ function countLaw() {
 
             //第一个是大
             if (is_big(temp[0][j])) {
-                if (is_small(temp[1][j])) {
-                    if (is_big(temp[2][j])) {
+                if (is_big(temp[1][j])) {
+                    if (is_small(temp[2][j])) {
                         if (is_small(temp[3][j])) {
                             if (is_big(temp[4][j])) {
-                                if (is_small(temp[5][j])) {
-                                    if (is_big(temp[6][j])) {
+                                if (is_big(temp[5][j])) {
+                                    if (is_small(temp[6][j])) {
                                         if (is_small(temp[7][j])) {
                                             if (is_big(temp[8][j])) {
                                                 result.size++;
@@ -336,12 +399,12 @@ function countLaw() {
 
             //第一个是小
             if (is_small(temp[0][j])) {
-                if (is_big(temp[1][j])) {//大
-                    if (is_small(temp[2][j])) {
+                if (is_small(temp[1][j])) {//大
+                    if (is_big(temp[2][j])) {
                         if (is_big(temp[3][j])) {
                             if (is_small(temp[4][j])) {
-                                if (is_big(temp[5][j])) {
-                                    if (is_small(temp[6][j])) {
+                                if (is_small(temp[5][j])) {
+                                    if (is_big(temp[6][j])) {
                                         if (is_big(temp[7][j])) {
                                             if (is_small(temp[8][j])) {
                                                 result.size++;
@@ -358,12 +421,12 @@ function countLaw() {
 
             //第一个是单
             if (is_single(temp[0][j])) {
-                if (is_double(temp[1][j])) {
-                    if (is_single(temp[2][j])) {
+                if (is_single(temp[1][j])) {
+                    if (is_double(temp[2][j])) {
                         if (is_double(temp[3][j])) {
                             if (is_single(temp[4][j])) {
-                                if (is_double(temp[5][j])) {
-                                    if (is_single(temp[6][j])) {
+                                if (is_single(temp[5][j])) {
+                                    if (is_double(temp[6][j])) {
                                         if (is_double(temp[7][j])) {
                                             if (is_single(temp[8][j])) {
                                                 result.single_double++;
@@ -379,12 +442,12 @@ function countLaw() {
 
             //第一个是双
             if (is_double(temp[0][j])) {
-                if (is_single(temp[1][j])) {
-                    if (is_double(temp[2][j])) {
+                if (is_double(temp[1][j])) {
+                    if (is_single(temp[2][j])) {
                         if (is_single(temp[3][j])) {
                             if (is_double(temp[4][j])) {
-                                if (is_single(temp[5][j])) {
-                                    if (is_double(temp[6][j])) {
+                                if (is_double(temp[5][j])) {
+                                    if (is_single(temp[6][j])) {
                                         if (is_single(temp[7][j])) {
                                             if (is_double(temp[8][j])) {
                                                 result.single_double++;
@@ -402,12 +465,12 @@ function countLaw() {
             if (j < 5) {
                 //第一个是龙
                 if (is_loong(temp[0], j)) {
-                    if (is_tiger(temp[1], j)) {
-                        if (is_loong(temp[2], j)) {
+                    if (is_loong(temp[1], j)) {
+                        if (is_tiger(temp[2], j)) {
                             if (is_tiger(temp[3], j)) {
                                 if (is_loong(temp[4], j)) {
-                                    if (is_tiger(temp[5], j)) {
-                                        if (is_loong(temp[6], j)) {
+                                    if (is_loong(temp[5], j)) {
+                                        if (is_tiger(temp[6], j)) {
                                             if (is_tiger(temp[7], j)) {
                                                 if (is_loong(temp[8], j)) {
                                                     result.dragon_tiger++;
@@ -424,12 +487,12 @@ function countLaw() {
 
                 //第一个是虎
                 if (is_tiger(temp[0], j)) {
-                    if (is_loong(temp[1], j)) {
-                        if (is_tiger(temp[2], j)) {
+                    if (is_tiger(temp[1], j)) {
+                        if (is_loong(temp[2], j)) {
                             if (is_loong(temp[3], j)) {
                                 if (is_tiger(temp[4], j)) {
-                                    if (is_loong(temp[5], j)) {
-                                        if (is_tiger(temp[6], j)) {
+                                    if (is_tiger(temp[5], j)) {
+                                        if (is_loong(temp[6], j)) {
                                             if (is_loong(temp[7], j)) {
                                                 if (is_tiger(temp[8], j)) {
                                                     result.dragon_tiger++;
@@ -561,12 +624,11 @@ function compute() {
     var num = parseInt($('#num').val());
     var add = parseInt($('#add').val());
     var max = parseInt($('#max').val());
-    var miss = parseInt($('#miss').val());
 
 
     var method = $("input[name='method']:checked").val();//方法
 
-    if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)) {
+    if (isNaN(num) || isNaN(add) || isNaN(max)) {
         showMsg('参数不全', 2, 1000);
         return;
     }
@@ -593,8 +655,7 @@ function compute() {
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
 
         // 计算两面结果
-        twoSidesResultArr.push(computeTwoSides(i, nameArr[i], num, add, max, miss, method));
-
+        twoSidesResultArr.push(computeTwoSides(i, nameArr[i], num, add, max, method));
 
     }
 
@@ -627,7 +688,7 @@ function outObj(obj) {
  * @param miss
  * @returns {{name: *, big: boolean, small: boolean, single: boolean, _double: boolean, _big: number, _small: number, _single: number, __double: number}}
  */
-function computeTwoSides(index, name, num, add, max, miss, method) {
+function computeTwoSides(index, name, num, add, max, method) {
 
     var subObj = function (name) {
         return {
@@ -669,7 +730,24 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
         //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致
         if (preArr != null && preArr.issue === vueData.trs[0].issue) {
             //之前有投注数据并且有效
-            var preNum = preArr.twoSides[index].item[itemIndex].betting_amount;//上期的投注额
+
+            var preItemIndex = -1;
+            //取上期的投注额   0大 1小 2单 3双 4龙 5虎
+            if (itemIndex === 0) {//如果本期投注大，取上期的小 1
+                preItemIndex = 1;
+            } else if (itemIndex === 1) {//取大 0
+                preItemIndex = 0;
+            } else if (itemIndex === 2) {
+                preItemIndex = 3;
+            } else if (itemIndex === 3) {
+                preItemIndex = 2;
+            } else if (itemIndex === 4) {
+                preItemIndex = 5;
+            } else if (itemIndex === 5) {
+                preItemIndex = 4;
+            }
+
+            var preNum = preArr.twoSides[index].item[preItemIndex].betting_amount;//上期的投注额
             if (preNum > 0) {//上次有投注这个项目
                 var betting_amount = preNum * 2 + add;
                 if (betting_amount <= max) {//没超过封顶
@@ -696,8 +774,12 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
         if (is_small(vueData.trs[1].nums[index])) {
             if (is_big(vueData.trs[2].nums[index])) {
                 if (is_small(vueData.trs[3].nums[index])) {
-                    //投注大
-                    computeBettingAmount(0);
+                    if (is_big(vueData.trs[4].nums[index])) {
+                        if (is_small(vueData.trs[5].nums[index])) {
+                            //投注大
+                            computeBettingAmount(0);
+                        }
+                    }
                 }
             }
         }
@@ -707,8 +789,12 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
         if (is_big(vueData.trs[1].nums[index])) {
             if (is_small(vueData.trs[2].nums[index])) {
                 if (is_big(vueData.trs[3].nums[index])) {
-                    //投注小
-                    computeBettingAmount(1);
+                    if (is_small(vueData.trs[4].nums[index])) {
+                        if (is_big(vueData.trs[5].nums[index])) {
+                            //投注小
+                            computeBettingAmount(1);
+                        }
+                    }
                 }
             }
         }
@@ -718,8 +804,12 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
         if (is_double(vueData.trs[1].nums[index])) {
             if (is_single(vueData.trs[2].nums[index])) {
                 if (is_double(vueData.trs[3].nums[index])) {
-                    //投注单
-                    computeBettingAmount(2);
+                    if (is_single(vueData.trs[4].nums[index])) {
+                        if (is_double(vueData.trs[5].nums[index])) {
+                            //投注单
+                            computeBettingAmount(2);
+                        }
+                    }
                 }
             }
         }
@@ -729,8 +819,12 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
         if (is_single(vueData.trs[1].nums[index])) {
             if (is_double(vueData.trs[2].nums[index])) {
                 if (is_single(vueData.trs[3].nums[index])) {
-                    //投注双
-                    computeBettingAmount(3);
+                    if (is_double(vueData.trs[4].nums[index])) {
+                        if (is_single(vueData.trs[5].nums[index])) {
+                            //投注双
+                            computeBettingAmount(3);
+                        }
+                    }
                 }
             }
         }
@@ -742,8 +836,12 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
             if (is_tiger(vueData.trs[1].nums, index)) {
                 if (is_loong(vueData.trs[2].nums, index)) {
                     if (is_tiger(vueData.trs[3].nums, index)) {
-                        //投注龙
-                        computeBettingAmount(4);
+                        if (is_loong(vueData.trs[4].nums, index)) {
+                            if (is_tiger(vueData.trs[5].nums, index)) {
+                                //投注龙
+                                computeBettingAmount(4);
+                            }
+                        }
                     }
                 }
             }
@@ -753,8 +851,12 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
             if (is_loong(vueData.trs[1].nums, index)) {
                 if (is_tiger(vueData.trs[2].nums, index)) {
                     if (is_loong(vueData.trs[3].nums, index)) {
-                        //投注虎
-                        computeBettingAmount(5);
+                        if (is_tiger(vueData.trs[4].nums, index)) {
+                            if (is_loong(vueData.trs[5].nums, index)) {
+                                //投注虎
+                                computeBettingAmount(5);
+                            }
+                        }
                     }
                 }
             }
