@@ -1,0 +1,143 @@
+.container-layout {
+    width: 1343px;
+    margin: 0;
+}
+
+.table-1 {
+    width: 840px;
+}
+
+#result {
+    width: 1323px;
+    resize: none;
+    overflow: hidden;
+}
+
+iframe {
+    display: block;
+    width: 1323px;
+    height: 37px;
+    border-top: 1px solid #ddd;
+}
+
+.option-panel {
+    width: 195px;
+}
+
+.out-result {
+    width: 298px;
+    max-height: 600px;
+    overflow: auto;
+}
+
+.content {
+    height: 61px;
+    border: 1px solid #ddd;
+}
+
+.content h1 {
+    text-align: center;
+    line-height: 59px;
+}
+
+.badge-1 {
+    display: inline-block;
+    margin: 3px 6px;
+    width: 20px;
+    height: 20px;
+    background: url(../img/ball-pk.png) no-repeat;
+}
+
+.badge-color-2 {
+    background-position: 0 -21px;
+}
+
+.badge-color-3 {
+    background-position: 0 -42px;
+}
+
+.badge-color-4 {
+    background-position: 0 -63px;
+}
+
+.badge-color-5 {
+    background-position: 0 -84px;
+}
+
+.badge-color-6 {
+    background-position: 0 -105px;
+}
+
+.badge-color-7 {
+    background-position: 0 -126px;
+}
+
+.badge-color-8 {
+    background-position: 0 -147px;
+}
+
+.badge-color-9 {
+    background-position: 0 -168px;
+}
+
+.badge-color-10 {
+    background-position: 0 -189px;
+}
+
+/*两面*/
+.two-sides {
+    background: url(../img/two-sides.jpg) no-repeat;
+    width: 827px;
+    height: 350px;
+    overflow: hidden;
+    margin-top: 10px;
+    float: left;
+}
+
+.two-sides .item {
+    float: left;
+    width: 165px;
+    margin: 25px 0 0 0;
+    height: 183px;
+
+}
+
+/*一到十*/
+.one-to-ten {
+    background: url(../img/1-10.jpg) no-repeat;
+    width: 827px;
+    height: 640px;
+    overflow: hidden;
+    margin-top: 10px;
+    float: left;
+}
+
+.one-to-ten .item {
+    float: left;
+    width: 165px;
+    margin: 25px 0 0 0;
+    height: 300px;
+}
+
+.item .num {
+    height: 29px;
+}
+
+.item .num span {
+    float: left;
+    margin: 3px 0 0 65px;
+    font-size: 16px;
+}
+
+.item .num input {
+    float: right;
+    width: 55px;
+    height: 18px;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    padding: 0 5px;
+    margin: 4px 3px 0 0;
+    background: rgba(255, 255, 255, 0);
+    background: #ff6e00;
+}
