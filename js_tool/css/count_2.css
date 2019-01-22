@@ -90,8 +90,6 @@ iframe {
     width: 827px;
     height: 350px;
     overflow: hidden;
-    margin-top: 10px;
-    float: left;
 }
 
 .two-sides .item {
@@ -108,8 +106,6 @@ iframe {
     width: 827px;
     height: 640px;
     overflow: hidden;
-    margin-top: 10px;
-    float: left;
 }
 
 .one-to-ten .item {
@@ -140,4 +136,36 @@ iframe {
     margin: 4px 3px 0 0;
     background: rgba(255, 255, 255, 0);
     background: #ff6e00;
+}
+
+/*投注面板*/
+#betting-panel {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    display: none;
+}
+
+#close-betting-panel {
+    font-size: 50px;
+    color: #666;
+    background: #eee;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    cursor: pointer;
+    transition: all .6s;
+}
+
+#close-betting-panel:hover {
+    color: #fff;
+    background: #00aaee;
 }
