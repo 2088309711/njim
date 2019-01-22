@@ -13,10 +13,10 @@
     <table class="table table-bordered">
 
         <tr>
-            <th>issue</th>
-            <th>num</th>
-            <th>add</th>
-            <th>count</th>
+            <th>期数</th>
+            <th>投注额</th>
+            <th>收益</th>
+            <th>累计</th>
         </tr>
 
 
@@ -24,9 +24,9 @@
 
         $start = 1;
         $min = 3;
-        $issueNum = 40;
+        $issueNum = 60;
 
-        $odds = 9.99;
+        $odds = 9.999;
 
         $count = 0;
 
