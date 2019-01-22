@@ -56,7 +56,7 @@
                             </div>
                             <div class="field">
                                 <label class="margin-big-right">
-                                    <input name="method" value="1" type="radio">
+                                    <input name="method" value="1" type="radio" checked>
                                     正常
                                 </label>
                                 <label>
@@ -122,7 +122,7 @@
                                 <label>大小</label>
                             </div>
                             <div class="field">
-                                <input type="text" class="input" id="num"/>
+                                <input type="text" class="input" id="num" placeholder="1"/>
                             </div>
                         </div>
 
@@ -131,7 +131,7 @@
                                 <label>增加</label>
                             </div>
                             <div class="field">
-                                <input type="text" class="input" id="add"/>
+                                <input type="text" class="input" id="add" placeholder="1"/>
                             </div>
                         </div>
 
@@ -141,7 +141,7 @@
                                 <label>封顶</label>
                             </div>
                             <div class="field">
-                                <input type="text" class="input" id="max"/>
+                                <input type="text" class="input" id="max" placeholder="50"/>
                             </div>
                         </div>
 
@@ -150,7 +150,7 @@
                                 <label>遗漏</label>
                             </div>
                             <div class="field">
-                                <input type="text" class="input" id="miss"/>
+                                <input type="text" class="input" id="miss" placeholder="12"/>
                             </div>
                         </div>
 
@@ -163,7 +163,7 @@
 
                 <div class="panel">
                     <div class="panel-head">
-                        1~10 名参数
+                        1~10 名遗漏
                     </div>
                     <div class="panel-body">
 
@@ -172,7 +172,7 @@
                                 <label>初始投注额</label>
                             </div>
                             <div class="field">
-                                <input type="text" class="input" id="num_1_10"/>
+                                <input type="text" class="input" id="num_1_10" placeholder="1"/>
                             </div>
                         </div>
 
@@ -181,7 +181,7 @@
                                 <label>最低收益</label>
                             </div>
                             <div class="field">
-                                <input type="text" class="input" id="min_1_10"/>
+                                <input type="text" class="input" id="min_1_10" placeholder="1"/>
                             </div>
                         </div>
 
@@ -191,19 +191,10 @@
                                 <label>最小遗漏</label>
                             </div>
                             <div class="field">
-                                <input type="text" class="input" id="miss_1_10"/>
+                                <input type="text" class="input" id="miss_1_10" placeholder="70"/>
                             </div>
                         </div>
 
-
-                        <div class="form-group">
-                            <div class="label">
-                                <label>最大遗漏</label>
-                            </div>
-                            <div class="field">
-                                <input type="text" class="input" id="max_miss_1_10"/>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -254,8 +245,8 @@
             <strong>投注面板</strong>
             <ul class="tab-nav">
                 <li class="active"><a href="#tab-1">一大一小</a></li>
-                <li><a href="#tab-2">2</a></li>
-                <li><a href="#tab-3">3</a></li>
+                <li><a href="#tab-2">单项遗漏</a></li>
+                <li><a href="#tab-3">1~10名遗漏</a></li>
             </ul>
         </div>
         <!--tab-body-bordered-->
@@ -277,11 +268,14 @@
             </div>
             <div class="tab-panel" id="tab-2">
 
-                <div class="two-sides">
-                    <div class="item">
-                        <div class="num">
-                            <span>1</span>
-                            <input readonly type="text">
+                <div id="vue-individual">
+                    <div class="two-sides" v-if="isShow()">
+                        <div class="item" v-for="(data1,index1) in result[0].betting">
+                            <div class="num" v-for="(data2,index2) in data1.item">
+                                <span>{{data2.miss}}</span>
+                                <input v-if="data2.is_betting" @click="copyText($event)"
+                                       :value="data2.betting_amount" readonly type="text">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -289,11 +283,14 @@
             </div>
             <div class="tab-panel" id="tab-3">
 
-                <div class="one-to-ten">
-                    <div class="item">
-                        <div class="num">
-                            <span>1</span>
-                            <input readonly type="text">
+                <div id="vue-one-to-ten-miss">
+                    <div class="one-to-ten" v-if="isShow()">
+                        <div class="item" v-for="(data1,index1) in result[0].betting">
+                            <div class="num" v-for="(data2,index2) in data1.item">
+                                <span>{{data2.miss}}</span>
+                                <input v-if="data2.is_betting" @click="copyText($event)"
+                                       :value="data2.betting_amount" readonly type="text">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -301,8 +298,7 @@
             </div>
         </div>
     </div>
-
-
+    
     <div id="close-betting-panel" class="icon-compress"></div>
 
 </div>
