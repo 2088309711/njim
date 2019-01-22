@@ -289,6 +289,8 @@ function countContinuity() {
         count: 0
     };
 
+    var names = ['冠军', '亚军', '第三名', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
+
     //遍历开奖每行结果
     for (var i = 0; i < vueData.trs.length; i++) {
 
@@ -296,46 +298,53 @@ function countContinuity() {
             break;
         }
 
-        var temp = [];
+        //10个号码，冠军，亚军...
+        for (var j = 0; j < names.length; j++) {
 
-        temp[0] = vueData.trs[i].nums[0];
-        temp[1] = vueData.trs[i + 1].nums[0];
-        temp[2] = vueData.trs[i + 2].nums[0];
+            var temp = [];
 
-        if (temp[0] === 9) {
-            if (temp[1] === 10) {
-                if (temp[2] === 1) {
-                    result.count++;
+            temp[2] = vueData.trs[i].nums[j];
+            temp[1] = vueData.trs[i + 1].nums[j];
+            temp[0] = vueData.trs[i + 2].nums[j];
 
-                    result.item.push({
-                        issue: vueData.trs[i + 2].issue,
-                        nums: temp[0] + '-' + temp[1] + '-' + temp[2]
-                    })
+            if (temp[0] === 9) {
+                if (temp[1] === 10) {
+                    if (temp[2] === 1) {
+                        result.count++;
 
+                        result.item.push({
+                            name: names[j],
+                            issue: vueData.trs[i + 2].issue,
+                            nums: temp[0] + '-' + temp[1] + '-' + temp[2]
+                        })
+
+                    }
                 }
-            }
-        } else if (temp[0] === 10) {
-            if (temp[1] === 1) {
-                if (temp[2] === 2) {
-                    result.count++;
+            } else if (temp[0] === 10) {
+                if (temp[1] === 1) {
+                    if (temp[2] === 2) {
+                        result.count++;
 
-                    result.item.push({
-                        issue: vueData.trs[i + 2].issue,
-                        nums: temp[0] + '-' + temp[1] + '-' + temp[2]
-                    })
+                        result.item.push({
+                            name: names[j],
+                            issue: vueData.trs[i + 2].issue,
+                            nums: temp[0] + '-' + temp[1] + '-' + temp[2]
+                        })
 
+                    }
                 }
-            }
-        } else {
-            if (temp[0] === temp[1] - 1) {
-                if (temp[1] === temp[2] - 1) {
-                    result.count++;
+            } else {
+                if (temp[0] === temp[1] - 1) {
+                    if (temp[1] === temp[2] - 1) {
+                        result.count++;
 
-                    result.item.push({
-                        issue: vueData.trs[i + 2].issue,
-                        nums: temp[0] + '-' + temp[1] + '-' + temp[2]
-                    })
+                        result.item.push({
+                            name: names[j],
+                            issue: vueData.trs[i + 2].issue,
+                            nums: temp[0] + '-' + temp[1] + '-' + temp[2]
+                        })
 
+                    }
                 }
             }
         }
