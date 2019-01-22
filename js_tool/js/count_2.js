@@ -1,21 +1,12 @@
-/**
- * 总控制器
- * @type {string}
- */
-
 var cookie_prefix = 'count_2_';
 
 $(function () {
 
+    //单项遗漏
     load_cookie('num');
     load_cookie('add');
     load_cookie('max');
     load_cookie('miss');
-    load_cookie('num_1_10');
-    load_cookie('min_1_10');
-    load_cookie('max_miss_1_10');
-    load_cookie('miss_1_10');
-    load_cookie('method');
 
     $('#num').blur(function () {
         ckNum('num');
@@ -36,6 +27,36 @@ $(function () {
         ckNum('miss');
         compute();
     });
+    //单项遗漏 end
+
+    load_cookie('num_1_10');
+    load_cookie('min_1_10');
+    load_cookie('max_miss_1_10');
+    load_cookie('miss_1_10');
+    load_cookie('method');
+
+    //一大一小
+    load_cookie('one_big_one_small_num');
+    load_cookie('one_big_one_small_add');
+    load_cookie('one_big_one_small_max');
+
+    $('#one_big_one_small_num').blur(function () {
+        ckNum('one_big_one_small_num');
+        compute();
+    });
+
+    $('#one_big_one_small_add').blur(function () {
+        ckNum('one_big_one_small_add');
+        compute();
+    });
+
+    $('#one_big_one_small_max').blur(function () {
+        ckNum('one_big_one_small_max');
+        compute();
+    });
+
+    //一大一小  end
+
 
     $('#num_1_10').blur(function () {
         ckNum('num_1_10');
@@ -130,7 +151,7 @@ $(function () {
     });
 
     $('#close-betting-panel').click(function () {
-        $('#betting-panel').fadeOut();
+        openOrClosebettingPanel(false);
     });
 
 });
@@ -631,11 +652,27 @@ function getIntVal(elId) {
     return parseInt($(elId).val());
 }
 
+
+function copyInputVal(e) {
+    var el = $(e.currentTarget);
+    // el.select();//选中文本
+    el.zclip({
+        path: '/static/zclip/ZeroClipboard.swf',
+        copy: function () { //复制内容
+            return el.val();
+        },
+        afterCopy: function () {
+            showMsg('复制成功', 1, 500);
+        }
+    });
+}
+
+
 /**
  * 一大一小实例
  */
 var vueOneBigAndOneSmall = new Vue({
-    el: 'vue-one-big-and-one-small',
+    el: '#vue-one-big-and-one-small',
     data: {
         result: [
             // {
@@ -658,9 +695,27 @@ var vueOneBigAndOneSmall = new Vue({
         ]
     },
     methods: {
+
+        /**
+         * 复制文本
+         * @param e
+         */
+        copyText: copyInputVal,
         isShow: function () {
             return this.result.length > 0
         },
+
+
+        get: function (issue) {
+            for (var i = 0; i < this.result.length; i++) {
+                if (this.result[i].issue === issue) {
+                    return this.result[i];
+                }
+            }
+            return null;
+        },
+
+
         compute: function (index, name, num, add, max, method) {
 
             var subObj = function (name) {
@@ -691,7 +746,8 @@ var vueOneBigAndOneSmall = new Vue({
             }
 
             //找出上一期的投注数据
-            var preArr = vueResult.get(vueData.trs[0].issue);
+            var preArr = this.get(vueData.trs[0].issue);
+
 
             //计算投注额
             var computeBettingAmount = function (itemIndex) {
@@ -720,7 +776,7 @@ var vueOneBigAndOneSmall = new Vue({
                         preItemIndex = 4;
                     }
 
-                    var preNum = preArr.twoSides[index].item[preItemIndex].betting_amount;//上期的投注额
+                    var preNum = preArr.betting[index].item[preItemIndex].betting_amount;//上期的投注额
                     if (preNum > 0) {//上次有投注这个项目
                         var betting_amount = preNum * 2 + add;
                         if (betting_amount <= max) {//没超过封顶
@@ -743,14 +799,22 @@ var vueOneBigAndOneSmall = new Vue({
 
             };
 
-            if (is_big(vueData.trs[0].nums[index])) {
+            if (is_big(vueData.trs[0].nums[index])) {//最后开的大，投大
                 if (is_small(vueData.trs[1].nums[index])) {
                     if (is_big(vueData.trs[2].nums[index])) {
                         if (is_small(vueData.trs[3].nums[index])) {
                             if (is_big(vueData.trs[4].nums[index])) {
                                 if (is_small(vueData.trs[5].nums[index])) {
-                                    //投注大
-                                    computeBettingAmount(0);
+                                    if (is_big(vueData.trs[6].nums[index])) {
+                                        if (is_small(vueData.trs[7].nums[index])) {
+                                            if (is_big(vueData.trs[8].nums[index])) {
+                                                if (is_small(vueData.trs[9].nums[index])) {
+                                                    //投注大
+                                                    computeBettingAmount(0);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -764,8 +828,16 @@ var vueOneBigAndOneSmall = new Vue({
                         if (is_big(vueData.trs[3].nums[index])) {
                             if (is_small(vueData.trs[4].nums[index])) {
                                 if (is_big(vueData.trs[5].nums[index])) {
-                                    //投注小
-                                    computeBettingAmount(1);
+                                    if (is_small(vueData.trs[6].nums[index])) {
+                                        if (is_big(vueData.trs[7].nums[index])) {
+                                            if (is_small(vueData.trs[8].nums[index])) {
+                                                if (is_big(vueData.trs[9].nums[index])) {
+                                                    //投注小
+                                                    computeBettingAmount(1);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -779,8 +851,16 @@ var vueOneBigAndOneSmall = new Vue({
                         if (is_double(vueData.trs[3].nums[index])) {
                             if (is_single(vueData.trs[4].nums[index])) {
                                 if (is_double(vueData.trs[5].nums[index])) {
-                                    //投注单
-                                    computeBettingAmount(2);
+                                    if (is_single(vueData.trs[6].nums[index])) {
+                                        if (is_double(vueData.trs[7].nums[index])) {
+                                            if (is_single(vueData.trs[8].nums[index])) {
+                                                if (is_double(vueData.trs[9].nums[index])) {
+                                                    //投注单
+                                                    computeBettingAmount(2);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -794,8 +874,16 @@ var vueOneBigAndOneSmall = new Vue({
                         if (is_single(vueData.trs[3].nums[index])) {
                             if (is_double(vueData.trs[4].nums[index])) {
                                 if (is_single(vueData.trs[5].nums[index])) {
-                                    //投注双
-                                    computeBettingAmount(3);
+                                    if (is_double(vueData.trs[6].nums[index])) {
+                                        if (is_single(vueData.trs[7].nums[index])) {
+                                            if (is_double(vueData.trs[8].nums[index])) {
+                                                if (is_single(vueData.trs[9].nums[index])) {
+                                                    //投注双
+                                                    computeBettingAmount(3);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -811,8 +899,16 @@ var vueOneBigAndOneSmall = new Vue({
                             if (is_tiger(vueData.trs[3].nums, index)) {
                                 if (is_loong(vueData.trs[4].nums, index)) {
                                     if (is_tiger(vueData.trs[5].nums, index)) {
-                                        //投注龙
-                                        computeBettingAmount(4);
+                                        if (is_loong(vueData.trs[6].nums, index)) {
+                                            if (is_tiger(vueData.trs[7].nums, index)) {
+                                                if (is_loong(vueData.trs[8].nums, index)) {
+                                                    if (is_tiger(vueData.trs[9].nums, index)) {
+                                                        //投注龙
+                                                        computeBettingAmount(4);
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -826,8 +922,16 @@ var vueOneBigAndOneSmall = new Vue({
                             if (is_loong(vueData.trs[3].nums, index)) {
                                 if (is_tiger(vueData.trs[4].nums, index)) {
                                     if (is_loong(vueData.trs[5].nums, index)) {
-                                        //投注虎
-                                        computeBettingAmount(5);
+                                        if (is_tiger(vueData.trs[6].nums, index)) {
+                                            if (is_loong(vueData.trs[7].nums, index)) {
+                                                if (is_tiger(vueData.trs[8].nums, index)) {
+                                                    if (is_loong(vueData.trs[9].nums, index)) {
+                                                        //投注虎
+                                                        computeBettingAmount(5);
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -836,6 +940,63 @@ var vueOneBigAndOneSmall = new Vue({
                 }
 
             }
+
+            return temp;
+        }
+    }
+});
+
+
+/**
+ * 单项遗漏实例
+ */
+var vueOneBigAndOneSmall = new Vue({
+    el: '#vue-one-big-and-one-small',
+    data: {
+        result: [
+            // {
+            //     issue: vueData.trs[0].issue + 1,
+            //     betting: [
+            //         {
+            //             name: name,
+            //             item: [
+            //                 {
+            //                     name: name,//名字：大小单双龙虎
+            //                     betting_amount: 0,//投注额
+            //                     total_sum: 0,//总金额
+            //                     is_betting: false,//是否投注
+            //                     betting_count: 0,//投注次数
+            //                 }
+            //             ]
+            //         }
+            //     ]
+            // }
+        ]
+    },
+    methods: {
+
+        /**
+         * 复制文本
+         * @param e
+         */
+        copyText: copyInputVal,
+        isShow: function () {
+            return this.result.length > 0
+        },
+
+
+        get: function (issue) {
+            for (var i = 0; i < this.result.length; i++) {
+                if (this.result[i].issue === issue) {
+                    return this.result[i];
+                }
+            }
+            return null;
+        },
+
+
+        compute: function () {
+
 
             return temp;
         }
@@ -857,9 +1018,20 @@ function compute() {
     var max_miss_1_10 = getIntVal('#max_miss_1_10')//最大遗漏
     var miss_1_10 = getIntVal('#miss_1_10')//最小遗漏
 
+
+    //一大一小
+    var one_big_one_small_num = getIntVal('#one_big_one_small_num')
+    var one_big_one_small_add = getIntVal('#one_big_one_small_add')
+    var one_big_one_small_max = getIntVal('#one_big_one_small_max')
+
+
     var method = $("input[name='method']:checked").val();//方法
 
-    if (isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss) || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(max_miss_1_10) || isNaN(miss_1_10)) {
+    if (
+        isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)
+        || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(max_miss_1_10) || isNaN(miss_1_10)
+        || isNaN(one_big_one_small_num) || isNaN(one_big_one_small_add) || isNaN(one_big_one_small_max)//一大一小
+    ) {
         showMsg('参数不全', 2, 1000);
         return;
     }
@@ -879,7 +1051,8 @@ function compute() {
     //以最新的数据遍历车道，从冠军到第十名
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
 
-        oneBigAndOneSmall.push(vueOneBigAndOneSmall.compute(i, nameArr[i], num, add, max, method))
+        oneBigAndOneSmall.push(vueOneBigAndOneSmall.compute(i, nameArr[i],
+            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
         // 计算两面结果
         // twoSidesResultArr.push(computeTwoSides(i, nameArr[i], num, add, max, miss, method));
@@ -893,6 +1066,7 @@ function compute() {
         betting: oneBigAndOneSmall
     });
 
+    openOrClosebettingPanel(true);
 
     //组织结果对象
     // var resultObj = {
@@ -903,6 +1077,18 @@ function compute() {
 
     // vueResult.add(resultObj);
     // outObj(vueResult.result);
+}
+
+function openOrClosebettingPanel(open) {
+
+    if (open) {
+        $('#betting-panel').fadeIn();
+        $('body').css('overflow', 'hidden');
+    } else {
+        $('#betting-panel').fadeOut();
+        $('body').css('overflow', 'auto');
+    }
+
 }
 
 /**
@@ -1182,80 +1368,6 @@ function computeTwoSides(index, name, num, add, max, miss, method) {
     return temp;
 }
 
-
-var vueResult = new Vue({
-    el: '#vue-result',
-    data: {
-        info: '录入数据',
-        result: [],
-        panel: {
-            two_sides: true,
-            one_to_ten: true
-        }
-    },
-    methods: {
-        activeClass: function (o) {
-            if (o) {
-                return 'active'
-            } else {
-                return ''
-            }
-        },
-        showLH: function (index) {
-            if (index < 5) {
-                return true;
-            }
-            return false;
-        },
-        isShow: function () {
-            return this.result.length > 0
-        },
-        selectText: function (e) {
-            var el = $(e.currentTarget);
-            // el.select();//选中文本
-            el.zclip({
-                path: '/static/zclip/ZeroClipboard.swf',
-                copy: function () { //复制内容
-                    return el.val();
-                },
-                afterCopy: function () {
-                    showMsg('复制成功', 1, 500);
-                }
-            });
-        },
-
-        /**
-         * 获取期号索引
-         * @param issue
-         * @returns {number}
-         */
-        getIndex: function (issue) {
-            for (var i = 0; i < this.result.length; i++) {
-                if (this.result[i].issue === issue) {
-                    return i;
-                }
-            }
-            return -1;
-        },
-        get: function (issue) {
-            for (var i = 0; i < this.result.length; i++) {
-                if (this.result[i].issue === issue) {
-                    return this.result[i];
-                }
-            }
-            return null;
-        },
-        add: function (obj) {
-            var index = this.getIndex(obj.issue);
-            if (index > -1) {
-                this.result.unshift(obj);
-                // this.result[index] = obj;
-            } else {
-                this.result.unshift(obj);
-            }
-        }
-    }
-});
 
 window.onbeforeunload = function (e) {
     // return '';

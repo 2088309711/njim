@@ -7,6 +7,10 @@
     width: 840px;
 }
 
+.padding-0 {
+    padding: 0 !important;
+}
+
 #result {
     width: 1323px;
     resize: none;
@@ -30,6 +34,11 @@ iframe {
     overflow: auto;
 }
 
+.result-panel {
+    max-height: 600px;
+    overflow: auto;
+}
+
 .content {
     height: 61px;
     border: 1px solid #ddd;
@@ -42,7 +51,7 @@ iframe {
 
 .badge-1 {
     display: inline-block;
-    margin: 3px 6px;
+    margin: 0 5px;
     width: 20px;
     height: 20px;
     background: url(../img/ball-pk.png) no-repeat;

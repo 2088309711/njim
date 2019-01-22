@@ -27,206 +27,193 @@
 
     <div class="line-middle margin-top">
 
-        <div class="x2 option-panel">
+        <div class="x8 padding-0">
 
 
-            <div class="panel">
-                <div class="panel-head">
-                    通用
+            <div class="x4">
+                <div class="panel">
+                    <div class="panel-head">全局</div>
+
+                    <div class="panel-body padding-little-bottom">
+                        <div class="form-group">
+                            <div class="label">
+                                <label>数据</label>
+                            </div>
+                            <div class="field">
+                                <button index="0" class="open-window button button-little margin-small">线路1</button>
+                                <button index="1" class="open-window button button-little margin-small">线路2</button>
+                                <button index="2" class="open-window button button-little margin-small">线路3</button>
+                                <button index="3" class="open-window button button-little margin-small">线路4</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel-body padding-little-top padding-bottom">
+                        <div class="form-group">
+                            <div class="label">
+                                <label>方法</label>
+                            </div>
+                            <div class="field">
+                                <label class="margin-big-right">
+                                    <input name="method" value="1" type="radio">
+                                    正常
+                                </label>
+                                <label>
+                                    <input name="method" value="2" type="radio">
+                                    收尾
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
-                <div class="panel-body padding-little-bottom">
-                    <div class="form-group">
-                        <div class="label">
-                            <label>数据</label>
+
+                <div class="panel margin-top">
+                    <div class="panel-head">
+                        一大一小
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="label">
+                                <label>大小</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="one_big_one_small_num" placeholder="1"/>
+                            </div>
                         </div>
-                        <div class="field">
-                            <button index="0" class="open-window button button-little margin-small">线路1</button>
-                            <button index="1" class="open-window button button-little margin-small">线路2</button>
-                            <button index="2" class="open-window button button-little margin-small">线路3</button>
-                            <button index="3" class="open-window button button-little margin-small">线路4</button>
+
+                        <div class="form-group">
+                            <div class="label">
+                                <label>增加</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="one_big_one_small_add" placeholder="1"/>
+                            </div>
                         </div>
+
+
+                        <div class="form-group">
+                            <div class="label">
+                                <label>封顶</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="one_big_one_small_max" placeholder="50"/>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-
-                <div class="panel-body padding-little-top padding-small-bottom">
-                    <div class="form-group">
-                        <div class="label">
-                            <label>方法</label>
-                        </div>
-                        <div class="field">
-                            <label class="margin-big-right">
-                                <input name="method" value="1" type="radio">
-                                正常
-                            </label>
-                            <label>
-                                <input name="method" value="2" type="radio">
-                                收尾
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="panel-body padding-little-top padding-bottom">
-                    <div class="form-group">
-                        <div class="label">
-                            <label>显示</label>
-                        </div>
-                        <div class="field">
-                            <label class="margin-big-right">
-                                <input name="show_panel" value="1" type="checkbox" checked>
-                                两面
-                            </label>
-                            <label>
-                                <input name="show_panel" value="2" type="checkbox" checked>
-                                1~10名
-                            </label>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
-            <div class="panel margin-top">
-                <div class="panel-head">
-                    两面参数
+            <div class="x4">
+
+                <div class="panel">
+                    <div class="panel-head">
+                        单项遗漏
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="label">
+                                <label>大小</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="num"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="label">
+                                <label>增加</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="add"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="label">
+                                <label>封顶</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="max"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="label">
+                                <label>遗漏</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="miss"/>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="label">
-                            <label>大小</label>
-                        </div>
-                        <div class="field">
-                            <input type="text" class="input" id="num"/>
-                        </div>
+            </div>
+
+            <div class="x4">
+
+                <div class="panel">
+                    <div class="panel-head">
+                        1~10 名参数
                     </div>
+                    <div class="panel-body">
 
-                    <div class="form-group">
-                        <div class="label">
-                            <label>增加</label>
+                        <div class="form-group">
+                            <div class="label">
+                                <label>初始投注额</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="num_1_10"/>
+                            </div>
                         </div>
-                        <div class="field">
-                            <input type="text" class="input" id="add"/>
+
+                        <div class="form-group">
+                            <div class="label">
+                                <label>最低收益</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="min_1_10"/>
+                            </div>
                         </div>
+
+
+                        <div class="form-group">
+                            <div class="label">
+                                <label>最小遗漏</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="miss_1_10"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="label">
+                                <label>最大遗漏</label>
+                            </div>
+                            <div class="field">
+                                <input type="text" class="input" id="max_miss_1_10"/>
+                            </div>
+                        </div>
+
                     </div>
-
-
-                    <div class="form-group">
-                        <div class="label">
-                            <label>封顶</label>
-                        </div>
-                        <div class="field">
-                            <input type="text" class="input" id="max"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="label">
-                            <label>遗漏</label>
-                        </div>
-                        <div class="field">
-                            <input type="text" class="input" id="miss"/>
-                        </div>
-                    </div>
-
-
                 </div>
             </div>
 
-
-            <div class="panel margin-top">
-                <div class="panel-head">
-                    1~10 名参数
-                </div>
-                <div class="panel-body">
-
-                    <div class="form-group">
-                        <div class="label">
-                            <label>初始投注额</label>
-                        </div>
-                        <div class="field">
-                            <input type="text" class="input" id="num_1_10"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="label">
-                            <label>最低收益</label>
-                        </div>
-                        <div class="field">
-                            <input type="text" class="input" id="min_1_10"/>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="label">
-                            <label>最小遗漏</label>
-                        </div>
-                        <div class="field">
-                            <input type="text" class="input" id="miss_1_10"/>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <div class="label">
-                            <label>最大遗漏</label>
-                        </div>
-                        <div class="field">
-                            <input type="text" class="input" id="max_miss_1_10"/>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
         </div>
 
-        <div id="vue-result" class="x8 table-1">
-            <div class="content">
-                <h1>
-                    <span v-if="isShow()">{{result[0].issue}} 期投注清单</span>
-                    <span v-else>{{info}}</span>
-                </h1>
-            </div>
 
-            <template v-if="isShow()">
-
-                <div class="two-sides" v-if="panel.two_sides">
-                    <template v-for="(data,index) in result[0].twoSides">
-
-                        <div class="item">
-
-                            <template v-for="(obj,index) in data.item">
-                                <div class="num">
-                                    <span>{{obj.miss}}</span>
-                                    <input readonly type="text" @click="selectText($event)" v-show="obj.is_betting"
-                                           :value="obj.betting_amount">
-                                </div>
-
-                            </template>
-                        </div>
-
-                    </template>
-                </div>
-
-                <div class="one-to-ten" v-if="panel.one_to_ten">
-
-                    <div class="item" v-for="(data,index) in result[0].oneToTen">
-                        <div class="num" v-for="(obj,index) in data.nums">
-                            <span>{{obj.miss}}</span>
-                            <input v-show="obj.betting" readonly type="text" @click="selectText($event)"
-                                   :value="obj.num">
-                        </div>
-                    </div>
-
-                </div>
-            </template>
-        </div>
-
-        <div id="vue-data" class="x2 out-result">
+        <div id="vue-data" class="x4 result-panel">
 
             <table class="table table-bordered">
                 <tr>
@@ -264,9 +251,9 @@
 
     <div class="tab" data-toggle="click">
         <div class="tab-head">
-            <strong>面板</strong>
+            <strong>投注面板</strong>
             <ul class="tab-nav">
-                <li class="active"><a href="#tab-1">1</a></li>
+                <li class="active"><a href="#tab-1">一大一小</a></li>
                 <li><a href="#tab-2">2</a></li>
                 <li><a href="#tab-3">3</a></li>
             </ul>
@@ -280,7 +267,8 @@
                         <div class="item" v-for="(data1,index1) in result[0].betting">
                             <div class="num" v-for="(data2,index2) in data1.item">
                                 <!--<span></span>-->
-                                <input v-if="data2.is_betting" value="data2.betting_amount" readonly type="text">
+                                <input v-if="data2.is_betting" @click="copyText($event)"
+                                       :value="data2.betting_amount" readonly type="text">
                             </div>
                         </div>
                     </div>
