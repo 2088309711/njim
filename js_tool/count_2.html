@@ -354,7 +354,7 @@
                     <div class="two-sides" v-if="isShow()">
                         <div class="item" v-for="(data1,index1) in result[0].betting">
                             <div class="num" v-for="(data2,index2) in data1.item">
-                                <span>{{data2.miss}}</span>
+                                <!--<span></span>-->
                                 <input v-if="data2.is_betting" @click="copyText($event)"
                                        :value="data2.betting_amount" readonly type="text">
                             </div>
@@ -371,7 +371,7 @@
                     <div class="two-sides" v-if="isShow()">
                         <div class="item" v-for="(data1,index1) in result[0].betting">
                             <div class="num" v-for="(data2,index2) in data1.item">
-                                <span>{{data2.miss}}</span>
+                                <!--<span></span>-->
                                 <input v-if="data2.is_betting" @click="copyText($event)"
                                        :value="data2.betting_amount" readonly type="text">
                             </div>
@@ -419,7 +419,11 @@
 </div>
 
 <script src="js/count_2_common.js"></script>
+<script src="js/count_2_one_big_and_one_small.js"></script>
 <script src="js/count_2_double_big_double_small.js"></script>
+<script src="js/count_2_three_big_three_small.js"></script>
+<script src="js/count_2_individual.js"></script>
+<script src="js/count_2_one_to_ten_miss.js"></script>
 <script src="js/count_2.js"></script>
 </body>
 </html>
