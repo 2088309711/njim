@@ -832,21 +832,29 @@ function countDoubleBigDoubleSmall() {
 //统计三大三小
 function countThreeBigThreeSmall() {
 
-
     var result = {
-        size: 0,
-        single_double: 0,
-        dragon_tiger: 0,
-        issue: [],
+        size: {
+            issue: [],
+            count: 0
+        },
+        single_double: {
+            issue: [],
+            count: 0
+        },
+        dragon_tiger: {
+            issue: [],
+            count: 0
+        },
         num: 0
     };
+
 
     //遍历开奖每行结果
     for (var i = 0; i < vueData.trs.length; i++) {
         //遍历一行中的10个号码
         for (var j = 0; j < vueData.trs[i].nums.length; j++) {
 
-            if (i + 5 >= vueData.trs.length) {
+            if (i + 8 >= vueData.trs.length) {
                 break;
             }
 
@@ -858,6 +866,18 @@ function countThreeBigThreeSmall() {
             temp[3] = vueData.trs[i + 3].nums;
             temp[4] = vueData.trs[i + 4].nums;
             temp[5] = vueData.trs[i + 5].nums;
+            temp[6] = vueData.trs[i + 6].nums;
+            temp[7] = vueData.trs[i + 7].nums;
+            temp[8] = vueData.trs[i + 8].nums;
+            // temp[9] = vueData.trs[i + 9].nums;
+            // temp[10] = vueData.trs[i + 10].nums;
+            // temp[11] = vueData.trs[i + 11].nums;
+            // temp[12] = vueData.trs[i + 12].nums;
+            // temp[13] = vueData.trs[i + 13].nums;
+            // temp[14] = vueData.trs[i + 14].nums;
+            // temp[15] = vueData.trs[i + 15].nums;
+            // temp[16] = vueData.trs[i + 16].nums;
+            // temp[17] = vueData.trs[i + 17].nums;
 
 
             if (
@@ -866,10 +886,22 @@ function countThreeBigThreeSmall() {
                 is_big(temp[2][j]) &&
                 is_small(temp[3][j]) &&
                 is_small(temp[4][j]) &&
-                is_small(temp[5][j])
+                is_small(temp[5][j]) &&
+                is_big(temp[6][j]) &&
+                is_big(temp[7][j]) &&
+                is_big(temp[8][j]) //&&
+                // is_small(temp[9][j]) &&
+                // is_small(temp[10][j]) &&
+                // is_small(temp[11][j]) //&&
+                // is_big(temp[12][j]) &&
+                // is_big(temp[13][j]) &&
+                // is_big(temp[14][j]) &&
+                // is_small(temp[15][j]) &&
+                // is_small(temp[16][j]) &&
+                // is_small(temp[17][j])
             ) {
-                result.size++;
-                result.issue.push(vueData.trs[i].issue);
+                result.size.count++;
+                result.size.issue.push(vueData.trs[i].issue + ':' + (j + 1));
             }
 
 
@@ -879,10 +911,22 @@ function countThreeBigThreeSmall() {
                 is_small(temp[2][j]) &&
                 is_big(temp[3][j]) &&
                 is_big(temp[4][j]) &&
-                is_big(temp[5][j])
+                is_big(temp[5][j]) &&
+                is_small(temp[6][j]) &&
+                is_small(temp[7][j]) &&
+                is_small(temp[8][j]) //&&
+                // is_big(temp[9][j]) &&
+                // is_big(temp[10][j]) &&
+                // is_big(temp[11][j]) //&&
+                // is_small(temp[12][j]) &&
+                // is_small(temp[13][j]) &&
+                // is_small(temp[14][j]) &&
+                // is_big(temp[15][j]) &&
+                // is_big(temp[16][j]) &&
+                // is_big(temp[17][j])
             ) {
-                result.size++;
-                result.issue.push(vueData.trs[i].issue);
+                result.size.count++;
+                result.size.issue.push(vueData.trs[i].issue + ':' + (j + 1));
             }
 
 
@@ -892,10 +936,22 @@ function countThreeBigThreeSmall() {
                 is_single(temp[2][j]) &&
                 is_double(temp[3][j]) &&
                 is_double(temp[4][j]) &&
-                is_double(temp[5][j])
+                is_double(temp[5][j]) &&
+                is_single(temp[6][j]) &&
+                is_single(temp[7][j]) &&
+                is_single(temp[8][j]) //&&
+                // is_double(temp[9][j]) &&
+                // is_double(temp[10][j]) &&
+                // is_double(temp[11][j]) //&&
+                // is_single(temp[12][j]) &&
+                // is_single(temp[13][j]) &&
+                // is_single(temp[14][j]) &&
+                // is_double(temp[15][j]) &&
+                // is_double(temp[16][j]) &&
+                // is_double(temp[17][j])
             ) {
-                result.single_double++;
-                result.issue.push(vueData.trs[i].issue);
+                result.single_double.count++;
+                result.single_double.issue.push(vueData.trs[i].issue + ':' + (j + 1));
             }
 
 
@@ -905,10 +961,22 @@ function countThreeBigThreeSmall() {
                 is_double(temp[2][j]) &&
                 is_single(temp[3][j]) &&
                 is_single(temp[4][j]) &&
-                is_single(temp[5][j])
+                is_single(temp[5][j]) &&
+                is_double(temp[6][j]) &&
+                is_double(temp[7][j]) &&
+                is_double(temp[8][j]) //&&
+                // is_single(temp[9][j]) &&
+                // is_single(temp[10][j]) &&
+                // is_single(temp[11][j]) //&&
+                // is_double(temp[12][j]) &&
+                // is_double(temp[13][j]) &&
+                // is_double(temp[14][j]) &&
+                // is_single(temp[15][j]) &&
+                // is_single(temp[16][j]) &&
+                // is_single(temp[17][j])
             ) {
-                result.single_double++;
-                result.issue.push(vueData.trs[i].issue);
+                result.single_double.count++;
+                result.single_double.issue.push(vueData.trs[i].issue + ':' + (j + 1));
             }
 
 
@@ -919,10 +987,22 @@ function countThreeBigThreeSmall() {
                     is_loong(temp[2], j) &&
                     is_tiger(temp[3], j) &&
                     is_tiger(temp[4], j) &&
-                    is_tiger(temp[5], j)
+                    is_tiger(temp[5], j) &&
+                    is_loong(temp[6], j) &&
+                    is_loong(temp[7], j) &&
+                    is_loong(temp[8], j) //&&
+                    // is_tiger(temp[9], j) &&
+                    // is_tiger(temp[10], j) &&
+                    // is_tiger(temp[11], j) //&&
+                    // is_loong(temp[12], j) &&
+                    // is_loong(temp[13], j) &&
+                    // is_loong(temp[14], j) &&
+                    // is_tiger(temp[15], j) &&
+                    // is_tiger(temp[16], j) &&
+                    // is_tiger(temp[17], j)
                 ) {
-                    result.dragon_tiger++;
-                    result.issue.push(vueData.trs[i].issue);
+                    result.dragon_tiger.count++;
+                    result.dragon_tiger.issue.push(vueData.trs[i].issue + ':' + (j + 1));
                 }
 
 
@@ -932,10 +1012,22 @@ function countThreeBigThreeSmall() {
                     is_tiger(temp[2], j) &&
                     is_loong(temp[3], j) &&
                     is_loong(temp[4], j) &&
-                    is_loong(temp[5], j)
+                    is_loong(temp[5], j) &&
+                    is_tiger(temp[6], j) &&
+                    is_tiger(temp[7], j) &&
+                    is_tiger(temp[8], j) //&&
+                    // is_loong(temp[9], j) &&
+                    // is_loong(temp[10], j) &&
+                    // is_loong(temp[11], j) //&&
+                    // is_tiger(temp[12], j) &&
+                    // is_tiger(temp[13], j) &&
+                    // is_tiger(temp[14], j) &&
+                    // is_loong(temp[15], j) &&
+                    // is_loong(temp[16], j) &&
+                    // is_loong(temp[17], j)
                 ) {
-                    result.dragon_tiger++;
-                    result.issue.push(vueData.trs[i].issue);
+                    result.dragon_tiger.count++;
+                    result.dragon_tiger.issue.push(vueData.trs[i].issue + ':' + (j + 1));
                 }
 
             }
@@ -959,5 +1051,5 @@ setInterval(function () {
 
 
 window.onbeforeunload = function (e) {
-    return '';
+    // return '';
 }
