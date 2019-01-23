@@ -54,6 +54,28 @@ $(function () {
 
     //一大一小  end
 
+    //双大双小
+    load_cookie('double_big_double_small_num');
+    load_cookie('double_big_double_small_add');
+    load_cookie('double_big_double_small_max');
+
+    $('#double_big_double_small_num').blur(function () {
+        ckNum('double_big_double_small_num');
+        compute();
+    });
+
+    $('#double_big_double_small_add').blur(function () {
+        ckNum('double_big_double_small_add');
+        compute();
+    });
+
+    $('#double_big_double_small_max').blur(function () {
+        ckNum('double_big_double_small_max');
+        compute();
+    });
+
+    //双大双小 end
+
 
     //1~10 名遗漏
     load_cookie('num_1_10');
@@ -730,21 +752,6 @@ function getIntVal(elId) {
 }
 
 
-function copyInputVal(e) {
-    var el = $(e.currentTarget);
-    // el.select();//选中文本
-    el.zclip({
-        path: '/static/zclip/ZeroClipboard.swf',
-        copy: function () { //复制内容
-            return el.val();
-        },
-        afterCopy: function () {
-            showMsg('复制成功', 1, 500);
-        }
-    });
-}
-
-
 /**
  * 一大一小实例
  */
@@ -1395,6 +1402,11 @@ function compute() {
     var one_big_one_small_add = getIntVal('#one_big_one_small_add')
     var one_big_one_small_max = getIntVal('#one_big_one_small_max')
 
+    //双大双小
+    var double_big_double_small_num = getIntVal('#double_big_double_small_num')
+    var double_big_double_small_add = getIntVal('#double_big_double_small_add')
+    var double_big_double_small_max = getIntVal('#double_big_double_small_max')
+
 
     var method = $("input[name='method']:checked").val();//方法
 
@@ -1402,6 +1414,7 @@ function compute() {
         isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)//单项遗漏
         || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(miss_1_10)//1~10 名遗漏
         || isNaN(one_big_one_small_num) || isNaN(one_big_one_small_add) || isNaN(one_big_one_small_max)//一大一小
+        || isNaN(double_big_double_small_num) || isNaN(double_big_double_small_add) || isNaN(double_big_double_small_max)//双大双小
     ) {
         showMsg('参数不全', 2, 1000);
         return;
@@ -1414,6 +1427,7 @@ function compute() {
 
 
     var oneBigAndOneSmall = [];
+    var doubleBigDoubleSmall = [];
     var individual = [];
     var oneToTenMiss = [];
 
@@ -1422,39 +1436,50 @@ function compute() {
     //以最新的数据遍历车道，从冠军到第十名
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
 
+        //一大一小
         oneBigAndOneSmall.push(vueOneBigAndOneSmall.compute(i, nameArr[i],
             one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
 
+        //双大双小
+        doubleBigDoubleSmall.push(vueDoubleBigDoubleSmall.compute(i, nameArr[i],
+            double_big_double_small_num, double_big_double_small_add, double_big_double_small_max, method))
+
+        //单项遗漏
         individual.push(vueIndividual.compute(i, nameArr[i], num, add, max, miss, method))
 
 
-        // || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(miss_1_10)//1~10 名遗漏
+        //1~10 名遗漏
         oneToTenMiss.push(vueOneToTenMiss.compute(i, nameArr[i], num_1_10, min_1_10, miss_1_10, method))
 
-        // (index, name, num, min, miss, method)
 
-        // 计算 1-10 结果
-        // oneToTenResultArr.push(computeOneToTen(i, nameArr[i], num_1_10, min_1_10, max_miss_1_10, miss_1_10, method));
     }
 
+    //一大一小
     vueOneBigAndOneSmall.result.unshift({
         issue: vueData.trs[0].issue + 1,
         betting: oneBigAndOneSmall
     });
 
+    //双大双小
+    vueDoubleBigDoubleSmall.result.unshift({
+        issue: vueData.trs[0].issue + 1,
+        betting: doubleBigDoubleSmall
+    });
 
+
+    //单项遗漏
     vueIndividual.result.unshift({
         issue: vueData.trs[0].issue + 1,
         betting: individual
     })
 
 
+    //1~10名遗漏
     vueOneToTenMiss.result.unshift({
         issue: vueData.trs[0].issue + 1,
         betting: oneToTenMiss
     })
-
 
     outObj(oneToTenMiss)
 
