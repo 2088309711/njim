@@ -189,9 +189,19 @@ $(function () {
         countOneToTenMiss();
     });
 
-    // 统计规律发生次数
-    $('#count-law').click(function () {
-        countLaw();
+    // 统计一大一小
+    $('#count-one-big-one-small').click(function () {
+        countOneBigOneSmall();
+    });
+
+    //统计双大双小
+    $('#count-double-big-double-small').click(function () {
+        countDoubleBigDoubleSmall();
+    });
+
+    //统计三大三小
+    $('#count-three-big-three-small').click(function () {
+        countThreeBigThreeSmall();
     });
 
     $('#close-betting-panel').click(function () {
@@ -552,12 +562,13 @@ function countOneToTenMiss() {
 
 
 //统计规律
-function countLaw() {
+function countOneBigOneSmall() {
 
     var result = {
         size: 0,
         single_double: 0,
         dragon_tiger: 0,
+        issue: [],
         num: 0
     };
 
@@ -572,94 +583,364 @@ function countLaw() {
 
             //选出6个需要比对的号码
             var temp = [];
-            temp[0] = vueData.trs[i].nums[j];
-            temp[1] = vueData.trs[i + 1].nums[j];
-            temp[2] = vueData.trs[i + 2].nums[j];
-            temp[3] = vueData.trs[i + 3].nums[j];
-            temp[4] = vueData.trs[i + 4].nums[j];
-            temp[5] = vueData.trs[i + 5].nums[j];
-            temp[6] = vueData.trs[i + 6].nums[j];
-            temp[7] = vueData.trs[i + 7].nums[j];
+            temp[0] = vueData.trs[i].nums;
+            temp[1] = vueData.trs[i + 1].nums;
+            temp[2] = vueData.trs[i + 2].nums;
+            temp[3] = vueData.trs[i + 3].nums;
+            temp[4] = vueData.trs[i + 4].nums;
+            temp[5] = vueData.trs[i + 5].nums;
+            temp[6] = vueData.trs[i + 6].nums;
+            temp[7] = vueData.trs[i + 7].nums;
 
-            //第一个是大
-            if (is_big(temp[0])) {
-                if (is_small(temp[1])) {
-                    if (is_big(temp[2])) {
-                        if (is_small(temp[3])) {
-                            if (is_big(temp[4])) {
-                                if (is_small(temp[5])) {
-                                    if (is_big(temp[6])) {
-                                        if (is_small(temp[7])) {
-                                            result.size++;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
 
-            //第一个是小
-            if (is_small(temp[0])) {
-                if (is_big(temp[1])) {//大
-                    if (is_small(temp[2])) {
-                        if (is_big(temp[3])) {
-                            if (is_small(temp[4])) {
-                                if (is_big(temp[5])) {
-                                    if (is_small(temp[6])) {
-                                        if (is_big(temp[7])) {
-                                            result.size++;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            if (
+                is_big(temp[0][j]) &&
+                is_small(temp[1][j]) &&
+                is_big(temp[2][j]) &&
+                is_small(temp[3][j]) &&
+                is_big(temp[4][j]) &&
+                is_small(temp[5][j]) &&
+                is_big(temp[6][j]) &&
+                is_small(temp[7][j])
+            ) {
+                result.size++;
+                result.issue.push(vueData.trs[i].issue);
             }
 
 
-            //第一个是单
-            if (is_single(temp[0])) {
-                if (is_double(temp[1])) {
-                    if (is_single(temp[2])) {
-                        if (is_double(temp[3])) {
-                            if (is_single(temp[4])) {
-                                if (is_double(temp[5])) {
-                                    if (is_single(temp[6])) {
-                                        if (is_double(temp[7])) {
-                                            result.single_double++;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            if (
+                is_small(temp[0][j]) &&
+                is_big(temp[1][j]) &&
+                is_small(temp[2][j]) &&
+                is_big(temp[3][j]) &&
+                is_small(temp[4][j]) &&
+                is_big(temp[5][j]) &&
+                is_small(temp[6][j]) &&
+                is_big(temp[7][j])
+            ) {
+                result.size++;
+                result.issue.push(vueData.trs[i].issue);
             }
 
-            //第一个是双
-            if (is_double(temp[0])) {
-                if (is_single(temp[1])) {
-                    if (is_double(temp[2])) {
-                        if (is_single(temp[3])) {
-                            if (is_double(temp[4])) {
-                                if (is_single(temp[5])) {
-                                    if (is_double(temp[6])) {
-                                        if (is_single(temp[7])) {
-                                            result.single_double++;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+
+            if (
+                is_single(temp[0][j]) &&
+                is_double(temp[1][j]) &&
+                is_single(temp[2][j]) &&
+                is_double(temp[3][j]) &&
+                is_single(temp[4][j]) &&
+                is_double(temp[5][j]) &&
+                is_single(temp[6][j]) &&
+                is_double(temp[7][j])
+            ) {
+                result.single_double++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (
+                is_double(temp[0][j]) &&
+                is_single(temp[1][j]) &&
+                is_double(temp[2][j]) &&
+                is_single(temp[3][j]) &&
+                is_double(temp[4][j]) &&
+                is_single(temp[5][j]) &&
+                is_double(temp[6][j]) &&
+                is_single(temp[7][j])
+            ) {
+                result.single_double++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (j < 5) {
+                if (
+                    is_loong(temp[0], j) &&
+                    is_tiger(temp[1], j) &&
+                    is_loong(temp[2], j) &&
+                    is_tiger(temp[3], j) &&
+                    is_loong(temp[4], j) &&
+                    is_tiger(temp[5], j) &&
+                    is_loong(temp[6], j) &&
+                    is_tiger(temp[7], j)
+                ) {
+                    result.dragon_tiger++;
+                    result.issue.push(vueData.trs[i].issue);
                 }
+
+
+                if (
+                    is_tiger(temp[0], j) &&
+                    is_loong(temp[1], j) &&
+                    is_tiger(temp[2], j) &&
+                    is_loong(temp[3], j) &&
+                    is_tiger(temp[4], j) &&
+                    is_loong(temp[5], j) &&
+                    is_tiger(temp[6], j) &&
+                    is_loong(temp[7], j)
+                ) {
+                    result.dragon_tiger++;
+                    result.issue.push(vueData.trs[i].issue);
+                }
+
+
             }
 
             result.num++
 
+        }
+    }
+
+    outObj(result);
+
+}
+
+
+//统计双大双小
+function countDoubleBigDoubleSmall() {
+
+    var result = {
+        size: 0,
+        single_double: 0,
+        dragon_tiger: 0,
+        issue: [],
+        num: 0
+    };
+
+    //遍历开奖每行结果
+    for (var i = 0; i < vueData.trs.length; i++) {
+        //遍历一行中的10个号码
+        for (var j = 0; j < vueData.trs[i].nums.length; j++) {
+
+            if (i + 7 >= vueData.trs.length) {
+                break;
+            }
+
+            //选出6个需要比对的号码
+            var temp = [];
+            temp[0] = vueData.trs[i].nums;
+            temp[1] = vueData.trs[i + 1].nums;
+            temp[2] = vueData.trs[i + 2].nums;
+            temp[3] = vueData.trs[i + 3].nums;
+            temp[4] = vueData.trs[i + 4].nums;
+            temp[5] = vueData.trs[i + 5].nums;
+            temp[6] = vueData.trs[i + 6].nums;
+            temp[7] = vueData.trs[i + 7].nums;
+
+
+            if (
+                is_big(temp[0][j]) &&
+                is_big(temp[1][j]) &&
+                is_small(temp[2][j]) &&
+                is_small(temp[3][j]) &&
+                is_big(temp[4][j]) &&
+                is_big(temp[5][j]) &&
+                is_small(temp[6][j]) &&
+                is_small(temp[7][j])
+            ) {
+                result.size++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (
+                is_small(temp[0][j]) &&
+                is_small(temp[1][j]) &&
+                is_big(temp[2][j]) &&
+                is_big(temp[3][j]) &&
+                is_small(temp[4][j]) &&
+                is_small(temp[5][j]) &&
+                is_big(temp[6][j]) &&
+                is_big(temp[7][j])
+            ) {
+                result.size++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+            if (
+                is_single(temp[0][j]) &&
+                is_single(temp[1][j]) &&
+                is_double(temp[2][j]) &&
+                is_double(temp[3][j]) &&
+                is_single(temp[4][j]) &&
+                is_single(temp[5][j]) &&
+                is_double(temp[6][j]) &&
+                is_double(temp[7][j])
+            ) {
+                result.single_double++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (
+                is_double(temp[0][j]) &&
+                is_double(temp[1][j]) &&
+                is_single(temp[2][j]) &&
+                is_single(temp[3][j]) &&
+                is_double(temp[4][j]) &&
+                is_double(temp[5][j]) &&
+                is_single(temp[6][j]) &&
+                is_single(temp[7][j])
+            ) {
+                result.single_double++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (j < 5) {
+                if (
+                    is_loong(temp[0], j) &&
+                    is_loong(temp[1], j) &&
+                    is_tiger(temp[2], j) &&
+                    is_tiger(temp[3], j) &&
+                    is_loong(temp[4], j) &&
+                    is_loong(temp[5], j) &&
+                    is_tiger(temp[6], j) &&
+                    is_tiger(temp[7], j)
+                ) {
+                    result.dragon_tiger++;
+                    result.issue.push(vueData.trs[i].issue);
+                }
+
+
+                if (
+                    is_tiger(temp[0], j) &&
+                    is_tiger(temp[1], j) &&
+                    is_loong(temp[2], j) &&
+                    is_loong(temp[3], j) &&
+                    is_tiger(temp[4], j) &&
+                    is_tiger(temp[5], j) &&
+                    is_loong(temp[6], j) &&
+                    is_loong(temp[7], j)
+                ) {
+                    result.dragon_tiger++;
+                    result.issue.push(vueData.trs[i].issue);
+                }
+
+            }
+
+            result.num++
+
+        }
+    }
+
+    outObj(result);
+
+}
+
+
+//统计三大三小
+function countThreeBigThreeSmall() {
+
+
+    var result = {
+        size: 0,
+        single_double: 0,
+        dragon_tiger: 0,
+        issue: [],
+        num: 0
+    };
+
+    //遍历开奖每行结果
+    for (var i = 0; i < vueData.trs.length; i++) {
+        //遍历一行中的10个号码
+        for (var j = 0; j < vueData.trs[i].nums.length; j++) {
+
+            if (i + 5 >= vueData.trs.length) {
+                break;
+            }
+
+            //选出需要比对的号码
+            var temp = [];
+            temp[0] = vueData.trs[i].nums;
+            temp[1] = vueData.trs[i + 1].nums;
+            temp[2] = vueData.trs[i + 2].nums;
+            temp[3] = vueData.trs[i + 3].nums;
+            temp[4] = vueData.trs[i + 4].nums;
+            temp[5] = vueData.trs[i + 5].nums;
+
+
+            if (
+                is_big(temp[0][j]) &&
+                is_big(temp[1][j]) &&
+                is_big(temp[2][j]) &&
+                is_small(temp[3][j]) &&
+                is_small(temp[4][j]) &&
+                is_small(temp[5][j])
+            ) {
+                result.size++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (
+                is_small(temp[0][j]) &&
+                is_small(temp[1][j]) &&
+                is_small(temp[2][j]) &&
+                is_big(temp[3][j]) &&
+                is_big(temp[4][j]) &&
+                is_big(temp[5][j])
+            ) {
+                result.size++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (
+                is_single(temp[0][j]) &&
+                is_single(temp[1][j]) &&
+                is_single(temp[2][j]) &&
+                is_double(temp[3][j]) &&
+                is_double(temp[4][j]) &&
+                is_double(temp[5][j])
+            ) {
+                result.single_double++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (
+                is_double(temp[0][j]) &&
+                is_double(temp[1][j]) &&
+                is_double(temp[2][j]) &&
+                is_single(temp[3][j]) &&
+                is_single(temp[4][j]) &&
+                is_single(temp[5][j])
+            ) {
+                result.single_double++;
+                result.issue.push(vueData.trs[i].issue);
+            }
+
+
+            if (j < 5) {
+                if (
+                    is_loong(temp[0], j) &&
+                    is_loong(temp[1], j) &&
+                    is_loong(temp[2], j) &&
+                    is_tiger(temp[3], j) &&
+                    is_tiger(temp[4], j) &&
+                    is_tiger(temp[5], j)
+                ) {
+                    result.dragon_tiger++;
+                    result.issue.push(vueData.trs[i].issue);
+                }
+
+
+                if (
+                    is_tiger(temp[0], j) &&
+                    is_tiger(temp[1], j) &&
+                    is_tiger(temp[2], j) &&
+                    is_loong(temp[3], j) &&
+                    is_loong(temp[4], j) &&
+                    is_loong(temp[5], j)
+                ) {
+                    result.dragon_tiger++;
+                    result.issue.push(vueData.trs[i].issue);
+                }
+
+            }
+
+            result.num++
 
         }
     }
