@@ -1,8 +1,3 @@
-
-
-
-
-
 function compute() {
 
     //单项
@@ -51,6 +46,9 @@ function compute() {
         return;
     }
 
+    if (!vueData.check()) {
+        alert('数据断层，不能计算')
+    }
 
     var oneBigAndOneSmall = [];
     var doubleBigDoubleSmall = [];
@@ -122,7 +120,6 @@ function compute() {
 
     openOrClosebettingPanel(true);
 }
-
 
 
 //二叉树算法
@@ -204,7 +201,6 @@ function splitNumsToInt(str) {
 }
 
 
-
 function ckNum(name) {
     var obj = $('#' + name);
     var value = trim(obj.val());
@@ -222,13 +218,9 @@ function trim(str) {
 }
 
 
-
-
-
 function getIntVal(elId) {
     return parseInt($(elId).val());
 }
-
 
 
 function copyInputVal(e) {
