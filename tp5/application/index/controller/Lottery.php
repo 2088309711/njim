@@ -18,21 +18,20 @@ class Lottery extends Controller
     public function index()
     {
 
-        $url = 'https://api.speedlottery.com/data/racing/last.xml';
+        $t = time();
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-//        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-//        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, false);
-        $result = curl_exec($ch);
-        curl_close($ch);
-        return $result;
-//        ****
-//        https://api.speedlottery.com/data/racing/last.xml //秒速赛车官方接口
+//        $url = 'https://www.sh1333.com/static/data/80CurIssue.json?_t=' . $t;
+//        $url = 'https://www.rd2255.com/static/data/80CurIssue.json?_t=' . $t;
+//        $url = 'http://www.9h991.com/static/data/80CurIssue.json?_t=' . $t;
+//        $url = 'https://api.speedlottery.com/data/racing/last.xml?_t=' . $t;
+        $url = 'https://api.cp987a.com/data/jspk10/last.json?_t=' . $t;
+
+//        $this->getHttpsData2($url);
+
+        return $this->getHttpsData($url);
+
+//        https://api.speedlottery.com/data/racing/last.xml
+
     }
 
     public function getSecondSpeedRacingData()
@@ -87,12 +86,23 @@ class Lottery extends Controller
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_ENCODING, '');
+        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 2);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language:zh-CN,zh;q=0.8',
+            'Cache-Control:no-cache',
+            'Connection:keep-alive',
+            'Pragma:no-cache',
+            'Upgrade-Insecure-Requests:1',
+            'User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.90 Safari/537.36 2345Explorer/9.6.0.18627'
+        ]);
+
         $result = curl_exec($ch);
         curl_close($ch);
         return $result;
