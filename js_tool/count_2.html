@@ -16,12 +16,12 @@
 <body>
 <div class="container-layout padding-top padding-bottom">
 
-    <div id="data">
-        <iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>
-        <iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>
-    </div>
+    <!--<div id="data">-->
+    <!--<iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>-->
+    <!--<iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>-->
+    <!--<iframe src="//www.rd2255.com/static/data/80CurIssue.json"></iframe>-->
+    <!--<iframe src="//www.sh1333.com/static/data/80CurIssue.json"></iframe>-->
+    <!--</div>-->
 
     <textarea id="result" rows="1" class="input"></textarea>
 
@@ -255,14 +255,14 @@
         <div class="tab-head">
             <strong>投注面板</strong>
             <ul class="tab-nav">
-                <li class="active"><a href="#tab-1">一大一小</a></li>
-                <li><a href="#tab-2">双大双小</a></li>
-                <li><a href="#tab-3">三大三小</a></li>
-                <li><a href="#tab-4">单项遗漏</a></li>
-                <li><a href="#tab-5">1~10名遗漏</a></li>
-                <li><a href="#tab-6">双大一小</a></li>
-                <li><a href="#tab-7">三大一小</a></li>
-                <li><a href="#tab-8">四大一小</a></li>
+                <li class="active"><a id="head-1" href="#tab-1">一大一小</a></li>
+                <li><a id="head-2" href="#tab-2">双大双小</a></li>
+                <li><a id="head-3" href="#tab-3">三大三小</a></li>
+                <li><a id="head-4" href="#tab-4">单项遗漏</a></li>
+                <li><a id="head-5" href="#tab-5">1~10名遗漏</a></li>
+                <li><a id="head-6" href="#tab-6">双大一小</a></li>
+                <li><a id="head-7" href="#tab-7">三大一小</a></li>
+                <li><a id="head-8" href="#tab-8">四大一小</a></li>
             </ul>
         </div>
         <!--tab-body-bordered-->
@@ -397,11 +397,10 @@
 
             </div>
 
-
-
         </div>
     </div>
 
+    <div id="audio-stop" class="icon-stop"></div>
     <div id="close-betting-panel" class="icon-compress"></div>
 
 </div>
@@ -410,6 +409,8 @@
 <script src="js/count_2_one_big_and_one_small.js"></script>
 <script src="js/count_2_double_big_double_small.js"></script>
 <script src="js/count_2_two_big_and_one_small.js"></script>
+<script src="js/count_2_three_big_and_one_small.js"></script>
+<script src="js/count_2_four_big_and_one_small.js"></script>
 <script src="js/count_2_three_big_three_small.js"></script>
 <script src="js/count_2_individual.js"></script>
 <script src="js/count_2_one_to_ten_miss.js"></script>

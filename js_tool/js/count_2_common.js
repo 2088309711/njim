@@ -1,4 +1,18 @@
+var play_audio = false,
+    audio = new Audio('/js_tool/audio/1.mp3');
+
 function compute() {
+
+
+    $('#head-1').css('color', '#000');
+    $('#head-2').css('color', '#000');
+    $('#head-3').css('color', '#000');
+    $('#head-4').css('color', '#000');
+    $('#head-5').css('color', '#000');
+    $('#head-6').css('color', '#000');
+    $('#head-7').css('color', '#000');
+    $('#head-8').css('color', '#000');
+
 
     //单项
     var num = getIntVal('#num')
@@ -34,7 +48,8 @@ function compute() {
     }
 
     if (!vueData.check()) {
-        alert('数据断层，不能计算')
+        alert('数据断层，不能计算');
+        return;
     }
 
     var oneBigAndOneSmall = [];//一大一小
@@ -44,6 +59,7 @@ function compute() {
     var oneToTenMiss = [];//1~10名遗漏
     var twoBigAndOneSmall = [];//双大一小
     var threeBigAndOneSmall = [];//三大一小
+    var fourBigAndOneSmall = [];//四大一小
 
     var nameArr = ['冠军', '亚军', '第三名', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
 
@@ -79,6 +95,12 @@ function compute() {
         //三大一小
         threeBigAndOneSmall.push(vueThreeBigAndOneSmall.compute(i, nameArr[i],
             one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+
+
+        //四大一小
+        fourBigAndOneSmall.push(vueFourBigAndOneSmall.compute(i, nameArr[i],
+            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+
 
     }
 
@@ -125,6 +147,19 @@ function compute() {
         issue: vueData.trs[0].issue + 1,
         betting: threeBigAndOneSmall
     });
+
+
+    //四大一小
+    vueFourBigAndOneSmall.result.unshift({
+        issue: vueData.trs[0].issue + 1,
+        betting: fourBigAndOneSmall
+    });
+
+
+    if (play_audio) {
+        audio.play(); //播放
+    }
+
 
     openOrClosebettingPanel(true);
 }
@@ -279,10 +314,16 @@ function is_double(num) {
 }
 
 function is_loong(arr, index) {
+    if (index == null) {
+        alert('龙必须加索引')
+    }
     return arr[index] > arr[9 - index];
 }
 
 function is_tiger(arr, index) {
+    if (index == null) {
+        alert('虎必须加索引')
+    }
     return arr[index] < arr[9 - index];
 }
 

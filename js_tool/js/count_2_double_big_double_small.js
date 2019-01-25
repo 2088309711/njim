@@ -88,6 +88,25 @@ var vueDoubleBigDoubleSmall = new Vue({
 
                 temp.item[itemIndex].is_betting = true;//开启投注
 
+                play_audio = true;
+
+
+                $('#head-2').css('color', '#f00');
+                /*
+                  <strong>投注面板</strong>
+          <ul class="tab-nav">
+              <li class="active"><a id="head-1" href="#tab-1">一大一小</a></li>
+              <li><a id="head-2" href="#tab-2">双大双小</a></li>
+              <li><a id="head-3" href="#tab-3">三大三小</a></li>
+              <li><a id="head-4" href="#tab-4">单项遗漏</a></li>
+              <li><a id="head-5" href="#tab-5">1~10名遗漏</a></li>
+              <li><a id="head-6" href="#tab-6">双大一小</a></li>
+              <li><a id="head-7" href="#tab-7">三大一小</a></li>
+              <li><a id="head-8" href="#tab-8">四大一小</a></li>
+          </ul>
+              */
+
+
                 var start = true;
 
                 //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致

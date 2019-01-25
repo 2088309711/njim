@@ -145,6 +145,14 @@ $(function () {
         $(this).attr('disabled', true).text('已开启');
     });
 
+
+    //暂停音频
+    $('#audio-stop').click(function () {
+        // audio.pause()
+        audio.load()
+    });
+
+
 });
 
 
@@ -221,9 +229,10 @@ var vueData = new Vue({
                 issue1 = parseInt(issue1.substr(6));
                 issue2 = parseInt(issue2.substr(6)) + 1;
 
+
                 if (issue1 !== issue2) {
                     var temp = this.trs[i].issue.toString();
-                    temp = parseInt(temp.substr(0, 6) + (issue2 - 1));
+                    temp = parseInt(temp.substr(0, 6) + issue2);
                     if (this.get(temp) == null) {
                         alert(temp + ' 期数据不存在');
                         return false;
@@ -1188,14 +1197,14 @@ function countFourBigFourSmall() {
 }
 
 setInterval(function () {
-    $('#data').children('iframe').each(function () {
-        var url = this.src.split('?');
-        this.src = url[0] + '?_t=' + new Date().getTime();
-    });
+    // $('#data').children('iframe').each(function () {
+    //     var url = this.src.split('?');
+    //     this.src = url[0] + '?_t=' + new Date().getTime();
+    // });
 
     if (autoGet) {
         $.ajax({
-            url: '/index/Lottery/getSecondSpeedRacingData',
+            url: '/index.php/index/Lottery/getSecondSpeedRacingData',
             dataType: 'json',
             success: function (data) {
                 if (data.issue != null && data.nums != null) {

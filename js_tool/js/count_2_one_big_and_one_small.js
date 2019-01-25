@@ -78,33 +78,41 @@ var vueOneBigAndOneSmall = new Vue({
             //找出上一期的投注数据
             var preArr = this.get(vueData.trs[0].issue);
 
-
-            //计算投注额
-            var computeBettingAmount = function (itemIndex) {
+            /**
+             * 计算投注额
+             * @param itemIndex
+             * @param preItemIndex
+             */
+            var computeBettingAmount = function (itemIndex, preItemIndex) {
 
                 temp.item[itemIndex].is_betting = true;//开启投注
+
+                play_audio = true;
+
+
+                $('#head-1').css('color', '#f00');
+
+                /*
+                $('#head-1').css('color', '#f00');
+                    <strong>投注面板</strong>
+            <ul class="tab-nav">
+                <li class="active"><a id="head-1" href="#tab-1">一大一小</a></li>
+                <li><a id="head-2" href="#tab-2">双大双小</a></li>
+                <li><a id="head-3" href="#tab-3">三大三小</a></li>
+                <li><a id="head-4" href="#tab-4">单项遗漏</a></li>
+                <li><a id="head-5" href="#tab-5">1~10名遗漏</a></li>
+                <li><a id="head-6" href="#tab-6">双大一小</a></li>
+                <li><a id="head-7" href="#tab-7">三大一小</a></li>
+                <li><a id="head-8" href="#tab-8">四大一小</a></li>
+            </ul>
+                */
+
 
                 var start = true;
 
                 //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致
                 if (preArr != null && preArr.issue === vueData.trs[0].issue) {
                     //之前有投注数据并且有效
-
-                    var preItemIndex = -1;
-                    //取上期的投注额   0大 1小 2单 3双 4龙 5虎
-                    if (itemIndex === 0) {//如果本期投注大，取上期的小 1
-                        preItemIndex = 1;
-                    } else if (itemIndex === 1) {//取大 0
-                        preItemIndex = 0;
-                    } else if (itemIndex === 2) {
-                        preItemIndex = 3;
-                    } else if (itemIndex === 3) {
-                        preItemIndex = 2;
-                    } else if (itemIndex === 4) {
-                        preItemIndex = 5;
-                    } else if (itemIndex === 5) {
-                        preItemIndex = 4;
-                    }
 
                     var preNum = preArr.betting[index].item[preItemIndex].betting_amount;//上期的投注额
                     if (preNum > 0) {//上次有投注这个项目
@@ -129,149 +137,75 @@ var vueOneBigAndOneSmall = new Vue({
 
             };
 
-            if (is_big(vueData.trs[0].nums[index])) {//最后开的大，投大
-                if (is_small(vueData.trs[1].nums[index])) {
-                    if (is_big(vueData.trs[2].nums[index])) {
-                        if (is_small(vueData.trs[3].nums[index])) {
-                            if (is_big(vueData.trs[4].nums[index])) {
-                                if (is_small(vueData.trs[5].nums[index])) {
-                                    if (is_big(vueData.trs[6].nums[index])) {
-                                        if (is_small(vueData.trs[7].nums[index])) {
-                                            if (is_big(vueData.trs[8].nums[index])) {
-                                                if (is_small(vueData.trs[9].nums[index])) {
-                                                    //投注大
-                                                    computeBettingAmount(0);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+            //大小
+            if (//大
+                is_big(vueData.trs[0].nums[index]) &&//小
+                is_small(vueData.trs[1].nums[index]) &&//大
+                is_big(vueData.trs[2].nums[index]) &&//小
+                is_small(vueData.trs[3].nums[index]) //&&//大
+            ) {
+                computeBettingAmount(0, 1);// 0大 1小 2单 3双 4龙 5虎
             }
 
-            if (is_small(vueData.trs[0].nums[index])) {
-                if (is_big(vueData.trs[1].nums[index])) {
-                    if (is_small(vueData.trs[2].nums[index])) {
-                        if (is_big(vueData.trs[3].nums[index])) {
-                            if (is_small(vueData.trs[4].nums[index])) {
-                                if (is_big(vueData.trs[5].nums[index])) {
-                                    if (is_small(vueData.trs[6].nums[index])) {
-                                        if (is_big(vueData.trs[7].nums[index])) {
-                                            if (is_small(vueData.trs[8].nums[index])) {
-                                                if (is_big(vueData.trs[9].nums[index])) {
-                                                    //投注小
-                                                    computeBettingAmount(1);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+
+            if (//小
+                is_small(vueData.trs[0].nums[index]) &&//大
+                is_big(vueData.trs[1].nums[index]) &&//小
+                is_small(vueData.trs[2].nums[index]) &&//大
+                is_big(vueData.trs[3].nums[index]) //&&//小
+            ) {
+                computeBettingAmount(1, 0);// 0大 1小 2单 3双 4龙 5虎
             }
 
-            if (is_single(vueData.trs[0].nums[index])) {
-                if (is_double(vueData.trs[1].nums[index])) {
-                    if (is_single(vueData.trs[2].nums[index])) {
-                        if (is_double(vueData.trs[3].nums[index])) {
-                            if (is_single(vueData.trs[4].nums[index])) {
-                                if (is_double(vueData.trs[5].nums[index])) {
-                                    if (is_single(vueData.trs[6].nums[index])) {
-                                        if (is_double(vueData.trs[7].nums[index])) {
-                                            if (is_single(vueData.trs[8].nums[index])) {
-                                                if (is_double(vueData.trs[9].nums[index])) {
-                                                    //投注单
-                                                    computeBettingAmount(2);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+
+            //单双
+            if (//单
+                is_single(vueData.trs[0].nums[index]) &&//双
+                is_double(vueData.trs[1].nums[index]) &&//单
+                is_single(vueData.trs[2].nums[index]) &&//双
+                is_double(vueData.trs[3].nums[index]) //&&//单
+            ) {
+                computeBettingAmount(2, 3);// 0大 1小 2单 3双 4龙 5虎
             }
 
-            if (is_double(vueData.trs[0].nums[index])) {
-                if (is_single(vueData.trs[1].nums[index])) {
-                    if (is_double(vueData.trs[2].nums[index])) {
-                        if (is_single(vueData.trs[3].nums[index])) {
-                            if (is_double(vueData.trs[4].nums[index])) {
-                                if (is_single(vueData.trs[5].nums[index])) {
-                                    if (is_double(vueData.trs[6].nums[index])) {
-                                        if (is_single(vueData.trs[7].nums[index])) {
-                                            if (is_double(vueData.trs[8].nums[index])) {
-                                                if (is_single(vueData.trs[9].nums[index])) {
-                                                    //投注双
-                                                    computeBettingAmount(3);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+
+            if (//双
+                is_double(vueData.trs[0].nums[index]) &&//单
+                is_single(vueData.trs[1].nums[index]) &&//双
+                is_double(vueData.trs[2].nums[index]) &&//单
+                is_single(vueData.trs[3].nums[index]) //&&//双
+            ) {
+                computeBettingAmount(3, 2);// 0大 1小 2单 3双 4龙 5虎
             }
+
 
             if (index < 5) {//龙虎
 
-                if (is_loong(vueData.trs[0].nums, index)) {
-                    if (is_tiger(vueData.trs[1].nums, index)) {
-                        if (is_loong(vueData.trs[2].nums, index)) {
-                            if (is_tiger(vueData.trs[3].nums, index)) {
-                                if (is_loong(vueData.trs[4].nums, index)) {
-                                    if (is_tiger(vueData.trs[5].nums, index)) {
-                                        if (is_loong(vueData.trs[6].nums, index)) {
-                                            if (is_tiger(vueData.trs[7].nums, index)) {
-                                                if (is_loong(vueData.trs[8].nums, index)) {
-                                                    if (is_tiger(vueData.trs[9].nums, index)) {
-                                                        //投注龙
-                                                        computeBettingAmount(4);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+
+                if (//龙
+                    is_loong(vueData.trs[0].nums, index) &&//虎
+                    is_tiger(vueData.trs[1].nums, index) &&//龙
+                    is_loong(vueData.trs[2].nums, index) &&//虎
+                    is_tiger(vueData.trs[3].nums, index)// &&//龙
+                ) {
+                    computeBettingAmount(4, 5);// 0大 1小 2单 3双 4龙 5虎
                 }
 
-                if (is_tiger(vueData.trs[0].nums, index)) {
-                    if (is_loong(vueData.trs[1].nums, index)) {
-                        if (is_tiger(vueData.trs[2].nums, index)) {
-                            if (is_loong(vueData.trs[3].nums, index)) {
-                                if (is_tiger(vueData.trs[4].nums, index)) {
-                                    if (is_loong(vueData.trs[5].nums, index)) {
-                                        if (is_tiger(vueData.trs[6].nums, index)) {
-                                            if (is_loong(vueData.trs[7].nums, index)) {
-                                                if (is_tiger(vueData.trs[8].nums, index)) {
-                                                    if (is_loong(vueData.trs[9].nums, index)) {
-                                                        //投注虎
-                                                        computeBettingAmount(5);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+
+                if (//虎
+                    is_tiger(vueData.trs[0].nums, index) &&//龙
+                    is_loong(vueData.trs[1].nums, index) &&//虎
+                    is_tiger(vueData.trs[2].nums, index) &&//龙
+                    is_loong(vueData.trs[3].nums, index) //&&//虎
+                ) {
+                    computeBettingAmount(5, 4);// 0大 1小 2单 3双 4龙 5虎
                 }
+
 
             }
 
             return temp;
         }
+
     }
 });

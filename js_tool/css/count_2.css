@@ -99,6 +99,7 @@ iframe {
     width: 827px;
     height: 350px;
     overflow: hidden;
+    margin: 211px 0 0 197px;
 }
 
 .two-sides .item {
@@ -115,6 +116,7 @@ iframe {
     width: 827px;
     height: 640px;
     overflow: hidden;
+    margin: 157px 0 232px 197px;
 }
 
 .one-to-ten .item {
@@ -159,22 +161,29 @@ iframe {
     display: none;
 }
 
-#close-betting-panel {
-    font-size: 50px;
+#audio-stop, #close-betting-panel {
+    font-size: 30px;
     color: #666;
     background: #eee;
     width: 80px;
     height: 80px;
     line-height: 80px;
     text-align: center;
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
+    position: fixed;
+    right: 50px;
     cursor: pointer;
     transition: all .6s;
 }
 
-#close-betting-panel:hover {
+#audio-stop {
+    bottom: 140px;
+}
+
+#close-betting-panel {
+    bottom: 50px;
+}
+
+#audio-stop:hover, #close-betting-panel:hover {
     color: #fff;
     background: #00aaee;
 }
