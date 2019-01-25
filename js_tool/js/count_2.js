@@ -1,4 +1,5 @@
-var cookie_prefix = 'count_2_';
+var cookie_prefix = 'count_2_',
+    autoGet = false;
 
 $(function () {
 
@@ -175,6 +176,12 @@ $(function () {
         openOrClosebettingPanel(false);
     });
 
+
+    $('#auto-get').click(function () {
+        autoGet = true;
+        $(this).attr('disabled', true).text('已开启');
+    });
+
 });
 
 
@@ -264,6 +271,20 @@ var vueData = new Vue({
 
 
         /**
+         * 拆分号码字符串并转整型
+         * @param str
+         * @returns {*|string[]}
+         */
+        splitNumsToInt: function (str) {
+            str = str.split(',');
+            for (var i = 0; i < str.length; i++) {
+                str[i] = parseInt(str[i]);
+            }
+            return str;
+        },
+
+
+        /**
          * 解析数据
          */
         parseData: function () {
@@ -301,7 +322,7 @@ var vueData = new Vue({
 
                 //添加数据
                 for (var i = 0; i < data.length; i++) {
-                    if (this.add(parseInt(data[i].turnNum), splitNumsToInt(data[i].openNum))) {
+                    if (this.add(parseInt(data[i].turnNum), this.splitNumsToInt(data[i].openNum))) {
                         $('#result').val('数据录入成功');
                     } else {
                         $('#result').val('数据已存在');
@@ -317,7 +338,7 @@ var vueData = new Vue({
 
                 //转整
                 issue = parseInt(issue[0]);
-                nums = splitNumsToInt(nums[0]);
+                nums = this.splitNumsToInt(nums[0]);
 
                 if (this.add(issue, nums)) {
                     $('#result').val('数据录入成功');
@@ -1203,14 +1224,25 @@ function countFourBigFourSmall() {
 
 }
 
-
 setInterval(function () {
     $('#data').children('iframe').each(function () {
         var url = this.src.split('?');
         this.src = url[0] + '?_t=' + new Date().getTime();
     });
-}, 5000);
 
+    if (autoGet) {
+        $.ajax({
+            url: '/index/Lottery/getSecondSpeedRacingData',
+            dataType: 'json',
+            success: function (data) {
+                if (data.issue != null && data.nums != null) {
+                    vueData.add(parseInt(data.issue), vueData.splitNumsToInt(data.nums));
+                }
+            }
+        });
+    }
+
+}, 5000);
 
 window.onbeforeunload = function (e) {
     // return '';

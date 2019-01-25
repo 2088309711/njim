@@ -20,61 +20,36 @@ class Lottery extends Controller
 
         $t = time();
 
-//        $url = 'https://www.sh1333.com/static/data/80CurIssue.json?_t=' . $t;
+        $url = 'https://www.sh1333.com/static/data/80CurIssue.json?_t=' . $t;
 //        $url = 'https://www.rd2255.com/static/data/80CurIssue.json?_t=' . $t;
 //        $url = 'http://www.9h991.com/static/data/80CurIssue.json?_t=' . $t;
 //        $url = 'https://api.speedlottery.com/data/racing/last.xml?_t=' . $t;
-        $url = 'https://api.cp987a.com/data/jspk10/last.json?_t=' . $t;
+//        $url = 'https://api.cp987a.com/data/jspk10/last.json?_t=' . $t;
 
-//        $this->getHttpsData2($url);
 
         return $this->getHttpsData($url);
 
-//        https://api.speedlottery.com/data/racing/last.xml
-
     }
 
+    /**
+     * http://njim.com/index/Lottery/getSecondSpeedRacingData
+     */
     public function getSecondSpeedRacingData()
     {
-
         $t = time();
-
-        $result = [];
-
-        $result[] = $this->getArr('盈盈彩', "https://www.yyc91.com/static/data/80CurIssue.json?_t=" . $t);
-
-        $result[] = $this->getArr('盛宏', "https://www.sh1333.com/static/data/80CurIssue.json?_t=" . $t);
-
-        $result[] = $this->getArr('荣鼎', "https://www.rd2255.com/static/data/80CurIssue.json?_t=" . $t);
-
-        $result[] = $this->getArr('9号', "http://www.9h991.com/static/data/80CurIssue.json?_t=" . $t);
-
-        echo json_encode($result);
+        $this->outJSON('https://www.sh1333.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('http://www.9h991.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('https://www.rd2255.com/static/data/80CurIssue.json?_t=' . $t);
     }
 
 
-    private function getArr($name, $url)
+    private function outJSON($url)
     {
-
         $json = $this->getHttpsData($url);
-
-        $errText = '--';
-
-        $result = [
-            'name' => $name,
-            'issue' => $errText,
-            'opentime' => $errText,
-            'nums' => $errText
-        ];
-
-        $data = json_decode($json);
-        if ($data != null) {
-            $result['issue'] = $data->issue;
-            $result['opentime'] = $data->opentime;
-            $result['nums'] = $data->nums;
+        if (json_decode($json) != null) {
+            echo $json;
+            die;
         }
-
-        return $result;
     }
 
     /**

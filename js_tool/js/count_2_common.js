@@ -187,20 +187,6 @@ function BinaryTree() {
 }
 
 
-/**
- * 拆分号码字符串并转整型
- * @param str
- * @returns {*|string[]}
- */
-function splitNumsToInt(str) {
-    str = str.split(',');
-    for (var i = 0; i < str.length; i++) {
-        str[i] = parseInt(str[i]);
-    }
-    return str;
-}
-
-
 function ckNum(name) {
     var obj = $('#' + name);
     var value = trim(obj.val());
