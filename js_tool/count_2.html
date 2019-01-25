@@ -80,7 +80,7 @@
 
                 <div class="panel margin-top">
                     <div class="panel-head">
-                        一大一小
+                        大小交替
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
@@ -162,40 +162,6 @@
                     </div>
                 </div>
 
-                <div class="panel margin-top">
-                    <div class="panel-head">
-                        双大双小
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="label">
-                                <label>大小</label>
-                            </div>
-                            <div class="field">
-                                <input type="text" class="input" id="double_big_double_small_num" placeholder="1"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="label">
-                                <label>增加</label>
-                            </div>
-                            <div class="field">
-                                <input type="text" class="input" id="double_big_double_small_add" placeholder="1"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="label">
-                                <label>封顶</label>
-                            </div>
-                            <div class="field">
-                                <input type="text" class="input" id="double_big_double_small_max" placeholder="50"/>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
             </div>
 
@@ -235,43 +201,6 @@
                             </div>
                         </div>
 
-
-                    </div>
-                </div>
-
-
-                <div class="panel margin-top">
-                    <div class="panel-head">
-                        三大三小
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <div class="label">
-                                <label>大小</label>
-                            </div>
-                            <div class="field">
-                                <input type="text" class="input" id="three_big_three_small_num" placeholder="1"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="label">
-                                <label>增加</label>
-                            </div>
-                            <div class="field">
-                                <input type="text" class="input" id="three_big_three_small_add" placeholder="1"/>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <div class="label">
-                                <label>封顶</label>
-                            </div>
-                            <div class="field">
-                                <input type="text" class="input" id="three_big_three_small_max" placeholder="50"/>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -331,6 +260,9 @@
                 <li><a href="#tab-3">三大三小</a></li>
                 <li><a href="#tab-4">单项遗漏</a></li>
                 <li><a href="#tab-5">1~10名遗漏</a></li>
+                <li><a href="#tab-6">双大一小</a></li>
+                <li><a href="#tab-7">三大一小</a></li>
+                <li><a href="#tab-8">四大一小</a></li>
             </ul>
         </div>
         <!--tab-body-bordered-->
@@ -339,8 +271,8 @@
 
                 <div id="vue-one-big-and-one-small">
                     <div class="two-sides" v-if="isShow()">
-                        <div class="item" v-for="(data1,index1) in result[0].betting">
-                            <div class="num" v-for="(data2,index2) in data1.item">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
                                 <!--<span></span>-->
                                 <input v-if="data2.is_betting" @click="copyText($event)"
                                        :value="data2.betting_amount" readonly type="text">
@@ -355,8 +287,8 @@
 
                 <div id="vue-double-big-double-small">
                     <div class="two-sides" v-if="isShow()">
-                        <div class="item" v-for="(data1,index1) in result[0].betting">
-                            <div class="num" v-for="(data2,index2) in data1.item">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
                                 <!--<span></span>-->
                                 <input v-if="data2.is_betting" @click="copyText($event)"
                                        :value="data2.betting_amount" readonly type="text">
@@ -371,8 +303,8 @@
 
                 <div id="vue-three-big-three-small">
                     <div class="two-sides" v-if="isShow()">
-                        <div class="item" v-for="(data1,index1) in result[0].betting">
-                            <div class="num" v-for="(data2,index2) in data1.item">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
                                 <!--<span></span>-->
                                 <input v-if="data2.is_betting" @click="copyText($event)"
                                        :value="data2.betting_amount" readonly type="text">
@@ -387,8 +319,8 @@
 
                 <div id="vue-individual">
                     <div class="two-sides" v-if="isShow()">
-                        <div class="item" v-for="(data1,index1) in result[0].betting">
-                            <div class="num" v-for="(data2,index2) in data1.item">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
                                 <span>{{data2.miss}}</span>
                                 <input v-if="data2.is_betting" @click="copyText($event)"
                                        :value="data2.betting_amount" readonly type="text">
@@ -402,8 +334,8 @@
 
                 <div id="vue-one-to-ten-miss">
                     <div class="one-to-ten" v-if="isShow()">
-                        <div class="item" v-for="(data1,index1) in result[0].betting">
-                            <div class="num" v-for="(data2,index2) in data1.item">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
                                 <span>{{data2.miss}}</span>
                                 <input v-if="data2.is_betting" @click="copyText($event)"
                                        :value="data2.betting_amount" readonly type="text">
@@ -413,6 +345,60 @@
                 </div>
 
             </div>
+
+
+            <div class="tab-panel" id="tab-6">
+
+                <div id="vue-two-big-and-one-small">
+                    <div class="two-sides" v-if="isShow()">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
+                                <!--<span></span>-->
+                                <input v-if="data2.is_betting" @click="copyText($event)"
+                                       :value="data2.betting_amount" readonly type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="tab-panel" id="tab-7">
+
+                <div id="vue-three-big-and-one-small">
+                    <div class="two-sides" v-if="isShow()">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
+                                <!--<span></span>-->
+                                <input v-if="data2.is_betting" @click="copyText($event)"
+                                       :value="data2.betting_amount" readonly type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="tab-panel" id="tab-8">
+
+                <div id="vue-four-big-and-one-small">
+                    <div class="two-sides" v-if="isShow()">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
+                                <!--<span></span>-->
+                                <input v-if="data2.is_betting" @click="copyText($event)"
+                                       :value="data2.betting_amount" readonly type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
         </div>
     </div>
 
@@ -423,6 +409,7 @@
 <script src="js/count_2_common.js"></script>
 <script src="js/count_2_one_big_and_one_small.js"></script>
 <script src="js/count_2_double_big_double_small.js"></script>
+<script src="js/count_2_two_big_and_one_small.js"></script>
 <script src="js/count_2_three_big_three_small.js"></script>
 <script src="js/count_2_individual.js"></script>
 <script src="js/count_2_one_to_ten_miss.js"></script>

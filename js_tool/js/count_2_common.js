@@ -11,21 +11,10 @@ function compute() {
     var min_1_10 = getIntVal('#min_1_10')//最低收益
     var miss_1_10 = getIntVal('#miss_1_10')//最小遗漏
 
-
     //一大一小
     var one_big_one_small_num = getIntVal('#one_big_one_small_num')
     var one_big_one_small_add = getIntVal('#one_big_one_small_add')
     var one_big_one_small_max = getIntVal('#one_big_one_small_max')
-
-    //双大双小
-    var double_big_double_small_num = getIntVal('#double_big_double_small_num')
-    var double_big_double_small_add = getIntVal('#double_big_double_small_add')
-    var double_big_double_small_max = getIntVal('#double_big_double_small_max')
-
-    //三大三小
-    var three_big_three_small_num = getIntVal('#three_big_three_small_num')
-    var three_big_three_small_add = getIntVal('#three_big_three_small_add')
-    var three_big_three_small_max = getIntVal('#three_big_three_small_max')
 
 
     var method = $("input[name='method']:checked").val();//方法
@@ -34,8 +23,6 @@ function compute() {
         isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)//单项遗漏
         || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(miss_1_10)//1~10名遗漏
         || isNaN(one_big_one_small_num) || isNaN(one_big_one_small_add) || isNaN(one_big_one_small_max)//一大一小
-        || isNaN(double_big_double_small_num) || isNaN(double_big_double_small_add) || isNaN(double_big_double_small_max)//双大双小
-        || isNaN(three_big_three_small_num) || isNaN(three_big_three_small_add) || isNaN(three_big_three_small_max)//三大三小
     ) {
         showMsg('参数不全', 2, 1000);
         return;
@@ -50,11 +37,13 @@ function compute() {
         alert('数据断层，不能计算')
     }
 
-    var oneBigAndOneSmall = [];
-    var doubleBigDoubleSmall = [];
-    var threeBigThreeSmall = [];
-    var individual = [];
-    var oneToTenMiss = [];
+    var oneBigAndOneSmall = [];//一大一小
+    var doubleBigDoubleSmall = [];//双大双小
+    var threeBigThreeSmall = [];//三大三小
+    var individual = [];//单项遗漏
+    var oneToTenMiss = [];//1~10名遗漏
+    var twoBigAndOneSmall = [];//双大一小
+    var threeBigAndOneSmall = [];//三大一小
 
     var nameArr = ['冠军', '亚军', '第三名', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
 
@@ -68,11 +57,11 @@ function compute() {
 
         //双大双小
         doubleBigDoubleSmall.push(vueDoubleBigDoubleSmall.compute(i, nameArr[i],
-            double_big_double_small_num, double_big_double_small_add, double_big_double_small_max, method))
+            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
         //三大三小
         threeBigThreeSmall.push(vueThreeBigThreeSmall.compute(i, nameArr[i],
-            three_big_three_small_num, three_big_three_small_add, three_big_three_small_max, method))
+            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
         //单项遗漏
         individual.push(vueIndividual.compute(i, nameArr[i], num, add, max, miss, method))
@@ -81,6 +70,15 @@ function compute() {
         //1~10 名遗漏
         oneToTenMiss.push(vueOneToTenMiss.compute(i, nameArr[i], num_1_10, min_1_10, miss_1_10, method))
 
+
+        //两大一小
+        twoBigAndOneSmall.push(vueTwoBigAndOneSmall.compute(i, nameArr[i],
+            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+
+
+        //三大一小
+        threeBigAndOneSmall.push(vueThreeBigAndOneSmall.compute(i, nameArr[i],
+            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
     }
 
@@ -107,20 +105,29 @@ function compute() {
     vueIndividual.result.unshift({
         issue: vueData.trs[0].issue + 1,
         betting: individual
-    })
+    });
 
 
     //1~10名遗漏
     vueOneToTenMiss.result.unshift({
         issue: vueData.trs[0].issue + 1,
         betting: oneToTenMiss
-    })
+    });
 
-    outObj(oneToTenMiss)
+    //两大一小
+    vueTwoBigAndOneSmall.result.unshift({
+        issue: vueData.trs[0].issue + 1,
+        betting: twoBigAndOneSmall
+    });
+
+    //三大一小
+    vueThreeBigAndOneSmall.result.unshift({
+        issue: vueData.trs[0].issue + 1,
+        betting: threeBigAndOneSmall
+    });
 
     openOrClosebettingPanel(true);
 }
-
 
 //二叉树算法
 function BinaryTree() {

@@ -47,43 +47,6 @@ $(function () {
 
     //一大一小  end
 
-    //双大双小
-    load_cookie('double_big_double_small_num');
-    load_cookie('double_big_double_small_add');
-    load_cookie('double_big_double_small_max');
-
-    $('#double_big_double_small_num').blur(function () {
-        ckNum('double_big_double_small_num');
-    });
-
-    $('#double_big_double_small_add').blur(function () {
-        ckNum('double_big_double_small_add');
-    });
-
-    $('#double_big_double_small_max').blur(function () {
-        ckNum('double_big_double_small_max');
-    });
-
-    //双大双小 end
-
-    //三大三小
-    load_cookie('three_big_three_small_num');
-    load_cookie('three_big_three_small_add');
-    load_cookie('three_big_three_small_max');
-
-    $('#three_big_three_small_num').blur(function () {
-        ckNum('three_big_three_small_num');
-    });
-
-    $('#three_big_three_small_add').blur(function () {
-        ckNum('three_big_three_small_add');
-    });
-
-    $('#three_big_three_small_max').blur(function () {
-        ckNum('three_big_three_small_max');
-    });
-
-    //三大三小 end
 
     //1~10 名遗漏
     load_cookie('num_1_10');
@@ -1236,7 +1199,9 @@ setInterval(function () {
             dataType: 'json',
             success: function (data) {
                 if (data.issue != null && data.nums != null) {
-                    vueData.add(parseInt(data.issue), vueData.splitNumsToInt(data.nums));
+                    if (vueData.add(parseInt(data.issue), vueData.splitNumsToInt(data.nums))) {
+                        compute();
+                    }
                 }
             }
         });
