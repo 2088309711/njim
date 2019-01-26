@@ -145,13 +145,11 @@ $(function () {
         $(this).attr('disabled', true).text('已开启');
     });
 
-
-    //暂停音频
+    //停止音频
     $('#audio-stop').click(function () {
         // audio.pause()
         audio.load()
     });
-
 
 });
 
@@ -1216,7 +1214,7 @@ setInterval(function () {
         });
     }
 
-}, 5000);
+}, 2000);
 
 window.onbeforeunload = function (e) {
     // return '';

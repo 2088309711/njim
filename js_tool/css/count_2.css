@@ -1,10 +1,5 @@
 .container-layout {
-    width: 1343px;
     margin: 0;
-}
-
-.table-1 {
-    width: 840px;
 }
 
 .padding-0 {
@@ -12,41 +7,21 @@
 }
 
 #result {
-    width: 1323px;
+
     resize: none;
     overflow: hidden;
 }
 
 iframe {
     display: block;
-    width: 1323px;
+    width: 100%;
     height: 37px;
     border-top: 1px solid #ddd;
-}
-
-.option-panel {
-    width: 195px;
-}
-
-.out-result {
-    width: 298px;
-    max-height: 1000px;
-    overflow: auto;
 }
 
 .result-panel {
     max-height: 600px;
     overflow: auto;
-}
-
-.content {
-    height: 61px;
-    border: 1px solid #ddd;
-}
-
-.content h1 {
-    text-align: center;
-    line-height: 59px;
 }
 
 .badge-1 {
