@@ -143,7 +143,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_big(vueData.trs[2].nums[index]) &&//小
                 is_small(vueData.trs[3].nums[index]) &&//大
                 is_big(vueData.trs[4].nums[index]) &&
-                is_big(vueData.trs[5].nums[index])
+                is_big(vueData.trs[5].nums[index]) &&
+                is_small(vueData.trs[6].nums[index]) &&//大
+                is_big(vueData.trs[7].nums[index]) &&
+                is_big(vueData.trs[8].nums[index])
             ) {
                 computeBettingAmount(1, 0);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -156,7 +159,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_big(vueData.trs[3].nums[index]) &&//小
                 is_small(vueData.trs[4].nums[index]) &&//大
                 is_big(vueData.trs[5].nums[index]) &&
-                is_big(vueData.trs[6].nums[index])
+                is_big(vueData.trs[6].nums[index]) &&
+                is_small(vueData.trs[7].nums[index]) &&//大
+                is_big(vueData.trs[8].nums[index]) &&
+                is_big(vueData.trs[9].nums[index])
             ) {
                 computeBettingAmount(1, 1);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -170,7 +176,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_big(vueData.trs[4].nums[index]) &&//小
                 is_small(vueData.trs[5].nums[index]) &&//大
                 is_big(vueData.trs[6].nums[index]) &&
-                is_big(vueData.trs[7].nums[index])
+                is_big(vueData.trs[7].nums[index]) &&
+                is_small(vueData.trs[8].nums[index]) &&//大
+                is_big(vueData.trs[9].nums[index]) &&
+                is_big(vueData.trs[10].nums[index])
             ) {
                 computeBettingAmount(0, 1);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -183,7 +192,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_small(vueData.trs[2].nums[index]) &&//大
                 is_big(vueData.trs[3].nums[index]) &&//小
                 is_small(vueData.trs[4].nums[index]) &&
-                is_small(vueData.trs[5].nums[index])
+                is_small(vueData.trs[5].nums[index]) &&
+                is_big(vueData.trs[6].nums[index]) &&//小
+                is_small(vueData.trs[7].nums[index]) &&
+                is_small(vueData.trs[8].nums[index])
 
             ) {
                 computeBettingAmount(0, 1);// 0大 1小 2单 3双 4龙 5虎
@@ -196,7 +208,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_small(vueData.trs[3].nums[index]) &&//大
                 is_big(vueData.trs[4].nums[index]) &&//小
                 is_small(vueData.trs[5].nums[index]) &&
-                is_small(vueData.trs[6].nums[index])
+                is_small(vueData.trs[6].nums[index]) &&
+                is_big(vueData.trs[7].nums[index]) &&//小
+                is_small(vueData.trs[8].nums[index]) &&
+                is_small(vueData.trs[9].nums[index])
             ) {
                 computeBettingAmount(0, 0);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -210,7 +225,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_small(vueData.trs[4].nums[index]) &&//大
                 is_big(vueData.trs[5].nums[index]) &&//小
                 is_small(vueData.trs[6].nums[index]) &&
-                is_small(vueData.trs[7].nums[index])
+                is_small(vueData.trs[7].nums[index]) &&
+                is_big(vueData.trs[8].nums[index]) &&//小
+                is_small(vueData.trs[9].nums[index]) &&
+                is_small(vueData.trs[10].nums[index])
             ) {
                 computeBettingAmount(1, 0);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -223,7 +241,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_single(vueData.trs[2].nums[index]) &&//双
                 is_double(vueData.trs[3].nums[index]) &&//单
                 is_single(vueData.trs[4].nums[index]) &&
-                is_single(vueData.trs[5].nums[index])
+                is_single(vueData.trs[5].nums[index]) &&
+                is_double(vueData.trs[6].nums[index]) &&//单
+                is_single(vueData.trs[7].nums[index]) &&
+                is_single(vueData.trs[8].nums[index])
             ) {
                 computeBettingAmount(3, 2);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -236,7 +257,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_single(vueData.trs[3].nums[index]) &&//双
                 is_double(vueData.trs[4].nums[index]) &&//单
                 is_single(vueData.trs[5].nums[index]) &&
-                is_single(vueData.trs[6].nums[index])
+                is_single(vueData.trs[6].nums[index]) &&
+                is_double(vueData.trs[7].nums[index]) &&//单
+                is_single(vueData.trs[8].nums[index]) &&
+                is_single(vueData.trs[9].nums[index])
             ) {
                 computeBettingAmount(3, 3);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -250,7 +274,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_single(vueData.trs[4].nums[index]) &&//双
                 is_double(vueData.trs[5].nums[index]) &&//单
                 is_single(vueData.trs[6].nums[index]) &&
-                is_single(vueData.trs[7].nums[index])
+                is_single(vueData.trs[7].nums[index]) &&
+                is_double(vueData.trs[8].nums[index]) &&//单
+                is_single(vueData.trs[9].nums[index]) &&
+                is_single(vueData.trs[10].nums[index])
             ) {
                 computeBettingAmount(2, 3);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -263,7 +290,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_double(vueData.trs[2].nums[index]) &&//单
                 is_single(vueData.trs[3].nums[index]) &&//双
                 is_double(vueData.trs[4].nums[index]) &&
-                is_double(vueData.trs[5].nums[index])
+                is_double(vueData.trs[5].nums[index]) &&
+                is_single(vueData.trs[6].nums[index]) &&//双
+                is_double(vueData.trs[7].nums[index]) &&
+                is_double(vueData.trs[8].nums[index])
 
             ) {
                 computeBettingAmount(2, 3);// 0大 1小 2单 3双 4龙 5虎
@@ -277,7 +307,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_double(vueData.trs[3].nums[index]) &&//单
                 is_single(vueData.trs[4].nums[index]) &&//双
                 is_double(vueData.trs[5].nums[index]) &&
-                is_double(vueData.trs[6].nums[index])
+                is_double(vueData.trs[6].nums[index]) &&
+                is_single(vueData.trs[7].nums[index]) &&//双
+                is_double(vueData.trs[8].nums[index]) &&
+                is_double(vueData.trs[9].nums[index])
             ) {
                 computeBettingAmount(2, 2);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -291,7 +324,10 @@ var vueTwoBigAndOneSmall = new Vue({
                 is_double(vueData.trs[4].nums[index]) &&//单
                 is_single(vueData.trs[5].nums[index]) &&//双
                 is_double(vueData.trs[6].nums[index]) &&
-                is_double(vueData.trs[7].nums[index])
+                is_double(vueData.trs[7].nums[index]) &&
+                is_single(vueData.trs[8].nums[index]) &&//双
+                is_double(vueData.trs[9].nums[index]) &&
+                is_double(vueData.trs[10].nums[index])
             ) {
                 computeBettingAmount(3, 2);// 0大 1小 2单 3双 4龙 5虎
             }
@@ -307,7 +343,10 @@ var vueTwoBigAndOneSmall = new Vue({
                     is_loong(vueData.trs[2].nums, index) &&//虎
                     is_tiger(vueData.trs[3].nums, index) &&//龙
                     is_loong(vueData.trs[4].nums, index) &&
-                    is_loong(vueData.trs[5].nums, index)
+                    is_loong(vueData.trs[5].nums, index) &&
+                    is_tiger(vueData.trs[6].nums, index) &&//龙
+                    is_loong(vueData.trs[7].nums, index) &&
+                    is_loong(vueData.trs[8].nums, index)
 
                 ) {
                     computeBettingAmount(5, 4);// 0大 1小 2单 3双 4龙 5虎
@@ -321,7 +360,10 @@ var vueTwoBigAndOneSmall = new Vue({
                     is_loong(vueData.trs[3].nums, index) &&//虎
                     is_tiger(vueData.trs[4].nums, index) &&//龙
                     is_loong(vueData.trs[5].nums, index) &&
-                    is_loong(vueData.trs[6].nums, index)
+                    is_loong(vueData.trs[6].nums, index) &&
+                    is_tiger(vueData.trs[7].nums, index) &&//龙
+                    is_loong(vueData.trs[8].nums, index) &&
+                    is_loong(vueData.trs[9].nums, index)
                 ) {
                     computeBettingAmount(5, 5);// 0大 1小 2单 3双 4龙 5虎
                 }
@@ -335,7 +377,10 @@ var vueTwoBigAndOneSmall = new Vue({
                     is_loong(vueData.trs[4].nums, index) &&//虎
                     is_tiger(vueData.trs[5].nums, index) &&//龙
                     is_loong(vueData.trs[6].nums, index) &&
-                    is_loong(vueData.trs[7].nums, index)
+                    is_loong(vueData.trs[7].nums, index) &&
+                    is_tiger(vueData.trs[8].nums, index) &&//龙
+                    is_loong(vueData.trs[9].nums, index) &&
+                    is_loong(vueData.trs[10].nums, index)
                 ) {
                     computeBettingAmount(4, 5);// 0大 1小 2单 3双 4龙 5虎
                 }
@@ -348,7 +393,10 @@ var vueTwoBigAndOneSmall = new Vue({
                     is_tiger(vueData.trs[2].nums, index) &&//龙
                     is_loong(vueData.trs[3].nums, index) &&//虎
                     is_tiger(vueData.trs[4].nums, index) &&
-                    is_tiger(vueData.trs[5].nums, index)
+                    is_tiger(vueData.trs[5].nums, index) &&
+                    is_loong(vueData.trs[6].nums, index) &&//虎
+                    is_tiger(vueData.trs[7].nums, index) &&
+                    is_tiger(vueData.trs[8].nums, index)
                 ) {
                     computeBettingAmount(4, 5);// 0大 1小 2单 3双 4龙 5虎
                 }
@@ -361,7 +409,10 @@ var vueTwoBigAndOneSmall = new Vue({
                     is_tiger(vueData.trs[3].nums, index) &&//龙
                     is_loong(vueData.trs[4].nums, index) &&//虎
                     is_tiger(vueData.trs[5].nums, index) &&
-                    is_tiger(vueData.trs[6].nums, index)
+                    is_tiger(vueData.trs[6].nums, index) &&
+                    is_loong(vueData.trs[7].nums, index) &&//虎
+                    is_tiger(vueData.trs[8].nums, index) &&
+                    is_tiger(vueData.trs[9].nums, index)
                 ) {
                     computeBettingAmount(4, 4);// 0大 1小 2单 3双 4龙 5虎
                 }
@@ -375,7 +426,10 @@ var vueTwoBigAndOneSmall = new Vue({
                     is_tiger(vueData.trs[4].nums, index) &&//龙
                     is_loong(vueData.trs[5].nums, index) &&//虎
                     is_tiger(vueData.trs[6].nums, index) &&
-                    is_tiger(vueData.trs[7].nums, index)
+                    is_tiger(vueData.trs[7].nums, index) &&
+                    is_loong(vueData.trs[8].nums, index) &&//虎
+                    is_tiger(vueData.trs[9].nums, index) &&
+                    is_tiger(vueData.trs[10].nums, index)
                 ) {
                     computeBettingAmount(5, 4);// 0大 1小 2单 3双 4龙 5虎
                 }

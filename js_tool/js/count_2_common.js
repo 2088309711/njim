@@ -1,8 +1,8 @@
-var play_audio = false,
-    audio = new Audio('/js_tool/audio/1.mp3');
+var play_audio, audio = new Audio('/js_tool/audio/1.mp3');
 
 function compute() {
 
+    play_audio = false;
 
     $('#head-1').css('color', '#000');
     $('#head-2').css('color', '#000');
@@ -100,7 +100,6 @@ function compute() {
         //四大一小
         fourBigAndOneSmall.push(vueFourBigAndOneSmall.compute(i, nameArr[i],
             one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
-
 
     }
 
