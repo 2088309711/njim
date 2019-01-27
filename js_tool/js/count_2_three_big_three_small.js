@@ -90,7 +90,7 @@ var vueThreeBigThreeSmall = new Vue({
 
                 play_audio = true;
 
-                $('#head-3').css('color', '#f00');
+                $('#head-3').css(headColor);
                 /*
                   <strong>投注面板</strong>
           <ul class="tab-nav">

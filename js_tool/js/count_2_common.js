@@ -1,17 +1,26 @@
-var play_audio, audio = new Audio('/js_tool/audio/1.mp3');
+var play_audio, audio = new Audio('/js_tool/audio/1.mp3'), headColor = {
+    'background': '#ff6e00',
+    'color': '#fff'
+};
 
 function compute() {
 
     play_audio = false;
 
-    $('#head-1').css('color', '#000');
-    $('#head-2').css('color', '#000');
-    $('#head-3').css('color', '#000');
-    $('#head-4').css('color', '#000');
-    $('#head-5').css('color', '#000');
-    $('#head-6').css('color', '#000');
-    $('#head-7').css('color', '#000');
-    $('#head-8').css('color', '#000');
+    var headColor1 = {
+        'background': 'none',
+        'color': '#000'
+    };
+
+
+    $('#head-1').css(headColor1);
+    $('#head-2').css(headColor1);
+    $('#head-3').css(headColor1);
+    $('#head-4').css(headColor1);
+    $('#head-5').css(headColor1);
+    $('#head-6').css(headColor1);
+    $('#head-7').css(headColor1);
+    $('#head-8').css(headColor1);
 
 
     //单项

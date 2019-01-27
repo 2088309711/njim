@@ -94,7 +94,7 @@ var vueIndividual = new Vue({
                     play_audio = true;
 
 
-              $('#head-4').css('color', '#f00');
+              $('#head-4').css(headColor);
                     /*
                   <strong>投注面板</strong>
           <ul class="tab-nav">

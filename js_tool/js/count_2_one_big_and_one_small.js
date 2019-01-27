@@ -90,7 +90,7 @@ var vueOneBigAndOneSmall = new Vue({
                 play_audio = true;
 
 
-                $('#head-1').css('color', '#f00');
+                $('#head-1').css(headColor);
 
                 /*
                 $('#head-1').css('color', '#f00');
