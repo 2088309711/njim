@@ -24,9 +24,9 @@
 
         $start = 1;
         $min = 3;
-        $issueNum = 60;
+        $issueNum = 40;
 
-        $odds = 9.999;
+        $odds = 9.99;
 
         $count = 0;
 
