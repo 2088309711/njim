@@ -40,6 +40,13 @@ class Lottery extends Controller
         $this->outJSON('https://www.sh1333.com/static/data/80CurIssue.json?_t=' . $t);
         $this->outJSON('http://www.9h991.com/static/data/80CurIssue.json?_t=' . $t);
         $this->outJSON('https://www.rd2255.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('https://www.zg579.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('https://www.sx6767.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('https://www.zc535.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('https://www.hrcp666.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('https://www.pg8806.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('https://www.rgcp333.com/static/data/80CurIssue.json?_t=' . $t);
+        $this->outJSON('https://www.666b9.com/static/data/80CurIssue.json?_t=' . $t);
     }
 
 
