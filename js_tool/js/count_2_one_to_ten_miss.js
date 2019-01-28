@@ -96,7 +96,7 @@ var vueOneToTenMiss = new Vue({
 
                     play_audio = true;
 
-              $('#head-5').css(headColor);
+                    $('#head-5').css(headColor);
                     /*
                   <strong>投注面板</strong>
           <ul class="tab-nav">
@@ -131,7 +131,7 @@ var vueOneToTenMiss = new Vue({
                         if (preNum !== 0) {
                             start = false;//上期投注额不等于0，非起始投注
                             var nowNum = num;//初始投注额
-                            var odds = 9.99;//赔率
+                            var odds = 10;//赔率
                             var flag = true;
                             while (flag) {
 

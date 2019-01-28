@@ -13,39 +13,39 @@ function compute() {
     };
 
 
-    $('#head-1').css(headColor1);
-    $('#head-2').css(headColor1);
-    $('#head-3').css(headColor1);
-    $('#head-4').css(headColor1);
+    // $('#head-1').css(headColor1);
+    // $('#head-2').css(headColor1);
+    // $('#head-3').css(headColor1);
+    // $('#head-4').css(headColor1);
     $('#head-5').css(headColor1);
-    $('#head-6').css(headColor1);
-    $('#head-7').css(headColor1);
-    $('#head-8').css(headColor1);
+    // $('#head-6').css(headColor1);
+    // $('#head-7').css(headColor1);
+    // $('#head-8').css(headColor1);
 
 
     //单项
-    var num = getIntVal('#num')
-    var add = getIntVal('#add')
-    var max = getIntVal('#max')
-    var miss = getIntVal('#miss')
+    // var num = getIntVal('#num')
+    // var add = getIntVal('#add')
+    // var max = getIntVal('#max')
+    // var miss = getIntVal('#miss')
 
     //1~10名参数
     var num_1_10 = getIntVal('#num_1_10')//初始投注额
-    var min_1_10 = getIntVal('#min_1_10')//最低收益
-    var miss_1_10 = getIntVal('#miss_1_10')//最小遗漏
+    var min_1_10 = 0//最低收益
+    var miss_1_10 = 20//最小遗漏
 
     //一大一小
-    var one_big_one_small_num = getIntVal('#one_big_one_small_num')
-    var one_big_one_small_add = getIntVal('#one_big_one_small_add')
-    var one_big_one_small_max = getIntVal('#one_big_one_small_max')
+    // var one_big_one_small_num = getIntVal('#one_big_one_small_num')
+    // var one_big_one_small_add = getIntVal('#one_big_one_small_add')
+    // var one_big_one_small_max = getIntVal('#one_big_one_small_max')
 
 
     var method = $("input[name='method']:checked").val();//方法
 
     if (
-        isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)//单项遗漏
-        || isNaN(num_1_10) || isNaN(min_1_10) || isNaN(miss_1_10)//1~10名遗漏
-        || isNaN(one_big_one_small_num) || isNaN(one_big_one_small_add) || isNaN(one_big_one_small_max)//一大一小
+        // isNaN(num) || isNaN(add) || isNaN(max) || isNaN(miss)//单项遗漏
+        isNaN(num_1_10)//1~10名遗漏
+    // || isNaN(one_big_one_small_num) || isNaN(one_big_one_small_add) || isNaN(one_big_one_small_max)//一大一小
     ) {
         showMsg('参数不全', 2, 1000);
         return;
@@ -61,14 +61,14 @@ function compute() {
         return;
     }
 
-    var oneBigAndOneSmall = [];//一大一小
-    var doubleBigDoubleSmall = [];//双大双小
-    var threeBigThreeSmall = [];//三大三小
-    var individual = [];//单项遗漏
+    // var oneBigAndOneSmall = [];//一大一小
+    // var doubleBigDoubleSmall = [];//双大双小
+    // var threeBigThreeSmall = [];//三大三小
+    // var individual = [];//单项遗漏
     var oneToTenMiss = [];//1~10名遗漏
-    var twoBigAndOneSmall = [];//双大一小
-    var threeBigAndOneSmall = [];//三大一小
-    var fourBigAndOneSmall = [];//四大一小
+    // var twoBigAndOneSmall = [];//双大一小
+    // var threeBigAndOneSmall = [];//三大一小
+    // var fourBigAndOneSmall = [];//四大一小
 
     var nameArr = ['冠军', '亚军', '第三名', '第四名', '第五名', '第六名', '第七名', '第八名', '第九名', '第十名'];
 
@@ -76,20 +76,20 @@ function compute() {
     for (var i = 0; i < vueData.trs[0].nums.length; i++) {
 
         //一大一小
-        oneBigAndOneSmall.push(vueOneBigAndOneSmall.compute(i, nameArr[i],
-            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+        // oneBigAndOneSmall.push(vueOneBigAndOneSmall.compute(i, nameArr[i],
+        //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
 
         //双大双小
-        doubleBigDoubleSmall.push(vueDoubleBigDoubleSmall.compute(i, nameArr[i],
-            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+        // doubleBigDoubleSmall.push(vueDoubleBigDoubleSmall.compute(i, nameArr[i],
+        //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
         //三大三小
-        threeBigThreeSmall.push(vueThreeBigThreeSmall.compute(i, nameArr[i],
-            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+        // threeBigThreeSmall.push(vueThreeBigThreeSmall.compute(i, nameArr[i],
+        //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
         //单项遗漏
-        individual.push(vueIndividual.compute(i, nameArr[i], num, add, max, miss, method))
+        // individual.push(vueIndividual.compute(i, nameArr[i], num, add, max, miss, method))
 
 
         //1~10 名遗漏
@@ -97,45 +97,45 @@ function compute() {
 
 
         //两大一小
-        twoBigAndOneSmall.push(vueTwoBigAndOneSmall.compute(i, nameArr[i],
-            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+        // twoBigAndOneSmall.push(vueTwoBigAndOneSmall.compute(i, nameArr[i],
+        //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
 
         //三大一小
-        threeBigAndOneSmall.push(vueThreeBigAndOneSmall.compute(i, nameArr[i],
-            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+        // threeBigAndOneSmall.push(vueThreeBigAndOneSmall.compute(i, nameArr[i],
+        //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
 
         //四大一小
-        fourBigAndOneSmall.push(vueFourBigAndOneSmall.compute(i, nameArr[i],
-            one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
+        // fourBigAndOneSmall.push(vueFourBigAndOneSmall.compute(i, nameArr[i],
+        //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
     }
 
     //一大一小
-    vueOneBigAndOneSmall.result.unshift({
-        issue: vueData.trs[0].issue + 1,
-        betting: oneBigAndOneSmall
-    });
+    // vueOneBigAndOneSmall.result.unshift({
+    //     issue: vueData.trs[0].issue + 1,
+    //     betting: oneBigAndOneSmall
+    // });
 
     //双大双小
-    vueDoubleBigDoubleSmall.result.unshift({
-        issue: vueData.trs[0].issue + 1,
-        betting: doubleBigDoubleSmall
-    });
+    // vueDoubleBigDoubleSmall.result.unshift({
+    //     issue: vueData.trs[0].issue + 1,
+    //     betting: doubleBigDoubleSmall
+    // });
 
 
     //三大三小
-    vueThreeBigThreeSmall.result.unshift({
-        issue: vueData.trs[0].issue + 1,
-        betting: threeBigThreeSmall
-    });
+    // vueThreeBigThreeSmall.result.unshift({
+    //     issue: vueData.trs[0].issue + 1,
+    //     betting: threeBigThreeSmall
+    // });
 
-    //单项遗漏
-    vueIndividual.result.unshift({
-        issue: vueData.trs[0].issue + 1,
-        betting: individual
-    });
+    // 单项遗漏
+    // vueIndividual.result.unshift({
+    //     issue: vueData.trs[0].issue + 1,
+    //     betting: individual
+    // });
 
 
     //1~10名遗漏
@@ -145,23 +145,23 @@ function compute() {
     });
 
     //两大一小
-    vueTwoBigAndOneSmall.result.unshift({
-        issue: vueData.trs[0].issue + 1,
-        betting: twoBigAndOneSmall
-    });
+    // vueTwoBigAndOneSmall.result.unshift({
+    //     issue: vueData.trs[0].issue + 1,
+    //     betting: twoBigAndOneSmall
+    // });
 
     //三大一小
-    vueThreeBigAndOneSmall.result.unshift({
-        issue: vueData.trs[0].issue + 1,
-        betting: threeBigAndOneSmall
-    });
+    // vueThreeBigAndOneSmall.result.unshift({
+    //     issue: vueData.trs[0].issue + 1,
+    //     betting: threeBigAndOneSmall
+    // });
 
 
     //四大一小
-    vueFourBigAndOneSmall.result.unshift({
-        issue: vueData.trs[0].issue + 1,
-        betting: fourBigAndOneSmall
-    });
+    // vueFourBigAndOneSmall.result.unshift({
+    //     issue: vueData.trs[0].issue + 1,
+    //     betting: fourBigAndOneSmall
+    // });
 
 
     if (play_audio) {
