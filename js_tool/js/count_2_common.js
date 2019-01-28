@@ -17,7 +17,7 @@ function compute() {
     // $('#head-2').css(headColor1);
     // $('#head-3').css(headColor1);
     // $('#head-4').css(headColor1);
-    $('#head-5').css(headColor1);
+    // $('#head-5').css(headColor1);
     // $('#head-6').css(headColor1);
     // $('#head-7').css(headColor1);
     // $('#head-8').css(headColor1);
@@ -31,8 +31,7 @@ function compute() {
 
     //1~10名参数
     var num_1_10 = getIntVal('#num_1_10')//初始投注额
-    var min_1_10 = 0//最低收益
-    var miss_1_10 = 20//最小遗漏
+
 
     //一大一小
     // var one_big_one_small_num = getIntVal('#one_big_one_small_num')
@@ -93,7 +92,7 @@ function compute() {
 
 
         //1~10 名遗漏
-        oneToTenMiss.push(vueOneToTenMiss.compute(i, nameArr[i], num_1_10, min_1_10, miss_1_10, method))
+        oneToTenMiss.push(vueOneToTenMiss.compute(i, nameArr[i], num_1_10, method))
 
 
         //两大一小
