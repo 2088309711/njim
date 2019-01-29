@@ -111,19 +111,19 @@ var vueOneToTenMiss = new Vue({
 
                         //如果上期没有投注当前号码并且当前号码遗漏大于最小遗漏，取消投注
                         if (!preIsBetting && temp.item[i].miss > minMiss) {
-                            is_betting = false;
+                            // is_betting = false;
                         }
 
                     } else {
                         //没有上期的投注方案并且当前号码遗漏大于最小遗漏，取消投注
                         if (temp.item[i].miss > minMiss) {
-                            is_betting = false;
+                            // is_betting = false;
                         }
                     }
 
                     //如果是收尾并且为起始投注，取消投注
                     if (method == '2' && temp.item[i].miss == minMiss) {
-                        is_betting = false;
+                        // is_betting = false;
                     }
 
 

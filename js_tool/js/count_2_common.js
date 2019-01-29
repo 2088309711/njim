@@ -3,6 +3,18 @@ var play_audio, audio = new Audio('/js_tool/audio/1.mp3'), headColor = {
     'color': '#fff'
 };
 
+function cut(id) {
+    if (id == 1) {
+        audio = new Audio('/js_tool/audio/1.mp3')
+    } else if (id == 2) {
+        audio = new Audio('/js_tool/audio/2.mp3')
+    } else {
+        return '不存在'
+    }
+    return '切换成功'
+}
+
+
 function compute() {
 
     play_audio = false;
