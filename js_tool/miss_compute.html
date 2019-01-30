@@ -17,12 +17,12 @@
     <textarea id="data" rows="1" class="input"></textarea>
 
 
-    <table id="result" class="table table-bordered margin-top">
+    <table id="result" class="table table-bordered table-condensed margin-top">
         <tr>
-            <th>名称</th>
+            <th>方案</th>
             <th>收入</th>
             <th>亏损</th>
-            <th class="bg-back">结果</th>
+            <th class="yellow">结果</th>
             <th>起始位置</th>
             <th>投注期数</th>
             <th>单注亏损</th>
@@ -32,7 +32,7 @@
             <td>{{item.name}}</td>
             <td>{{item.profit}}</td>
             <td>{{item.loss}}</td>
-            <td class="bg-back">{{item.result}}</td>
+            <td :class="findMax(item.result)">{{item.result}}</td>
             <td>{{item.start}}</td>
             <td>{{item.capital.profit.length}}</td>
             <td>{{item.capital.lossNum}}</td>
