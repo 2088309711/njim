@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <title>遗漏计算</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/static/pintuer/pintuer.css">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/pintuer/pintuer.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/layer-v3.1.1/layer/layer.js"></script>
+</head>
+<body>
+<div class="container-layout padding-top padding-bottom">
+
+    <textarea id="data" rows="1" class="input"></textarea>
+
+
+    <table id="result" class="table table-bordered margin-top">
+        <tr>
+            <th>名称</th>
+            <th>收入</th>
+            <th>亏损</th>
+            <th class="bg-back">结果</th>
+            <th>起始位置</th>
+            <th>投注期数</th>
+            <th>单注亏损</th>
+            <th>收益序列</th>
+        </tr>
+        <tr v-for="item in bettingScheme">
+            <td>{{item.name}}</td>
+            <td>{{item.profit}}</td>
+            <td>{{item.loss}}</td>
+            <td class="bg-back">{{item.result}}</td>
+            <td>{{item.start}}</td>
+            <td>{{item.capital.profit.length}}</td>
+            <td>{{item.capital.lossNum}}</td>
+            <td>{{item.capital.profit}}</td>
+        </tr>
+    </table>
+
+
+</div>
+
+<script src="js/miss_compute.js"></script>
+</body>
+</html>
