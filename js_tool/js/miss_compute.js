@@ -22,6 +22,10 @@ function log(o) {
 
 var fundingScheme = [
     {
+        profit: [9, 8, 7, 6, 5, 4, 3, 2],
+        lossNum: 8
+    },
+    {
         profit: [9, 8, 7, 6, 5],
         lossNum: 5
     },
