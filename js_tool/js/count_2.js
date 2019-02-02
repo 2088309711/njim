@@ -104,9 +104,9 @@ $(function () {
         window.open(url, "all_data", "toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=400, height=400");
     });
 
-    //统计遗漏次数
-    $('#two-sides-miss').click(function () {
-        countTwoSidesMiss();
+    //对子遗漏
+    $('#pairs-miss').click(function () {
+        countPairsMiss();
     });
 
     $('#one-to-ten-miss').click(function () {
@@ -329,27 +329,13 @@ var vueData = new Vue({
 });
 
 
-//统计两面遗漏
-function countTwoSidesMiss() {
+//统计对子遗漏
+function countPairsMiss() {
 
-    //存储遗漏值 [10,60,5,56,2,0,1,56,45,65]
-    var result = [//记录次数
-        [],//大
-        [],//小
-        [],//单
-        [],//双
-        [],//龙
-        []//虎
-    ];
+    //存储遗漏值
+    var result = [];
 
-    var count = [//记录遗漏值
-        0,//大
-        0,//小
-        0,//单
-        0,//双
-        0,//龙
-        0//虎
-    ];
+    var count = 0;//记录遗漏值
 
     //遍历 1~10 名，从冠军开始，作为号码数组取值的索引
     for (var i = 0; i < 10; i++) {
@@ -357,110 +343,43 @@ function countTwoSidesMiss() {
         //遍历所有数据
         for (var k = 0; k < vueData.trs.length; k++) {
 
-            //大
-            if (is_big(vueData.trs[k].nums[i])) {
+            if (k + 1 >= vueData.trs.length) {
+                continue;
+            }
+
+            if (vueData.trs[k].nums[i] === vueData.trs[k + 1].nums[i]) {//如果相等，就是对子
                 //如果等于，将统计保存到结果数组并置零统计
-                result[0].push(count[0]);
-                count[0] = 0;
+                result.push(count);
+                count = 0;
             } else {
                 //如果不等于，统计+1
-                count[0]++;
+                count++;
             }
 
-
-            //小
-            if (is_small(vueData.trs[k].nums[i])) {
-                //如果等于，将统计保存到结果数组并置零统计
-                result[1].push(count[1]);
-                count[1] = 0;
-            } else {
-                //如果不等于，统计+1
-                count[1]++;
-            }
-
-
-            //单
-            if (is_single(vueData.trs[k].nums[i])) {
-                //如果等于，将统计保存到结果数组并置零统计
-                result[2].push(count[2]);
-                count[2] = 0;
-            } else {
-                //如果不等于，统计+1
-                count[2]++;
-            }
-
-
-            //双
-            if (is_double(vueData.trs[k].nums[i])) {
-                //如果等于，将统计保存到结果数组并置零统计
-                result[3].push(count[3]);
-                count[3] = 0;
-            } else {
-                //如果不等于，统计+1
-                count[3]++;
-            }
-
-            if (i < 5) {
-                //龙
-                if (is_loong(vueData.trs[k].nums, i)) {
-                    //如果等于，将统计保存到结果数组并置零统计
-                    result[4].push(count[4]);
-                    count[4] = 0;
-                } else {
-                    //如果不等于，统计+1
-                    count[4]++;
-                }
-
-
-                //虎
-                if (is_tiger(vueData.trs[k].nums, i)) {
-                    //如果等于，将统计保存到结果数组并置零统计
-                    result[5].push(count[5]);
-                    count[5] = 0;
-                } else {
-                    //如果不等于，统计+1
-                    count[5]++;
-                }
-            }
         }
     }
-
+    outObj(result)
     //排序
-    for (var i = 0; i < result.length; i++) {
-        result[i].sort(function sortNumber(a, b) {
-            return a - b;
-        });
-    }
+    result.sort(function sortNumber(a, b) {
+        return a - b;
+    });
 
 
     //计算相同元素的数量
-    var miss = [
-        {name: '大', miss: []},
-        {name: '小', miss: []},
-        {name: '单', miss: []},
-        {name: '双', miss: []},
-        {name: '龙', miss: []},
-        {name: '虎', miss: []}
-    ];
+    var miss = [];
 
-    for (var i = 0; i < result.length; i++) {
-
-
-        for (var j = 0; j < result[i].length;) {
-            count = 0;
-            for (var k = j; k < result[i].length; k++) {
-                if (result[i][j] === result[i][k]) {
-                    count++;
-                }
+    for (var i = 0; i < result.length;) {
+        count = 0;
+        for (var j = i; j < result.length; j++) {
+            if (result[i] === result[j]) {
+                count++;
             }
-            miss[i].miss.push({
-                num: result[i][j],
-                count: count
-            });
-            j += count;
         }
-
-
+        miss.push({
+            num: result[i],
+            count: count
+        })
+        i += count;
     }
 
 

@@ -26,6 +26,16 @@ var fundingScheme = [
         lossNum: 8
     },
     {
+        profit: [36, 32, 28, 24, 20, 16],
+        lossNum: 24
+    },
+    {
+        profit: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 8, 6, 4, 2, 0, 7, 4, 1, 7, 3],
+        lossNum: 37
+    },
+
+
+    {
         profit: [9, 8, 7, 6, 5],
         lossNum: 5
     },
@@ -45,10 +55,7 @@ var fundingScheme = [
         profit: [9, 8, 7, 6, 5, 4, 3, 2, 1, 9, 7, 5, 3, 1, 8, 5, 2, 8, 4, 9],
         lossNum: 41
     },
-    {
-        profit: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, 8, 6, 4, 2, 0, 7, 4, 1, 7, 3],
-        lossNum: 37
-    },
+
     {
         profit: [9, 8, 7, 6, 5, 4, 3, 2, 1, 0],
         lossNum: 10
@@ -73,14 +80,54 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 15,
+                start: 0,
+                capital: fundingScheme[0]
+            },
+            {
+                name: 1,
+                profit: 0,
+                loss: 0,
+                result: 0,
+                start: 1,
+                capital: fundingScheme[0]
+            },
+            {
+                name: 1,
+                profit: 0,
+                loss: 0,
+                result: 0,
+                start: 2,
+                capital: fundingScheme[0]
+            },
+            {
+                name: 1,
+                profit: 0,
+                loss: 0,
+                result: 0,
+                start: 3,
+                capital: fundingScheme[0]
+            },
+            {
+                name: 1,
+                profit: 0,
+                loss: 0,
+                result: 0,
+                start: 4,
+                capital: fundingScheme[0]
+            },
+            {
+                name: 1,
+                profit: 0,
+                loss: 0,
+                result: 0,
+                start: 5,
                 capital: fundingScheme[0]
             }, {
                 name: 2,
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 16,
+                start: 6,
                 capital: fundingScheme[0]
             },
             {
@@ -88,7 +135,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 17,
+                start: 7,
                 capital: fundingScheme[0]
             },
             {
@@ -96,7 +143,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 18,
+                start: 8,
                 capital: fundingScheme[0]
             },
             {
@@ -104,7 +151,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 19,
+                start: 9,
                 capital: fundingScheme[0]
             },
             {
@@ -112,7 +159,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 20,
+                start: 10,
                 capital: fundingScheme[0]
             },
             {
@@ -120,7 +167,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 21,
+                start: 11,
                 capital: fundingScheme[0]
             },
             {
@@ -128,7 +175,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 22,
+                start: 12,
                 capital: fundingScheme[0]
             },
             {
@@ -136,7 +183,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 23,
+                start: 13,
                 capital: fundingScheme[0]
             },
             {
@@ -144,7 +191,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 24,
+                start: 14,
                 capital: fundingScheme[0]
             },
             {
@@ -152,7 +199,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 25,
+                start: 15,
                 capital: fundingScheme[0]
             },
             {
@@ -160,7 +207,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 26,
+                start: 16,
                 capital: fundingScheme[0]
             },
             {
@@ -168,7 +215,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 27,
+                start: 17,
                 capital: fundingScheme[0]
             },
             {
@@ -176,7 +223,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 28,
+                start: 18,
                 capital: fundingScheme[0]
             },
             {
@@ -184,7 +231,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 29,
+                start: 19,
                 capital: fundingScheme[0]
             },
             {
@@ -192,7 +239,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 30,
+                start: 20,
                 capital: fundingScheme[0]
             },
             {
@@ -200,7 +247,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 31,
+                start: 21,
                 capital: fundingScheme[0]
             },
             {
@@ -208,7 +255,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 32,
+                start: 22,
                 capital: fundingScheme[0]
             },
             {
@@ -216,7 +263,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 33,
+                start: 23,
                 capital: fundingScheme[0]
             },
             {
@@ -224,7 +271,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 34,
+                start: 24,
                 capital: fundingScheme[0]
             },
             {
@@ -232,7 +279,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 35,
+                start: 25,
                 capital: fundingScheme[0]
             },
             {
@@ -240,7 +287,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 36,
+                start: 26,
                 capital: fundingScheme[0]
             },
             {
@@ -248,7 +295,7 @@ var vueCompute = new Vue({
                 profit: 0,
                 loss: 0,
                 result: 0,
-                start: 37,
+                start: 27,
                 capital: fundingScheme[0]
             },
 

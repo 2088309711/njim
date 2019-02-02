@@ -23,8 +23,8 @@
         <?php
 
         $start = 1;
-        $min = 0;
-        $issueNum = 8;
+        $min = -2;
+        $issueNum = 40;
         $odds = 10;
 
         $count = 0;

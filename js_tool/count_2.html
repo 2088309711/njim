@@ -229,12 +229,13 @@
 
     </div>
 
+
     <div class="panel margin-top">
         <div class="panel-head">数据分析</div>
         <div class="panel-body">
 
             <div>
-                <button class="button border-sub margin-right" id="two-sides-miss">两面遗漏</button>
+                <button class="button border-sub margin-right" id="pairs-miss">对子遗漏</button>
                 <button class="button border-sub margin-right" id="one-to-ten-miss">1~10名遗漏</button>
                 <button class="button border-sub margin-right" id="count-one-big-one-small">一大一小</button>
                 <button class="button border-sub margin-right" id="count-double-big-double-small">双大双小</button>
@@ -258,8 +259,8 @@
                 <!--<li><a id="head-1" href="#tab-1">一大一小</a></li>-->
                 <!--<li><a id="head-2" href="#tab-2">双大双小</a></li>-->
                 <!--<li><a id="head-3" href="#tab-3">三大三小</a></li>-->
-                <!--<li><a id="head-4" href="#tab-4">单项遗漏</a></li>-->
-                <li class="active"><a id="head-5" href="#tab-5">1~10名遗漏</a></li>
+                <li class="active"><a id="head-4" href="#tab-4">单项遗漏</a></li>
+                <!--<li><a id="head-5" href="#tab-5">1~10名遗漏</a></li>-->
                 <!--<li><a id="head-6" href="#tab-6">双大一小</a></li>-->
                 <!--<li><a id="head-7" href="#tab-7">三大一小</a></li>-->
                 <!--<li><a id="head-8" href="#tab-8">四大一小</a></li>-->
@@ -315,26 +316,10 @@
 
             <!--</div>-->
 
-            <!--<div class="tab-panel" id="tab-4">-->
+            <div class="tab-panel active" id="tab-4">
 
-            <!--<div id="vue-individual">-->
-            <!--<div class="two-sides" v-if="isShow()">-->
-            <!--<div class="item" v-for="data1 in result[0].betting">-->
-            <!--<div class="num" v-for="data2 in data1.item">-->
-            <!--<span>{{data2.miss}}</span>-->
-            <!--<input v-if="data2.is_betting" @click="copyText($event)"-->
-            <!--:value="data2.betting_amount" readonly type="text">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--</div>-->
-
-            <div class="tab-panel active" id="tab-5">
-
-                <div id="vue-one-to-ten-miss">
-                    <div class="one-to-ten" v-if="isShow()">
+                <div id="vue-individual">
+                    <div class="two-sides" v-if="isShow()">
                         <div class="item" v-for="data1 in result[0].betting">
                             <div class="num" v-for="data2 in data1.item">
                                 <span>{{data2.miss}}</span>
@@ -346,6 +331,22 @@
                 </div>
 
             </div>
+
+            <!--<div class="tab-panel" id="tab-5">-->
+
+            <!--<div id="vue-one-to-ten-miss">-->
+            <!--<div class="one-to-ten" v-if="isShow()">-->
+            <!--<div class="item" v-for="data1 in result[0].betting">-->
+            <!--<div class="num" v-for="data2 in data1.item">-->
+            <!--<span>{{data2.miss}}</span>-->
+            <!--<input v-if="data2.is_betting" @click="copyText($event)"-->
+            <!--:value="data2.betting_amount" readonly type="text">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--</div>-->
 
 
             <!--<div class="tab-panel" id="tab-6">-->
@@ -413,8 +414,8 @@
 <!--<script src="js/count_2_three_big_and_one_small.js"></script>-->
 <!--<script src="js/count_2_four_big_and_one_small.js"></script>-->
 <!--<script src="js/count_2_three_big_three_small.js"></script>-->
-<!--<script src="js/count_2_individual.js"></script>-->
-<script src="js/count_2_one_to_ten_miss.js"></script>
+<script src="js/count_2_individual.js"></script>
+<!--<script src="js/count_2_one_to_ten_miss.js"></script>-->
 <script src="js/count_2.js"></script>
 </body>
 </html>
