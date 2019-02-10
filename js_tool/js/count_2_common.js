@@ -180,11 +180,11 @@ function compute() {
 
 
     if (play_audio) {
-        audio.play(); //播放
+        // audio.play(); //播放
     }
 
 
-    openOrClosebettingPanel(true);
+    // openOrClosebettingPanel(true);
 }
 
 //二叉树算法

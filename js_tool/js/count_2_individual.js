@@ -2,7 +2,7 @@
  * 单项实例
  */
 var vueIndividual = new Vue({
-    el: '#vue-individual',
+    el: '.vue-individual',
     data: {
         result: [
             // {
@@ -15,9 +15,7 @@ var vueIndividual = new Vue({
             //                     name: name,//名字：大小单双龙虎
             //                     miss: null, //遗漏
             //                     betting_amount: 0,//投注额
-            //                     total_sum: 0,//总金额
             //                     is_betting: false,//是否投注
-            //                     betting_count: 0,//投注次数
             //                 }
             //             ]
             //         }
@@ -55,11 +53,10 @@ var vueIndividual = new Vue({
             var subObj = function (name) {
                 return {
                     name: name,//名字：大小单双
-
+                    thread: 0,//主线
+                    feeder_line: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],//10条支线
                     betting_amount: 0,//投注额
-                    total_sum: 0,//总金额
                     is_betting: false,//是否投注
-                    betting_count: 0,//投注次数
                 }
             }
 
