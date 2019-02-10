@@ -4,18 +4,20 @@
 var vueIndividual = new Vue({
     el: '.vue-individual',
     data: {
+        register: 0,//寄存器
         result: [
-            // {
+            // {  this.result[0].betting[index].item[0].feeder_line
             //     issue: vueData.trs[0].issue + 1,
             //     betting: [
             //         {
             //             name: name,
             //             item: [
             //                 {
-            //                     name: name,//名字：大小单双龙虎
-            //                     miss: null, //遗漏
-            //                     betting_amount: 0,//投注额
-            //                     is_betting: false,//是否投注
+            //                      name: name,//名字：大小单双
+            //                      thread: 0,//主线
+            //                      feeder_line: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],//10条支线
+            //                      betting_amount: 0,//投注额
+            //                      is_betting: false,//是否投注
             //                 }
             //             ]
             //         }
@@ -47,6 +49,41 @@ var vueIndividual = new Vue({
         },
 
 
+        /**
+         * 分配寄存器
+         */
+        distribution_register: function (index, max) {
+
+            //大
+            if (this.result.length > 0) {
+
+
+                if (is_big(vueData.trs[0].nums[index])) {
+
+                    var temp = 0;
+                    if (this.register < 5 && this.register >= 1) {
+                        temp = this.register;
+                    } else {
+                        temp = Math.floor(this.register / 5);//从寄存器取出的数量，向下取整
+                        if (temp > max) {//支线金额限制
+                            temp = max;
+                        }
+                    }
+
+                    //插入到支线
+                    this.result[0].betting[index].item[0].feeder_line = temp;
+                    this.register -= temp;//从寄存器中减去
+
+                }
+
+
+                //相加投注额
+                this.result[0].betting[index].item[0].betting_amount = this.result[0].betting[index].item[0].thread
+                    + this.result[0].betting[index].item[0].feeder_line;
+            }
+        },
+
+
         compute: function (index, name, num, add, max, miss, method) {
 
 
@@ -54,7 +91,7 @@ var vueIndividual = new Vue({
                 return {
                     name: name,//名字：大小单双
                     thread: 0,//主线
-                    feeder_line: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],//10条支线
+                    feeder_line: 0,//支线
                     betting_amount: 0,//投注额
                     is_betting: false,//是否投注
                 }
@@ -87,28 +124,44 @@ var vueIndividual = new Vue({
 
                 //没有之前的投注数据，或者上次投注的期号和最新开奖的期号不一致
                 if (preArr == null || preArr.issue !== vueData.trs[0].issue) {
-                    temp.item[itemIndex].betting_amount = num;
+                    temp.item[itemIndex].thread = num;
                 } else {//之前有投注数据
 
-                    var preNum = preArr.betting[index].item[itemIndex].betting_amount;//上期的投注额
-
+                    //上期的主线
+                    var preNum = preArr.betting[index].item[itemIndex].thread;
                     if (preNum === 0 || win) {//上次没有投注这个项目或者赢了
-                        temp.item[itemIndex].betting_amount = num;
+                        temp.item[itemIndex].thread = num;
                     } else {
                         var temp2 = preNum * 2 + add;
                         if (temp2 > max) {//封顶
+                            this.register += temp2 - add;//将封顶的金额加入寄存器
+                            log(this.temp2 - add);
                             temp2 = num;
                         }
-                        temp.item[itemIndex].betting_amount = temp2;
+                        temp.item[itemIndex].thread = temp2;
                     }
+
+
+                    //上期的支线
+                    var preFeederLine = preArr.betting[index].item[itemIndex].feeder_line;
+
+                    if (!win) {//如果没赢，上期的支线翻倍
+                        var temp2 = preFeederLine * 2;
+                        if (temp2 > max) {
+                            this.register += temp2;//将封顶的金额加入寄存器
+                        } else {
+                            temp.item[itemIndex].feeder_line = temp2;
+                        }
+                    }
+
 
                 }
 
 
-                //如果方法是收尾，则取消新的投注项目
-                if (method == '2' && temp.item[itemIndex].betting_amount == num) {
+                //如果方法是收尾，则取消新的主线任务
+                if (method == '2' && temp.item[itemIndex].thread == num) {
                     temp.item[itemIndex].is_betting = false;
-                    temp.item[itemIndex].betting_amount = 0;
+                    temp.item[itemIndex].thread = 0;
                 }
 
             };

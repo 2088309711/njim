@@ -234,27 +234,18 @@
         <template v-if="isShow()">
             <table class="table table-bordered">
                 <tr>
-                    <th>车道</th>
+                    <th>车道，已寄存：{{register}}</th>
                     <th>投注项</th>
                     <th>投注额</th>
                     <th>主线</th>
-                    <th>支线1</th>
-                    <th>支线2</th>
-                    <th>支线3</th>
-                    <th>支线4</th>
-                    <th>支线5</th>
-                    <th>支线6</th>
-                    <th>支线7</th>
-                    <th>支线8</th>
-                    <th>支线9</th>
-                    <th>支线10</th>
+                    <th>支线</th>
                 </tr>
                 <tr v-for="data in result[0].betting">
                     <td>{{data.name}}</td>
                     <td>{{data.item[0].name}}</td>
-                    <td class="yellow">{{data.item[0].betting_amount}}</td>
+                    <td>{{data.item[0].betting_amount}}</td>
                     <td>{{data.item[0].thread}}</td>
-                    <td class="green" v-for="data2 in data.item[0].feeder_line">{{data2}}</td>
+                    <td>{{data.item[0].feeder_line}}</td>
                 </tr>
             </table>
         </template>
