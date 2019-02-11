@@ -99,7 +99,7 @@ function compute() {
         // threeBigThreeSmall.push(vueThreeBigThreeSmall.compute(i, nameArr[i],
         //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
-        var max = 20;//封顶
+        var max = 10;//封顶
 
         //单项遗漏
         // vueIndividual.compute(i, nameArr[i], 1, 1, max, 3, method)
