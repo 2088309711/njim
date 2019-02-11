@@ -80,7 +80,7 @@ var vueIndividual = new Vue({
 
                 temp.item[itemIndex].is_betting = true;//开启投注
 
-                play_audio = true;
+                // play_audio = true;
 
                 // $('#head-4').css(headColor);
 
@@ -96,7 +96,7 @@ var vueIndividual = new Vue({
                     } else {
                         var temp2 = preNum * 2 + add;
                         if (temp2 > max) {//封顶
-                            vueThis.register += temp2 - add;//将封顶的金额加入寄存器
+                            vueThis.register += temp2;//将封顶的金额加入寄存器
                             temp2 = num;
                         }
                         temp.item[itemIndex].thread = temp2;
@@ -110,7 +110,13 @@ var vueIndividual = new Vue({
                         //遍历上期的支线
                         for (var i = 0; i < preFeederLine.length; i++) {
                             var temp2 = preFeederLine[i] * 2;
-                            if (temp2 > max) {
+
+                            //支线减少金额
+                            if (temp2 > 4) {
+                                temp2 -= 3;
+                            }
+
+                            if (temp2 > 70) {
                                 vueThis.register += temp2;//将封顶的金额加入寄存器
                             } else {
                                 temp.item[itemIndex].feeder_line.push(temp2);
@@ -140,7 +146,7 @@ var vueIndividual = new Vue({
             var distribution_register = function (vueThis, win) {
 
                 //确定追加支线的数量，赢了追加2个，输了追加1个
-                var num = win ? 4 : 2;
+                var num = win ? 1 : 1;
 
                 if (vueThis.register >= num) {//确保寄存池内金额充足
 
