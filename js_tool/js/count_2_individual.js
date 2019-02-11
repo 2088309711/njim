@@ -173,16 +173,8 @@ var vueIndividual = new Vue({
 
             var distribution_register = function (vueThis) {
 
-                //确定分配金额
-                var temp2 = 0;
-                if (vueThis.register < 5 && vueThis.register >= 1) {
-                    temp2 = vueThis.register;
-                } else {
-                    temp2 = Math.floor(vueThis.register / 5);//从寄存器取出的数量，向下取整
-                    if (temp2 > max) {//支线金额限制
-                        temp2 = max;
-                    }
-                }
+                //确定分配金额，从寄存器取出的数量
+                var temp2 = vueThis.register >= 1 ? 1 : 0;
 
                 //插入到支线
                 temp.item[0].feeder_line = temp2;
