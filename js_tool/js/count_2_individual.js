@@ -2,7 +2,7 @@
  * 单项实例
  */
 var vueIndividual = new Vue({
-    el: '.vue-individual',
+    el: '#vue-individual',
     data: {
         register: 0,//寄存器
         result: [

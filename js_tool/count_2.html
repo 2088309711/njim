@@ -350,6 +350,28 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="margin-top" v-if="isShow()">
+                        <table class="table table-bordered">
+                            <tr>
+                                <th>车道</th>
+                                <th>投注项</th>
+                                <th>投注额</th>
+                                <th>主线</th>
+                                <th>支线，寄存池：{{register}}</th>
+                            </tr>
+                            <tr v-for="data in result[0].betting">
+                                <td>{{data.name}}</td>
+                                <td>{{data.item[0].name}}</td>
+                                <td>{{data.item[0].betting_amount}}</td>
+                                <td>{{data.item[0].thread}}</td>
+                                <td>{{data.item[0].feeder_line}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+
                 </div>
 
             </div>
