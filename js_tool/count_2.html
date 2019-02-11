@@ -234,11 +234,11 @@
         <template v-if="isShow()">
             <table class="table table-bordered">
                 <tr>
-                    <th>车道，已寄存：{{register}}</th>
+                    <th>车道</th>
                     <th>投注项</th>
                     <th>投注额</th>
                     <th>主线</th>
-                    <th>支线</th>
+                    <th>支线，剩余寄存：{{register}}</th>
                 </tr>
                 <tr v-for="data in result[0].betting">
                     <td>{{data.name}}</td>

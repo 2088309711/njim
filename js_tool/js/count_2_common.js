@@ -99,14 +99,14 @@ function compute() {
         // threeBigThreeSmall.push(vueThreeBigThreeSmall.compute(i, nameArr[i],
         //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
-        var max = 2;//封顶
+        var max = 20;//封顶
 
         //单项遗漏
         // vueIndividual.compute(i, nameArr[i], 1, 1, max, 3, method)
         individual.push(vueIndividual.compute(i, nameArr[i], 1, 1, max, 3, method))
 
 
-        vueIndividual.distribution_register(i, max)
+        // vueIndividual.distribution_register(i, max)
 
         //1~10 名遗漏
         // oneToTenMiss.push(vueOneToTenMiss.compute(i, nameArr[i], num_1_10))
