@@ -58,6 +58,7 @@ var vueIndividual = new Vue({
                     feeder_line: [],//支线
                     betting_amount: 0,//投注额
                     is_betting: false,//是否投注
+                    miss: 0,//遗漏
                 }
             }
 
@@ -102,10 +103,16 @@ var vueIndividual = new Vue({
                         temp.item[itemIndex].thread = temp2;
                     }
 
-                    //上期的支线（数组）
-                    var preFeederLine = preArr.betting[index].item[itemIndex].feeder_line;
+                    var preFeederLine = preArr.betting[index].item[itemIndex].feeder_line;//上期的支线（数组）
+
+                    var curMiss = 0;//当前遗漏
 
                     if (!win) {//如果没赢，上期的支线翻倍
+
+                        //遗漏+1
+                        var preMiss = preArr.betting[index].item[itemIndex].miss;//上期的遗漏
+                        curMiss = preMiss + 1;
+                        temp.item[itemIndex].miss = curMiss;
 
                         //遍历上期的支线
                         for (var i = 0; i < preFeederLine.length; i++) {
@@ -117,7 +124,7 @@ var vueIndividual = new Vue({
                             }
 
                             if (temp2 > 70) {
-                                vueThis.register += temp2;//将封顶的金额加入寄存器
+                                vueThis.register += temp2;//将封顶的金额加入寄存池
                             } else {
                                 temp.item[itemIndex].feeder_line.push(temp2);
                             }
@@ -125,7 +132,7 @@ var vueIndividual = new Vue({
 
                     }
 
-                    distribution_register(vueThis, win);//分配寄存器（不论输赢）
+                    distribution_register(vueThis, curMiss);//分配寄存器
 
                 }
 
@@ -143,10 +150,10 @@ var vueIndividual = new Vue({
 
             };
 
-            var distribution_register = function (vueThis, win) {
+            var distribution_register = function (vueThis, miss) {
 
-                //确定追加支线的数量，赢了追加2个，输了追加1个
-                var num = win ? 1 : 1;
+                //确定追加支线的数量，遗漏值+1
+                var num = miss + 1;
 
                 if (vueThis.register >= num) {//确保寄存池内金额充足
 

@@ -3,8 +3,6 @@ var cookie_prefix = 'count_2_',
 
 $(function () {
 
-    load_cookie('method');
-
     //单项遗漏
     load_cookie('num');
     load_cookie('add');

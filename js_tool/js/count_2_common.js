@@ -157,6 +157,7 @@ function compute() {
         betting: individual
     });
 
+    vueIndividual.register += 5;//每期都给寄存池加5元
 
     //1~10名遗漏
     // vueOneToTenMiss.result.unshift({
