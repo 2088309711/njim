@@ -155,7 +155,7 @@ var vueIndividual = new Vue({
             var distribution_register = function (vueThis, win) {
 
                 //确定追加支线的数量
-                var num = win ? 3 : 0;
+                var num = win ? 6 : 0;
 
                 if (vueThis.register >= num) {//确保寄存池内金额充足
 
