@@ -321,7 +321,7 @@
                     <div class="two-sides" v-if="isShow()">
                         <div class="item" v-for="data1 in result[0].betting">
                             <div class="num" v-for="data2 in data1.item">
-                                <span>{{data2.miss}}</span>
+                                <!--<span>{{data2.miss}}</span>-->
                                 <input v-if="data2.is_betting" @click="copyText($event)"
                                        :value="data2.betting_amount" readonly type="text">
                             </div>

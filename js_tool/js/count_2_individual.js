@@ -4,7 +4,7 @@
 var vueIndividual = new Vue({
     el: '#vue-individual',
     data: {
-        register: 0,//寄存器
+        register: 300,//寄存器
         result: [
             // {  this.result[0].betting[index].item[0].feeder_line
             //     issue: vueData.trs[0].issue + 1,
@@ -120,10 +120,10 @@ var vueIndividual = new Vue({
 
                             //支线减少金额
                             if (temp2 > 4) {
-                                temp2 -= 3;
+                                temp2 -= 1;
                             }
 
-                            if (temp2 > 20) {
+                            if (temp2 > 40) {
                                 vueThis.register += temp2;//将封顶的金额加入寄存池
                             } else {
                                 temp.item[itemIndex].feeder_line.push(temp2);
@@ -153,8 +153,7 @@ var vueIndividual = new Vue({
             var distribution_register = function (vueThis, win) {
 
                 //确定追加支线的数量
-                var num = win ? 3 : 0;
-
+                var num = win ? 5 : 0;
 
                 if (vueThis.register >= num) {//确保寄存池内金额充足
 
