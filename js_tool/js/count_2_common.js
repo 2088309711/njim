@@ -14,7 +14,6 @@ function cut(id) {
     return '切换成功'
 }
 
-
 function compute() {
 
     play_audio = false;

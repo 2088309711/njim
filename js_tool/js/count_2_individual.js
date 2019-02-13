@@ -4,7 +4,7 @@
 var vueIndividual = new Vue({
     el: '#vue-individual',
     data: {
-        register: 300,//寄存器
+        register: 0,//寄存池
         result: [
             // {  this.result[0].betting[index].item[0].feeder_line
             //     issue: vueData.trs[0].issue + 1,
@@ -15,9 +15,10 @@ var vueIndividual = new Vue({
             //                 {
             //                      name: name,//名字：大小单双
             //                      thread: 0,//主线
-            //                      feeder_line: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],//10条支线
+            //                      feeder_line: [],//支线
             //                      betting_amount: 0,//投注额
             //                      is_betting: false,//是否投注
+            //                      miss: 0,//遗漏
             //                 }
             //             ]
             //         }
@@ -120,10 +121,11 @@ var vueIndividual = new Vue({
 
                             //支线减少金额
                             if (temp2 > 4) {
-                                temp2 -= 1;
+                                temp2 -= 3;
+                                vueThis.register += 3;//扣除的金额加入寄存池
                             }
 
-                            if (temp2 > 40) {
+                            if (temp2 > 20) {// 1  2  4  5  7  11  19
                                 vueThis.register += temp2;//将封顶的金额加入寄存池
                             } else {
                                 temp.item[itemIndex].feeder_line.push(temp2);
@@ -132,7 +134,7 @@ var vueIndividual = new Vue({
 
                     }
 
-                    distribution_register(vueThis, win);//分配寄存器
+                    distribution_register(vueThis, win);//分配寄存池
 
                 }
 
@@ -153,7 +155,7 @@ var vueIndividual = new Vue({
             var distribution_register = function (vueThis, win) {
 
                 //确定追加支线的数量
-                var num = win ? 5 : 0;
+                var num = win ? 4 : 0;
 
                 if (vueThis.register >= num) {//确保寄存池内金额充足
 
@@ -162,7 +164,7 @@ var vueIndividual = new Vue({
                         temp.item[0].feeder_line.push(1);//每个支线初始金额为1元
                     }
 
-                    vueThis.register -= num;//从寄存器中减去
+                    vueThis.register -= num;//从寄存池中减去
                 }
             }
 
