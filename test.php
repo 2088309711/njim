@@ -23,7 +23,7 @@
         <?php
 
         $start = 1;
-        $min = -2;
+        $min = 0;
         $issueNum = 40;
         $odds = 10;
 
