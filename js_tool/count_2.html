@@ -16,10 +16,6 @@
 <body>
 <div class="container-layout padding-top padding-bottom">
 
-    <blockquote class="border-blue padding-small-top padding-small-bottom padding-left">
-        <strong class="margin-little">更新时间：2019-2-14 11:45:06</strong>
-    </blockquote>
-
     <!--<div id="data">-->
     <!--<iframe src="//www.yyc91.com/static/data/80CurIssue.json"></iframe>-->
     <!--<iframe src="//www.9h991.com/static/data/80CurIssue.json"></iframe>-->
@@ -321,7 +317,7 @@
 
             <div class="tab-panel active" id="tab-4">
 
-                <div id="vue-individual" class="vue-individual">
+                <div id="vue-individual">
                     <div class="two-sides" v-if="isShow()">
                         <div class="item" v-for="data1 in result[0].betting">
                             <div class="num" v-for="data2 in data1.item">
@@ -339,8 +335,9 @@
                                 <th>车道</th>
                                 <th>遗漏</th>
                                 <th>金额</th>
-                                <th>主线</th>
-                                <th>支线，寄存池：{{register}}</th>
+                                <th>主线，溢出：{{register[0]}}</th>
+                                <th>支线1，溢出：{{register[1]}}，扣损：{{register[2]}}</th>
+                                <th>支线2，溢出：{{register[3]}}，扣损：{{register[4]}}，总计：{{registerCount()}}</th>
                             </tr>
                             <tr v-for="data in result[0].betting">
                                 <td>{{data.name}}</td>
@@ -348,10 +345,10 @@
                                 <td>{{data.item[0].betting_amount}}</td>
                                 <td>{{data.item[0].thread}}</td>
                                 <td>{{data.item[0].feeder_line}}</td>
+                                <td>{{data.item[0].feeder_line2}}</td>
                             </tr>
                         </table>
                     </div>
-
 
                 </div>
 
