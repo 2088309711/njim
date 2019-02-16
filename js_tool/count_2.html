@@ -337,7 +337,10 @@
                                 <th>金额</th>
                                 <th>主线，溢出：{{register[0]}}</th>
                                 <th>支线1，溢出：{{register[1]}}，扣损：{{register[2]}}</th>
-                                <th>支线2，溢出：{{register[3]}}，扣损：{{register[4]}}，总计：{{registerCount()}}</th>
+                                <th>支线2，溢出：{{register[3]}}，扣损：{{register[4]}}</th>
+                                <th>支线3，溢出：{{register[5]}}，扣损：{{register[6]}}</th>
+                                <th>支线4，溢出：{{register[7]}}，扣损：{{register[8]}}</th>
+                                <th>支线5，溢出：{{register[9]}}，扣损：{{register[10]}}，总计：{{registerCount()}}</th>
                             </tr>
                             <tr v-for="data in result[0].betting">
                                 <td>{{data.name}}</td>
@@ -346,6 +349,9 @@
                                 <td>{{data.item[0].thread}}</td>
                                 <td>{{data.item[0].feeder_line}}</td>
                                 <td>{{data.item[0].feeder_line2}}</td>
+                                <td>{{data.item[0].feeder_line3}}</td>
+                                <td>{{data.item[0].feeder_line4}}</td>
+                                <td>{{data.item[0].feeder_line5}}</td>
                             </tr>
                         </table>
                     </div>
