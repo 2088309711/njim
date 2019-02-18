@@ -4,21 +4,35 @@
 var vueIndividual = new Vue({
     el: '#vue-individual',
     data: {
+        register: 0,//寄存池
+        issue_num: 0,//期数
+
         /**
-         * 寄存池
-         * 0 = 主线溢出
-         * 1 = 支线1溢出
-         * 2 = 支线1被扣除的3元
-         * 3 = 支线2溢出
-         * 4 = 支线2被扣除的3元
-         * 5 = 支线3溢出
-         * 6 = 支线3被扣除的3元
-         * 7 = 支线4溢出
-         * 8 = 支线4被扣除的3元
-         * 9 = 支线5溢出
-         * 10 = 支线5被扣除的3元
+         * 支线IO情况
+         * 0=支线1
+         * 1=支线2
+         * 2=支线3
+         * 3=支线4
+         * 4=支线5
          */
-        register: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        feeder_line_io: [
+            {
+                out: 0,
+                input: 0
+            }, {
+                out: 0,
+                input: 0
+            }, {
+                out: 0,
+                input: 0
+            }, {
+                out: 0,
+                input: 0
+            }, {
+                out: 0,
+                input: 0
+            },
+        ],
         result: [
             // {  this.result[0].betting[index].item[0].feeder_line
             //     issue: vueData.trs[0].issue + 1,
@@ -47,19 +61,6 @@ var vueIndividual = new Vue({
          * @param e
          */
         copyText: copyInputVal,
-
-
-        registerCount: function () {
-
-            var count = 0;
-
-            for (var i = 0; i < this.register.length; i++) {
-                count += this.register[i];
-            }
-
-            return count;
-        },
-
 
         isShow: function () {
             return this.result.length > 0
@@ -126,12 +127,11 @@ var vueIndividual = new Vue({
                     } else {
                         var temp2 = preNum * 2 + add;
                         if (temp2 > max) {//封顶
-                            vueThis.register[0] += temp2;//主线溢出
+                            vueThis.register += temp2;//主线溢出
                             temp2 = num;
                         }
                         temp.item[itemIndex].thread = temp2;
                     }
-
 
                     var curMiss = 0;//当前遗漏
 
@@ -149,12 +149,15 @@ var vueIndividual = new Vue({
 
                             //支线减少金额
                             if (temp2 > 4) {
-                                temp2 -= 3;
-                                vueThis.register[2] += 3;//支线1扣除3元
+                                var deduction = 3;
+                                temp2 -= deduction;
+                                vueThis.register += deduction;//支线1扣除3元
+                                vueThis.feeder_line_io[0].out += deduction;//支线1输出
                             }
 
                             if (temp2 > 20) {// 1  2  4  5  7  11  19
-                                vueThis.register[1] += temp2;//支线1溢出
+                                vueThis.register += temp2;//支线1溢出
+                                vueThis.feeder_line_io[0].out += temp2;//支线1输出
                             } else {
                                 temp.item[itemIndex].feeder_line.push(temp2);
                             }
@@ -168,12 +171,15 @@ var vueIndividual = new Vue({
 
                             //支线减少金额
                             if (temp2 > 4) {
-                                temp2 -= 3;
-                                vueThis.register[4] += 3;//支线2扣除3元
+                                var deduction = 3;
+                                temp2 -= deduction;
+                                vueThis.register += deduction;//支线2扣除3元
+                                vueThis.feeder_line_io[1].out += deduction;//支线2输出
                             }
 
                             if (temp2 > 20) {// 1  2  4  5  7  11  19
-                                vueThis.register[3] += temp2;//支线2溢出
+                                vueThis.register += temp2;//支线2溢出
+                                vueThis.feeder_line_io[1].out += temp2;//支线2输出
                             } else {
                                 temp.item[itemIndex].feeder_line2.push(temp2);
                             }
@@ -187,12 +193,15 @@ var vueIndividual = new Vue({
 
                             //支线减少金额
                             if (temp2 > 4) {
-                                temp2 -= 3;
-                                vueThis.register[6] += 3;//支线3扣除3元
+                                deduction = 3;
+                                temp2 -= deduction;
+                                vueThis.register += deduction;//支线3扣除3元
+                                vueThis.feeder_line_io[2].out += deduction;//支线3输出
                             }
 
                             if (temp2 > 20) {// 1  2  4  5  7  11  19
-                                vueThis.register[5] += temp2;//支线3溢出
+                                vueThis.register += temp2;//支线3溢出
+                                vueThis.feeder_line_io[2].out += temp2;//支线3输出
                             } else {
                                 temp.item[itemIndex].feeder_line3.push(temp2);
                             }
@@ -206,12 +215,15 @@ var vueIndividual = new Vue({
 
                             //支线减少金额
                             if (temp2 > 4) {
-                                temp2 -= 3;
-                                vueThis.register[8] += 3;//支线4扣除3元
+                                var deduction = 3;
+                                temp2 -= deduction;
+                                vueThis.register += deduction;//支线4扣除3元
+                                vueThis.feeder_line_io[3].out += deduction;//支线4输出
                             }
 
                             if (temp2 > 20) {// 1  2  4  5  7  11  19
-                                vueThis.register[7] += temp2;//支线4溢出
+                                vueThis.register += temp2;//支线4溢出
+                                vueThis.feeder_line_io[3].out += temp2;//支线4输出
                             } else {
                                 temp.item[itemIndex].feeder_line4.push(temp2);
                             }
@@ -224,17 +236,19 @@ var vueIndividual = new Vue({
 
                             //支线减少金额
                             if (temp2 > 4) {
-                                temp2 -= 3;
-                                vueThis.register[10] += 3;//支线5扣除3元
+                                var deduction = 3;
+                                temp2 -= deduction;
+                                vueThis.register += deduction;//支线5扣除3元
+                                vueThis.feeder_line_io[4].out += deduction;//支线5输出
                             }
 
                             if (temp2 > 20) {// 1  2  4  5  7  11  19
-                                vueThis.register[9] += temp2;//支线5溢出
+                                vueThis.register += temp2;//支线5溢出
+                                vueThis.feeder_line_io[4].out += temp2;//支线5输出
                             } else {
                                 temp.item[itemIndex].feeder_line5.push(temp2);
                             }
                         }
-
 
                     }
 
@@ -281,148 +295,80 @@ var vueIndividual = new Vue({
             var distribution_register = function (vueThis, miss) {
 
                 /*
-         * 0 = 主线溢出
-         * 1 = 支线1溢出
-         * 2 = 支线1被扣除的3元
-         * 3 = 支线2溢出
-         * 4 = 支线2被扣除的3元
-         * 5 = 支线3溢出
-         * 6 = 支线3被扣除的3元
-         * 7 = 支线4溢出
-         * 8 = 支线4被扣除的3元
-         * 9 = 支线5溢出
-         * 10 = 支线5被扣除的3元
-         *
-         *
-         * 主线，溢出：15	支线1，溢出：0，扣损：2523	支线2，溢出：350，扣损：1099
-         * 支线3，溢出：245，扣损：174	支线4，溢出：0，扣损：53	支线5，溢出：0，扣损：33，总计：4492
-         *
-         *
-         *
+                 *
+                 * 主线，溢出：15	支线1，溢出：0，扣损：2523	支线2，溢出：350，扣损：1099
+                 * 支线3，溢出：245，扣损：174	支线4，溢出：0，扣损：53	支线5，溢出：0，扣损：33，总计：4492
+                 *
                  */
 
                 //分配支线1
                 var num = miss === 0 ? 3 : 0;
-                if (vueThis.register[0] >= num) {//从主线溢出取值
+                if (vueThis.register >= num) {//从主线溢出取值
 
                     //插入到支线1
                     for (var i = 0; i < num; i++) {
                         temp.item[0].feeder_line.push(1);
                     }
 
-                    vueThis.register[0] -= num;//从主线溢出中减去
-
-                } else if (vueThis.register[1] >= num) {//从支线1溢出取值
-
-                    //插入到支线1
-                    for (var i = 0; i < num; i++) {
-                        temp.item[0].feeder_line.push(1);
-                    }
-
-                    vueThis.register[1] -= num;//从支线1溢出中减去
-
+                    vueThis.feeder_line_io[0].input += num;//支线1输入
+                    vueThis.register -= num;//从主线溢出中减去
                 }
-
 
                 //分配支线2
-                num = miss >= 2 ? 5 : 0;
+                num = miss === 2 ? 5 : 0;
                 if (temp.item[0].feeder_line2.length === 0) {//支线2必须为空
-                    if (vueThis.register[2] >= num) {//从支线1被扣除的3元取值
-
+                    if (vueThis.register >= num) {//从支线1被扣除的3元取值
                         //插入到支线2
                         for (var i = 0; i < num; i++) {
                             temp.item[0].feeder_line2.push(1);
                         }
 
-                        vueThis.register[2] -= num;//从支线1被扣除的3元中减去
-
-                    } else if (vueThis.register[3] >= num) {//从支线2溢出取值
-
-                        //插入到支线2
-                        for (var i = 0; i < num; i++) {
-                            temp.item[0].feeder_line2.push(1);
-                        }
-
-                        vueThis.register[3] -= num;//从支线2溢出中减去
-
+                        vueThis.feeder_line_io[1].input += num;//支线2输入
+                        vueThis.register -= num;//从支线1被扣除的3元中减去
                     }
                 }
-
 
                 //分配支线3
-                num = miss >= 4 ? 7 : 0;
+                num = miss === 4 ? 7 : 0;
                 if (temp.item[0].feeder_line3.length === 0) {//支线3必须为空
-                    if (vueThis.register[4] >= num) {//从支线2被扣除的3元取值
-
+                    if (vueThis.register >= num) {//从支线2被扣除的3元取值
                         //插入到支线3
                         for (var i = 0; i < num; i++) {
                             temp.item[0].feeder_line3.push(1);
                         }
 
-                        vueThis.register[4] -= num;//从支线2被扣除的3元中减去
-
-                    } else if (vueThis.register[5] >= num) {//从支线3溢出取值
-
-                        //插入到支线3
-                        for (var i = 0; i < num; i++) {
-                            temp.item[0].feeder_line3.push(1);
-                        }
-
-                        vueThis.register[5] -= num;//从支线3溢出中减去
-
+                        vueThis.feeder_line_io[2].input += num;//支线3输入
+                        vueThis.register -= num;//从支线2被扣除的3元中减去
                     }
                 }
-
 
                 //分配支线4
-                num = miss >= 6 ? 9 : 0;
+                num = miss === 6 ? 9 : 0;
                 if (temp.item[0].feeder_line4.length === 0) {//支线4必须为空
-                    if (vueThis.register[6] >= num) {//从支线3被扣除的3元取值
-
+                    if (vueThis.register >= num) {//从支线3被扣除的3元取值
                         //插入到支线4
                         for (var i = 0; i < num; i++) {
                             temp.item[0].feeder_line4.push(1);
                         }
 
-                        vueThis.register[6] -= num;//从支线3被扣除的3元中减去
-
-                    } else if (vueThis.register[7] >= num) {//从支线4溢出取值
-
-                        //插入到支线4
-                        for (var i = 0; i < num; i++) {
-                            temp.item[0].feeder_line4.push(1);
-                        }
-
-                        vueThis.register[7] -= num;//从支线4溢出中减去
-
+                        vueThis.feeder_line_io[3].input += num;//支线4输入
+                        vueThis.register -= num;//从支线3被扣除的3元中减去
                     }
                 }
-
 
                 //分配支线5
-                num = miss >= 8 ? 11 : 0;
-                if (temp.item[0].feeder_line5.length === 0) {//支线5必须为空
-                    if (vueThis.register[8] >= num) {//从支线4被扣除的3元取值
-
+                num = miss === 8 ? 11 : 0;
+                if (temp.item[0].feeder_line5.length === 0) {//支线必须为空
+                    if (vueThis.register >= num) {
                         //插入到支线5
                         for (var i = 0; i < num; i++) {
                             temp.item[0].feeder_line5.push(1);
                         }
 
-                        vueThis.register[8] -= num;//从支线4被扣除的3元中减去
-
-                    } else if (vueThis.register[9] >= num) {//从支线5溢出取值
-
-                        //插入到支线5
-                        for (var i = 0; i < num; i++) {
-                            temp.item[0].feeder_line5.push(1);
-                        }
-
-                        vueThis.register[9] -= num;//从支线5溢出中减去
-
+                        vueThis.feeder_line_io[4].input += num;//支线5输入
+                        vueThis.register -= num;//从支线4被扣除的3元中减去
                     }
                 }
-
 
             }
 

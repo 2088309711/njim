@@ -150,13 +150,14 @@ function compute() {
     //     betting: threeBigThreeSmall
     // });
 
+
     // 单项遗漏
     vueIndividual.result.unshift({
         issue: vueData.trs[0].issue + 1,
         betting: individual
     });
 
-    // vueIndividual.register += 5;//每期都给寄存池加5元
+    vueIndividual.issue_num++;//增加期数
 
     //1~10名遗漏
     // vueOneToTenMiss.result.unshift({

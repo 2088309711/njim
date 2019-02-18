@@ -29,7 +29,6 @@
 
         <div class="x6 padding-0">
 
-
             <div class="x7">
                 <div class="panel">
                     <div class="panel-head">全局</div>
@@ -205,12 +204,9 @@
                     </div>
                 </div>
 
-
             </div>
 
-
         </div>
-
 
         <div id="vue-data" class="x6 result-panel">
 
@@ -328,20 +324,20 @@
                         </div>
                     </div>
 
-
-                    <div class="margin-top" v-if="isShow()">
+                    <div class="margin-top margin-bottom" v-if="isShow()">
                         <table class="table table-bordered">
                             <tr>
                                 <th>车道</th>
                                 <th>遗漏</th>
                                 <th>金额</th>
-                                <th>主线，溢出：{{register[0]}}</th>
-                                <th>支线1，溢出：{{register[1]}}，扣损：{{register[2]}}</th>
-                                <th>支线2，溢出：{{register[3]}}，扣损：{{register[4]}}</th>
-                                <th>支线3，溢出：{{register[5]}}，扣损：{{register[6]}}</th>
-                                <th>支线4，溢出：{{register[7]}}，扣损：{{register[8]}}</th>
-                                <th>支线5，溢出：{{register[9]}}，扣损：{{register[10]}}，总计：{{registerCount()}}</th>
+                                <th>主线</th>
+                                <th>支线1</th>
+                                <th>支线2</th>
+                                <th>支线3</th>
+                                <th>支线4</th>
+                                <th>支线5</th>
                             </tr>
+
                             <tr v-for="data in result[0].betting">
                                 <td>{{data.name}}</td>
                                 <td>{{data.item[0].miss}}</td>
@@ -353,6 +349,19 @@
                                 <td>{{data.item[0].feeder_line4}}</td>
                                 <td>{{data.item[0].feeder_line5}}</td>
                             </tr>
+
+                            <tr>
+                                <td colspan="9">
+                                    期数：{{issue_num}}，
+                                    寄存池：{{register}}，
+                                    支线1：输入：{{feeder_line_io[0].input}} 输出：{{feeder_line_io[0].out}}，
+                                    支线2：输入：{{feeder_line_io[1].input}} 输出：{{feeder_line_io[1].out}}，
+                                    支线3：输入：{{feeder_line_io[2].input}} 输出：{{feeder_line_io[2].out}}，
+                                    支线4：输入：{{feeder_line_io[3].input}} 输出：{{feeder_line_io[3].out}}，
+                                    支线5：输入：{{feeder_line_io[4].input}} 输出：{{feeder_line_io[4].out}}
+                                </td>
+                            </tr>
+
                         </table>
                     </div>
 
@@ -376,7 +385,6 @@
 
             <!--</div>-->
 
-
             <!--<div class="tab-panel" id="tab-6">-->
 
             <!--<div id="vue-two-big-and-one-small">-->
@@ -392,8 +400,7 @@
             <!--</div>-->
 
             <!--</div>-->
-
-
+            
             <!--<div class="tab-panel" id="tab-7">-->
 
             <!--<div id="vue-three-big-and-one-small">-->
