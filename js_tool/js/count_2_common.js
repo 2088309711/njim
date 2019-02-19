@@ -74,7 +74,7 @@ function compute() {
     // var oneBigAndOneSmall = [];//一大一小
     // var doubleBigDoubleSmall = [];//双大双小
     // var threeBigThreeSmall = [];//三大三小
-    var individual = [];//单项遗漏
+    // var individual = [];//单项遗漏
     var oneToTenMiss = [];//1~10名遗漏
     // var twoBigAndOneSmall = [];//双大一小
     // var threeBigAndOneSmall = [];//三大一小
@@ -98,17 +98,14 @@ function compute() {
         // threeBigThreeSmall.push(vueThreeBigThreeSmall.compute(i, nameArr[i],
         //     one_big_one_small_num, one_big_one_small_add, one_big_one_small_max, method))
 
-        var max = 10;//封顶
 
         //单项遗漏
-        // vueIndividual.compute(i, nameArr[i], 1, 1, max, 3, method)
-        individual.push(vueIndividual.compute(i, nameArr[i], 1, 1, max, 3, method))
+        // var max = 10;//封顶
+        // individual.push(vueIndividual.compute(i, nameArr[i], 1, 1, max, 3, method))
 
-
-        // vueIndividual.distribution_register(i, max)
 
         //1~10 名遗漏
-        // oneToTenMiss.push(vueOneToTenMiss.compute(i, nameArr[i], num_1_10))
+        oneToTenMiss.push(vueOneToTenMiss.compute(i, nameArr[i], num_1_10, method))
 
 
         //两大一小
@@ -152,18 +149,18 @@ function compute() {
 
 
     // 单项遗漏
-    vueIndividual.result.unshift({
-        issue: vueData.trs[0].issue + 1,
-        betting: individual
-    });
+    // vueIndividual.result.unshift({
+    //     issue: vueData.trs[0].issue + 1,
+    //     betting: individual
+    // });
 
-    vueIndividual.issue_num++;//增加期数
+    // vueIndividual.issue_num++;//增加期数
 
     //1~10名遗漏
-    // vueOneToTenMiss.result.unshift({
-    //     issue: vueData.trs[0].issue + 1,
-    //     betting: oneToTenMiss
-    // });
+    vueOneToTenMiss.result.unshift({
+        issue: vueData.trs[0].issue + 1,
+        betting: oneToTenMiss
+    });
 
     //两大一小
     // vueTwoBigAndOneSmall.result.unshift({

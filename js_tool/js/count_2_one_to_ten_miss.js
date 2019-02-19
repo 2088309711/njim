@@ -33,7 +33,6 @@ var vueOneToTenMiss = new Vue({
          */
         copyText: copyInputVal,
 
-
         isShow: function () {
             return this.result.length > 0
         },
@@ -49,17 +48,16 @@ var vueOneToTenMiss = new Vue({
         },
 
 
-        compute: function (index, name, num) {
+        compute: function (index, name, num, method) {
 
             //遗漏距离
             var distance = [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50];
 
-            //投注20期，最小收益0，共37元
-            var plan = [
-                1 * num, 1 * num, 1 * num, 1 * num, 1 * num, 1 * num, 1 * num, 1 * num, 1 * num, 1 * num,
-                2 * num, 2 * num, 2 * num, 2 * num, 2 * num, 3 * num, 3 * num, 3 * num, 4 * num, 4 * num
-            ];
+            //投注8期，最小收益2，共8元
+            var plan = [1 * num, 1 * num, 1 * num, 1 * num, 1 * num, 1 * num, 1 * num, 1 * num];
 
+            //开始位置
+            var start_position = 27;
 
             var numObj = function (number) {
                 return {
@@ -72,6 +70,7 @@ var vueOneToTenMiss = new Vue({
                 }
             }
 
+            //计算遗漏值
             var computeMiss = function (number) {
                 for (var i = 0; i < vueData.trs.length; i++) {
                     if (vueData.trs[i].nums[index] === number) {
@@ -124,63 +123,60 @@ var vueOneToTenMiss = new Vue({
 
 
             //和往期数据对比，计算出 10 个号码的遗漏值
-            for (var i = 0; i < 10; i++) {
-                temp.item[i].miss = computeMiss(temp.item[i].number);
-            }
+            // for (var i = 0; i < 10; i++) {
+            //     temp.item[i].miss = computeMiss(temp.item[i].number);
+            // }
 
             //和往期数据对比，计算出 10 个号码遗漏值的距离
-            for (var i = 0; i < 10; i++) {
-                temp.item[i].miss_distance = computeMissDistance(temp.item[i].miss);
-            }
+            // for (var i = 0; i < 10; i++) {
+            //     temp.item[i].miss_distance = computeMissDistance(temp.item[i].miss);
+            // }
 
             //获取上一期的投注方案
             var preData = this.get(vueData.trs[0].issue);
 
             //和往期数据对比，计算出 10 个号码的遗漏值
-            // for (var i = 0; i < temp.item.length; i++) {
-            // temp.item[i].miss = countMiss(temp.item[i].number);
+            for (var i = 0; i < temp.item.length; i++) {
+                temp.item[i].miss = computeMiss(temp.item[i].number);
 
 
-            //必须在遗漏范围内才能投注
-            // if (temp.item[i].miss >= minMiss && temp.item[i].miss <= maxMiss) {
+                // 必须在遗漏范围内才能投注 27 28 29 30 31 32 33 34
+                if (temp.item[i].miss >= start_position && temp.item[i].miss < start_position + plan.length) {
 
+                    var is_betting = true;//开启投注
 
-            // var is_betting = true;//是否投注
+                    if (preData != null) { //有上期的投注方案
 
-            // if (preData != null) { //有上期的投注方案
+                        var preIsBetting = preData.betting[index].item[i].is_betting;//上期是否投注
 
-            // var preIsBetting = preData.betting[index].item[i].is_betting;//上期是否投注
+                        // 如果上期没有投注当前号码并且当前号码遗漏大于最小遗漏，取消投注
+                        if (!preIsBetting && temp.item[i].miss > start_position) {
+                            is_betting = false;
+                        }
 
-            //如果上期没有投注当前号码并且当前号码遗漏大于最小遗漏，取消投注
-            // if (!preIsBetting && temp.item[i].miss > minMiss) {
-            // is_betting = false;
-            // }
+                    } else {
+                        // 没有上期的投注方案并且当前号码遗漏大于最小遗漏，取消投注
+                        if (temp.item[i].miss > start_position) {
+                            is_betting = false;
+                        }
+                    }
 
-            // } else {
-            //没有上期的投注方案并且当前号码遗漏大于最小遗漏，取消投注
-            // if (temp.item[i].miss > minMiss) {
-            // is_betting = false;
-            // }
-            // }
+                    // 如果是收尾并且为起始投注，取消投注
+                    if (method == '2' && temp.item[i].miss == start_position) {
+                        is_betting = false;
+                    }
 
-            //如果是收尾并且为起始投注，取消投注
-            // if (method == '2' && temp.item[i].miss == minMiss) {
-            // is_betting = false;
-            // }
+                    if (is_betting) {//投注
+                        // play_audio = true;
+                        // $('#head-5').css(headColor);
+                        temp.item[i].is_betting = true;//开启投注
+                        //投注额 = 当前遗漏值 - 开始位置
+                        temp.item[i].betting_amount = plan[temp.item[i].miss - start_position];
+                    }
 
+                }
 
-            // if (is_betting) {//投注
-            //     play_audio = true;
-            // $('#head-5').css(headColor);
-            // temp.item[i].is_betting = true;//开启投注
-            // temp.item[i].betting_amount = plan[temp.item[i].miss - 20];
-            // }
-
-
-            // }
-
-            // }
-
+            }
 
             return temp;
         }

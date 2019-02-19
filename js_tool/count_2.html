@@ -254,8 +254,8 @@
                 <!--<li><a id="head-1" href="#tab-1">一大一小</a></li>-->
                 <!--<li><a id="head-2" href="#tab-2">双大双小</a></li>-->
                 <!--<li><a id="head-3" href="#tab-3">三大三小</a></li>-->
-                <li class="active"><a id="head-4" href="#tab-4">单项遗漏</a></li>
-                <!--<li><a id="head-5" href="#tab-5">1~10名遗漏</a></li>-->
+                <!--<li><a id="head-4" href="#tab-4">单项遗漏</a></li>-->
+                <li class="active"><a id="head-5" href="#tab-5">1~10名遗漏</a></li>
                 <!--<li><a id="head-6" href="#tab-6">双大一小</a></li>-->
                 <!--<li><a id="head-7" href="#tab-7">三大一小</a></li>-->
                 <!--<li><a id="head-8" href="#tab-8">四大一小</a></li>-->
@@ -311,79 +311,77 @@
 
             <!--</div>-->
 
-            <div class="tab-panel active" id="tab-4">
+            <!--<div class="tab-panel" id="tab-4">-->
 
-                <div id="vue-individual">
-                    <div class="two-sides" v-if="isShow()">
-                        <div class="item" v-for="data1 in result[0].betting">
-                            <div class="num" v-for="data2 in data1.item">
-                                <!--<span>{{data2.miss}}</span>-->
-                                <input v-if="data2.is_betting" @click="copyText($event)"
-                                       :value="data2.betting_amount" readonly type="text">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="margin-top margin-bottom" v-if="isShow()">
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>车道</th>
-                                <th>遗漏</th>
-                                <th>金额</th>
-                                <th>主线</th>
-                                <th>支线1</th>
-                                <th>支线2</th>
-                                <th>支线3</th>
-                                <th>支线4</th>
-                                <th>支线5</th>
-                            </tr>
-
-                            <tr v-for="data in result[0].betting">
-                                <td>{{data.name}}</td>
-                                <td>{{data.item[0].miss}}</td>
-                                <td>{{data.item[0].betting_amount}}</td>
-                                <td>{{data.item[0].thread}}</td>
-                                <td>{{data.item[0].feeder_line}}</td>
-                                <td>{{data.item[0].feeder_line2}}</td>
-                                <td>{{data.item[0].feeder_line3}}</td>
-                                <td>{{data.item[0].feeder_line4}}</td>
-                                <td>{{data.item[0].feeder_line5}}</td>
-                            </tr>
-
-                            <tr>
-                                <td colspan="9">
-                                    期数：{{issue_num}}，
-                                    寄存池：{{register}}，
-                                    支线1：输入：{{feeder_line_io[0].input}} 输出：{{feeder_line_io[0].out}}，
-                                    支线2：输入：{{feeder_line_io[1].input}} 输出：{{feeder_line_io[1].out}}，
-                                    支线3：输入：{{feeder_line_io[2].input}} 输出：{{feeder_line_io[2].out}}，
-                                    支线4：输入：{{feeder_line_io[3].input}} 输出：{{feeder_line_io[3].out}}，
-                                    支线5：输入：{{feeder_line_io[4].input}} 输出：{{feeder_line_io[4].out}}
-                                </td>
-                            </tr>
-
-                        </table>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!--<div class="tab-panel" id="tab-5">-->
-
-            <!--<div id="vue-one-to-ten-miss">-->
-            <!--<div class="one-to-ten" v-if="isShow()">-->
+            <!--<div id="vue-individual">-->
+            <!--<div class="two-sides" v-if="isShow()">-->
             <!--<div class="item" v-for="data1 in result[0].betting">-->
             <!--<div class="num" v-for="data2 in data1.item">-->
-            <!--<span>{{data2.miss}}</span>-->
+            <!--&lt;!&ndash;<span>{{data2.miss}}</span>&ndash;&gt;-->
             <!--<input v-if="data2.is_betting" @click="copyText($event)"-->
             <!--:value="data2.betting_amount" readonly type="text">-->
             <!--</div>-->
             <!--</div>-->
             <!--</div>-->
+
+            <!--<div class="margin-top margin-bottom" v-if="isShow()">-->
+            <!--<table class="table table-bordered">-->
+            <!--<tr>-->
+            <!--<th>车道</th>-->
+            <!--<th>遗漏</th>-->
+            <!--<th>金额</th>-->
+            <!--<th>主线</th>-->
+            <!--<th>支线1</th>-->
+            <!--<th>支线2</th>-->
+            <!--<th>支线3</th>-->
+            <!--<th>支线4</th>-->
+            <!--<th>支线5</th>-->
+            <!--</tr>-->
+
+            <!--<tr v-for="data in result[0].betting">-->
+            <!--<td>{{data.name}}</td>-->
+            <!--<td>{{data.item[0].miss}}</td>-->
+            <!--<td>{{data.item[0].betting_amount}}</td>-->
+            <!--<td>{{data.item[0].thread}}</td>-->
+            <!--<td>{{data.item[0].feeder_line}}</td>-->
+            <!--<td>{{data.item[0].feeder_line2}}</td>-->
+            <!--<td>{{data.item[0].feeder_line3}}</td>-->
+            <!--<td>{{data.item[0].feeder_line4}}</td>-->
+            <!--<td>{{data.item[0].feeder_line5}}</td>-->
+            <!--</tr>-->
+
+            <!--<tr>-->
+            <!--<td colspan="9">-->
+            <!--期数：{{issue_num}}，-->
+            <!--寄存池：{{register}}，-->
+            <!--支线1：输入：{{feeder_line_io[0].input}} 输出：{{feeder_line_io[0].out}}，-->
+            <!--支线2：输入：{{feeder_line_io[1].input}} 输出：{{feeder_line_io[1].out}}，-->
+            <!--支线3：输入：{{feeder_line_io[2].input}} 输出：{{feeder_line_io[2].out}}，-->
+            <!--支线4：输入：{{feeder_line_io[3].input}} 输出：{{feeder_line_io[3].out}}，-->
+            <!--支线5：输入：{{feeder_line_io[4].input}} 输出：{{feeder_line_io[4].out}}-->
+            <!--</td>-->
+            <!--</tr>-->
+
+            <!--</table>-->
             <!--</div>-->
 
             <!--</div>-->
+
+            <!--</div>-->
+
+            <div class="tab-panel active" id="tab-5">
+                <div id="vue-one-to-ten-miss">
+                    <div class="one-to-ten" v-if="isShow()">
+                        <div class="item" v-for="data1 in result[0].betting">
+                            <div class="num" v-for="data2 in data1.item">
+                                <span>{{data2.miss}}</span>
+                                <input v-if="data2.is_betting" @click="copyText($event)"
+                                       :value="data2.betting_amount" readonly type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!--<div class="tab-panel" id="tab-6">-->
 
@@ -449,8 +447,8 @@
 <!--<script src="js/count_2_three_big_and_one_small.js"></script>-->
 <!--<script src="js/count_2_four_big_and_one_small.js"></script>-->
 <!--<script src="js/count_2_three_big_three_small.js"></script>-->
-<script src="js/count_2_individual.js"></script>
-<!--<script src="js/count_2_one_to_ten_miss.js"></script>-->
+<!--<script src="js/count_2_individual.js"></script>-->
+<script src="js/count_2_one_to_ten_miss.js"></script>
 <script src="js/count_2.js"></script>
 </body>
 </html>
