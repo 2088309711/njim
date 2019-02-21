@@ -42,6 +42,7 @@ class Corpus extends Controller
             $this->error($result);
         }
 
+
         $corpus = CorpusData::all(['group_id' => $data['id']]);
 
         return view('corpus_list', [

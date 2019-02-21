@@ -9,11 +9,7 @@
                 <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 设置实例
                     <small>Set example</small>
                 </div>
-                <p class="page-header-description">皮肤，邀请功能，参与客服等相关参数设置。</p>
-            </div>
-            <div class="am-u-lg-3 tpl-index-settings-button">
-                <button type="button" class="page-header-button"><span class="am-icon-paint-brush"></span> 设置
-                </button>
+                <p class="page-header-description">皮肤，邀请功能，人工/机器客服等相关参数设置。</p>
             </div>
         </div>
     </div>
@@ -24,9 +20,6 @@
                 <div class="widget am-cf">
                     <div class="widget-head am-cf">
                         <div class="widget-title am-fl">请设置以下参数</div>
-                        <div class="widget-function am-fr">
-                            <a href="javascript:;" class="am-icon-cog"></a>
-                        </div>
                     </div>
                     <div class="widget-body am-fr">
                         <form class="am-form tpl-form-border-form tpl-form-border-br" onsubmit="return false">
@@ -36,7 +29,7 @@
                                     <li class="am-active"><a href="#tab1">基本</a></li>
                                     <li><a href="#tab2">皮肤</a></li>
                                     <li><a href="#tab3">邀请</a></li>
-                                    <li><a href="#tab4">客服</a></li>
+                                    <li><a href="#tab4">人/机客服</a></li>
                                 </ul>
                                 <div class="am-tabs-bd">
                                     <div class="am-tab-panel am-fade am-in am-active" id="tab1">
@@ -485,38 +478,15 @@
                                         </div>
                                     </div>
                                     <div class="am-tab-panel am-fade" id="tab4">
-                                        <div class="am-form-group">
-                                            <label class="am-u-sm-3 am-form-label">选择客服</label>
-                                            <div class="am-u-sm-9">
-                                                <table class="am-table am-table-bordered" style="margin-bottom: 0;">
-                                                    <thead>
-                                                    <tr>
-                                                        <th width="30"></th>
-                                                        <th width="80">编号</th>
-                                                        <th width="160">用户名</th>
-                                                        <th>客服名称</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    {volist name="staff_list" id="vo"}
-                                                    <tr>
-                                                        <td><input type="checkbox" value="{$vo.id}"
-                                                                   class="staff-list-checkbox" name="staff_pk"
-                                                                   {volist name="example.staff_pk" id="v2" }
-                                                                   {eq name="v2" value="$vo.id" }checked{/eq} {/volist}>
-                                                        </td>
-                                                        <td>{$vo.id}</td>
-                                                        <td>{$vo.user_name}</td>
-                                                        <td>{$vo.name}</td>
-                                                    </tr>
-                                                    {/volist}
-                                                    </tbody>
-                                                </table>
-                                                <small>
-                                                    被勾选的客服才能参与该实例的工作任务
-                                                </small>
-                                            </div>
+
+                                        <div>
+                                            <button class="am-btn am-btn-success am-btn-xl am-margin-xs">人工客服
+                                            </button>
+                                            <button class="am-btn am-btn-primary am-btn-xl am-margin-xs">机器客服
+                                            </button>
                                         </div>
+                                        <small>选择客服类型进入设置面板。</small>
+
                                     </div>
                                 </div>
                             </div>
