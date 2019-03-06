@@ -8,15 +8,16 @@
             <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
                 <div class="widget am-cf">
                     <div class="widget-head am-cf">
-                        <div class="widget-title  am-cf">实例列表</div>
+                        <div class="widget-title  am-cf">语料列表</div>
                     </div>
                     <div class="widget-body  am-fr">
                         <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
                             <div class="am-form-group">
                                 <div class="am-btn-toolbar">
                                     <div class="am-btn-group am-btn-group-xs">
-                                        <a href="/index.php/staff/Example/create" class="am-btn am-btn-success">
-                                            <span class="am-icon-plus"></span> 创建实例
+                                        <a href="/index.php/staff/Example_Corpus/add/example_id/{$example_id}"
+                                           class="am-btn am-btn-success">
+                                            <span class="am-icon-plus"></span> 添加语料
                                         </a>
                                     </div>
                                 </div>
@@ -39,30 +40,26 @@
                                 <thead>
                                 <tr>
                                     <th width="80">编号</th>
-                                    <th>实例名称</th>
+                                    <th>标题</th>
+                                    <th width="180">创建时间</th>
                                     <th width="180">修改时间</th>
-                                    <th width="250">操作</th>
+                                    <th width="140">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
-                                {volist name="list" id="vo"}
+                                {volist name="corpus" id="vo"}
                                 <tr class="gradeX">
                                     <td>{$vo.id}</td>
-                                    <td>{$vo.name}</td>
+                                    <td>{$vo.title}</td>
+                                    <td>{$vo.create_time}</td>
                                     <td>{$vo.update_time}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
-                                            <a href="/index.php/staff/Example/deploy/id/{$vo.id}">
-                                                <i class="am-icon-plug"></i> 对接
-                                            </a>
-                                            <a href="/index.php/staff/Example_Corpus/index/example_id/{$vo.id}">
-                                                <i class="am-icon-android"></i> 机器人
-                                            </a>
                                             <a href="/index.php/staff/Example/update/id/{$vo.id}">
                                                 <i class="am-icon-pencil"></i> 编辑
                                             </a>
-                                            <a href="/index.php/staff/Example/delete/id/{$vo.id}"
+                                            <a href="/index.php/staff/Example_Corpus/delete/id/{$vo.id}/example_id/{$example_id}"
                                                class="tpl-table-black-operation-del">
                                                 <i class="am-icon-trash"></i> 删除
                                             </a>
@@ -93,4 +90,24 @@
         </div>
     </div>
 </div>
+<script src="/static/layui/layui.js"></script>
+<script>
+    var layer = null;
+    layui.use('layer', function () {
+        layer = layui.layer;
+    });
+
+    $(function () {
+        $('.del-staff').click(function () {
+            var id = $(this).attr('data-id');
+            var name = $(this).attr('data-name');
+
+
+            layer.confirm('确定删除“' + name + '”？', function (index) {
+                layer.close(index);
+                location.href = '/index.php/staff/Staff_Manage/delete/id/' + id;
+            });
+        });
+    });
+</script>
 {/block}

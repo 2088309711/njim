@@ -11,15 +11,16 @@ namespace app\common\model;
 
 use think\Model;
 
-class CorpusData extends Model
+class ExampleCorpus extends Model
 {
     protected $pk = 'id';
 
     public function add($data)
     {
         $this->title = $data['title'];
-        $this->content = $data['content'];
-        $this->group_id = $data['id'];
+        $this->ask = $data['ask'];
+        $this->text = $data['text'];
+        $this->example_id = $data['example_id'];
         return !!$this->save();
     }
 

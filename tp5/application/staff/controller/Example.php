@@ -9,6 +9,7 @@
 namespace app\staff\controller;
 
 use app\common\model\Staff;
+use app\common\model\ExampleCorpus;
 use think\Controller;
 use think\Request;
 use app\common\model\Example as ExampleModel;
@@ -369,5 +370,30 @@ class Example extends Controller
 
         return view('deploy', ['example' => $example, 'staff' => $staff, 'menu' => 'example']);
     }
+
+
+    public function robot()
+    {
+
+        $data = input();
+        $result = $this->validate($data, 'Example.scene1');
+        if (true !== $result) {
+            $this->error($result);
+        }
+
+        $login = new Login();
+        $staff = $login->getUserData();
+
+        //获取实例语料数据
+        $corpus = ExampleCorpus::all(['example_id' => $data['id']]);
+
+        $this->assign('corpus', $corpus);
+        $this->assign('staff', $staff);
+        $this->assign('menu', 'example');
+
+        return view();
+
+    }
+
 
 }
