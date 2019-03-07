@@ -1,0 +1,103 @@
+{extend name="base" /}
+{block name="title"}参与客服 - 客服控制台{/block}
+{block name="left"}{include file="left_admin" /}{/block}
+{block name="content"}
+<div class="tpl-content-wrapper">
+
+
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">请勾选参与到该实例<span
+                                class="am-text-danger">（{$example.name}）</span>的客服工作人员
+                        </div>
+
+                    </div>
+                    <div class="widget-body am-fr">
+                        <form action="/index.php/staff/Example/create"
+                              class="am-form tpl-form-border-form tpl-form-border-br"
+                              method="post" onsubmit="return check();">
+                            {:token()}
+
+                            <div class="am-form-group">
+
+                                <table id="people-table"
+                                       class="am-table am-table-bordered am-table-striped am-table-compact people-table">
+                                    <thead>
+                                    <tr>
+                                        <th width="34">
+                                            <label class="input-label" for="sel-all">
+                                                <input id="sel-all" type="checkbox">
+                                            </label>
+                                        </th>
+                                        <th>编号</th>
+                                        <th>名称</th>
+                                        <th>用户名</th>
+                                        <th>状态</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {volist name="staffList" id="vo"}
+                                    <tr>
+                                        <td>
+                                            <label class="input-label" for="id_{$vo.id}">
+                                                <input name="id[]" id="id_{$vo.id}" value="{$vo.id}" type="checkbox">
+                                            </label>
+                                        </td>
+                                        <td><label for="id_{$vo.id}">{$vo.id}</label></td>
+                                        <td><label for="id_{$vo.id}">{$vo.name}</label></td>
+                                        <td><label for="id_{$vo.id}">{$vo.user_name}</label></td>
+                                        <td><label for="id_{$vo.id}">{$vo.state}</label></td>
+                                    </tr>
+                                    {/volist}
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                            <div class="am-form-group">
+
+                                <button type="submit" class="am-btn am-btn-success">保存</button>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/static/layui/layui.js"></script>
+<script>
+    var layer = null;
+    layui.use(['layer', 'form'], function () {
+        layer = layui.layer;
+    });
+
+
+    $(function () {
+
+        //全选
+        $('#sel-all').click(function () {
+            if ($(this)[0].checked) {
+                $('#people-table :checkbox').each(function () {
+                    $(this).prop("checked", true);
+                })
+            } else {
+                $('#people-table :checkbox').each(function () {
+                    $(this).prop("checked", false);
+                })
+            }
+        })
+
+
+    })
+
+
+</script>
+{/block}

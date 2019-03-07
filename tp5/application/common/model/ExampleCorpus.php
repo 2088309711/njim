@@ -24,4 +24,10 @@ class ExampleCorpus extends Model
         return !!$this->save();
     }
 
+    public function edit($data)
+    {
+        return $this->allowField(true)->save($data, ['id' => $data['id'], 'example_id' => $data['example_id']]);
+    }
+
+
 }

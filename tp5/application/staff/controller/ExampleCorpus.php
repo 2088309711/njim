@@ -75,7 +75,7 @@ class ExampleCorpus extends Controller
             }
 
 
-            $data['ask'] = $temp;
+            $data['ask'] = $this->cutEnd($temp);
 
             //验证回复
             $temp = '';
@@ -89,7 +89,7 @@ class ExampleCorpus extends Controller
                 }
             }
 
-            $data['text'] = $temp;
+            $data['text'] = $this->cutEnd($temp);
 
 
             //保存
@@ -118,12 +118,122 @@ class ExampleCorpus extends Controller
     }
 
 
+    private function cutEnd($str)
+    {
+        return preg_replace("/@06#$/", "", $str);
+    }
+
+
     public function edit()
     {
         if (request()->isPost()) {
 
+
+            /*
+array(5) {
+  ["__token__"] => string(32) "a69e2916e863ef31b0f738ca2ea5b91d"
+  ["example_id"] => string(2) "11"
+  ["id"] => string(2) "42"
+  ["ask"] => array(3) {
+    [0] => string(3) "444"
+    [1] => string(3) "555"
+    [2] => string(3) "666"
+  }
+  ["text"] => array(3) {
+    [0] => string(3) "111"
+    [1] => string(3) "222"
+    [2] => string(3) "333"
+  }
+}
+             */
+
+
+            $data = input('post.');
+
+            //验证实例ID和token
+            $result = $this->validate($data, 'ExampleCorpus.ck_example_id4');
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+
+            //验证问题
+            $temp = '';
+            $data['title'] = '';
+            foreach ($data['ask'] as $val) {
+                if (trim($val) != '') {
+                    $result = $this->validate(['ask' => $val], 'ExampleCorpus.ck_ask');
+                    if (true !== $result) {
+                        $this->error($result);
+                    }
+
+                    if ($data['title'] == '') {
+                        $data['title'] = $val;
+                    }
+
+                    $temp .= $val . '@06#';
+                }
+            }
+
+
+            if ($data['title'] == '') {
+                $this->error('必须填写一个提问语句');
+            }
+
+
+            $data['ask'] = $this->cutEnd($temp);
+
+            //验证回复
+            $temp = '';
+            foreach ($data['text'] as $val) {
+                if (trim($val) != '') {
+                    $result = $this->validate(['answer' => $val], 'ExampleCorpus.ck_answer');
+                    if (true !== $result) {
+                        $this->error($result);
+                    }
+                    $temp .= $val . '@06#';
+                }
+            }
+
+            $data['text'] = $this->cutEnd($temp);
+
+            //保存
+            $ecm = new ExampleCorpusModel();
+
+            if ($ecm->edit($data)) {
+                $this->success('保存成功', '/index.php/staff/Example_Corpus/index/example_id/' . $data['example_id']);
+            } else {
+                $this->error('保存失败');
+            }
+
         } else {
-            return view();
+            $data = input();
+            $result = $this->validate($data, 'ExampleCorpus.ck_example_id3');
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+            $login = new Login();
+            $staff = $login->getUserData();
+
+            $corpus = ExampleCorpusModel::get(['id' => $data['id'], 'example_id' => $data['example_id']]);
+
+
+            if ($corpus != null) {
+
+                $corpus->ask = explode('@06#', $corpus->ask);
+                $corpus->text = explode('@06#', $corpus->text);
+
+                $this->assign('example_id', $data['example_id']);
+                $this->assign('staff', $staff);
+                $this->assign('corpus', $corpus);
+                $this->assign('menu', 'example');
+                return view();
+            } else {
+                $this->error('相关数据不存在');
+            }
+
+
         }
     }
 

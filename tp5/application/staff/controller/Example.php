@@ -372,6 +372,42 @@ class Example extends Controller
     }
 
 
+    public function people()
+    {
+        $data = input();
+
+
+        $result = $this->validate($data, 'Example.scene1');
+        if ($result !== true) {
+            $this->error($result);
+        }
+
+        $login = new Login();
+        $staff = $login->getUserData();
+
+        //获取实例数据
+        $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $staff->user_name]);
+
+        if ($example != null) {
+
+            //获取客服数据
+            $staffList = Staff::all(['account' => $staff->user_name]);
+
+            $this->assign('example', $example);
+            $this->assign('staff', $staff);
+            $this->assign('staffList', $staffList);
+            $this->assign('menu', 'example');
+
+            return view();
+
+        } else {
+            $this->error('数据不存在');
+        }
+
+
+    }
+
+
     public function robot()
     {
 

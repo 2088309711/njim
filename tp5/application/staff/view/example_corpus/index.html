@@ -56,11 +56,12 @@
                                     <td>{$vo.update_time}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
-                                            <a href="/index.php/staff/Example/update/id/{$vo.id}">
+                                            <a href="/index.php/staff/Example_Corpus/edit/id/{$vo.id}/example_id/{$example_id}">
                                                 <i class="am-icon-pencil"></i> 编辑
                                             </a>
-                                            <a href="/index.php/staff/Example_Corpus/delete/id/{$vo.id}/example_id/{$example_id}"
-                                               class="tpl-table-black-operation-del">
+                                            <a href="javascript:;"
+                                               class="tpl-table-black-operation-del del-corpus"
+                                               data-id="{$vo.id}" data-title="{$vo.title}">
                                                 <i class="am-icon-trash"></i> 删除
                                             </a>
                                         </div>
@@ -98,14 +99,13 @@
     });
 
     $(function () {
-        $('.del-staff').click(function () {
+        $('.del-corpus').click(function () {
             var id = $(this).attr('data-id');
-            var name = $(this).attr('data-name');
+            var title = $(this).attr('data-title');
 
-
-            layer.confirm('确定删除“' + name + '”？', function (index) {
+            layer.confirm('确定删除“' + title + '”？', function (index) {
                 layer.close(index);
-                location.href = '/index.php/staff/Staff_Manage/delete/id/' + id;
+                location.href = '/index.php/staff/Example_Corpus/delete/example_id/{$example_id}/id/' + id;
             });
         });
     });

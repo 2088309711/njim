@@ -2293,4 +2293,22 @@ ul.tpl-dropdown-content .tpl-dropdown-menu-messages-item .menu-messages-content 
     clear: both;
 }
 
-/*词库*/
+/*人工客服*/
+
+.people-table label {
+    margin: 0;
+    font-weight: normal;
+    display: block;
+    cursor: pointer;
+}
+
+.input-label {
+    height: 25px;
+    padding-top: 6px;
+}
+
+.input-label input {
+    display: block;
+    margin: 0 auto;
+}
+

@@ -53,6 +53,7 @@ class ExampleCorpus extends Validate
         'ck_example_id' => ['example_id'],
         'ck_example_id2' => ['__token__', 'example_id'],
         'ck_example_id3' => ['id', 'example_id'],
+        'ck_example_id4' => ['__token__', 'id', 'example_id'],
     ];
 
 

@@ -1,0 +1,105 @@
+{extend name="base" /}
+{block name="title"}编辑语料 - 客服控制台{/block}
+{block name="left"}{include file="left_admin" /}{/block}
+{block name="content"}
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">编辑语料</div>
+
+                    </div>
+                    <div class="widget-body am-fr">
+                        <form action="/index.php/staff/Example_Corpus/edit"
+                              class="am-form tpl-form-border-form tpl-form-border-br"
+                              method="post" onsubmit="return true;">
+                            {:token()}
+
+                            <input type="hidden" name="example_id" value="{$example_id}">
+                            <input type="hidden" name="id" value="{$corpus.id}">
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-2 am-form-label" style="padding-top: 15px;">匹配内容</label>
+                                <div class="am-u-sm-10">
+                                    <div id="ask">
+
+                                        {volist name="corpus.ask" id="vo"}
+                                        <input type="text" class="tpl-form-input am-margin-vertical-sm"
+                                               onblur="blurClear(this)" placeholder="请输入提问内容"
+                                               value="{$vo}" name="ask[]">
+                                        {/volist}
+
+                                    </div>
+                                    <button type="button"
+                                            class="am-btn am-btn-default am-btn-block am-margin-vertical-sm"
+                                            id="add-ask">
+                                        添加提问语句
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-2 am-form-label" style="padding-top: 15px;">回复内容</label>
+                                <div class="am-u-sm-10">
+                                    <div id="answer">
+                                        {volist name="corpus.text" id="vo"}
+                                        <textarea class="am-margin-vertical-sm" rows="3" placeholder="请输入回复内容"
+                                                  onblur="blurClear(this)" name="text[]">{$vo}</textarea>
+                                        {/volist}
+                                    </div>
+                                    <button type="button" id="add-answer"
+                                            class="am-btn am-btn-default am-btn-block am-margin-vertical-sm">
+                                        添加回复方案
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group">
+                                <div class="am-u-sm-10 am-u-sm-push-2">
+                                    <button type="submit" class="am-btn am-btn-success">保存</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#add-ask').click(function () {
+            $('#ask').append('<input type="text" onblur="blurClear(this)" class="tpl-form-input am-margin-vertical-sm" placeholder="请输入提问内容" name="ask[]">');
+        })
+
+        $('#add-answer').click(function () {
+            $('#answer').append('<textarea class="am-margin-vertical-sm" onblur="blurClear(this)" rows="3" placeholder="请输入回复内容" name="text[]"></textarea>')
+        })
+
+    })
+
+    //清理空白文本域
+    function blurClear(el) {
+        var el = $(el);
+
+        if (el.is('input')) {
+            if (el.val() == '' && $('#ask input').length > 1) {
+                el.remove();
+            }
+        } else {
+            if (el.val() == '' && $('#answer textarea').length > 1) {
+                el.remove();
+            }
+        }
+
+    }
+
+    function log(o) {
+        console.log(o)
+    }
+</script>
+{/block}
