@@ -1,0 +1,87 @@
+{extend name="base" /}
+{block name="title"}机器人设置 - 客服控制台{/block}
+{block name="left"}{include file="left_admin" /}{/block}
+{block name="content"}
+<div class="tpl-content-wrapper">
+    <div class="row-content am-cf">
+        <div class="row">
+            <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                <div class="widget am-cf">
+                    <div class="widget-head am-cf">
+                        <div class="widget-title am-fl">机器人设置</div>
+                        <div class="widget-function am-fr">
+                            <a href="javascript:;" class="am-icon-cog"></a>
+                        </div>
+                    </div>
+                    <div class="widget-body am-fr">
+                        <form action="/index.php/staff/Example/robot" method="post"
+                              class="am-form tpl-form-border-form tpl-form-border-br" onsubmit="return true;">
+                            {:token()}
+
+                            <input type="hidden" name="id" value="{$example.id}">
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-2 am-form-label">启用机器人</label>
+                                <div class="am-u-sm-10">
+                                    <div class="tpl-switch">
+                                        <input type="checkbox" id="robot"
+                                               class="ios-switch bigswitch tpl-switch-btn"
+                                               name="robot" value="1"
+                                               {eq name="example.robot" value="1" }checked{/eq}>
+                                        <div class="tpl-switch-btn-view">
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-2 am-form-label">启用柠吉语料库</label>
+                                <div class="am-u-sm-10">
+                                    <div class="tpl-switch">
+                                        <input type="checkbox" id="public_corpus"
+                                               class="ios-switch bigswitch tpl-switch-btn"
+                                               name="public_corpus" value="1"
+                                               {eq name="example.public_corpus" value="1" }checked{/eq}>
+                                        <div class="tpl-switch-btn-view">
+                                            <div></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-2 am-form-label">机器人名称</label>
+                                <div class="am-u-sm-10">
+                                    <input type="text" class="tpl-form-input" id="robot_name"
+                                           value="{$example.robot_name}" name="robot_name" placeholder="如：小柠">
+                                </div>
+                            </div>
+
+
+                            <div class="am-form-group">
+                                <label class="am-u-sm-2 am-form-label">欢迎语</label>
+                                <div class="am-u-sm-10">
+                                    <textarea rows="3" id="welcome"
+                                              name="welcome" placeholder="请输入...">{$example.welcome}</textarea>
+                                    <small>支持HTML代码，支持提问锚点，格式：[#问题#]，如：[#产品有什么特点？#]</small>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group" style="margin-top: 20px;">
+                                <div class="am-u-sm-10 am-u-sm-push-2">
+                                    <button type="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success ">
+                                        保存
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

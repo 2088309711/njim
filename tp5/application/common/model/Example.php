@@ -75,4 +75,5 @@ class Example extends Model
         ]);
     }
 
+
 }

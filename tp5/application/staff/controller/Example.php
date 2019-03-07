@@ -374,61 +374,144 @@ class Example extends Controller
 
     public function people()
     {
-        $data = input();
+
+        if (request()->isPost()) {
+
+            $data = input('post.');
+
+            //处理staff_pk
+            $data['staff_pk'] = isset($data['staff_pk']) ? $data['staff_pk'] : [];
+            $temp = '';
+            foreach ($data['staff_pk'] as $val) {
+                $temp .= $val . '|';
+            }
+            $data['staff_pk'] = preg_replace("/\|$/", "", $temp);
 
 
-        $result = $this->validate($data, 'Example.scene1');
-        if ($result !== true) {
-            $this->error($result);
-        }
+            $result = $this->validate($data, 'Example.scene2');
+            if ($result !== true) {
+                $this->error($result);
+            }
 
-        $login = new Login();
-        $staff = $login->getUserData();
+            $login = new Login();
 
-        //获取实例数据
-        $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $staff->user_name]);
-
-        if ($example != null) {
-
-            //获取客服数据
-            $staffList = Staff::all(['account' => $staff->user_name]);
-
-            $this->assign('example', $example);
-            $this->assign('staff', $staff);
-            $this->assign('staffList', $staffList);
-            $this->assign('menu', 'example');
-
-            return view();
+            $em = new ExampleModel();
+            if ($em->allowField(['staff_pk'])->save($data, ['id' => $data['id'], 'user_name' => $login->getUserName()])) {
+                $this->success('保存成功', '/index.php/staff/Example');
+            } else {
+                $this->error('保存失败');
+            }
 
         } else {
-            $this->error('数据不存在');
+
+            $data = input();
+
+            $result = $this->validate($data, 'Example.scene1');
+            if ($result !== true) {
+                $this->error($result);
+            }
+
+            $login = new Login();
+            $staff = $login->getUserData();
+
+            //获取实例数据
+            $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $staff->user_name]);
+
+            if ($example != null) {
+
+                //获取客服数据
+                $staffList = Staff::all(['account' => $staff->user_name]);
+
+
+                $example->staff_pk = explode('|', $example->staff_pk);
+
+
+                $this->assign('example', $example);
+                $this->assign('staff', $staff);
+                $this->assign('staffList', $staffList);
+                $this->assign('menu', 'example');
+
+                return view();
+
+            } else {
+                $this->error('数据不存在');
+            }
+
+
         }
-
-
     }
 
 
     public function robot()
     {
 
-        $data = input();
-        $result = $this->validate($data, 'Example.scene1');
-        if (true !== $result) {
-            $this->error($result);
+        if (request()->isPost()) {
+
+            $data = input('post.');
+
+
+            /*
+array(6) {
+  ["__token__"] => string(32) "7e547cc359f231b224b272adf08b1f9a"
+  ["id"] => string(2) "11"
+  ["robot"] => string(1) "1"
+  ["public_corpus"] => string(1) "1"
+  ["robot_name"] => string(3) "132"
+  ["welcome"] => string(3) "165"
+}
+
+array(4) {
+  ["__token__"] => string(32) "67565309ef37c2f9e647cda5e5b82e51"
+  ["id"] => string(2) "11"
+  ["robot_name"] => string(0) ""
+  ["welcome"] => string(0) ""
+}
+             */
+
+
+            $data['robot'] = isset($data['robot']) ? 1 : 0;
+            $data['public_corpus'] = isset($data['public_corpus']) ? 1 : 0;
+
+            $result = $this->validate($data, 'Example.scene3');
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+            $example = new ExampleModel();
+
+
+            $login = new Login();
+
+            if ($example->allowField(['robot', 'public_corpus', 'robot_name', 'welcome'])
+                ->save($data, ['id' => $data['id'], 'user_name' => $login->getUserName()])) {
+                $this->success('保存成功', '/index.php/staff/Example');
+            } else {
+                $this->error('保存失败');
+            }
+
+
+        } else {
+
+
+            $data = input();
+            $result = $this->validate($data, 'Example.scene1');
+            if (true !== $result) {
+                $this->error($result);
+            }
+
+            $login = new Login();
+            $staff = $login->getUserData();
+
+            //获取实例数据
+            $example = ExampleModel::get(['id' => $data['id'], 'user_name' => $staff->user_name]);
+
+            $this->assign('example', $example);
+            $this->assign('staff', $staff);
+            $this->assign('menu', 'example');
+
+            return view();
+
         }
-
-        $login = new Login();
-        $staff = $login->getUserData();
-
-        //获取实例语料数据
-        $corpus = ExampleCorpus::all(['example_id' => $data['id']]);
-
-        $this->assign('corpus', $corpus);
-        $this->assign('staff', $staff);
-        $this->assign('menu', 'example');
-
-        return view();
-
     }
 
 

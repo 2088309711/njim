@@ -41,7 +41,7 @@
                                     <th width="80">编号</th>
                                     <th>实例名称</th>
                                     <th width="180">修改时间</th>
-                                    <th width="250">操作</th>
+                                    <th width="160">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -52,21 +52,35 @@
                                     <td>{$vo.name}</td>
                                     <td>{$vo.update_time}</td>
                                     <td>
-                                        <div class="tpl-table-black-operation">
-                                            <a href="/index.php/staff/Example/deploy/id/{$vo.id}">
-                                                <i class="am-icon-plug"></i> 对接
-                                            </a>
-                                            <a href="/index.php/staff/Example_Corpus/index/example_id/{$vo.id}">
-                                                <i class="am-icon-comments"></i> 语料库
-                                            </a>
-                                            <a href="/index.php/staff/Example/update/id/{$vo.id}">
-                                                <i class="am-icon-pencil"></i> 编辑
-                                            </a>
-                                            <a href="/index.php/staff/Example/delete/id/{$vo.id}"
-                                               class="tpl-table-black-operation-del">
-                                                <i class="am-icon-trash"></i> 删除
-                                            </a>
+
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <a href="/index.php/staff/Example/update/id/{$vo.id}"
+                                               class="am-btn am-btn-secondary">管理</a>
+                                            <div class="am-dropdown am-btn-group-xs" data-am-dropdown>
+                                                <button class="am-btn am-btn-secondary am-dropdown-toggle"
+                                                        data-am-dropdown-toggle><span class="am-icon-caret-down"></span>
+                                                </button>
+                                                <ul class="am-dropdown-content">
+                                                    <li><a href="/index.php/staff/Example/deploy/id/{$vo.id}">对接</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/index.php/staff/Example_Corpus/index/example_id/{$vo.id}">语料库</a>
+                                                    </li>
+                                                    <li class="am-divider"></li>
+                                                    <li>
+                                                        <a href="/index.php/staff/Example/people/id/{$vo.id}">人工客服</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/index.php/staff/Example/robot/id/{$vo.id}">机器客服</a>
+                                                    </li>
+                                                    <li class="am-divider"></li>
+                                                    <li><a href="/index.php/staff/Example/delete/id/{$vo.id}">删除</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
+
+
                                     </td>
                                 </tr>
                                 {/volist}

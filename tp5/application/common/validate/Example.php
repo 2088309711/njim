@@ -159,7 +159,17 @@ class Example extends Validate
             'staff_pk',
             'regex:staff_pk_frame',
             '参与客服格式错误'
-        ]
+        ],
+        [
+            'robot_name',
+            'require|chsDash|max:20',
+            '机器人名称不能为空|机器人名称只能填写汉字、字母、数字和下划线_及破折号-|机器人名称长度超过限制'
+        ],
+        [
+            'welcome',
+            'max:1000',
+            '欢迎语长度超过限制'
+        ],
     ];
 
     protected $regex = [
@@ -196,12 +206,15 @@ class Example extends Validate
         'staff_pk' => ['id', 'staff_pk'],
         'phone' => ['id', 'phone'],
         'scene1' => ['id'],
+        'scene2' => ['__token__', 'id', 'staff_pk'],
+        'scene3' => ['__token__', 'id', 'robot_name', 'welcome'],
         'del' => ['__token__', 'id'],
         'add' => ['__token__', 'captcha'],
         'save' => [
             '__token__', 'id', 'name', 'style_id', 'description', 'invitation_switch', 'invitation_first',
             'invitation_after', 'invitation_num', 'invitation_time', 'invitation_auto_close'
-        ]
+        ],
+
     ];
 
 }

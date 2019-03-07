@@ -16,10 +16,12 @@
 
                     </div>
                     <div class="widget-body am-fr">
-                        <form action="/index.php/staff/Example/create"
+                        <form action="/index.php/staff/Example/people"
                               class="am-form tpl-form-border-form tpl-form-border-br"
                               method="post" onsubmit="return check();">
                             {:token()}
+
+                            <input type="hidden" name="id" value="{$example.id}">
 
                             <div class="am-form-group">
 
@@ -32,10 +34,10 @@
                                                 <input id="sel-all" type="checkbox">
                                             </label>
                                         </th>
-                                        <th>编号</th>
+                                        <th width="80">编号</th>
                                         <th>名称</th>
-                                        <th>用户名</th>
-                                        <th>状态</th>
+                                        <th width="200">用户名</th>
+                                        <th width="80">状态</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -44,13 +46,16 @@
                                     <tr>
                                         <td>
                                             <label class="input-label" for="id_{$vo.id}">
-                                                <input name="id[]" id="id_{$vo.id}" value="{$vo.id}" type="checkbox">
+                                                <input name="staff_pk[]" id="id_{$vo.id}" value="{$vo.id}" type="checkbox"
+                                                       {volist name="example.staff_pk" id="vo2" }
+                                                       {eq name="vo.id" value="$vo2" }checked{/eq} {/volist}>
                                             </label>
                                         </td>
                                         <td><label for="id_{$vo.id}">{$vo.id}</label></td>
                                         <td><label for="id_{$vo.id}">{$vo.name}</label></td>
                                         <td><label for="id_{$vo.id}">{$vo.user_name}</label></td>
-                                        <td><label for="id_{$vo.id}">{$vo.state}</label></td>
+                                        <td><label for="id_{$vo.id}">{eq name="vo.state"
+                                            value="1"}启用{else/}<span class="am-text-danger">禁用</span>{/eq}</label></td>
                                     </tr>
                                     {/volist}
 
@@ -60,9 +65,8 @@
                             </div>
 
                             <div class="am-form-group">
-
-                                <button type="submit" class="am-btn am-btn-success">保存</button>
-
+                                <button type="submit" class="am-btn am-btn-primary">保存</button>
+                                <button type="reset" class="am-btn am-btn-warning am-margin-left">重置</button>
                             </div>
 
                         </form>
@@ -79,10 +83,8 @@
         layer = layui.layer;
     });
 
-
     $(function () {
-
-        //全选
+        //全选/取消
         $('#sel-all').click(function () {
             if ($(this)[0].checked) {
                 $('#people-table :checkbox').each(function () {
@@ -94,10 +96,7 @@
                 })
             }
         })
-
-
     })
-
 
 </script>
 {/block}
