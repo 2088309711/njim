@@ -7,25 +7,69 @@
 </head>
 <body>
 <a href="/index.php/staff">使用入口</a>
-<!--<script src="http://serve.njim.vip/static/js/im.js?njim5c1d0e79ecd6fbd8a053f0821cb2132ed614a3d4234d"-->
-<!--charset="utf-8"></script>-->
 
+<script src="http://serve.njim.vip/static/js/im.js?njim5c1d0e79ecd6fbd8a053f0821cb2132ed614a3d4234d"
+        charset="utf-8"></script>
 
 <script>
 
-    //2019-01-12 16:23:45
-
-    var timeStr = '2019-1-15 15:32:11';
-
-    var nextTime = parseInt(new Date(timeStr).getTime() / 1000) + 75;
-
-    var nowTime = parseInt(new Date().getTime() / 1000);
-
-
-    log(nextTime - nowTime);
 
     function log(o) {
         console.log(o);
+    }
+
+    //莱文斯坦距离
+    // Levenshtein('比对字符串', '被比对字符串');
+
+    /**
+     * 莱文斯坦距离
+     * 检查两个字符串的相似度
+     * 可以用在 DNA分析 　　拼字检查 　　语音辨识 　　抄袭侦测
+     * @createTime 2012-1-12
+     */
+    function Levenshtein(str1, str2) {
+        //计算两个字符串的长度。
+        var len1 = str1.length;
+        var len2 = str2.length;
+
+
+        //建立数组，比字符长度大一个空间
+        var dif = [];
+
+        //赋初值，步骤B。
+        for (var a = 0; a <= len1; a++) {
+            dif[a] = [a];
+        }
+
+        for (var a = 0; a <= len2; a++) {
+            dif[0][a] = a;
+        }
+
+        //计算两个字符是否一样，计算左上的值
+
+        //根据字符串1的长度来遍历（行）
+        for (var i = 1; i <= len1; i++) {
+
+            //根据字符串2的长度来遍历（列）
+            for (var j = 1; j <= len2; j++) {
+
+                //取三个值中最小的
+                dif[i][j] = Math.min(
+                    dif[i - 1][j - 1] + (str1[i - 1] == str2[j - 1] ? 0 : 1),//左上角
+                    dif[i][j - 1] + 1,//左边
+                    dif[i - 1][j] + 1//上边
+                );
+
+            }
+        }
+
+        //计算相似度
+        var similarity = 1 - dif[len1][len2] / Math.max(str1.length, str2.length);
+
+        log(similarity)
+
+        return similarity;
+
     }
 
 </script>

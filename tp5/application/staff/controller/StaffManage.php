@@ -24,7 +24,7 @@ class StaffManage extends Controller
         $s = new Staff();
         $list = $s->where('account', $data['user_name'])->select();
 
-        return view('index', [
+        return view('', [
             'staff' => $staff,
             'menu' => 'staff_manage',
             'list' => $list
@@ -63,7 +63,7 @@ class StaffManage extends Controller
         } else {
             $login = new Login();
             $staff = $login->getUserData();
-            return view('create', [
+            return view('', [
                 'staff' => $staff,
                 'menu' => 'staff_manage'
             ]);
@@ -146,7 +146,7 @@ class StaffManage extends Controller
                 'account' => $data['user_name']
             ]);
 
-            return view('update', [
+            return view('', [
                 'staff' => $staff,
                 'menu' => 'staff_manage'
             ]);

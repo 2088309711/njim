@@ -1,7 +1,6 @@
 !function () {
     "use strict";
 
-
     // msg
     var new_msg_id = [],
         last_msg = '',
@@ -11,7 +10,7 @@
         is_open_emo_panel = false,
 
         // data
-        is_phone = false,
+        is_phone = !!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i),
         staff_id = '',
         staff_name = '',
         client_id = '',
@@ -23,7 +22,7 @@
         staff_name = dataElem.attr('staff_name');
         client_id = dataElem.attr('client_id');
         access = dataElem.attr('access');
-        is_phone = !!navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i);//是否为移动设备
+
 
         init();
 
@@ -281,7 +280,6 @@
         return $.trim($("#edit").val());
     }
 
-
     // 清空输入区
     function setInputToEmpty() {
         last_msg = getInputText();
@@ -363,10 +361,11 @@
         return content;
     }
 
-
-    setInterval(function () {
-        updateMessageBoxHeight();
-    }, 1000);
+    if (is_phone) {
+        setInterval(function () {
+            updateMessageBoxHeight();
+        }, 1000);
+    }
 
     function updateMessageBoxHeight() {
         var h1 = $(window).height();//可视高度

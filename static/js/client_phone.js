@@ -1,4 +1,7 @@
 "use strict";
+
+//已停用
+
 var im_object = {
     msg: {
         new_msg_id: [],

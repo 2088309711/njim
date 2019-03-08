@@ -35,11 +35,11 @@ var pageData = {
     // 首页
     // ===============================================
     'index': function indexData() {
-        $('#example-r').DataTable({
-
-            bInfo: false, //页脚信息
-            dom: 'ti'
-        });
+        // $('#example-r').DataTable({
+        //
+        //     bInfo: false, //页脚信息
+        //     dom: 'ti'
+        // });
 
 
         // ==========================

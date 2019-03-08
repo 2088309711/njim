@@ -9,7 +9,6 @@
 namespace app\staff\controller;
 
 use app\common\model\Staff;
-use app\common\model\ExampleCorpus;
 use think\Controller;
 use think\Request;
 use app\common\model\Example as ExampleModel;
@@ -448,25 +447,6 @@ class Example extends Controller
         if (request()->isPost()) {
 
             $data = input('post.');
-
-
-            /*
-array(6) {
-  ["__token__"] => string(32) "7e547cc359f231b224b272adf08b1f9a"
-  ["id"] => string(2) "11"
-  ["robot"] => string(1) "1"
-  ["public_corpus"] => string(1) "1"
-  ["robot_name"] => string(3) "132"
-  ["welcome"] => string(3) "165"
-}
-
-array(4) {
-  ["__token__"] => string(32) "67565309ef37c2f9e647cda5e5b82e51"
-  ["id"] => string(2) "11"
-  ["robot_name"] => string(0) ""
-  ["welcome"] => string(0) ""
-}
-             */
 
 
             $data['robot'] = isset($data['robot']) ? 1 : 0;

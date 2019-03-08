@@ -63,10 +63,100 @@ class Message extends Controller
         }
 
         $data['send_type'] = 0;
+        $data['c_read'] = 1;
 
-        // 储存
-        $msg = new Msg();
-        $msg->saveMsg($data);
+        // 储存客户消息
+        $msg = new Msg($data);
+        $msg->allowField(['client_id', 'staff_id', 'content', 'send_type',
+            's_get', 'c_get', 's_read', 'c_read'])->save();
+
+
+        //机器人回复
+        $data['content'] = $this->getRobotSendContent($data['content']);
+        $data['send_type'] = 2;
+
+        //储存机器人消息
+        $msg = new Msg($data);
+        $msg->allowField(['client_id', 'staff_id', 'content', 'send_type',])->save();
+
+    }
+
+    /**
+     * 获取机器人发送的内容
+     * @param $ask
+     */
+    private function getRobotSendContent($ask)
+    {
+
+
+        return '机器人发送的内容';
+    }
+
+    /**
+     * 使用莱文斯坦距离计算两个字符串的相似度
+     * @param $str1
+     * @param $str2
+     */
+    private function computeSimilarityDegree($str1, $str2)
+    {
+
+        //计算两个字符串的长度
+        $len1 = mb_strlen($str1, 'utf-8');
+        $len2 = mb_strlen($str2, 'utf-8');
+
+
+        echo $len1;
+
+
+//        ********************
+
+        //建立数组，比字符长度大一个空间
+        $dif = [];
+
+        //赋初值，步骤B。
+        for ($i = 0; $i <= $len1; $i++) {
+            $dif[$i] = [$i];
+        }
+
+        for ($i = 0; $i <= $len2; $i++) {
+            $dif[0][$i] = $i;
+        }
+
+        //2019-3-8 17:32:19 修改到此
+
+        //计算两个字符是否一样，计算左上的值
+
+        //根据字符串1的长度来遍历（行）
+//        for (var i = 1; i <= len1; i++) {
+
+        //根据字符串2的长度来遍历（列）
+//        for (var j = 1; j <= len2; j++) {
+
+        //取三个值中最小的
+//            dif[i][j] = Math.min(
+//                    dif[i - 1][j - 1] + (str1[i - 1] == str2[j - 1] ? 0 : 1),//左上角
+//                    dif[i][j - 1] + 1,//左边
+//                    dif[i - 1][j] + 1//上边
+//                );
+
+//        }
+//        }
+
+        //计算相似度
+//        var similarity = 1 - dif[len1][len2] / Math.max(str1.length, str2.length);
+
+//        log(similarity)
+
+//        return similarity;
+
+//        ********************
+
+
+    }
+
+    public function index()
+    {
+        $this->computeSimilarityDegree('字符串1', '字符串20');
     }
 
 }
