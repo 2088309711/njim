@@ -8,6 +8,7 @@
 
 namespace app\client\controller;
 
+use app\common\model\ExampleCorpus;
 use app\common\model\Msg;
 use think\Controller;
 use think\Request;
@@ -26,7 +27,7 @@ class Message extends Controller
             'old_msg_ids' => explode(":", Request::instance()->param('b'))
         ];
 
-        $result = $this->validate($data, 'Msg');
+        $result = $this->validate($data, 'Msg.get');
         if (true !== $result) {
             return $result;
         }
@@ -57,7 +58,7 @@ class Message extends Controller
     {
         $data = input('post.');
 
-        $result = $this->validate($data, 'Msg');
+        $result = $this->validate($data, 'Msg.send');
         if (true !== $result) {
             return $result;
         }
@@ -72,12 +73,13 @@ class Message extends Controller
 
 
         //机器人回复
-        $data['content'] = $this->getRobotSendContent($data['content']);
-        $data['send_type'] = 2;
-
-        //储存机器人消息
-        $msg = new Msg($data);
-        $msg->allowField(['client_id', 'staff_id', 'content', 'send_type',])->save();
+        $data['content'] = $this->getRobotSendContent($data['content'], $data['example_id']);
+        if ($data['content'] != '') {
+            $data['send_type'] = 2;
+            //储存机器人消息
+            $msg = new Msg($data);
+            $msg->allowField(['client_id', 'staff_id', 'content', 'send_type',])->save();
+        }
 
     }
 
@@ -85,11 +87,59 @@ class Message extends Controller
      * 获取机器人发送的内容
      * @param $ask
      */
-    private function getRobotSendContent($ask)
+    private function getRobotSendContent($ask, $example_id)
     {
 
+        $dataSum = ExampleCorpus::where('example_id', $example_id)->count();
 
-        return '机器人发送的内容';
+        $result = [
+            'similarity' => 0,
+            'text' => ''
+        ];
+
+        $flag = true;
+        $affset = 0;
+        while ($flag) {
+
+            $num = 100;//每次查询的数据量
+
+            //获取语料数据
+            $ec = new ExampleCorpus();
+            $list = $ec->where('example_id', $example_id)->limit($affset, $num)
+                ->order('id', 'desc')->select();
+
+            foreach ($list as $corpus) {
+
+                $strArr = explode('@06#', $corpus->ask);
+
+                foreach ($strArr as $value) {
+
+                    //将客户提问和语料进行相似度计算
+                    $similarity = $this->computeSimilarity($ask, $value);
+
+                    if ($similarity > $result['similarity']) {
+                        $result['similarity'] = $similarity;
+                        $result['text'] = explode('@06#', $corpus->text);
+                    }
+
+                }
+
+            }
+
+            //增加偏移量
+            $affset += $num;
+            if ($affset >= $dataSum) {
+                $flag = false;
+            }
+
+        }
+
+        if ($result['similarity'] >= 65) {
+            return $result['text'][array_rand($result['text'])];
+        } else {
+            return '';
+        }
+
     }
 
     /**
@@ -97,18 +147,16 @@ class Message extends Controller
      * @param $str1
      * @param $str2
      */
-    private function computeSimilarityDegree($str1, $str2)
+    private function computeSimilarity($str1, $str2)
     {
 
+        //将字符串转字符数组
+        $arr1 = mb_str_split($str1);
+        $arr2 = mb_str_split($str2);
+
         //计算两个字符串的长度
-        $len1 = mb_strlen($str1, 'utf-8');
-        $len2 = mb_strlen($str2, 'utf-8');
-
-
-        echo $len1;
-
-
-//        ********************
+        $len1 = count($arr1);
+        $len2 = count($arr2);
 
         //建立数组，比字符长度大一个空间
         $dif = [];
@@ -122,41 +170,33 @@ class Message extends Controller
             $dif[0][$i] = $i;
         }
 
-        //2019-3-8 17:32:19 修改到此
-
         //计算两个字符是否一样，计算左上的值
 
         //根据字符串1的长度来遍历（行）
-//        for (var i = 1; i <= len1; i++) {
+        for ($i = 1; $i <= $len1; $i++) {
 
-        //根据字符串2的长度来遍历（列）
-//        for (var j = 1; j <= len2; j++) {
+            //根据字符串2的长度来遍历（列）
+            for ($j = 1; $j <= $len2; $j++) {
 
-        //取三个值中最小的
-//            dif[i][j] = Math.min(
-//                    dif[i - 1][j - 1] + (str1[i - 1] == str2[j - 1] ? 0 : 1),//左上角
-//                    dif[i][j - 1] + 1,//左边
-//                    dif[i - 1][j] + 1//上边
-//                );
+                //取三个值中最小的
+                $dif[$i][$j] = min([
+                    $dif[$i - 1][$j - 1] + ($arr1[$i - 1] == $arr2[$j - 1] ? 0 : 1),//左上角
+                    $dif[$i][$j - 1] + 1,//左边
+                    $dif[$i - 1][$j] + 1//上边
+                ]);
 
-//        }
-//        }
+            }
+        }
 
         //计算相似度
-//        var similarity = 1 - dif[len1][len2] / Math.max(str1.length, str2.length);
+        $similarity = floor((1 - $dif[$len1][$len2] / max([$len1, $len2])) * 100);
 
-//        log(similarity)
-
-//        return similarity;
-
-//        ********************
-
-
+        return $similarity;
     }
 
     public function index()
     {
-        $this->computeSimilarityDegree('字符串1', '字符串20');
+        echo $this->computeSimilarity('ab', 'ab');
     }
 
 }

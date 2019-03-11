@@ -52,3 +52,14 @@ function time_stamp_to_str($time)
 {
     return date("Y-m-d H:i:s", $time);
 }
+
+
+/**
+ * 将带中文的字符串转字符数组
+ * @param $str
+ * @return array[]|false|string[]
+ */
+function mb_str_split($str)
+{
+    return preg_split('/(?<!^)(?!$)/u', $str);
+}

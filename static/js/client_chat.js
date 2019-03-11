@@ -14,7 +14,8 @@
         staff_id = '',
         staff_name = '',
         client_id = '',
-        access = ''
+        access = '',
+        example_id = ''
 
     $(function () {
         var dataElem = $('#data');
@@ -22,6 +23,7 @@
         staff_name = dataElem.attr('staff_name');
         client_id = dataElem.attr('client_id');
         access = dataElem.attr('access');
+        example_id = dataElem.attr('example_id');
 
 
         init();
@@ -213,6 +215,7 @@
         $.post("/index.php/client/message/send", {
             staff_id: staff_id,
             client_id: client_id,
+            example_id: example_id,
             content: rContent
         });
     }
