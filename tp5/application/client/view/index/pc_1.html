@@ -11,36 +11,13 @@
     <link rel="stylesheet" href="/static/css/message.css">
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/vue.js"></script>
-    <style type="text/css">
-        .container .title-box {
-            background: {$example.color};
-        }
 
-        .container .bottom-box .send {
-            border-color: {$example.color};
-            background: {$example.color};
-        }
-
-        .container .bottom-box .send:hover {
-            background: #fff;
-            color: {$example.color};
-        }
-
-        /* 消息 */
-        .right .bubble {
-            background: {$example.color};
-        }
-
-        .right .arrow {
-            border-left-color: {$example.color};
-        }
-    </style>
 </head>
 <body>
 <div id="on-line-staff" class="container">
     <!-- 顶部标题 -->
     <div class="title-box">
-        <span class="title">柠吉在线客服</span>
+        <span class="title">{$example.name}</span>
     </div>
 
     <!-- 消息显示区 -->
@@ -49,33 +26,37 @@
 
             <!-- 时间 -->
             <template v-if="display_time()">
-                <li class="system"><span class="bubble" v-html="item.time"></span></li>
+                <li class="system-msg-box"><span class="bubble" v-html="item.time"></span></li>
             </template>
 
             <!-- 客服 -->
-            <template
-                    v-if="item.type==1">
-                <li class="left" :data-id="item.id">
-                    <div class="arrow"></div>
+            <template v-if="item.type==1">
+                <li class="staff-msg-box" :data-id="item.id">
                     <div class="bubble" v-html="item.content"></div>
-                    <div class="clear"></div>
                 </li>
             </template>
 
+
             <!-- 客户 -->
             <template v-else-if="item.type==0">
-                <li class="right" :data-id="item.id">
-                    <div class="arrow"></div>
+                <li class="client-msg-box" :data-id="item.id">
                     <div class="bubble" v-html="item.content"></div>
-                    <div class="clear"></div>
                 </li>
             </template>
 
             <!-- 系统 -->
             <template v-else-if="item.type==2">
-                <li class="system" :data-id="item.id"><span class="bubble"
-                                                            v-html="item.content"></span></li>
+                <li class="system-msg-box" :data-id="item.id"><span class="bubble" v-html="item.content"></span></li>
             </template>
+
+            <!-- 机器人 -->
+            <template v-if="item.type==3">
+                <li class="robot-msg-box" :data-id="item.id">
+                    <div class="name">小柠机器人</div>
+                    <div class="bubble" v-html="item.content"></div>
+                </li>
+            </template>
+
         </template>
     </ul>
     <!-- 工具栏 -->

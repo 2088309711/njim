@@ -1,5 +1,4 @@
     <style type="text/css">
-        /* pc_1 */
         .container .title-box {
             background: {$style.color};
         }

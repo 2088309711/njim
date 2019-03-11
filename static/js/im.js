@@ -114,7 +114,7 @@
                     invitation = false;//秒数超时
                 }
             }
-            
+
             if (invitation) {
                 //如果是PC端，聊天窗口必须处于关闭状态
                 if (!is_phone) {
@@ -451,7 +451,7 @@
                 '<div style="width: 370px; height: 510px; background: url(' +
                 domain + 'static/images/move.png) no-repeat;"></div>' +
                 '<iframe id="njim_window_iframe" style="width: 350px; height: 500px; border: none; ' +
-                'margin: 0; padding: 0; overflow: hidden; position: absolute; top:0; left: 10px; " src="' +
+                'margin: 0; padding: 0; overflow: hidden; position: absolute; top:0; left: 10px; border-radius: 2px;" src="' +
                 domain + 'index.php/client/index/index/device/pc_1/access/' + access +
                 '/client_id/' + client_id + '/is_new/' + is_new_client + '"></iframe><div id="njim_window_move_layer" ' +
                 'style=" width: 310px; height: 40px; position: absolute; top:0; left: 10px; cursor: move;"></div>' +

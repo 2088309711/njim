@@ -75,7 +75,7 @@ class Message extends Controller
         //机器人回复
         $data['content'] = $this->getRobotSendContent($data['content'], $data['example_id']);
         if ($data['content'] != '') {
-            $data['send_type'] = 2;
+            $data['send_type'] = 3;
             //储存机器人消息
             $msg = new Msg($data);
             $msg->allowField(['client_id', 'staff_id', 'content', 'send_type',])->save();
@@ -90,49 +90,24 @@ class Message extends Controller
     private function getRobotSendContent($ask, $example_id)
     {
 
-        $dataSum = ExampleCorpus::where('example_id', $example_id)->count();
-
         $result = [
             'similarity' => 0,
             'text' => ''
         ];
 
-        $flag = true;
-        $affset = 0;
-        while ($flag) {
-
-            $num = 100;//每次查询的数据量
-
-            //获取语料数据
-            $ec = new ExampleCorpus();
-            $list = $ec->where('example_id', $example_id)->limit($affset, $num)
-                ->order('id', 'desc')->select();
-
-            foreach ($list as $corpus) {
-
-                $strArr = explode('@06#', $corpus->ask);
-
+        ExampleCorpus::where('example_id', $example_id)->chunk(100, function ($corpus) use ($ask, &$result) {
+            foreach ($corpus as $c) {
+                $strArr = explode('@06#', $c->ask);
                 foreach ($strArr as $value) {
-
                     //将客户提问和语料进行相似度计算
                     $similarity = $this->computeSimilarity($ask, $value);
-
                     if ($similarity > $result['similarity']) {
                         $result['similarity'] = $similarity;
-                        $result['text'] = explode('@06#', $corpus->text);
+                        $result['text'] = explode('@06#', $c->text);
                     }
-
                 }
-
             }
-
-            //增加偏移量
-            $affset += $num;
-            if ($affset >= $dataSum) {
-                $flag = false;
-            }
-
-        }
+        });
 
         if ($result['similarity'] >= 65) {
             return $result['text'][array_rand($result['text'])];
