@@ -15,30 +15,44 @@
 <div class="top">
     <a href="javascript:history.go(-1);" class="back-icon"></a>
     <a href="tel:{$example.phone}" class="phone-icon"></a>
-    <div class="title">title</div>
+    <div class="title">{$example.name}</div>
 </div>
 
 <ul id="show-message" class="msg-box">
-    <template v-for="item in messages"> <!-- 客服 -->
-        <template
-                v-if="item.type==1">
-            <li class="left" :data-id="item.id">
-                <div class="arrow"></div>
-                <div class="bubble" v-html="item.content"></div>
-                <div class="clear"></div>
-            </li>
-        </template> <!-- 客户 -->
-        <template v-else-if="item.type==0">
-            <li class="right" :data-id="item.id">
-                <div class="arrow"></div>
-                <div class="bubble" v-html="item.content"></div>
-                <div class="clear"></div>
-            </li>
-        </template> <!-- 系统 -->
-        <template v-else-if="item.type==2">
-            <li class="system" :data-id="item.id"><span class="bubble"
-                                                        v-html="item.content"></span></li>
+    <template v-for="item in messages">
+
+        <!-- 时间 -->
+        <template v-if="display_time()">
+            <li class="system-msg-box"><span class="bubble" v-html="item.time"></span></li>
         </template>
+
+        <!-- 客服 -->
+        <template v-if="item.type==1">
+            <li class="staff-msg-box" :data-id="item.id">
+                <div class="bubble" v-html="item.content"></div>
+            </li>
+        </template>
+
+        <!-- 客户 -->
+        <template v-else-if="item.type==0">
+            <li class="client-msg-box" :data-id="item.id">
+                <div class="bubble" v-html="item.content"></div>
+            </li>
+        </template>
+
+        <!-- 系统 -->
+        <template v-else-if="item.type==2">
+            <li class="system-msg-box" :data-id="item.id"><span class="bubble" v-html="item.content"></span></li>
+        </template>
+
+        <!-- 机器人 -->
+        <template v-else-if="item.type==3">
+            <li class="robot-msg-box" :data-id="item.id">
+                <div class="name">{$example.robot_name}</div>
+                <div class="bubble" v-html="item.content"></div>
+            </li>
+        </template>
+
     </template>
 </ul>
 <div class="emo-container">

@@ -6,6 +6,7 @@
 namespace app\client\controller;
 
 use app\common\model\Example;
+use app\common\model\Msg;
 use app\common\model\ServerList;
 use app\common\model\Staff;
 use think\Controller;
@@ -29,10 +30,10 @@ class Index extends Controller
         //设备信息验证
         if (isset($data['device'])) {
             if ($data['device'] !== 'pc_1' && $data['device'] !== 'phone_1') {
-                return 'url 参数错误';
+                return '无法识别的设备标识信息';
             }
         } else {
-            return '缺少 url 参数';
+            return '缺少设备标识信息';
         }
 
 
@@ -80,6 +81,16 @@ class Index extends Controller
 
         //check staff is on select
         if ($data['sel_staff']) {//on select staff, get style data
+
+            //发送欢迎语
+            $msg = new Msg([
+                'client_id' => $data['client_id'],
+                'staff_id' => $data['staff']['user_name'],
+                'content' => $this->example->welcome,
+                'send_type' => 3
+            ]);
+            $msg->allowField(true)->save();
+
             return view($data['device'], [
                 'staff' => $data['staff'],
                 'client' => ['client_id' => $data['client_id']],

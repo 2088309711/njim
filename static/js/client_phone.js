@@ -1,6 +1,8 @@
 "use strict";
 
-//已停用
+
+alert('delete 2019-3-12 16:32:27');
+
 
 var im_object = {
     msg: {

@@ -1,0 +1,85 @@
+/* 通用 */
+.staff-msg-box, .client-msg-box, .robot-msg-box, .system-msg-box {
+    position: relative;
+    margin: 15px 0;
+}
+
+.client-msg-box:before, .client-msg-box:after, .staff-msg-box:before,
+.staff-msg-box:after, .robot-msg-box:before, .robot-msg-box:after {
+    clear: both;
+    content: '';
+    display: block;
+}
+
+.client-msg-box .bubble, .staff-msg-box .bubble, .robot-msg-box .bubble {
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+
+.client-msg-box .bubble:before, .staff-msg-box .bubble:before, .robot-msg-box .bubble:before {
+    content: '';
+    position: absolute;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+/* 系统 */
+.system-msg-box {
+    text-align: center;
+}
+
+.system-msg-box .bubble {
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: #e6e6e6;
+}
+
+/*客户*/
+.client-msg-box .bubble {
+    background: #ddd;
+    float: left;
+    margin-left: 20px;
+}
+
+.client-msg-box .bubble:before {
+    left: 12px;
+    top: 8px;
+    border-right: 8px solid #ddd;
+}
+
+/*客服*/
+.staff-msg-box .bubble {
+    background: #008fff;
+    float: right;
+    margin-right: 20px;
+    color: #fff;
+}
+
+.staff-msg-box .bubble:before {
+    right: 12px;
+    top: 8px;
+    border-left: 8px solid #008fff;
+}
+
+/*机器人*/
+.robot-msg-box .name {
+    font-size: 12px;
+    line-height: 20px;
+    height: 20px;
+    overflow: hidden;
+    color: #666;
+    padding: 0 15px;
+    text-align: right;
+}
+
+.robot-msg-box .bubble {
+    background: #ffc9a2;
+    float: right;
+    margin-right: 20px;
+}
+
+.robot-msg-box .bubble:before {
+    right: 12px;
+    top: 28px;
+    border-left: 8px solid #ffc9a2;
+}

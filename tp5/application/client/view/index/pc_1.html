@@ -36,7 +36,6 @@
                 </li>
             </template>
 
-
             <!-- 客户 -->
             <template v-else-if="item.type==0">
                 <li class="client-msg-box" :data-id="item.id">
@@ -50,9 +49,9 @@
             </template>
 
             <!-- 机器人 -->
-            <template v-if="item.type==3">
+            <template v-else-if="item.type==3">
                 <li class="robot-msg-box" :data-id="item.id">
-                    <div class="name">小柠机器人</div>
+                    <div class="name">{$example.robot_name}</div>
                     <div class="bubble" v-html="item.content"></div>
                 </li>
             </template>
