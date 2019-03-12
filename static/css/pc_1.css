@@ -27,7 +27,6 @@
     width: 100%;
     overflow: auto;
     border-bottom: 1px solid #eee;
-    background: #fafafa;
 }
 
 .container .tool-box {
@@ -145,7 +144,7 @@
     margin: 5px 10px 0 0;
     font-size: 13px;
     font-weight: bold;
-    padding: 5px 30px;
+    padding: 5px 15px;
     color: #fff;
     outline: none;
     cursor: pointer;
