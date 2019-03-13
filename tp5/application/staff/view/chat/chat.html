@@ -13,10 +13,10 @@
 <div class="container">
     <div class="left-panel">
         <div class="tab">
-            <div class="item-1 active">当前对话
+            <div class="list-header item-1 active" panel="1">当前会话
                 <span class="layui-badge" id="unread-all" style="display: none;"></span>
             </div>
-            <div class="item-2">黑名单</div>
+            <div class="list-header item-2" panel="2">黑名单</div>
         </div>
         <div id="now-chat-list" class="menu" style="display: none;">
             <div v-for="item in list" :id="'id_' + item.id" class="item">
@@ -27,7 +27,15 @@
                 <div class="open-chat" @click="open(item)"></div>
             </div>
         </div>
-        <div class="menu" style="display: none;"></div>
+        <div id="blacklist" class="menu" style="display: none;">
+            <div v-for="item in blacklist" :id="'id_' + item.id" class="item">
+                <span class="name">{{item.name}}</span>
+                <span class="date">{{item.date}}</span>
+                <span class="msg" v-html="item.lastMsg"></span>
+                <span v-show="item.newMsgNum != 0" class="new-num">{{item.newMsgNum}}</span>
+                <div class="open-chat" @click="open(item)"></div>
+            </div>
+        </div>
     </div>
 
     <div id="main-chat" class="center-panel">
@@ -86,6 +94,7 @@
                 <!-- 结束对话 -->
 
                 <!-- 拉黑 -->
+                <i id="pull-black" title="加入黑名单"></i>
 
             </div>
 

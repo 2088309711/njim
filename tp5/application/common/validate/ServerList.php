@@ -36,7 +36,8 @@ class ServerList extends Validate
     protected $scene = [
         'scene1' => ['access', 'client_id'],
         'scene2' => ['access'],
-        'scene3' => ['client_id', 'name']
+        'scene3' => ['client_id', 'name'],
+        'scene4' => ['client_id']
     ];
 
 

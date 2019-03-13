@@ -75,16 +75,44 @@ layui.use('layer', function () {
                 yes: function () {
                     var value = $('#remarks-input').val();
                     client.name = value;
-                    $.get('/staff/chat/remarks/client_id/' + client.id + '/name/' + value);
+                    $.get('/index.php/staff/chat/remarks/client_id/' + client.id + '/name/' + value);
                     layer.close(layerIndex);
                 },
                 content: '<div id="remarks"><input id="remarks-input" value="' + client.name + '" type="text" placeholder="请输入备注" class="layui-input"></div>'
             });
         });
 
+
+        //拉黑
+        $('#pull-black').click(function () {
+            layer.confirm('确定将当前访客加入黑名单？', {icon: 3, title: '提示'}, function (index) {
+                $.get('/index.php/staff/chat/blacklist/pull_black/y/client_id/' + display.id);
+                layer.close(index);
+            });
+        });
+
+
+        //列表头切换面板
+        $('.list-header').click(function () {
+            $(this).addClass('active').siblings().removeClass('active');
+
+            var panel = $(this).attr('panel');
+
+
+            if (panel == '1') {
+                $('#now-chat-list').show();
+                $('#blacklist').hide();
+            } else if (panel == '2') {
+                $('#now-chat-list').hide();
+                $('#blacklist').show();
+            }
+
+        });
+
+
         setTimeout(function () {
             $('#now-chat-list').show();
-        }, 1000);
+        }, 100);
     });
 });
 
@@ -157,7 +185,8 @@ function BinaryTree() {
 var clientList = new Vue({
     el: '#now-chat-list',
     data: {
-        list: []
+        list: [],
+        blacklist: []
     },
     methods: {
         /**
@@ -174,6 +203,14 @@ var clientList = new Vue({
 
             // 部署列表
             for (var i = 0; i < data.client_list.length; i++) {
+
+                var listNum = 1;
+                if (data.client_list[i].blacklist === 1) {//黑名单
+                    listNum = 2;
+                    // 从当前会话列表中删除
+                    this.deleteItem(data.client_list[i].client_id);
+                }
+
                 this.inputItem({
                     id: data.client_list[i].client_id,
                     name: data.client_list[i].name,
@@ -181,7 +218,7 @@ var clientList = new Vue({
                     lastMsg: '',
                     newMsgNum: data.client_list[i].unread_num,
                     messages: []
-                });
+                }, listNum);
             }
 
             // 部署消息
@@ -200,18 +237,43 @@ var clientList = new Vue({
             im_object.state.is_add_msg_num = true;
             this.forMsg();
         },
-        inputItem: function (obj) {
-            // 处理已存在的数据
+        deleteItem: function (client_id) {
             for (var i = 0; i < this.list.length; i++) {
-                if (this.list[i].id === obj.id) {
-                    //更新列表数据
-                    this.list[i].name = obj.name;
-                    this.list[i].date = obj.date;
-                    this.list[i].newMsgNum = obj.newMsgNum;
+                if (this.list[i].id === client_id) {
+                    //删除当前元素
+                    this.list.splice(i, 1)
                     return;
                 }
             }
-            this.list.push(obj);
+        },
+        inputItem: function (obj, listNum) {
+
+            if (listNum === 1) {//当前会话
+                // 处理已存在的数据
+                for (var i = 0; i < this.list.length; i++) {
+                    if (this.list[i].id === obj.id) {
+                        //更新列表数据
+                        this.list[i].name = obj.name;
+                        this.list[i].date = obj.date;
+                        this.list[i].newMsgNum = obj.newMsgNum;
+                        return;
+                    }
+                }
+                this.list.push(obj);
+            } else if (listNum === 2) {//黑名单
+                // 处理已存在的数据
+                for (var i = 0; i < this.blacklist.length; i++) {
+                    if (this.blacklist[i].id === obj.id) {
+                        //更新列表数据
+                        this.blacklist[i].name = obj.name;
+                        this.blacklist[i].date = obj.date;
+                        this.blacklist[i].newMsgNum = obj.newMsgNum;
+                        return;
+                    }
+                }
+                this.blacklist.push(obj);
+            }
+
         },
         inputMsg: function (obj) {
             // 从列表中找到对应客户
@@ -398,7 +460,6 @@ setInterval(function () {
 
     // 检查数据
     if (im_object.data.staff_id.length < 5 || im_object.data.staff_id.length > 14) {
-        // 数据不合法
         return;
     }
 

@@ -56,7 +56,8 @@ class Chat extends Controller
                 'name' => $client->name,
                 'client_id' => $client->client_id,
                 'active_time' => $client->active_time,
-                'unread_num' => $msg->countUnreadNum($data, $client->client_id)// 统计未读数量
+                'unread_num' => $msg->countUnreadNum($data, $client->client_id),// 统计未读数量
+                'blacklist' => $client->blacklist
             ];
 
 
@@ -110,6 +111,24 @@ class Chat extends Controller
 
         $sl = new ServerList();
         $sl->save(['name' => $data['name']], ['client_id' => $data['client_id'], 'staff_id' => $data['staff_id']]);
+    }
+
+    //黑名单加入/移出
+    public function blacklist()
+    {
+        $data = input();
+
+        $result = $this->validate($data, 'ServerList.scene4');
+        if (true !== $result) {
+            $this->error($result);
+        }
+
+        $sl = new ServerList();
+        if ($data['pull_black'] == 'y') {//拉黑
+            $sl->save(['blacklist' => 1], ['client_id' => $data['client_id']]);
+        } elseif ($data['pull_black'] == 'n') {//移出黑名单
+            $sl->save(['blacklist' => 0], ['client_id' => $data['client_id']]);
+        }
     }
 
 }

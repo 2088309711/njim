@@ -165,6 +165,10 @@ html, body {
     background: url(/static/images/icon-desktop.png) no-repeat -45px -1px;
 }
 
+.tool-bar #pull-black {
+    background: url(/static/images/icon-desktop.png) no-repeat -65px -1px;
+}
+
 .input-message .input {
     position: absolute;
     top: 35px;
