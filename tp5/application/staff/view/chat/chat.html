@@ -18,22 +18,24 @@
             </div>
             <div class="list-header item-2" panel="2">黑名单</div>
         </div>
-        <div id="now-chat-list" class="menu" style="display: none;">
-            <div v-for="item in list" :id="'id_' + item.id" class="item">
-                <span class="name">{{item.name}}</span>
-                <span class="date">{{item.date}}</span>
-                <span class="msg" v-html="item.lastMsg"></span>
-                <span v-show="item.newMsgNum != 0" class="new-num">{{item.newMsgNum}}</span>
-                <div class="open-chat" @click="open(item)"></div>
+        <div id="client-list">
+            <div id="now-chat-list" class="menu" style="display: none;">
+                <div v-for="item in list" :id="'id_' + item.id" class="item">
+                    <span class="name">{{item.name}}</span>
+                    <span class="date">{{item.date}}</span>
+                    <span class="msg" v-html="item.lastMsg"></span>
+                    <span v-show="item.newMsgNum != 0" class="new-num">{{item.newMsgNum}}</span>
+                    <div class="open-chat" @click="open(item)"></div>
+                </div>
             </div>
-        </div>
-        <div id="blacklist" class="menu" style="display: none;">
-            <div v-for="item in blacklist" :id="'id_' + item.id" class="item">
-                <span class="name">{{item.name}}</span>
-                <span class="date">{{item.date}}</span>
-                <span class="msg" v-html="item.lastMsg"></span>
-                <span v-show="item.newMsgNum != 0" class="new-num">{{item.newMsgNum}}</span>
-                <div class="open-chat" @click="open(item)"></div>
+            <div id="blacklist" class="menu" style="display: none;">
+                <div v-for="item in blacklist" :id="'id_' + item.id" class="item">
+                    <span class="name">{{item.name}}</span>
+                    <span class="date">{{item.date}}</span>
+                    <span class="msg" v-html="item.lastMsg"></span>
+                    <span v-show="item.newMsgNum != 0" class="new-num">{{item.newMsgNum}}</span>
+                    <div class="open-chat" @click="removeTheBlacklist(item)"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -87,6 +87,7 @@ layui.use('layer', function () {
         $('#pull-black').click(function () {
             layer.confirm('确定将当前访客加入黑名单？', {icon: 3, title: '提示'}, function (index) {
                 $.get('/index.php/staff/chat/blacklist/pull_black/y/client_id/' + display.id);
+                clientList.deleteItem(display.id, 1);//从当前会话列表中删除
                 layer.close(index);
             });
         });
@@ -180,10 +181,9 @@ function BinaryTree() {
     }
 }
 
-
 // 客户列表实例
 var clientList = new Vue({
-    el: '#now-chat-list',
+    el: '#client-list',
     data: {
         list: [],
         blacklist: []
@@ -207,8 +207,6 @@ var clientList = new Vue({
                 var listNum = 1;
                 if (data.client_list[i].blacklist === 1) {//黑名单
                     listNum = 2;
-                    // 从当前会话列表中删除
-                    this.deleteItem(data.client_list[i].client_id);
                 }
 
                 this.inputItem({
@@ -237,14 +235,24 @@ var clientList = new Vue({
             im_object.state.is_add_msg_num = true;
             this.forMsg();
         },
-        deleteItem: function (client_id) {
-            for (var i = 0; i < this.list.length; i++) {
-                if (this.list[i].id === client_id) {
-                    //删除当前元素
-                    this.list.splice(i, 1)
-                    return;
+        deleteItem: function (client_id, listNum) {
+
+            if (listNum === 1) {//当前会话
+                for (var i = 0; i < this.list.length; i++) {
+                    if (this.list[i].id === client_id) {
+                        this.list.splice(i, 1)
+                        return;
+                    }
+                }
+            } else if (listNum === 2) {//黑名单
+                for (var i = 0; i < this.blacklist.length; i++) {
+                    if (this.blacklist[i].id === client_id) {
+                        this.blacklist.splice(i, 1)
+                        return;
+                    }
                 }
             }
+
         },
         inputItem: function (obj, listNum) {
 
@@ -338,6 +346,13 @@ var clientList = new Vue({
                 $('#unread-all').hide();
             }
 
+        },
+        removeTheBlacklist: function (item) {
+            layer.confirm('确定将当前访客从黑名单中取消？', {icon: 3, title: '提示'}, function (index) {
+                $.get('/index.php/staff/chat/blacklist/pull_black/n/client_id/' + item.id);
+                clientList.deleteItem(item.id, 2);//从黑名单中删除
+                layer.close(index);
+            });
         },
         open: function (item) { // 打开会话
             // 改变列表样式
