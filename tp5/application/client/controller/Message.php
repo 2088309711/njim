@@ -171,7 +171,10 @@ class Message extends Controller
 
     public function index()
     {
-        echo $this->computeSimilarity('ab', 'ab');
+        echo $this->computeSimilarity(
+            '0cc175b9c0f1b6a831c399e269772660',
+            '0cc175b9c0f1b6a831c399e269772661'
+        );
     }
 
 }

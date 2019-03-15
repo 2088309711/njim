@@ -14,6 +14,7 @@
 .client-msg-box .bubble, .staff-msg-box .bubble, .robot-msg-box .bubble {
     padding: 5px 10px;
     border-radius: 3px;
+    font-size: 14px;
 }
 
 .client-msg-box .bubble:before, .staff-msg-box .bubble:before, .robot-msg-box .bubble:before {
@@ -23,9 +24,18 @@
     border-bottom: 6px solid transparent;
 }
 
+/*消息锚点*/
+.staff-msg-box .bubble .msg-anchor-point, .robot-msg-box .bubble .msg-anchor-point {
+    cursor: pointer;
+    line-height: 20px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
 /* 系统 */
 .system-msg-box {
     text-align: center;
+    font-size: 12px;
 }
 
 .system-msg-box .bubble {
@@ -61,6 +71,16 @@
     border-left: 8px solid #008fff;
 }
 
+.staff-msg-box .bubble .msg-anchor-point {
+    color: #ddd;
+    border-bottom: 1px dashed #ddd;
+}
+
+.staff-msg-box .bubble .msg-anchor-point:hover {
+    color: #fff;
+    border-bottom: 1px dashed #fff;
+}
+
 /*机器人*/
 .robot-msg-box .name {
     font-size: 12px;
@@ -83,3 +103,16 @@
     top: 28px;
     border-left: 8px solid #ffc9a2;
 }
+
+.robot-msg-box .bubble .msg-anchor-point {
+    color: #008fff;
+    border-bottom: 1px dashed #008fff;
+}
+
+.robot-msg-box .bubble .msg-anchor-point:hover {
+    color: #006fff;
+    border-bottom: 1px dashed #006fff;
+}
+
+
+
